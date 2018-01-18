@@ -1,5 +1,10 @@
 const path = require('path')
 const url = require('url')
+const os = require('os')
+
+function _normalizeFamily (family) {
+  return family ? family.toLowerCase() : 'ipv4'
+}
 
 exports.getProjectRoot = function () {
   return path.resolve(__dirname, '..')
@@ -123,7 +128,7 @@ exports.prepareUrls = function (protocol, host, port) {
     try {
       lanUrlForConfig = exports.getLocalIp()
       if (lanUrlForConfig) {
-        if (isPrivate(lanUrlForConfig)) {
+        if (exports.isPrivate(lanUrlForConfig)) {
           lanUrlForTerminal = formatUrl(lanUrlForConfig)
         } else {
           lanUrlForConfig = undefined
