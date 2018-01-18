@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist/",
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "jsx": "react",
+    "jsxFactory": "Nerv.createElement"
+  },
+  "include": [
+    "src",
+    "site"
+  ],
+  "exclude": [
+    "node_modules",
+    ".dist",
+    "tests",
+    "jest",
+    "__tests__",
+    "**/*.test.ts"
+  ],
+  "compileOnSave": false
+}
