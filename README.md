@@ -9,17 +9,19 @@ $ yarn dev
 
 ## TODO List
 
-### 功能
+完成数量: 0/34
+
+### 功能 
 - [ ] 官网
 - [ ] 国际化
 
-### 基础组件
+### 基础组件 
 - [ ] Button     
 - [ ] Layout     
 - [ ] Tag        
 - [ ] Icon       
 
-### 表单组件
+### 表单组件 
 - [ ] Checkbox     
 - [ ] Input     
 - [ ] InputNumber     
@@ -30,7 +32,7 @@ $ yarn dev
 - [ ] Slider     
 - [ ] Textarea     
 
-### 视图组件
+### 视图组件 
 - [ ] Alert     
 - [ ] Badge     
 - [ ] Card     
@@ -45,7 +47,7 @@ $ yarn dev
 - [ ] Tooltip     
 - [ ] Table     
 
-### 导航组件
+### 导航组件 
 - [ ] Breadcrumb     
 - [ ] Dropdown     
 - [ ] Menu     
