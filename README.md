@@ -7,7 +7,7 @@ $ yarn install
 $ yarn dev
 ```
 
-## TODOLIST
+## TODO List
 
 ### 基础组件
 - Button - [ ]
