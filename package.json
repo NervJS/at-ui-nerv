@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
+    "commitmsg": "validate-commit-msg",
+    "commit": "git-cz",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "tslint -p tsconfig.json --project",
@@ -21,6 +23,24 @@
       "tslint --fix",
       "git add"
     ]
+  },
+  "validate-commit-msg": {
+    "types": [
+      "feat",
+      "fix",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "chore",
+      "revert",
+      "ci",
+      "build"
+    ],
+    "warnOnFail": false,
+    "maxSubjectLength": 100,
+    "helpMessage": ""
   },
   "repository": {
     "type": "git",
@@ -54,6 +74,7 @@
     "babel-loader": "8.0.0-beta.0",
     "chalk": "^2.3.0",
     "clean-webpack-plugin": "^0.1.17",
+    "commitizen": "^2.9.6",
     "css-loader": "^0.28.9",
     "eslint": "^4.15.0",
     "eslint-config-standard": "^11.0.0-beta.0",
@@ -81,8 +102,14 @@
     "tslint-react": "^3.4.0",
     "typescript": "^2.6.2",
     "url-loader": "^0.6.2",
+    "validate-commit-msg": "^2.14.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0",
     "webpack-merge": "^4.1.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
