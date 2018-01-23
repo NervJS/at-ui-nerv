@@ -1,5 +1,4 @@
 import * as Nerv from 'nervjs'
-import {renderIntoDocument} from 'nerv-test-utils'
 
 import Tag from '../../../src/tag/index'
 

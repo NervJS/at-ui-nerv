@@ -32,13 +32,12 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'browsers/karma.js',
-      './node_modules/es6-promise/dist/es6-promise.auto.min.js',
-      './node_modules/es5-polyfill/dist/polyfill.js',
+      // 'browsers/karma.js',
+      // './node_modules/es6-promise/dist/es6-promise.auto.min.js',
+      // './node_modules/es5-polyfill/dist/polyfill.js',
       // 'browsers/ie8.js',
-      'browsers/polyfill.js',
-      'src/*/__test__/index.test.tsx'
-      // 'src/*'
+      // 'browsers/polyfill.js',
+      'src/*/__test__/**/*test.ts?(x)'
     ],
 
     specReporter: {
@@ -54,7 +53,7 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/*/__test__/**/*.test.ts?(x)': ['webpack', 'sourcemap']
+      'src/*/__test__/**/*test.ts?(x)': ['webpack', 'sourcemap']
     },
 
     // test results reporter to use
@@ -105,7 +104,7 @@ module.exports = function (config) {
         alias: {
           react: 'nervjs',
           'react-dom': 'nervjs'
-          // nervjs: require('nervjs'),
+          // nervjs: resolve('nerv'),
           // 'nerv-devtools': resolve('nerv-devtools'),
           // 'nerv-shared': resolve('nerv-shared'),
           // 'nerv-utils': resolve('nerv-utils'),

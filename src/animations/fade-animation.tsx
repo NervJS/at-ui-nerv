@@ -13,7 +13,6 @@ interface Props {
 interface State {
   in: boolean
 }
-console.log(Transition)
 class FadeAnimation extends Nerv.Component<Props, State> {
   state = {
     in: false
