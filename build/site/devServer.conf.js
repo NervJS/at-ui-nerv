@@ -14,7 +14,7 @@ module.exports = function ({publicPath, contentBase, protocol, host, publicUrl})
     },
     https: protocol === 'https',
     host: host,
-    overlay: true,
+    // overlay: true,
     historyApiFallback: {
       disableDotRule: true
     },
