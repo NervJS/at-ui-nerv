@@ -1,0 +1,11 @@
+
+.fade-exited {
+  opacity: 0;
+}
+.fade {
+  transition: opacity .3s ease-out;
+}
+
+.fade-entered {
+  opacity: 1;
+}
