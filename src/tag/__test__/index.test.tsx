@@ -26,6 +26,7 @@ describe('Tag', () => {
   it('render tag', () => {
     const tag = <Tag closable onClose={handleClose}>Tag</Tag>
     const component = renderIntoDocument(tag)
+<<<<<<< HEAD
     // const dom = Nerv.findDOMNode(component)
     // console.log(dom)
     // // debugger
@@ -34,5 +35,11 @@ describe('Tag', () => {
     expect(1).toEqual(1)
     // expect(dom.textContent).toEqual('Tag')
 >>>>>>> c62989f... test: add tag test
+=======
+    const dom = Nerv.findDOMNode(component)
+    expect(component.props.closable).toBeTruthy()
+    expect(component.props.onClose).toBe(handleClose)
+    expect(dom.textContent).toBe('Tag')
+>>>>>>> b402c92... test: add Tag test
   })
 })
