@@ -1,6 +1,7 @@
 import * as Nerv from 'nervjs'
-import {renderIntoDocument} from 'nerv-test-utils'
-import sinon from 'sinon'
+import * as $ from 'webpack-zepto'
+import {renderIntoDocument, Simulate} from 'nerv-test-utils'
+import * as sinon from 'sinon'
 import Tag from '../'
 
 describe('Tag', () => {
@@ -19,6 +20,14 @@ describe('Tag', () => {
     const tag = <Tag closable={true}>TEST</Tag>
     const component = renderIntoDocument(tag)
     const dom = Nerv.findDOMNode(component)
-    console.log(dom)
+    expect($(dom).find('.at-tag__close').get(0)).toBeDefined()
+  })
+  it('onClose', () => {
+    const onClose = sinon.spy()
+    const tag = <Tag closable onClose={handleClose}>Tag</Tag>
+    const component = renderIntoDocument(tag)
+    const dom = Nerv.findDOMNode(component)
+    Simulate.click(dom.querySelector('i'))
+    expect(onClose.calledOnce).toBe(true)
   })
 })

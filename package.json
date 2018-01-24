@@ -94,6 +94,7 @@
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
     "jasmine": "^2.9.0",
+    "jquery": "^3.3.1",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.1",
@@ -122,7 +123,8 @@
     "validate-commit-msg": "^2.14.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0",
-    "webpack-merge": "^4.1.1"
+    "webpack-merge": "^4.1.1",
+    "webpack-zepto": "0.0.1"
   },
   "config": {
     "commitizen": {
