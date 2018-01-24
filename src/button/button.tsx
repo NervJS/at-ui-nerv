@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import * as classnames from 'classnames'
 
 import ButtonGroup from './button-group'
 

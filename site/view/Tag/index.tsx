@@ -5,8 +5,14 @@ import Tag from '../../../src/tag/index'
 import './fadeanimation.scss'
 
 class TagExample extends Nerv.Component {
+  constructor (...args) {
+    super(...args)
+    this.handleClose = this
+      .handleClose
+      .bind(this)
+  }
   handleClose (evt, name) {
-    console.log(evt, name)
+    alert(name)
   }
   componentDidMount () {
     console.log(Nerv.findDOMNode(this))
@@ -17,13 +23,8 @@ class TagExample extends Nerv.Component {
       <div className='tag_example'>
         <Tag>标签1</Tag>
         <Tag>标签2</Tag>
-        <Tag closable={true} onClose={this.handleClose.bind(this)}>标签三</Tag>
-        <Tag
-          name='标签四'
-          closable
-          onClose={this
-          .handleClose
-          .bind(this)}>标签四</Tag>
+        <Tag closable={true} onClose={this.handleClose}>标签三</Tag>
+        <Tag name='标签四' closable onClose={this.handleClose}>标签四</Tag>
         <Tag color='default'>标签一</Tag>
         <Tag color='primary'>标签二</Tag>
         <Tag color='success'>标签三</Tag>

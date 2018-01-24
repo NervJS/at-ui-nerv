@@ -17,7 +17,7 @@ $ yarn dev
 
 ### 基础组件 
 - [x] Button -lee    
-- [ ] Layout  -kyjo   
+- [x] Layout  -kyjo   
 - [ ] Tag -kyjo       
 - [ ] Icon       
 

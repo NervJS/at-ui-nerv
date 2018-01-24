@@ -19,16 +19,23 @@ const colorArr = [
 ]
 
 class Tag extends Nerv.Component {
-  name: 'AtTag'
   static defaultProps = {
     color: 'default',
     closable: false
   }
   state = { in: false
   }
+  name: 'AtTag'
+  constructor (...args) {
+    super(...args)
+    this.closeActionHandle = this
+      .closeActionHandle
+      .bind(this)
+  }
   closeActionHandle (evt: MouseEvent) {
     const name = this.props.name
     const onClose = this.props.onClose
+    console.log('test')
     if (typeof name === 'undefined') {
       onClose(evt)
     } else {
@@ -62,11 +69,7 @@ class Tag extends Nerv.Component {
         <span className={classNames} style={style}>
           <span className='at-tag__text'>{children}</span>
           {closable
-            ? <i
-                className='icon icon-x at-tag__close'
-                onClick={this
-                .closeActionHandle
-                .bind(this)}></i>
+            ? <i className='icon icon-x at-tag__close' onClick={this.closeActionHandle}/>
             : ''}
 
         </span>
