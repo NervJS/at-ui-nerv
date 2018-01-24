@@ -2,6 +2,7 @@ import * as Nerv from 'nervjs'
 
 import ButtonExample from './view/Button'
 import TagExample from './view/Tag'
+import LayoutExample from './view/Layout'
 
 import 'at-ui-style'
 
@@ -11,6 +12,7 @@ class App extends Nerv.Component {
       <div className='app' id='app'>
         <ButtonExample />
         <TagExample />
+        <LayoutExample />
       </div>
     )
   }
