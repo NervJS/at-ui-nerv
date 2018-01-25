@@ -1,10 +1,31 @@
 import * as Nerv from 'nervjs'
 import * as $ from 'webpack-zepto'
-import {renderIntoDocument, Simulate} from 'nerv-test-utils'
+import {renderIntoDocument} from 'nerv-test-utils'
 import * as sinon from 'sinon'
 import Tag from '../'
 
+function fireEvent (on, type) {
+  const e = document.createEvent('Event')
+  e.initEvent(type, true, true)
+  on.dispatchEvent(e)
+}
+
 describe('Tag', () => {
+  let scratch
+  beforeAll(() => {
+    scratch = document.createElement('div')
+    document.body.appendChild(scratch)
+  })
+
+  beforeEach(() => {
+    scratch = document.createElement('div')
+    document.body.appendChild(scratch)
+  })
+
+  afterAll(() => {
+    scratch.parentNode.removeChild(scratch)
+    scratch = null
+  })
   const handleClose = (evt, name) => {
     return {evt, name}
   }
@@ -24,10 +45,8 @@ describe('Tag', () => {
   })
   it('onClose', () => {
     const onClose = sinon.spy()
-    const tag = <Tag closable onClose={handleClose}>Tag</Tag>
-    const component = renderIntoDocument(tag)
-    const dom = Nerv.findDOMNode(component)
-    Simulate.click(dom.querySelector('i'))
+    const c = Nerv.render(<Tag closable onClose={onClose}>Tag</Tag>, scratch)
+    fireEvent(c.dom.querySelector('i'), 'click')
     expect(onClose.calledOnce).toBe(true)
   })
 })
