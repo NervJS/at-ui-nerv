@@ -4,14 +4,13 @@ const coverage = String(process.env.COVERAGE) !== 'false'
 const ci = String(process.env.CI).match(/^(1|true)$/gi)
 const realBrowser = String(process.env.BROWSER).match(/^(1|true)$/gi)
 const sauceLabs = realBrowser && ci
-const sauceLabsLaunchers = {
-  sl_win_chrome: {
-    base: 'SauceLabs',
-    browserName: 'chrome',
-    platform: 'Windows 10'
-  }
-}
-
+// const sauceLabsLaunchers = {
+//   sl_win_chrome: {
+//     base: 'SauceLabs',
+//     browserName: 'chrome',
+//     platform: 'Windows 10'
+//   }
+// }
 const travisLaunchers = {
   chrome_travis: {
     base: 'Chrome',
@@ -19,7 +18,7 @@ const travisLaunchers = {
   }
 }
 
-const localBrowsers = realBrowser ? Object.keys(travisLaunchers) : ['Chrome']
+const localBrowsers = /* realBrowser ? */ Object.keys(travisLaunchers) // : ['Chrome']
 
 module.exports = function (config) {
   config.set({
@@ -86,9 +85,9 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: sauceLabs ? Object.keys(sauceLabsLaunchers) : localBrowsers,
+    browsers: /* sauceLabs ? Object.keys(sauceLabsLaunchers) : */ localBrowsers,
 
-    customLaunchers: sauceLabs ? sauceLabsLaunchers : travisLaunchers,
+    customLaunchers: /* sauceLabs ? sauceLabsLaunchers : */ travisLaunchers,
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
