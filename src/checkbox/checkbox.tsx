@@ -4,14 +4,13 @@ import * as classnames from 'classnames'
 export interface CheckboxProps {
   value: string | number | boolean | any[],
   label: string | number | boolean,
-  name: string,
-  checked: boolean,
-  disabled: boolean
+  name?: string,
+  checked?: boolean,
+  disabled?: boolean
 }
 
 interface State {
   focus: boolean,
-  model: any,
   currentValue: any
 }
 
@@ -23,8 +22,8 @@ State > {
     checked: false,
     disabled: false
   }
+  static elementName = 'AtCheckbox'
   parent: any
-  name: 'AtCheckbox'
   state = {
     focus: false,
     model: this.props.label,
@@ -53,10 +52,16 @@ State > {
     }
   }
   onChangeHandle (evt: CompositionEvent) {
+    const { onChange = () => { return} , label} = this.props
     if (evt.target instanceof HTMLInputElement) {
-      this.setState({model: evt.target.value})
+      const checked = evt.target.checked
+      this.setState({ currentValue: checked }, () => {
+        onChange(
+          checked,
+          label
+        )
+      })
     }
-
   }
   onFocusHandle () {
     this.setState({focus: true})
@@ -66,8 +71,8 @@ State > {
   }
 
   render () {
-    const {children, name, disabled, checked} = this.props
-    const {focus, currentValue, model} = this.state
+    const {children, label, name, disabled, checked} = this.props
+    const {focus, currentValue} = this.state
 
     return (
       <label
@@ -75,22 +80,25 @@ State > {
         'at-checkbox--focus': focus,
         'at-checkbox--checked': currentValue,
         'at-checkbox--disabled': disabled
-      })}>
+        })}
+      >
         <span className='at-checkbox__input'>
           <span className='at-checkbox__inner'/>
           <input
             type='checkbox'
             className='at-checkbox__original'
             name={name}
-            value={checked}
+            checked={checked}
             disabled={disabled}
             onChange={this.onChangeHandle}
             onFocus={this.onFocusHandle}
-            onBlur={this.onBlurHandle} />
+            onBlur={this.onBlurHandle}
+          />
         </span>
         <span className='at-checkbox__label'>
-          {children
-}
+          {
+            label || children
+          }
         </span>
       </label >
     )
