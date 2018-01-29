@@ -11,7 +11,6 @@ export interface CheckboxProps {
 
 interface State {
   focus: boolean,
-  isGroup: boolean,
   model: any,
   currentValue: any
 }
@@ -55,19 +54,7 @@ State > {
   }
   onChangeHandle (evt: CompositionEvent) {
     if (evt.target instanceof HTMLInputElement) {
-      const {model} = this.state
-      const {
-        disabled,
-        onInput = () => {}
-      } = this.props
       this.setState({model: evt.target.value})
-      if (disabled) {
-        return false
-      }
-      const checked: boolean = evt.target.checked
-      this.setState({currentValue: checked})
-      onInput(checked)
-
     }
 
   }
@@ -79,7 +66,7 @@ State > {
   }
 
   render () {
-    const {children, name, disabled} = this.props
+    const {children, name, disabled, checked} = this.props
     const {focus, currentValue, model} = this.state
 
     return (
@@ -95,11 +82,11 @@ State > {
             type='checkbox'
             className='at-checkbox__original'
             name={name}
-            value={model}
+            value={checked}
             disabled={disabled}
             onChange={this.onChangeHandle}
             onFocus={this.onFocusHandle}
-            onBlur={this.onBlurHandle}/>
+            onBlur={this.onBlurHandle} />
         </span>
         <span className='at-checkbox__label'>
           {children
