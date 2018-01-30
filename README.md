@@ -27,8 +27,8 @@ $ yarn dev
 
 ### 表单组件 
 - [x] Checkbox -kyjo     
-- [ ] Input  -kyjo    
-- [ ] InputNumber -kyjo     
+- [x] Input  -kyjo    
+- [x] InputNumber -kyjo     
 - [ ] Radio -kyjo    
 - [ ] Rate -kyjo     
 - [ ] Select       

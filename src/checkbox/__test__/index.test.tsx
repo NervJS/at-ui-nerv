@@ -3,12 +3,6 @@ import * as $ from 'webpack-zepto'
 import * as sinon from 'sinon'
 import {Checkbox, CheckboxGroup} from '../'
 
-function fireEvent (on, type) {
-  const e = document.createEvent('Event')
-  e.initEvent(type, true, true)
-  on.dispatchEvent(e)
-}
-
 describe('Checkbox', () => {
   let scratch
   beforeAll(() => {
@@ -31,10 +25,6 @@ describe('Checkbox', () => {
       .removeChild(scratch)
     scratch = null
   })
-
-  const onChangeHandle = (checked, label) => {
-    return {checked, label}
-  }
 
   it('basic render', (done) => {
     const onChange = sinon.spy()
