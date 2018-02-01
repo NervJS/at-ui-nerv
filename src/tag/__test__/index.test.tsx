@@ -1,22 +1,5 @@
-<<<<<<< HEAD
-// import * as Nerv from 'nervjs'
-// import {renderIntoDocument} from 'nerv-test-utils'
-// import Tag from '../'
-
-describe('Tag', () => {
-  // const closeActionHandle = (evt, name) => {
-  //   return {evt, name}
-  // }
-  it('render button', () => {
-    // const button = <Tag closable onClose = {closeActionHandle} > Button </Tag>
-    // const component = renderIntoDocument(button)
-    // const dom = Nerv.findDOMNode(component)
-    // expect(component.props).toHaveProperty('type', 'primary')
-    // expect(dom.textContent).toEqual('Button')
-=======
 import * as Nerv from 'nervjs'
 import {renderIntoDocument} from 'nerv-test-utils'
-import sinon from 'sinon'
 import Tag from '../'
 
 describe('Tag', () => {
@@ -26,10 +9,6 @@ describe('Tag', () => {
   it('render tag', () => {
     const tag = <Tag closable onClose={handleClose}>Tag</Tag>
     const component = renderIntoDocument(tag)
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> dev-lth
     // const dom = Nerv.findDOMNode(component)
     // console.log(dom)
     // // debugger
@@ -37,15 +16,9 @@ describe('Tag', () => {
     // expect(component.props).toHaveProperty('onClose', handleClose)
     expect(1).toEqual(1)
     // expect(dom.textContent).toEqual('Tag')
-<<<<<<< HEAD
-=======
->>>>>>> c62989f... test: add tag test
-=======
     const dom = Nerv.findDOMNode(component)
     expect(component.props.closable).toBeTruthy()
     expect(component.props.onClose).toBe(handleClose)
     expect(dom.textContent).toBe('Tag')
->>>>>>> b402c92... test: add Tag test
->>>>>>> dev-lth
   })
 })

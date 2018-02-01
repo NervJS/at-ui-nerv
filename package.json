@@ -57,12 +57,15 @@
   "homepage": "https://github.com/NervJS/at-ui-nerv#readme",
   "dependencies": {
     "at-ui-style": "^1.5.0",
+    "chalk": "^2.3.0",
     "classnames": "^2.2.5",
-    "nervjs": "^1.2.5",
-    "react-transition-group": "^2.2.1"
+    "nervjs": "^1.2.8",
+    "react-transition-group": "^2.2.1",
+    "webpack": "^3.10.0",
+    "webpack-merge": "^4.1.1"
   },
   "peerDependencies": {
-    "nervjs": "^1.2.4"
+    "nervjs": "^1.2.8"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.38",
@@ -124,7 +127,7 @@
     "url-loader": "^0.6.2",
     "validate-commit-msg": "^2.14.0",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.0",
+    "webpack-dev-server": "^2.11.1",
     "webpack-merge": "^4.1.1"
   },
   "config": {

@@ -58,7 +58,7 @@ class Tag extends Nerv.Component {
     const style = this.colorStyle()
     const classNames = classnames('at-tag', this.colorClass())
     return (
-      <FadeAnimation>
+      <FadeAnimation >
         <span className={classNames} style={style}>
           <span className='at-tag__text'>{children}</span>
           {closable
@@ -70,7 +70,6 @@ class Tag extends Nerv.Component {
             : ''}
 
         </span>
-        //
       </FadeAnimation>
     )
   }

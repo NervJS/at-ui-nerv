@@ -9,7 +9,7 @@ class TagExample extends Nerv.Component {
     console.log(evt, name)
   }
   componentDidMount () {
-    console.log(Nerv.findDOMNode(this))
+    // console.log(Nerv.findDOMNode(this))
   }
   render () {
 
