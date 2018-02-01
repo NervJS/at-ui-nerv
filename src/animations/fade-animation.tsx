@@ -1,7 +1,6 @@
 import * as Nerv from 'nervjs'
 import { Transition } from 'react-transition-group'
-
-const duration = 300
+import * as classnames from 'classnames'
 
 interface VNode {
   props: object
@@ -13,23 +12,26 @@ interface Props {
 interface State {
   in: boolean
 }
+
 class FadeAnimation extends Nerv.Component<Props, State> {
-  state = {
-    in: false
-  }
-  componentDidMount () {
-    this.setState({in: true})
+  constructor (...args) {
+    super(...args)
   }
   render () {
-    const {children} = this.props
+    const { children } = this.props
+    const tranProps = { ...this.props }
+    delete tranProps.children
     return (
-      <Transition in={this.state.in} timeout={duration}>
-        {
-          (status) => {
-            children.props.className = children.props.className.concat(` fade fade-${status}`)
-            return (children)
-          }
-        }
+      <Transition {...tranProps}>
+        {(state) => {
+          return (
+            <div
+              className={classnames(`fade fade-${state}`)}
+            >
+              {children}
+            </div>
+          )
+        }}
       </Transition>
     )
   }
