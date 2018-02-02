@@ -45,7 +45,8 @@ describe('Tag', () => {
   })
   it('onClose', (done) => {
     const onClose = sinon.spy()
-    const c = Nerv.render(<Tag closable onClose={onClose}>Tag</Tag>, scratch)
+    const tag = <Tag closable={true} onClose={onClose}>TEST</Tag>
+    const c = Nerv.render(tag, scratch)
     fireEvent(c.dom.querySelector('i'), 'click')
     Nerv.nextTick(() => {
       expect(onClose.calledOnce).toBe(true)

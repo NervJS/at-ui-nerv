@@ -57,25 +57,29 @@
   "homepage": "https://github.com/NervJS/at-ui-nerv#readme",
   "dependencies": {
     "at-ui-style": "^1.5.0",
+    "chalk": "^2.3.0",
     "classnames": "^2.2.5",
-    "nervjs": "^1.2.5",
-    "react-transition-group": "^2.2.1"
+    "nervjs": "^1.2.8",
+    "react-transition-group": "^2.2.1",
+    "webpack": "^3.10.0",
+    "webpack-merge": "^4.1.1"
   },
   "peerDependencies": {
-    "nervjs": "^1.2.4"
+    "nervjs": "^1.2.8"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.38",
     "@babel/plugin-transform-react-jsx": "^7.0.0-beta.38",
     "@babel/preset-env": "^7.0.0-beta.38",
     "@types/jasmine": "^2.6.0",
+    "@types/jest": "^22.0.1",
+    "@types/react-transition-group": "^2.0.6",
     "@types/sinon": "^2.3.3",
     "autoprefixer": "^7.2.5",
     "babel-eslint": "^8.2.1",
     "babel-jest": "^22.1.0",
     "babel-loader": "8.0.0-beta.0",
     "babel-plugin-module-resolver": "^3.0.0",
-    "chai": "^4.1.2",
     "chalk": "^2.3.0",
     "clean-webpack-plugin": "^0.1.17",
     "commitizen": "^2.9.6",
