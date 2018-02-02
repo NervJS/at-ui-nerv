@@ -31,19 +31,11 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
   timeout: number
   constructor (...args) {
     super(...args)
-    this.onBlurHandle = this.onBlurHandle.bind(this)
-    this.onFocusHandle = this.onFocusHandle.bind(this)
-    this.onKeyDownHandle = this.onKeyDownHandle.bind(this)
-    this.decreaseNum = this.decreaseNum.bind(this)
-    this.increaseNum = this.increaseNum.bind(this)
-    this.calculateNumber = this.calculateNumber.bind(this)
-    this.calculateStep = this.calculateStep.bind(this)
-    this.onChangeHandle = this.onChangeHandle.bind(this)
     this.state = {
       currentValue: this.props.value || 0
     }
   }
-  increaseNum () {
+  increaseNum = () => {
     const { currentValue } = this.state
     const { max = Number.POSITIVE_INFINITY, disabled } = this.props
     const value = currentValue || 0
@@ -52,14 +44,14 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
     }
     this.calculateStep('up')
   }
-  decreaseNum () {
+  decreaseNum = () => {
     const {currentValue} = this.state
     const {min = Number.NEGATIVE_INFINITY, disabled} = this.props
     const value = currentValue || 0
     if (value <= min || disabled) { return }
     this.calculateStep('down')
   }
-  calculateStep (type) {
+  calculateStep = (type) => {
     const { currentValue } = this.state
     const { max = Number.POSITIVE_INFINITY, min = Number.NEGATIVE_INFINITY, disabled, step, onChange } = this.props
     if (disabled) { return }
@@ -75,7 +67,7 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
     this.setState({ currentValue: value })
     onChange(value)
   }
-  calculateNumber (num: number, stepNum: number, symbol: string): number {
+  calculateNumber = (num: number, stepNum: number, symbol: string): number => {
     let decimal1, decimal2
 
     try {
@@ -99,7 +91,7 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
       return num
     }
   }
-  onBlurHandle (evt: CompositionEvent): void {
+  onBlurHandle = (evt: CompositionEvent): void => {
     const { onBlur } = this.props
     if (onBlur) {
       onBlur()
@@ -119,13 +111,13 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
       })
     }
   }
-  onFocusHandle (evt: CompositeComponent): void {
+  onFocusHandle = (evt: CompositeComponent): void => {
     const { onFocus } = this.props
     if (onFocus) {
       onFocus(evt)
     }
   }
-  onKeyDownHandle (evt: KeyboardEvent): void {
+  onKeyDownHandle = (evt: KeyboardEvent): void => {
     const { keyCode } = evt
     if (keyCode === 38) {
       evt.stopPropagation()
@@ -137,7 +129,7 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
       this.decreaseNum()
     }
   }
-  onChangeHandle (evt) {
+  onChangeHandle = (evt) => {
     if (evt.target instanceof HTMLInputElement) {
       const val = Number(evt.target.value)
       this.setState({

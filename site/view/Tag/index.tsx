@@ -2,8 +2,6 @@ import * as Nerv from 'nervjs'
 
 import Tag from '../../../src/tag/index'
 
-import './fadeanimation.scss'
-
 class TagExample extends Nerv.Component {
   constructor (...args) {
     super(...args)
@@ -12,10 +10,8 @@ class TagExample extends Nerv.Component {
       .bind(this)
   }
   handleClose (evt, name) {
-    alert(name)
-  }
-  componentDidMount () {
-    console.log(Nerv.findDOMNode(this))
+    // alert(name)
+    console.log(evt, name)
   }
   render () {
 

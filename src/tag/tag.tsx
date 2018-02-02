@@ -71,7 +71,7 @@ class Tag extends Nerv.Component<TagProps, TagState> {
     const style = this.colorStyle()
     const classNames = classnames('at-tag', this.colorClass())
     return (
-      <FadeAnimation in={show} timeout={0}>
+      <FadeAnimation in={show} timeout={300}>
         <span className={classNames} style={style}>
           <span className='at-tag__text'>{children}</span>
           {closable

@@ -27,6 +27,34 @@ class InputNumberExample extends Nerv.Component {
             </div>
           </div>
         </div>
+        <div className='disabled'>
+          <div className='row no-gutter'>
+            <div className='col-md-4'>
+              <InputNumber disabled />
+            </div>
+          </div>
+        </div>
+        <div className='float-step'>
+          <p className='demo-desc'>step=0.3, min=1</p>
+          <div className='row no-gutter'>
+            <div className='col-md-4'>
+              <InputNumber onChange={this.onChangeHandle} step={0.3} min={1} />
+            </div>
+          </div>
+        </div>
+        <div className='different-size'>
+          <div className='row'>
+            <div className='col-sm-12 col-md-4'>
+              <InputNumber  size='small' />
+            </div>
+            <div className='col-sm-12 col-md-4'>
+              <InputNumber  />
+            </div>
+            <div className='col-sm-12 col-md-4'>
+              <InputNumber  size='large' />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

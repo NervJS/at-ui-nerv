@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as sinon from 'sinon'
+// import * as sinon from 'sinon'
 import * as $ from 'webpack-zepto'
 
 import InputNumber from '../InputNumber'

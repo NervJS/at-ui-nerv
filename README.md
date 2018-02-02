@@ -29,15 +29,15 @@ $ yarn dev
 - [x] Checkbox -kyjo     
 - [x] Input  -kyjo    
 - [x] InputNumber -kyjo     
-- [ ] Radio -kyjo    
-- [ ] Rate -kyjo     
+- [x] Radio -kyjo    
+- [x] Rate -kyjo     
 - [ ] Select       
 - [ ] Switch      
 - [ ] Slider      
 - [ ] Textarea       
 
 ### 视图组件 
-- [ ] Alert -kyjo   
+- [x] Alert -kyjo   
 - [ ] Badge -kyjo    
 - [ ] Card -kyjo    
 - [ ] Collapse -kyjo  
