@@ -13,12 +13,14 @@ interface State {
   in: boolean
 }
 
+import './fadeanimation.scss'
+
 class FadeAnimation extends Nerv.Component<Props, State> {
   constructor (...args) {
     super(...args)
   }
   render () {
-    const { children } = this.props
+    const { children, timeout } = this.props
     const tranProps = { ...this.props }
     delete tranProps.children
     return (
@@ -27,6 +29,9 @@ class FadeAnimation extends Nerv.Component<Props, State> {
           return (
             <div
               className={classnames(`fade fade-${state}`)}
+              style={{
+                transition: `opacity ${timeout}ms ease-out`
+              }}
             >
               {children}
             </div>
