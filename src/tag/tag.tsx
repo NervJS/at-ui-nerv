@@ -39,7 +39,8 @@ class Tag extends Nerv.Component {
     if (this.props.color && colorArr.indexOf(this.props.color) > -1) {
       return ''
     } else {
-      return {borderColor: this.props.color, backgroundColor: this.props.color}
+      // return {borderColor: this.props.color, backgroundColor: this.props.color}
+      return `borderColor:${this.props.color};backgroundColor:${this.props.color};`
     }
   }
   colorClass () {
@@ -55,7 +56,9 @@ class Tag extends Nerv.Component {
 
   render () {
     const {closable, children} = this.props
-    const style = this.colorStyle()
+    const style = Object.assign(this.colorStyle(),this.props.style)
+    // const style = this.colorStyle() + this.props.style
+    console.log('child', this.props.style)
     const classNames = classnames('at-tag', this.colorClass())
     return (
       <FadeAnimation >

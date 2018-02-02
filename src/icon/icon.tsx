@@ -30,7 +30,6 @@ class Icon extends Nerv.Component<IconProps, any> {
       onMouseLeave,
       onClick
       }
-    console.log('curr', style)
     const classNames = this.renderIconClassNames(props)
     return (
       <i className={classNames} {...needProps} style={style} >
@@ -40,7 +39,6 @@ class Icon extends Nerv.Component<IconProps, any> {
   componentDidMount () {
   }
   componentWillReceiveProps (nextProps) {
-    console.log('next', nextProps)
   }
 }
 
