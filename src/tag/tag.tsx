@@ -9,6 +9,10 @@ export interface TagProps {
   closable?: boolean
 }
 
+export interface TagState {
+  show: boolean
+}
+
 const colorArr = [
   'default',
   'primary',
@@ -18,12 +22,10 @@ const colorArr = [
   'info'
 ]
 
-class Tag extends Nerv.Component {
+class Tag extends Nerv.Component<TagProps, TagState> {
   static defaultProps = {
     color: 'default',
     closable: false
-  }
-  state = { in: false
   }
   name: 'AtTag'
   constructor (...args) {
@@ -31,16 +33,22 @@ class Tag extends Nerv.Component {
     this.closeActionHandle = this
       .closeActionHandle
       .bind(this)
+    this.state = {
+      show: true
+    }
   }
   closeActionHandle (evt: MouseEvent) {
     const name = this.props.name
     const onClose = this.props.onClose
-    console.log('test')
-    if (typeof name === 'undefined') {
-      onClose(evt)
-    } else {
-      onClose(evt, name)
-    }
+    this.setState({
+      show: false
+    }, () => {
+      if (typeof name === 'undefined') {
+        onClose(evt)
+      } else {
+        onClose(evt, name)
+      }
+    })
   }
   colorStyle () {
     if (this.props.color && colorArr.indexOf(this.props.color) > -1) {
@@ -56,16 +64,14 @@ class Tag extends Nerv.Component {
       return ''
     }
   }
-  componentDidMount () {
-    this.setState({in: true})
-  }
 
   render () {
     const {closable, children} = this.props
+    const { show } = this.state
     const style = this.colorStyle()
     const classNames = classnames('at-tag', this.colorClass())
     return (
-      <FadeAnimation>
+      <FadeAnimation in={show} timeout={0}>
         <span className={classNames} style={style}>
           <span className='at-tag__text'>{children}</span>
           {closable

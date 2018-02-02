@@ -43,10 +43,14 @@ describe('Tag', () => {
     const dom = Nerv.findDOMNode(component)
     expect($(dom).find('.at-tag__close').get(0)).toBeDefined()
   })
-  it('onClose', () => {
+  it('onClose', (done) => {
     const onClose = sinon.spy()
     const c = Nerv.render(<Tag closable onClose={onClose}>Tag</Tag>, scratch)
     fireEvent(c.dom.querySelector('i'), 'click')
-    expect(onClose.calledOnce).toBe(true)
+    Nerv.nextTick(() => {
+      expect(onClose.calledOnce).toBe(true)
+      done()
+    })
+
   })
 })
