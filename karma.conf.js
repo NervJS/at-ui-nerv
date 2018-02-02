@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const ES3 = require('es3ify-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 const coverage = String(process.env.COVERAGE) !== 'false'
 const ci = String(process.env.CI).match(/^(1|true)$/gi)
 const realBrowser = String(process.env.BROWSER).match(/^(1|true)$/gi)
@@ -58,10 +59,7 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec', 'jasmine-diff'].concat(
-      coverage ? [] : [],
-      sauceLabs ? 'saucelabs' : []
-    ),
+    reporters: ['spec', 'jasmine-diff'].concat(coverage ? [] : [], sauceLabs ? 'saucelabs' : []),
 
     browserLogOptions: { terminal: true },
     browserConsoleLogOptions: { terminal: true },
@@ -131,6 +129,37 @@ module.exports = function (config) {
                 module: 'commonjs'
               }
             }
+          },
+          {
+            test: /\.(css|scss|sass)(\?.*)?$/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  ident: 'postcss',
+                  plugins: () => [
+                    autoprefixer({
+                      browsers: [
+                        'ie >= 9',
+                        'Chrome >= 21',
+                        'Firefox >= 1',
+                        'Edge >= 13',
+                        'last 3 versions'
+                      ],
+                      flexbox: 'no-2009'
+                    })
+                  ]
+                }
+              },
+              'sass-loader'
+            ]
           }
         ]
       },
