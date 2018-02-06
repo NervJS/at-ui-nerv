@@ -58,7 +58,7 @@ class Tag extends Nerv.Component {
     const {closable, children} = this.props
     const style = Object.assign(this.colorStyle(),this.props.style)
     // const style = this.colorStyle() + this.props.style
-    console.log('child', this.props.style)
+    // console.log('child', this.props.style)
     const classNames = classnames('at-tag', this.colorClass())
     return (
       <FadeAnimation >
