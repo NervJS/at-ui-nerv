@@ -1,12 +1,13 @@
 import * as Nerv from 'nervjs'
 import * as classnames from 'classnames'
+import Popper from '../../libs/popper'
 
 import DropdownItem from './dropdownItem'
 import DropdownMenu from './dropdownMenu'
 
 interface DropdownProps {
     trigger: 'click' | 'hover' | 'focus'
-    placement?: 'top' | 'top-left' | 'top-right' | 'left' | 'left-top' | 'left-bottom' | 'right' | 'right-top' | 'right-bottom' | 'bottom' | 'bottom-left' | 'bottom-right'
+    placement: 'top' | 'top-left' | 'top-right' | 'left' | 'left-top' | 'left-bottom' | 'right' | 'right-top' | 'right-bottom' | 'bottom' | 'bottom-left' | 'bottom-right'
     dropDownChange: object
 }
 
@@ -23,8 +24,10 @@ DropdownState > {
         trigger: 'hover',
         placement: 'bottom'
     }
+    container: any
     trigger: any
     dropdown: any
+    popperJs: any
     constructor (...args) {
         super(...args)
         this.state = {
@@ -34,6 +37,27 @@ DropdownState > {
     }
     componentDidMount () {
         this.initEvent()
+        this.setMenuPlacement()
+    }
+    componentWillUnmount () {
+        this.popperJs.destroy()
+    }
+    setMenuPlacement = () => {
+        const {placement} = this.props
+        const container = Nerv.findDOMNode(this.container)
+        const dropdownElem = Nerv.findDOMNode(this.dropdown)
+        const placementStrategy = {
+            'top': '',
+            'top-left': '',
+            'top-right': '',
+            'bottom': 'bottom',
+            'bottom-left': 'bottom-start',
+            'bottom-right': 'bottom-end'
+        }
+        this.popperJs = new Popper(container, dropdownElem, {
+            placement: placementStrategy[placement],
+            gpuAcceleration: false
+        })
     }
     initEvent = () => {
         const {trigger} = this.props
@@ -95,7 +119,7 @@ DropdownState > {
                 type
             },                         idx) => {
                 if (child.type && child.type.elementName === 'AtDropdownMenu') {
-                    menu.push(child as never)
+                    menu.push(this.enhanceMenu(child) as never)
                     return
                 }
                 trigger.push(child as never)
@@ -103,20 +127,25 @@ DropdownState > {
         return {menu, trigger}
     }
     enhanceMenu = (menu) => {
-        const {placement} = this.props
-        return Nerv.cloneElement(menu, {placement})
+        const { placement } = this.props
+        const {visible} = this.state
+        return Nerv.cloneElement(menu, {placement, show: visible})
     }
+
     render () {
         const {visible} = this.state
         const {menu, trigger} = this.splitChildren()
         return (
-            <div className={classnames('at-dropdown')}>
+            <div className={classnames('at-dropdown')} ref={(elem) => {
+                this.container = elem
+            }}>
                 <div
                     className='at-dropdown__trigger'
                     ref={(elem) => {
                     this.trigger = elem
                 }}>{trigger}
                 </div>
+
                 <div
                     className={classnames('at-dropdown__popover')}
                     style={{
