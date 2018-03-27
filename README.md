@@ -38,12 +38,12 @@ $ yarn dev
 
 ### 视图组件 
 - [x] Alert -kyjo   
-- [ ] Badge -kyjo    
-- [ ] Card -kyjo    
+- [x] Badge -kyjo    
+- [x] Card -kyjo    
 - [ ] Collapse -kyjo  
-- [ ] LoadingBar -kyjo    
+- [x] LoadingBar -kyjo    
 - [ ] Modal -kyjo    
-- [ ] Message -kyjo  
+- [x] Message -kyjo  
 - [ ] Notification     
 - [ ] Popover     
 - [ ] Progress     
@@ -52,8 +52,8 @@ $ yarn dev
 - [ ] Table     
 
 ### 导航组件 
-- [ ] Breadcrumb -kyjo  
-- [ ] Dropdown  -kyjo   
+- [x] Breadcrumb -kyjo  
+- [x] Dropdown  -kyjo   
 - [ ] Menu     
 - [ ] Pagination     
 - [ ] Steps     
