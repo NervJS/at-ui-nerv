@@ -23,7 +23,7 @@ $ yarn dev
 - [x] Button -lee    
 - [x] Layout  -kyjo   
 - [x] Tag -kyjo       
-- [ ] Icon       
+- [x] Icon       
 
 ### 表单组件 
 - [x] Checkbox -kyjo     
@@ -31,8 +31,8 @@ $ yarn dev
 - [x] InputNumber -kyjo     
 - [x] Radio -kyjo    
 - [x] Rate -kyjo     
-- [ ] Select       
-- [ ] Switch      
+- [x] Select       
+- [x] Switch      
 - [ ] Slider      
 - [ ] Textarea       
 
@@ -56,5 +56,5 @@ $ yarn dev
 - [x] Dropdown  -kyjo   
 - [ ] Menu     
 - [ ] Pagination     
-- [ ] Steps     
-- [ ] Tabs     
+- [x] Steps     
+- [x] Tabs     
