@@ -36,9 +36,9 @@ const Message: MessageInterface = (options = { type: 'info', duration: 3000, ico
   const id = `message_${seed++}`
 
   options.onClose = () => {
-    Nerv.unmountComponentAtNode(container)
-    document.body.removeChild(container)
-    ; (Message as any).close(id, customCloseFunc)
+    (Message as any).close(id, customCloseFunc)
+     Nerv.unmountComponentAtNode(container)
+     document.body.removeChild(container)
   }
   const instance = Nerv.createElement(MessageElem, {
     ...options
@@ -80,7 +80,9 @@ Message.close = (id, customCloseFunc) => {
 
   if (len > 1) {
     for (let i = index; i < len - 1; i++) {
-      (instances[i].dom as any).style.top = `${parseInt((instances[i].dom as any).style.top) - removedHeight - 8}px`
+      (instances[i].dom as HTMLElement).style.top = `${parseInt((instances[i].dom as any).style.top) -
+        removedHeight -
+        8}px`
     }
   }
 }
