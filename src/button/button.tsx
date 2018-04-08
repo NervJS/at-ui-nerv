@@ -19,6 +19,7 @@ export interface ButtonProps {
 }
 
 class Button extends Nerv.Component<ButtonProps, any> {
+
   static Group: typeof ButtonGroup
 
   static defaultProps = {
