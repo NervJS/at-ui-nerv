@@ -31,7 +31,7 @@ class BadgeExample extends Nerv.Component<any, BadgeExampleState> {
     return (
       <div className='badge_example'>
         <div className='basic'>
-          <Badge value={3} />
+          <Badge value={4} />
           <Badge value={23} />
           <Badge value={199} />
         </div>

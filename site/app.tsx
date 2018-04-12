@@ -1,35 +1,60 @@
 import * as Nerv from 'nervjs'
+// import * as classnames from 'classnames'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+// import { CSSTransition } from 'react-transition-group'
 
-// import ButtonExample from './view/Button'
-// import TagExample from './view/Tag'
-// import LayoutExample from './view/Layout'
-// import CheckboxExample from './view/checkbox'
-// import InputExample from './view/Input'
-// import InputNumberExample from './view/InputNumber/'
-// import RadioExample from './view/Radio'
-// import RateExample from './view/Rate'
-// import AlertExample from './view/Alert'
-import BadgeExample from './view/Badge'
+import Index from './pages/index'
+import Docs from './pages/docs'
 
 import 'at-ui-style'
 
-class App extends Nerv.Component {
+interface AppState {
+  visible: boolean
+}
+
+class App extends Nerv.Component<null, AppState> {
+  constructor (...args) {
+    super(...args)
+    this.state = {
+      visible: false
+    }
+  }
+  componentDidMount () {
+    this.setState({
+      visible: true
+    })
+  }
   render () {
+    // const { visible } = this.state
+    // const animate = ({ location }) => {
+    //   return (
+    //     <CSSTransition key={location.key} classNames="fade" in={true} timeout={300}>
+    //       <div className="wrapper" style="background-color: #F8FAFF">
+    //         <Switch location={location}>
+    //           <Route path="/" exact component={Index} />
+    //           <Route path="/guide" component={Guide} />
+    //           <Route path="/resource" component={Resource} />
+    //           <Route path="/docs" component={Docs} />
+    //         </Switch>
+    //       </div>
+    //     </CSSTransition>
+    //   )
+    // }
+    // return <Route render={animate} />
     return (
-      <div className='app' id='app'>
-        {/* <ButtonExample/> */}
-        {/* <TagExample/> */}
-        {/* <LayoutExample/> */}
-        {/* <CheckboxExample/> */}
-        {/* <InputExample /> */}
-        {/* <InputNumberExample /> */}
-        {/* <RadioExample /> */}
-        {/* <RateExample /> */}
-        {/* <AlertExample /> */}
-        <BadgeExample />
+      <div className='wrapper' style='background-color: #F8FAFF'>
+        <Switch location={location}>
+          <Route path='/' exact component={Index} />
+          <Route path='/docs' component={Docs} />
+        </Switch>
       </div>
     )
   }
 }
 
-Nerv.render(<App />, document.getElementById('container') as Element)
+Nerv.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById('container') as Element
+)
