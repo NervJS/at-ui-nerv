@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import * as $ from 'webpack-zepto'
 import * as sinon from 'sinon'
-import {Checkbox, CheckboxGroup} from '../'
+import Checkbox from '../'
 
 describe('Checkbox', () => {
   let scratch
@@ -55,16 +55,16 @@ describe('Checkbox', () => {
       done()
     })
   })
-  it('should render checked checkbox if checkboxGroup value contain ths same label', () => {
+  it('should render checked checkbox if Checkbox.Group value contain ths same label', () => {
     const valueList: string[] = ['复选框 A', '选中且禁用']
-    const checkboxGroup = <CheckboxGroup value={valueList}>
+    const CheckboxV = <Checkbox.Group value={valueList}>
       <Checkbox label='复选框 A'></Checkbox>
       <Checkbox label='复选框 B'></Checkbox>
       <Checkbox label='复选框 C'></Checkbox>
       <Checkbox label='禁用' disabled></Checkbox>
       <Checkbox label='选中且禁用' disabled></Checkbox>
-    </CheckboxGroup>
-    const component = Nerv.render(checkboxGroup, scratch)
+    </Checkbox.Group>
+    const component = Nerv.render(CheckboxV, scratch)
     $(component.dom).find('.at-checkbox').forEach((e) => {
       if (valueList.indexOf($(e).find('.at-checkbox__label').text()) !== -1) {
         expect($(e).find('input').prop('checked')).toBeTruthy()
