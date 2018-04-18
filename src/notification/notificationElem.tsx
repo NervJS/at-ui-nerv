@@ -33,7 +33,7 @@ class NotificationElem extends Nerv.Component<NotificationElemProps, Notificatio
     duration: 4000,
     showClose: true
   }
-  timer: number
+  timer: any
   constructor (...args) {
     super(...args)
     this.state = {
@@ -85,16 +85,13 @@ class NotificationElem extends Nerv.Component<NotificationElemProps, Notificatio
           onClick={!showClose && this.onCloseHandle}
           onMouseleave={this.startTimer}
           onMouseenter={this.clearTimer}>
-          <i className={classnames('icon', 'at-notification__icon', iconClass)} v-if={showIcon} />
+          <i className={classnames('icon', 'at-notification__icon', iconClass)} showIcon={showIcon} />
           <div className='at-notification__content'>
-            <p className='at-notification__title' v-if={title}>
-              {title}
-            </p>
-            <p className='at-notification__message' v-if={message}>
-              {message}
-            </p>
+             <p className='at-notification__title'>{title}</p>
+             <p className='at-notification__message'>{message}</p>
           </div>
-          <i className='icon icon-x at-notification__close' v-show={showClose} onClick={this.onCloseHandle} />
+
+          {showClose ? <i className='icon icon-x at-notification__close' onClick={this.onCloseHandle} /> : null}
         </div>
       </CSSTransition>
     )
