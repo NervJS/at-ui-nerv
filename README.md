@@ -13,10 +13,9 @@ $ yarn dev
 
 ## TODO List
 
-*完成数量*: 0/34
 
 ### 功能 
-- [ ] 官网
+- [x] 官网
 - [ ] 国际化
 
 ### 基础组件 
@@ -42,9 +41,9 @@ $ yarn dev
 - [x] Card -kyjo    
 - [ ] Collapse -kyjo  
 - [x] LoadingBar -kyjo    
-- [ ] Modal -kyjo    
+- [x] Modal -kyjo    
 - [x] Message -kyjo  
-- [ ] Notification     
+- [x] Notification [kyjo]     
 - [ ] Popover     
 - [ ] Progress     
 - [ ] Timeline     
