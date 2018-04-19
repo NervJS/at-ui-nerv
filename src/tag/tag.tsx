@@ -54,7 +54,8 @@ class Tag extends Nerv.Component<TagProps, TagState> {
     if (this.props.color && colorArr.indexOf(this.props.color) > -1) {
       return ''
     } else {
-      return {borderColor: this.props.color, backgroundColor: this.props.color}
+      // return {borderColor: this.props.color, backgroundColor: this.props.color}
+      return `borderColor:${this.props.color};backgroundColor:${this.props.color};`
     }
   }
   colorClass () {
