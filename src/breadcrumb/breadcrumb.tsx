@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 import BreadcrumbItem from './breadcrumb-item'
 
 interface BreadcrumbProps {
@@ -7,7 +7,7 @@ interface BreadcrumbProps {
 }
 
 class Breadcrumb extends Nerv.Component < BreadcrumbProps,
-null > {
+any > {
     static Item: typeof BreadcrumbItem
     static defaultProps = {
         separator: '/'
@@ -28,7 +28,7 @@ null > {
                 }, this)
             : null
         return (
-            <div className={classnames('at-breadcrumb', className)}>
+            <div className={classnames('at-breadcrumb', className as any)}>
                 {crumbs}
             </div>
         )

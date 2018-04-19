@@ -1,6 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
-import { CompositeComponent } from 'nerv-shared'
+import classnames from 'classnames'
 
 interface InputNumberProps {
   value?: number
@@ -107,7 +106,7 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
       return num
     }
   }
-  onBlurHandle = (evt: CompositionEvent): void => {
+  onBlurHandle = (evt): void => {
     const { onBlur } = this.props
     if (onBlur) {
       onBlur()
@@ -132,13 +131,13 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
       )
     }
   }
-  onFocusHandle = (evt: CompositeComponent): void => {
+  onFocusHandle = (evt): void => {
     const { onFocus } = this.props
     if (onFocus) {
       onFocus(evt)
     }
   }
-  onKeyDownHandle = (evt: KeyboardEvent): void => {
+  onKeyDownHandle = (evt): void => {
     const { keyCode } = evt
     if (keyCode === 38) {
       evt.stopPropagation()
@@ -193,10 +192,10 @@ class InputNumber extends Nerv.Component<InputNumberProps, InputNumberState> {
             value={currentValue}
             name={name}
             disabled={disabled}
-            readonly={readonly}
+            readOnly={readonly}
             max={max}
             min={min}
-            autofocus={autofocus}
+            autoFocus={autofocus}
             onFocus={this.onFocusHandle}
             onBlur={this.onBlurHandle}
             onKeyDown={this.onKeyDownHandle}

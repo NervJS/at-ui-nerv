@@ -9,7 +9,7 @@ const siteRoot = path.join(projectRoot, 'site')
 
 module.exports = {
   entry: {
-    index: `${siteRoot}/app.tsx`
+    index: `${siteRoot}/app.jsx`
   },
   module: {
     rules: [
@@ -18,7 +18,14 @@ module.exports = {
           {
             test: /\.tsx?$/,
             exclude: /node_modules/,
-            use: 'ts-loader'
+            use: [
+              {
+                loader: 'babel-loader'
+              },
+              {
+                loader: 'ts-loader'
+              }
+            ]
           },
           {
             test: /\.jsx?$/,

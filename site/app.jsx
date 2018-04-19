@@ -1,18 +1,12 @@
 import * as Nerv from 'nervjs'
-// import * as classnames from 'classnames'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-// import { CSSTransition } from 'react-transition-group'
 
 import Index from './pages/index'
-import Docs from './pages/docs'
+import Docs from './pages/docs.jsx'
 
 import 'at-ui-style'
 
-interface AppState {
-  visible: boolean
-}
-
-class App extends Nerv.Component<null, AppState> {
+class App extends Nerv.Component {
   constructor (...args) {
     super(...args)
     this.state = {
@@ -23,6 +17,10 @@ class App extends Nerv.Component<null, AppState> {
     this.setState({
       visible: true
     })
+  }
+  shouldComponentUpdate () {
+    console.log('update')
+    return true
   }
   render () {
     // const { visible } = this.state
@@ -42,7 +40,7 @@ class App extends Nerv.Component<null, AppState> {
     // }
     // return <Route render={animate} />
     return (
-      <div className='wrapper' style='background-color: #F8FAFF'>
+      <div className='wrapper' style={{ backgroundColor: '#F8FAFF' }}>
         <Switch location={location}>
           <Route path='/' exact component={Index} />
           <Route path='/docs' component={Docs} />
@@ -56,5 +54,5 @@ Nerv.render(
   <Router>
     <App />
   </Router>,
-  document.getElementById('container') as Element
+  document.getElementById('container')
 )

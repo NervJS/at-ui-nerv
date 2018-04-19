@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 
 interface CheckboxGroupProps {
-  onChange: any
+  onChange?: (e) => void
 }
 
 interface CheckboxGroupState {

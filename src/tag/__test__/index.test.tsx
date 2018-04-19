@@ -3,6 +3,7 @@ import * as $ from 'webpack-zepto'
 import {renderIntoDocument} from 'nerv-test-utils'
 import * as sinon from 'sinon'
 import Tag from '../'
+import { VNode } from 'nerv-shared'
 
 function fireEvent (on, type) {
   const e = document.createEvent('Event')
@@ -30,7 +31,7 @@ describe('Tag', () => {
     return {evt, name}
   }
   it('render tag', () => {
-    const tag = <Tag closable onClose={handleClose}>Tag</Tag>
+    const tag = <Tag closable onClose={handleClose}>{}Tag</Tag>
     const component = renderIntoDocument(tag)
     const dom = Nerv.findDOMNode(component)
     expect(component.props.closable).toBeTruthy()
@@ -38,15 +39,15 @@ describe('Tag', () => {
     expect(dom.textContent).toBe('Tag')
   })
   it('closable', () => {
-    const tag = <Tag closable={true}>TEST</Tag>
+    const tag = <Tag closable={true}>{}TEST</Tag>
     const component = renderIntoDocument(tag)
     const dom = Nerv.findDOMNode(component)
     expect($(dom).find('.at-tag__close').get(0)).toBeDefined()
   })
   it('onClose', (done) => {
     const onClose = sinon.spy()
-    const tag = <Tag closable={true} onClose={onClose}>TEST</Tag>
-    const c = Nerv.render(tag, scratch)
+    const tag = <Tag closable={true} onClose={onClose}>{}TEST</Tag>
+    const c = Nerv.render(tag as VNode, scratch)
     fireEvent(c.dom.querySelector('i'), 'click')
     Nerv.nextTick(() => {
       expect(onClose.calledOnce).toBe(true)

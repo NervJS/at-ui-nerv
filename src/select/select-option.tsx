@@ -25,7 +25,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   componentWillReceiveProps (nextProps) {
     console.log('nextProps', nextProps.style, 'this.props', this.props.style)
   }
-  handleClick = (e: MouseEvent) => {
+  handleClick = (e) => {
     const onClick = this.props.onClick
     if (onClick) {
       onClick(e)

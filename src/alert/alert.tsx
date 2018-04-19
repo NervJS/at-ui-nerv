@@ -1,16 +1,15 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
-
-import FadeAnimation from '../animations/fade-animation'
+import classnames from 'classnames'
+import { CSSTransition } from 'react-transition-group'
 
 interface AlertProps {
   type?: string
-  message: string
-  description: string
-  closable: boolean
-  showIcon: boolean
-  icon: string
-  closeText: string
+  message?: string
+  description?: string
+  closable?: boolean
+  showIcon?: boolean
+  icon?: string
+  closeText?: string
 }
 
 interface AlertState {
@@ -53,22 +52,21 @@ class Alert extends Nerv.Component<AlertProps, AlertState> {
     }
     const iconClass = classArr[type as string] || (icon as string)
     return (
-      <FadeAnimation
+      <CSSTransition
+        classNames='fade'
         in={isShow}
         timeout={300}
         onExited={() => {
           this.setState({
             isExited: true
           })
-        }}
-      >
+        }}>
         <div
           className={classnames('at-alert', {
-            [`at-alert--${type}`]: !!type,
+            [`at-alert--${type}`]: !!type  as any,
             'at-alert--with-description': description
           })}
-          style={{ display: isExited ? 'none' : '' }}
-        >
+          style={{ display: isExited ? 'none' : '' }}>
           {showIcon ? <i className={classnames('icon at-alert__icon', iconClass)} /> : ''}
 
           <div className='at-alert__content'>
@@ -81,12 +79,11 @@ class Alert extends Nerv.Component<AlertProps, AlertState> {
               'icon-x': !closeText
             })}
             style={{ display: closable || closeText ? '' : 'none' }}
-            onClick={this.onCloseHandle}
-          >
+            onClick={this.onCloseHandle}>
             {closeText}
           </i>
         </div>
-      </FadeAnimation>
+      </CSSTransition>
     )
   }
 }

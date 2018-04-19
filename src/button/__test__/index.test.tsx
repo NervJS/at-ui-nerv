@@ -4,7 +4,7 @@ import Button from '../'
 
 describe('Button', () => {
   it('render button', () => {
-    const button = <Button type='primary'>Button</Button>
+    const button = <Button type='primary'>{}Button</Button>
     const component = renderIntoDocument(button)
     const dom = Nerv.findDOMNode(component)
     expect(component.props.type).toBe('primary')

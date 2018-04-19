@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 
 interface CardProps {
   bordered?: boolean
@@ -8,7 +8,7 @@ interface CardProps {
   loading?: boolean
 }
 
-class Card extends Nerv.Component<CardProps, null> {
+class CardL extends Nerv.Component<CardProps, any> {
   static defaultProps = {
     bordered: true,
     noHover: false,
@@ -20,7 +20,7 @@ class Card extends Nerv.Component<CardProps, null> {
     let extraSlot = null
     let loadingSlot = null
     const contentSlot = []
-    Nerv.Children.map(
+    Nerv.Children.forEach(
       children as object[],
       (child, index) => {
         const { slot } = child.props
@@ -64,24 +64,24 @@ class Card extends Nerv.Component<CardProps, null> {
             ) : (
               <div className='at-card__body--loading'>
                 <div>
-                  <span style='width: 95%' />
+                    <span style={{ width: '95%' }} />
                 </div>
                 <div>
-                  <span style='width: 32%' />
-                  <span style='width: 58%' />
+                  <span style={{ width: '32%' }} />
+                  <span style={{ width: '58%' }} />
                 </div>
                 <div>
-                  <span style='width: 23%' />
-                  <span style='width: 65%' />
+                  <span style={{ width: '23%' }} />
+                  <span style={{ width: '65%' }} />
                 </div>
                 <div>
-                  <span style='width: 59%' />
-                  <span style='width: 32%' />
+                  <span style={{ width: '59%' }} />
+                  <span style={{ width: '32%' }} />
                 </div>
                 <div>
-                  <span style='width: 26%' />
-                  <span style='width: 10%' />
-                  <span style='width: 50%' />
+                  <span style={{ width: '26%' }} />
+                  <span style={{ width: '10%' }} />
+                  <span style={{ width: '50%' }} />
                 </div>
               </div>
             )
@@ -94,4 +94,4 @@ class Card extends Nerv.Component<CardProps, null> {
   }
 }
 
-export default Card
+export default CardL

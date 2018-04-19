@@ -285,11 +285,11 @@ class Select extends Nerv.Component<SelectProps, any> {
   render () {
     const props = this.props
     const { style } = props
-    let clearBtn = null
-    let searchInput = null
+    let clearBtn: any = null
+    let searchInput: any = null
     const dropDownStyle = `${this.state.dropDownStyle}`
     if (props.clearable) {
-      clearBtn = <Icon type='icon-x' className='at-select__clear' style={this.state.iconXShow} ref='iconx' onClick={this.handleClear} onMouseLeave={this.handleLeaveIconX}/>
+      clearBtn = <Icon type='icon-x' className='at-select__clear' style={this.state.iconXShow}  onClick={this.handleClear} onMouseLeave={this.handleLeaveIconX}/>
     }
     if (props.filterable) {
       searchInput = <input type='text' onChange={this.handleInput} value={this.state.inputValue} placeholder='请输入查询数据' className='at-select__input' />
@@ -304,7 +304,7 @@ class Select extends Nerv.Component<SelectProps, any> {
           <Icon type='icon-chevron-down' className='at-select__arrow' style={this.state.iconChevronShow} onMouseEnter={this.handleOverIconX}></Icon>
           {clearBtn}
         </div>
-        <div className='at-select__dropdown at-select__dropdown--bottom' style={dropDownStyle}>
+        <div className='at-select__dropdown at-select__dropdown--bottom' style={dropDownStyle as any}>
           <ul className='at-select__not-found' style={this.state.noDataShow}>
             <li>无匹配数据</li>
           </ul>

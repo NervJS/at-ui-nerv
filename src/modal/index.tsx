@@ -4,7 +4,7 @@ import ModalFooter from './ModalFooter'
 import * as Nerv from 'nervjs'
 import { VNode } from 'nerv-shared'
 //
-Modal.body = ModalBody
+Modal.body  = ModalBody
 Modal.footer = ModalFooter
 
 // preset
@@ -26,6 +26,7 @@ Modal.alert = function (config) {
         willUnmount={() => {
           document.removeChild($el)
         }}>
+        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
@@ -59,6 +60,7 @@ Modal.confirm = function (config) {
         willUnmount={() => {
           document.removeChild($el)
         }}>
+        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
@@ -91,6 +93,7 @@ Modal.prompt = function (config) {
         willUnmount={() => {
           document.removeChild($el)
         }}>
+        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
@@ -123,6 +126,7 @@ Modal.info = function (config) {
         willUnmount={() => {
           document.removeChild($el)
         }}>
+        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
@@ -155,6 +159,7 @@ Modal.success = function (config) {
         willUnmount={() => {
           document.removeChild($el)
         }}>
+        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
@@ -187,6 +192,7 @@ Modal.warning = function (config) {
         willUnmount={() => {
           document.removeChild($el)
         }}>
+        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
@@ -219,6 +225,7 @@ Modal.error = function (config) {
         willUnmount={() => {
           document.removeChild($el)
         }}>
+        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>

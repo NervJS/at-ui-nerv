@@ -1,13 +1,13 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 import Popper from 'popper.js'
 
 import DropdownItem from './dropdownItem'
 import DropdownMenu from './dropdownMenu'
 
 interface DropdownProps {
-  trigger: 'click' | 'hover' | 'focus'
-  placement:
+  trigger?: 'click' | 'hover' | 'focus'
+  placement?:
     | 'top'
     | 'top-left'
     | 'top-right'
@@ -20,7 +20,7 @@ interface DropdownProps {
     | 'bottom'
     | 'bottom-left'
     | 'bottom-right'
-  dropDownChange: object
+  dropDownChange?: (name) => void
 }
 
 interface DropdownState {
@@ -65,7 +65,7 @@ class Dropdown extends Nerv.Component<DropdownProps, DropdownState> {
       'bottom-right': 'bottom-end'
       }
     this.popperJs = new Popper(container, dropdownElem, {
-      placement:  placementStrategy[placement],
+      placement:  placementStrategy[placement as never],
       positionFixed: true
     })
   }

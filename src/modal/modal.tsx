@@ -11,15 +11,15 @@ interface ModalProps {
   title?: string
   content?: string
   value?: boolean
-  cancelText: string
-  okText: string
-  maskClosable: string
-  showHead: boolean
-  showClose: boolean
-  showFooter: boolean
-  showInput: boolean
-  width: number | string
-  closeOnPressEsc: boolean
+  cancelText?: string
+  okText?: string
+  maskClosable?: string
+  showHead?: boolean
+  showClose?: boolean
+  showFooter?: boolean
+  showInput?: boolean
+  width?: number | string
+  closeOnPressEsc?: boolean
   type: string
 }
 
@@ -197,10 +197,8 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
         classNames={{
           enter: 'fade-enter',
           enterActive: 'fade-enter-active',
-          enterDone: 'fade-enter-done',
           exit: 'fade-leave',
-          exitActive: 'fade-leave-active',
-          exitDone: 'fade-leave-done'
+          exitActive: 'fade-leave-active'
         }}
         in={visible}
         timeout={300}

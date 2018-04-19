@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 // import { CSSTransition } from 'react-transition-group'
 
 interface LoadingbarElemProps {
@@ -31,7 +31,7 @@ class LoadingbarElem extends Nerv.Component<LoadingbarElemProps, null> {
       // <CSSTransition className='fade' in={show}>
         <div
           className={classnames('at-loading-bar', {
-            [`at-loading-bar--${status}`]: status
+            [`at-loading-bar--${status}`]: status as any
           })}
           style={barStyle()}>
           <div className='at-loading-bar__inner' style={{ width: percent + '%' }} />

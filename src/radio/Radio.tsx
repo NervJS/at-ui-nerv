@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 
 import RadioGroup from './RadioGroup'
 import RadioButton from './RadioButton'
@@ -50,7 +50,7 @@ class Radio extends Nerv.Component<RadioProps, RadioState> {
       focus: false
     })
   }
-  onChangeHandle = (evt: CompositionEvent) => {
+  onChangeHandle = (evt) => {
     const { onChange = () => {} } = this.props
     if (evt.target instanceof HTMLInputElement) {
       const val = evt.target.value

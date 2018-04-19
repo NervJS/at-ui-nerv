@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
 import { VNode } from 'nerv-shared'
 
@@ -66,10 +66,11 @@ class NotificationElem extends Nerv.Component<NotificationElemProps, Notificatio
     clearTimeout(this.timer)
   }
   onCloseHandle = () => {
+
     this.setState({ visible: false })
   }
   render () {
-    const { icon, type, message, showClose, top, showIcon, title } = this.props
+    const { icon, type, message, showClose, top,  title } = this.props
     const { visible } = this.state
 
     const iconClass = icon || classArr[type]
@@ -77,15 +78,15 @@ class NotificationElem extends Nerv.Component<NotificationElemProps, Notificatio
       <CSSTransition in={visible} classNames={'notification-fade'} timeout={300} onExited={this.doDestroy}>
         <div
           className={classnames('at-notification', {
-            [`at-notification--${type}`]: type,
+            [`at-notification--${type}`]: type as any,
             'at-notification--with-message': message,
             'at-notification--hover': !showClose
           })}
           style={{ top: top ? top + 'px' : 'auto' }}
-          onClick={!showClose && this.onCloseHandle}
-          onMouseleave={this.startTimer}
-          onMouseenter={this.clearTimer}>
-          <i className={classnames('icon', 'at-notification__icon', iconClass)} showIcon={showIcon} />
+          onClick={!showClose ? this.onCloseHandle : () => {}}
+          onMouseLeave={this.startTimer}
+          onMouseEnter={this.clearTimer}>
+          <i className={classnames('icon', 'at-notification__icon', iconClass)}  />
           <div className='at-notification__content'>
              <p className='at-notification__title'>{title}</p>
              <p className='at-notification__message'>{message}</p>

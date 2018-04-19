@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-// import * as classnames from 'classnames'
+// import classnames from 'classnames'
 import IconData from '../../icons.json'
 
 import './style.scss'

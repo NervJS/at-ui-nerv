@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
 import { VNode } from 'nerv-shared'
 
@@ -74,8 +74,8 @@ class Message extends Nerv.Component<MessageProps, MessageState> {
     }
     return (
       <div className='at-message__wrapper'>
-        <CSSTransition classNames='move-up' in={visible} onExit={this.destroy}>
-          <div className={classnames('at-message', { [`at-message--${type}`]: type })}>
+        <CSSTransition classNames='move-up' in={visible} onExit={this.destroy} timeout={300}>
+          <div className={classnames('at-message', { [`at-message--${type}`]: type as any })}>
             <i className={classnames('icon', 'at-message__icon', icon ? icon : iconClass(type))} />
             <span className='at-message__content'>{message}</span>
           </div>

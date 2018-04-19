@@ -1,8 +1,8 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 
 interface DropdownItemProps {
-    name: string
+    name?: string
     disabled?: boolean
     divided?: boolean
 }
