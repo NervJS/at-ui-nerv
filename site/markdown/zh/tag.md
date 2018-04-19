@@ -1,3 +1,7 @@
+---
+imports:
+    import {Tag} from '@src';
+---
 # Tag 标签
 
 ----
@@ -8,10 +12,12 @@
 
 :::demo
 ```html
-<at-tag>标签一</at-tag>
-<at-tag>标签二</at-tag>
-<at-tag>标签三</at-tag>
-<at-tag name="标签四" closable v-if="show" @on-close="handleClose">标签四</at-tag>
+<Tag>标签一</Tag>
+<Tag>标签二</Tag>
+<Tag>标签三</Tag>
+<Tag name="标签四" closable onClose={()=>{
+  alert('关闭')
+}}>标签四</Tag>
 ```
 :::
 
@@ -21,13 +27,13 @@
 
 :::demo
 ```html
-<at-tag color="default">标签一</at-tag>
-<at-tag color="primary">标签二</at-tag>
-<at-tag color="success">标签三</at-tag>
-<at-tag color="error">标签四</at-tag>
-<at-tag color="warning">标签五</at-tag>
-<at-tag color="info">标签六</at-tag>
-<at-tag color="#ecefce">#ecefce</at-tag>
+<Tag color="default">标签一</Tag>
+<Tag color="primary">标签二</Tag>
+<Tag color="success">标签三</Tag>
+<Tag color="error">标签四</Tag>
+<Tag color="warning">标签五</Tag>
+<Tag color="info">标签六</Tag>
+<Tag color="#ecefce">#ecefce</Tag>
 ```
 :::
 
@@ -43,22 +49,4 @@
 
 | 事件名称      | 说明          | 返回值  |
 |---------- |-------------- |---------- |
-| on-close | 点击关闭按钮时触发 | event |
-
-```
-<script>
-  export default {
-    data () {
-      return {
-        show: true
-      }
-    },
-    methods: {
-      handleClose (evt, name) {
-        this.$Message.info(`关闭标签 - ${name}`)
-        this.show = false
-      }
-    }
-  }
-</script>
-```
+| onClose | 点击关闭按钮时触发 | event |

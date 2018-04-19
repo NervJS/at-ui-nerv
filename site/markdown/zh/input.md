@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Input} from '@src';
+---
 # Input 输入框
 
 ----
@@ -9,9 +12,9 @@
 
 :::demo
 ```html
-<at-input v-model="inputValue" placeholder="输入提示"></at-input>
-<at-input v-model="inputValue" placeholder="禁用状态" disabled></at-input>
-<at-input v-model="password" type="password" placeholder="密码"></at-input>
+<Input onInput={(n)=>{console.log(n)}} placeholder="输入提示"></Input>
+<Input onInput={()=>{}} placeholder="禁用状态" disabled></Input>
+<Input onInput={()=>{}} type="password" placeholder="密码"></Input>
 ```
 :::
 
@@ -21,10 +24,10 @@
 
 :::demo
 ```html
-<at-input v-model="inputValue2" placeholder="success" status="success" icon="check-circle"></at-input>
-<at-input v-model="inputValue2" placeholder="error" status="error" icon="x-circle"></at-input>
-<at-input v-model="inputValue2" placeholder="warning" status="warning" icon="alert-circle"></at-input>
-<at-input v-model="inputValue2" placeholder="info" status="info" icon="info"></at-input>
+<Input onInput={()=>{}} placeholder="success" status="success" icon="check-circle"></Input>
+<Input onInput={()=>{}} placeholder="error" status="error" icon="x-circle"></Input>
+<Input onInput={()=>{}} placeholder="warning" status="warning" icon="alert-circle"></Input>
+<Input onInput={()=>{}} placeholder="info" status="info" icon="info"></Input>
 ```
 :::
 
@@ -34,7 +37,7 @@
 
 :::demo
 ```html
-<at-input v-model="inputValue3" placeholder="请输入链接" icon="link"></at-input>
+<Input onInput={()=>{}} placeholder="请输入链接" icon="link"></Input>
 ```
 :::
 
@@ -43,42 +46,21 @@
 设置 `slot="prepend"` 或者 `slot="append"` ，可自定义复合型输入框
 
 :::demo
-```html
-<at-input v-model="inputValue4" placeholder="请输入内容">
-  <template slot="prepend">
-    <span>Https://</span>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="请输入内容" size="small">
-  <template slot="append">
-    <span>@aotu.io</span>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="请输入内容">
-  <template slot="prepend">
-    <i class="icon icon-link"></i>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="请输入内容" prepend-button>
-  <template slot="prepend">
-    <span>搜索</span>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="请输入内容" append-button>
-  <template slot="append">
-    <span>搜索</span>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="请输入内容" prepend-button>
-  <template slot="prepend">
-    <i class="icon icon-search"></i>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="请输入内容" append-button>
-  <template slot="append">
-    <i class="icon icon-search"></i>
-  </template>
-</at-input>
+```jsx
+<Input onInput={()=>{}} placeholder="请输入内容" prepend={<span>Https://</span>}>
+</Input>
+<Input onInput={()=>{}} placeholder="请输入内容" size="small" append={<span>@aotu.io</span>}>
+</Input>
+<Input onInput={()=>{}} placeholder="请输入内容"  prepend={<i className='icon icon-search'/>}>
+</Input>
+<Input onInput={()=>{}} placeholder="请输入内容" prependButton prepend={<span>搜索</span>}>
+</Input>
+<Input onInput={()=>{}} placeholder="请输入内容" appendButton append={<span>搜索</span>}>
+</Input>
+<Input onInput={()=>{}} placeholder="请输入内容" prependButton prepend={<i className='icon icon-search'/>}>
+</Input>
+<Input onInput={()=>{}} placeholder="请输入内容" appendButton append={<i className='icon icon-search'/>}>
+</Input>
 ```
 :::
 
@@ -88,9 +70,9 @@
 
 :::demo
 ```html
-<at-input v-model="inputValue" size="large" placeholder="大尺寸"></at-input>
-<at-input v-model="inputValue" placeholder="正常尺寸"></at-input>
-<at-input v-model="inputValue" size="small" placeholder="小尺寸"></at-input>
+<Input onInput={()=>{}} size="large" placeholder="大尺寸"></Input>
+<Input onInput={()=>{}} placeholder="正常尺寸"></Input>
+<Input onInput={()=>{}} size="small" placeholder="小尺寸"></Input>
 ```
 :::
 
@@ -113,13 +95,9 @@
 | status | 输入框类型 | String | success, error, warning, info | - |
 | prependButton | 前置元素是否包含可点击的按钮，用于复合型输入框 | Boolean | - | false |
 | appendButton | 后置元素是否包含可点击的按钮，用于复合型输入框 | Boolean | - | false |
+| prepend | 前置内容 | Html,VNode,String | - | - | 
+| append | 后置内容 | Html,VNode,String | - | - |
 
-## Input slot
-
-| 名称 | 说明          |
-|------ |------------ |
-| prepend | 前置内容，仅在 text 类型下有效 |
-| append | 后置内容，仅在 text 类型下有效 |
 
 ## Input 事件
 
@@ -127,29 +105,5 @@
 |---------- |-------------- |---------- |
 | focus | 获得焦点时触发 | event |
 | blur | 失去焦点时触发 | event |
+| Input | 更新内容时触发 | value,event  |
 
-```
-<script>
-export default {
-  data() {
-    return {
-      inputValue: '',
-      inputValue2: '',
-      inputValue3: '',
-      inputValue4: '',
-      password: ''
-    }
-  }
-}
-</script>
-
-<style lang="scss" scoped>
-.at-input {
-  width: 200px;
-
-  & + .at-input {
-    margin-top: 15px;
-  }
-}
-</style>
-```

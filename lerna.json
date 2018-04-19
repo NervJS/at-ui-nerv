@@ -1,0 +1,13 @@
+{
+  "lerna": "2.9.0",
+  "version": "independent",
+  "publishConfig": {
+    "ignore": [
+      "node_modules",
+      "log.*"
+    ]
+  },
+  "packages": [
+    "packages/*"
+  ]
+}

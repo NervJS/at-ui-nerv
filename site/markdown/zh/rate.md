@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Rate} from '@src';
+---
 # Rate 评分
 
 ---
@@ -11,7 +14,7 @@
 
 :::demo
 ```html
-<at-rate></at-rate>
+<Rate></Rate>
 ```
 :::
 
@@ -21,9 +24,13 @@
 
 :::demo
 ```html
-<at-rate :show-text="true" v-model="value2">
-  <span>{{ value2 }} 星</span>
-</at-rate>
+<Rate 
+  showText="true" 
+  value={this.state.value2} 
+  onChange={(n)=>{this.setState({value2:n})}}
+  >
+  <span>{ this.state.value2 } 星</span>
+</Rate>
 ```
 :::
 
@@ -33,7 +40,7 @@
 
 :::demo
 ```html
-<at-rate icon="icon-heart-on"></at-rate>
+<Rate icon="icon-heart-on"></Rate>
 ```
 :::
 
@@ -44,13 +51,16 @@
 :::demo
 ```html
 <div >
-  <at-rate
-    :allow-half="true"
-    :show-text="true"
-    :value="value1"
-    @on-change="changeHandle">
-  </at-rate>
+  <Rate
+    allowHalf="true"
+    showText="true"
+    value="0"
+    onChange={this.changeHandle}>
+  </Rate>
 </div>
+```
+```method
+
 ```
 :::
 
@@ -61,12 +71,12 @@
 :::demo
 ```html
 <div >
-  <at-rate
-    :allow-half="true"
-    :show-text="true"
-    :value="value1"
-    :disabled="true">
-  </at-rate>
+  <Rate
+    allowHalf="true"
+    showText="true"
+    value="0"
+    disabled="true">
+  </Rate>
 </div>
 ```
 :::
@@ -87,31 +97,13 @@
 
 | 事件名称      | 说明          | 返回值  |
 |---------- |-------------- |---------- |
-| on-change | star 数目改变时触发 | 改变后的值 |
-| on-hover-change | 鼠标在 star 上移动导致数值变化时触发 | 改变后的值 |
+| onChange | star 数目改变时触发 | 改变后的值 |
+| onHoverChange | 鼠标在 star 上移动导致数值变化时触发 | 改变后的值 |
 
 
-## Rate slot
+## Rate children
 
 | 名称      | 说明 |
 |----------|-------- |
 | - | 自定义展示文案的内容 |
 
-
-```
-<script>
-export default {
-  data () {
-    return {
-      value1: 2.5,
-      value2: 2
-    }
-  },
-  methods: {
-    changeHandle (val) {
-      this.$Message.info(`trigger change event: ${val}`)
-    }
-  }
-}
-</script>
-```

@@ -1,0 +1,8 @@
+.at-dropdown + .at-dropdown {
+  margin-left: 8px;
+}
+.at-dropdown__trigger {
+  > span {
+    font-size: 12px;
+  }
+}

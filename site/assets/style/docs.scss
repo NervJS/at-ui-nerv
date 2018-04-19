@@ -5,10 +5,10 @@
  * Vue transitions
  */
 .fade-enter-active {
-  transition: opacity .3s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 .fade-leave-active {
-  transition: opacity .2s ease-out;
+  transition: opacity 0.2s ease-out;
 }
 .fade-enter,
 .fade-leave-active {
@@ -22,7 +22,7 @@ $small-viewport-max-width: 767px;
 $medium-viewport-max-width: 991px;
 $large-viewport-max-width: 1199px;
 
-$drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
+$drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, 0.5);
 
 .bg-c-brand {
   background-color: $brand-color-light;
@@ -57,7 +57,7 @@ $drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
     > h1,
     > h2,
     > h3,
-    > h4, {
+    > h4 {
       margin: 16px 0;
       line-height: 1.5;
     }
@@ -83,8 +83,8 @@ $drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
       }
     }
     code {
-      padding: .3em .5em;
-      font-size: .9em;
+      padding: 0.3em 0.5em;
+      font-size: 0.9em;
       vertical-align: middle;
       border: 1px solid $grey-100;
       border-radius: 2px;
@@ -127,7 +127,7 @@ $drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
       margin: 24px 0;
     }
   }
-  table.table {
+  table {
     display: block;
     width: 100%;
     // max-width: 1000px;
@@ -142,9 +142,10 @@ $drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
     th {
       text-align: left;
       border-top: 1px solid $border-color-lightest;
-      background-color: #FAFBFC;
+      background-color: #fafbfc;
     }
-    td, th {
+    td,
+    th {
       border-bottom: 1px solid $border-color-lightest;
       padding: 10px 8px;
 
@@ -172,7 +173,7 @@ $drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
 
     .demo-desc {
       margin: 8px 0;
-      color: #8DABC4;
+      color: #8dabc4;
     }
   }
   &__code {
@@ -265,12 +266,12 @@ $drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
     border: 1px solid $border-color-lighter;
     border-radius: $border-radius-base;
     overflow: hidden;
-    transition: all .3s;
+    transition: all 0.3s;
 
     &:hover {
       border-color: $border-color-lightest;
       background-color: #fff;
-      box-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
+      box-shadow: 0 4px 30px 0 rgba(223, 225, 230, 0.5);
     }
     a {
       width: 100%;
@@ -298,6 +299,29 @@ $drop-shadow: 0 4px 30px 0 rgba(223, 225, 230, .5);
       color: $grey-600;
       font-size: $font-size-smer;
     }
+  }
+}
+
+/*demo box style*/
+// .btn-copy + pre {
+//   display: none;
+// }
+.btn-copy {
+  display: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  transition: all 0.3s;
+  &:hover {
+    color: #6190e8;
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+}
+.at-component__code:hover {
+  .btn-copy {
+    display: block;
+    animation: fadeIn 0.3s both;
   }
 }
 

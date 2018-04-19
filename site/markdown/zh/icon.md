@@ -1,3 +1,7 @@
+---
+imports:
+    import IconList from '../../components/iconList/index.jsx';
+---
 # Icon 图标
 
 ----
@@ -21,42 +25,34 @@
 
 ### 主要
 
-<icon-list type="core"></icon-list>
+<IconList type="core"></IconList>
 
 ### 媒体控制
 
-<icon-list type="media"></icon-list>
+<IconList type="media"></IconList>
 
 ### 通信
 
-<icon-list type="communication"></icon-list>
+<IconList type="communication"></IconList>
 
 ### 照片
 
-<icon-list type="photo"></icon-list>
+<IconList type="photo"></IconList>
 
 ### 地理位置
 
-<icon-list type="location"></icon-list>
+<IconList type="location"></IconList>
 
 ### 天气
 
-<icon-list type="weather"></icon-list>
+<IconList type="weather"></IconList>
 
 ### 箭头
 
-<icon-list type="arrows"></icon-list>
+<IconList type="arrows"></IconList>
 
 ### LOGO
 
-<icon-list type="logos"></icon-list>
+<IconList type="logos"></IconList>
 
 
-```
-<style lang="scss" scoped>
-.icon {
-  font-size: 20px;
-  margin-right: 10px;
-}
-</style>
-```

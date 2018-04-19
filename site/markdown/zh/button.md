@@ -1,10 +1,11 @@
 ---
 imports:
-    import Button from '../../../src/button';
+    import {Button} from '@src';
 ---
+
 # Button 按钮
 
-----
+---
 
 按钮用于传递用户触摸时会触发的操作
 
@@ -13,11 +14,14 @@ imports:
 基础按钮分三种：`主按钮（实心）` 、 `次按钮（空心）` 、 `文字按钮`
 
 :::demo
+
 ```jsx
 <Button type="primary">主要按钮</Button>
 <Button>次要按钮</Button>
 <Button type="text">文字按钮</Button>
 ```
+
+
 :::
 
 ## 不可用状态按钮
@@ -25,11 +29,13 @@ imports:
 添加属性 `disabled` 禁用按钮
 
 :::demo
-```html
+
+```jsx
 <Button type="primary" disabled>主要按钮</Button>
 <Button hollow disabled>次要按钮</Button>
 <Button type="text" disabled>文字按钮</Button>
 ```
+
 :::
 
 ## 带颜色倾向的按钮
@@ -37,7 +43,8 @@ imports:
 带有色彩倾向的按钮能给用户带来操作提示
 
 :::demo
-```html
+
+```jsx
 <div class="row">
   <Button hollow>默认按钮</Button>
   <Button type="primary" hollow>主要按钮</Button>
@@ -55,6 +62,7 @@ imports:
   <Button type="info">信息按钮</Button>
 </div>
 ```
+
 :::
 
 ## 图标文字按钮
@@ -62,7 +70,8 @@ imports:
 如需要在在按钮中添加图标，可设置 `icon` 属性，或者自行在 `Button` 中内联 `icon`。通过 `icon` 属性设置的图标，位置固定在文本的前面。
 
 :::demo
-```html
+
+```jsx
 <div class="row">
   <Button icon="icon-download">下载资源</Button>
   <Button icon="icon-user-plus">添加用户</Button>
@@ -74,6 +83,7 @@ imports:
   <Button type="primary" icon="icon-search" circle></Button>
 </div>
 ```
+
 :::
 
 ## 加载中按钮
@@ -81,11 +91,13 @@ imports:
 可通过添加 `loading` 属性，使按钮处于加载中状态
 
 :::demo
-```html
+
+```jsx
 <Button loading>加载中</Button>
 <Button loading></Button>
 <Button loading circle></Button>
 ```
+
 :::
 
 ## 组合按钮
@@ -93,24 +105,26 @@ imports:
 可以将多个按钮放进 `AtButtonGroup` 中形成一个组合按钮
 
 :::demo
-```html
-<Button-group>
+
+```jsx
+<Button.Group>
   <Button>左</Button>
   <Button>中</Button>
   <Button>右</Button>
-</Button-group>
+</Button.Group>
 <br>
-<Button-group>
+<Button.Group>
   <Button icon="icon-edit" title="编辑"></Button>
   <Button icon="icon-copy" title="复制"></Button>
   <Button icon="icon-download" title="下载"></Button>
-</Button-group>
+</Button.Group>
 <br>
-<Button-group>
+<Button.Group>
   <Button><i class="icon icon-chevron-left"></i>后退</Button>
   <Button>往前<i class="icon icon-chevron-right"></i></Button>
-</Button-group>
+</Button.Group>
 ```
+
 :::
 
 ## 按钮尺寸
@@ -120,7 +134,8 @@ imports:
 若不设置 `size` 属性，则默认为中等大小
 
 :::demo
-```html
+
+```jsx
 <div>
   <Button type="primary" size="large">变大按钮</Button>
   <Button type="primary">正常按钮</Button>
@@ -151,44 +166,24 @@ imports:
   </Button-group>
 </div>
 ```
+
 :::
 
 ## Button 参数
 
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 按钮的类型 | String | `default`, `primary`, `success`, `error`, `warning`, `info`, `text` | - |
-| nativeType | 原生按钮的类型 | String | - | `button` |
-| size | 按钮的大小 | String | `large`, `small`, `smaller` | - |
-| hollow | 是否为空心按钮 | Boolean | - | false |
-| icon | 按钮的图标类名，填入图标的 `classname` | String | 见文档 `Icon 图标` | - |
-| loading | 设置按钮的载入状态 | Boolean | - | false |
-| circle | 设置圆形图标按钮 | Boolean | - | false |
+| 参数       | 说明                                   | 类型    | 可选值                                                              | 默认值   |
+| ---------- | -------------------------------------- | ------- | ------------------------------------------------------------------- | -------- |
+| type       | 按钮的类型                             | String  | `default`, `primary`, `success`, `error`, `warning`, `info`, `text` | -        |
+| nativeType | 原生按钮的类型                         | String  | -                                                                   | `button` |
+| size       | 按钮的大小                             | String  | `large`, `small`, `smaller`                                         | -        |
+| hollow     | 是否为空心按钮                         | Boolean | -                                                                   | false    |
+| icon       | 按钮的图标类名，填入图标的 `classname` | String  | 见文档 `Icon 图标`                                                  | -        |
+| loading    | 设置按钮的载入状态                     | Boolean | -                                                                   | false    |
+| circle     | 设置圆形图标按钮                       | Boolean | -                                                                   | false    |
 
 ## Button Group 参数
 
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
-|---------- |-------------- |---------- |--------------------------------  |-------- |
+| 参数 | 说明       | 类型   | 可选值           | 默认值   |
+| ---- | ---------- | ------ | ---------------- | -------- |
 | size | 按钮的大小 | String | `large`, `small` | 正常大小 |
-| gap | 按钮间隔 | Number | - | -1 |
-
-```
-<style lang="scss" scoped>
-  .row {
-    .at-btn + .at-btn {
-      margin-left: 8px;
-    }
-
-    & + .row {
-      margin-top: 8px;
-    }
-    .at-btn-group .at-btn {
-      margin-left: 0;
-    }
-  }
-  .at-btn-group {
-    margin-left: 8px;
-    margin-top: 16px;
-  }
-</style>
-```
+| gap  | 按钮间隔   | Number | -                | -1       |
