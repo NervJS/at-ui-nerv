@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import * as $ from 'webpack-zepto'
-import * as sinon from 'sinon'
+// import * as sinon from 'sinon'
 import Card from '../'
 
 describe('card', () => {
