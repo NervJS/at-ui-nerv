@@ -19,7 +19,7 @@ class Message extends Nerv.Component<MessageProps, MessageState> {
     duration: null,
     type: 'info'
   }
-  timer: number
+  timer: any
   constructor (...args) {
     super(...args)
     this.state = {
@@ -56,7 +56,9 @@ class Message extends Nerv.Component<MessageProps, MessageState> {
       onClose()
     }
   }
-  destroy () {}
+  destroy () {
+
+  }
   render () {
     const { message, type, icon } = this.props
     const { visible } = this.state
