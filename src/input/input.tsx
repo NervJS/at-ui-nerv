@@ -68,7 +68,7 @@ class Input extends Nerv.Component<InputProps, InputState> {
         this.setState({
           currentValue: val
         }, () => {
-          onInput(val)
+          onInput(val, evt)
         })
 
       }
