@@ -1,4 +1,4 @@
-import Modal from './modal'
+import Modal from './Modal'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 import * as Nerv from 'nervjs'
@@ -10,156 +10,222 @@ Modal.footer = ModalFooter
 // preset
 Modal.alert = function (config) {
   return new Promise((resolve, reject) => {
+    const $el = document.createElement('div')
     const { title, content, callback } = config
-    const modalBody = Nerv.createElement(ModalBody, {}, content)
-    const modalFooter = Nerv.createElement(ModalFooter, { showCancel: false })
-    const modal = Nerv.createElement(
-      Modal,
-      {
-        value: true,
-        title,
-        type: 'alert',
-        onConfirm: () => {
+    const modal = (
+      <Modal
+        value={true}
+        title={title}
+        type={'alert'}
+        onConfirm={() => {
           resolve()
-          if (callback instanceof Function) { callback() }
-        }
-      },
-      modalBody as VNode,
-      modalFooter as VNode
+          if (callback instanceof Function) {
+            callback()
+          }
+        }}
+        willUnmount={() => {
+          document.removeChild($el)
+        }}>
+        <ModalBody>{content}</ModalBody>
+        <ModalFooter showCancel={false} />
+      </Modal>
     )
-    Nerv.render(modal as VNode, document.body)
+
+    Nerv.render(modal as VNode, $el)
+    document.body.appendChild($el)
   })
 }
 Modal.confirm = function (config) {
+  const $el = document.createElement('div')
   return new Promise((resolve, reject) => {
     const { title, content, onConfirm, onCancel } = config
-    const modalBody = Nerv.createElement(ModalBody, {}, content)
-    const modalFooter = Nerv.createElement(ModalFooter, { showCancel: false })
-    const modal = Nerv.createElement(
-      Modal,
-      {
-        value: true,
-        title,
-        type: 'confirm',
-        onConfirm: () => {
+    const modal = (
+      <Modal
+        value={true}
+        title={title}
+        type={'confirm'}
+        onConfirm={() => {
           resolve()
-          if (onConfirm instanceof Function) { onConfirm() }
-        },
-        onCancel: () => {
-          reject()
-          if (onCancel instanceof Function) { onCancel() }
-        }
-      },
-      modalBody as VNode,
-      modalFooter as VNode
+          if (onConfirm instanceof Function) {
+            onConfirm()
+          }
+        }}
+        onCancel={() => {
+          // reject()
+          if (onCancel instanceof Function) {
+            onCancel()
+          }
+        }}
+        willUnmount={() => {
+          document.removeChild($el)
+        }}>
+        <ModalBody>{content}</ModalBody>
+        <ModalFooter showCancel={false} />
+      </Modal>
     )
-    Nerv.render(modal as VNode, document.body)
+    Nerv.render(modal as VNode, $el)
+    document.body.appendChild($el)
   })
 }
-Modal.prompt = function (config) {}
-Modal.info = function (config) {
+Modal.prompt = function (config) {
+  const $el = document.createElement('div')
   return new Promise((resolve, reject) => {
-    const { title= '信息', content, onConfirm, onCancel } = config
-    const modalBody = Nerv.createElement(ModalBody, {}, content)
-    const modalFooter = Nerv.createElement(ModalFooter, { showCancel: false })
-    const modal = Nerv.createElement(
-      Modal,
-      {
-        value: true,
-        title,
-        type: 'info',
-        onConfirm: () => {
+    const { title = '提示', content, onConfirm, onCancel } = config
+    const modal = (
+      <Modal
+        value={true}
+        title={title}
+        type={'info'}
+        onConfirm={() => {
           resolve()
-          if (onConfirm instanceof Function) { onConfirm() }
-        },
-        onCancel: () => {
-          reject()
-          if (onCancel instanceof Function) { onCancel() }
-        }
-      },
-      modalBody as VNode,
-      modalFooter as VNode
+          if (onConfirm instanceof Function) {
+            onConfirm()
+          }
+        }}
+        onCancel={() => {
+          // reject()
+          if (onCancel instanceof Function) {
+            onCancel()
+          }
+        }}
+        willUnmount={() => {
+          document.removeChild($el)
+        }}>
+        <ModalBody>{content}</ModalBody>
+        <ModalFooter showCancel={false} />
+      </Modal>
     )
-    Nerv.render(modal as VNode, document.body)
+    Nerv.render(modal as VNode, $el)
+    document.body.appendChild($el)
+  })
+}
+Modal.info = function (config) {
+  const $el = document.createElement('div')
+  return new Promise((resolve, reject) => {
+    const { title = '信息', content, onConfirm, onCancel } = config
+    const modal = (
+      <Modal
+        value={true}
+        title={title}
+        type={'info'}
+        onConfirm={() => {
+          resolve()
+          if (onConfirm instanceof Function) {
+            onConfirm()
+          }
+        }}
+        onCancel={() => {
+          // reject()
+          if (onCancel instanceof Function) {
+            onCancel()
+          }
+        }}
+        willUnmount={() => {
+          document.removeChild($el)
+        }}>
+        <ModalBody>{content}</ModalBody>
+        <ModalFooter showCancel={false} />
+      </Modal>
+    )
+    Nerv.render(modal as VNode, $el)
+    document.body.appendChild($el)
   })
 }
 Modal.success = function (config) {
-    return new Promise((resolve, reject) => {
-        const { title = '成功', content, onConfirm, onCancel } = config
-        const modalBody = Nerv.createElement(ModalBody, {}, content)
-        const modalFooter = Nerv.createElement(ModalFooter, { showCancel: false })
-        const modal = Nerv.createElement(
-          Modal,
-          {
-            value: true,
-            title,
-            type: 'success',
-            onConfirm: () => {
-              resolve()
-              if (onConfirm instanceof Function) { onConfirm() }
-            },
-            onCancel: () => {
-              reject()
-              if (onCancel instanceof Function) { onCancel() }
-            }
-          },
-          modalBody as VNode,
-          modalFooter as VNode
-        )
-        Nerv.render(modal as VNode, document.body)
-      })
+  const $el = document.createElement('div')
+  return new Promise((resolve, reject) => {
+    const { title = '成功', content, onConfirm, onCancel } = config
+    const modal = (
+      <Modal
+        value={true}
+        title={title}
+        type={'success'}
+        onConfirm={() => {
+          resolve()
+          if (onConfirm instanceof Function) {
+            onConfirm()
+          }
+        }}
+        onCancel={() => {
+          // reject()
+          if (onCancel instanceof Function) {
+            onCancel()
+          }
+        }}
+        willUnmount={() => {
+          document.removeChild($el)
+        }}>
+        <ModalBody>{content}</ModalBody>
+        <ModalFooter showCancel={false} />
+      </Modal>
+    )
+    Nerv.render(modal as VNode, $el)
+    document.body.appendChild($el)
+  })
 }
 Modal.warning = function (config) {
-    return new Promise((resolve, reject) => {
-        const { title = '警告', content, onConfirm, onCancel } = config
-        const modalBody = Nerv.createElement(ModalBody, {}, content)
-        const modalFooter = Nerv.createElement(ModalFooter, { showCancel: false })
-        const modal = Nerv.createElement(
-          Modal,
-          {
-            value: true,
-            title,
-            type: 'warning',
-            onConfirm: () => {
-              resolve()
-              if (onConfirm instanceof Function) { onConfirm() }
-            },
-            onCancel: () => {
-              reject()
-              if (onCancel instanceof Function) { onCancel() }
-            }
-          },
-          modalBody as VNode,
-          modalFooter as VNode
-        )
-        Nerv.render(modal as VNode, document.body)
-      })
+  const $el = document.createElement('div')
+  return new Promise((resolve, reject) => {
+    const { title = '警告', content, onConfirm, onCancel } = config
+    const modal = (
+      <Modal
+        value={true}
+        title={title}
+        type={'warning'}
+        onConfirm={() => {
+          resolve()
+          if (onConfirm instanceof Function) {
+            onConfirm()
+          }
+        }}
+        onCancel={() => {
+          // reject()
+          if (onCancel instanceof Function) {
+            onCancel()
+          }
+        }}
+        willUnmount={() => {
+          document.removeChild($el)
+        }}>
+        <ModalBody>{content}</ModalBody>
+        <ModalFooter showCancel={false} />
+      </Modal>
+    )
+    Nerv.render(modal as VNode, $el)
+    document.body.appendChild($el)
+  })
 }
 Modal.error = function (config) {
-    return new Promise((resolve, reject) => {
-        const { title = '错误', content, onConfirm, onCancel } = config
-        const modalBody = Nerv.createElement(ModalBody, {}, content)
-        const modalFooter = Nerv.createElement(ModalFooter, { showCancel: false })
-        const modal = Nerv.createElement(
-          Modal,
-          {
-            value: true,
-            title,
-            type: 'error',
-            onConfirm: () => {
-              resolve()
-              if (onConfirm instanceof Function) { onConfirm() }
-            },
-            onCancel: () => {
-              reject()
-              if (onCancel instanceof Function) { onCancel() }
-            }
-          },
-          modalBody as VNode,
-          modalFooter as VNode
-        )
-        Nerv.render(modal as VNode, document.body)
-      })
+  const $el = document.createElement('div')
+  return new Promise((resolve, reject) => {
+    const { title = '错误', content, onConfirm, onCancel } = config
+    const modal = (
+      <Modal
+        value={true}
+        title={title}
+        type={'error'}
+        onConfirm={() => {
+          resolve()
+          if (onConfirm instanceof Function) {
+            onConfirm()
+          }
+        }}
+        onCancel={() => {
+          // reject()
+          if (onCancel instanceof Function) {
+            onCancel()
+          }
+        }}
+        willUnmount={() => {
+          document.removeChild($el)
+        }}>
+        <ModalBody>{content}</ModalBody>
+        <ModalFooter showCancel={false} />
+      </Modal>
+    )
+    Nerv.render(modal as VNode, $el)
+    document.body.appendChild($el)
+  })
 }
 
 export default Modal
