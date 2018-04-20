@@ -24,9 +24,10 @@ describe('Alert test', () => {
     const message = '这里是提示的文案~这里是提示的文案~这里是提示的文案~'
     const alert = <Alert message={message} type='success' />
     const component = Nerv.render(alert as VNode, scratch)
+    console.log(component.dom)
     expect(
       $(component.dom)
-        .find('.at-alert')
+        .find('.at-alert__message')
         .text()
     ).toBe(message)
   })
@@ -38,7 +39,7 @@ describe('Alert test', () => {
       .find('.at-alert__close')
       .trigger('click')
     setTimeout(() => {
-      expect($(component.dom).hasClass('fade-exited')).toBeTruthy()
+      expect($(component.dom).css('display')).toBe('none')
       done()
     }, 1000)
   })

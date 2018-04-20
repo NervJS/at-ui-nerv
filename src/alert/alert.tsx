@@ -53,7 +53,12 @@ class Alert extends Nerv.Component<AlertProps, AlertState> {
     const iconClass = classArr[type as string] || (icon as string)
     return (
       <CSSTransition
-        classNames='fade'
+        classNames={{
+          enter: 'fade-enter',
+          enterActive: 'fade-enter-active',
+          exit: 'fade-leave',
+          exitActive: 'fade-leave-active'
+        }}
         in={isShow}
         timeout={300}
         onExited={() => {
