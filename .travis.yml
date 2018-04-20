@@ -18,8 +18,9 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 install:
-  - npm install -g yarn
-  - yarn
+  - npm install
+  # - npm install -g yarn
+  # - yarn
 
 script:
   - npm run build:site
