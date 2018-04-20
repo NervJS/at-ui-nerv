@@ -25,10 +25,16 @@ install:
 script:
   - npm run build:site
   # - npm run test:coverage
-  # - BROWSER=true COVERAGE=false FLAKEY=false npm run test:karma
+  - BROWSER=true COVERAGE=false FLAKEY=false npm run test:karma
   # - ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info
 
-after_script:
-  - git add .
-  - git commit -m "Update docs"
-  - git push  --quiet "https://${GH_TOKEN}@at-ui-nerv" master:master
+after_success:
+  - cd "$TRAVIS_BUILD_DIR"
+  -  git init
+  -  git checkout -b gh-pages
+  -  git add -f .\siteoutput
+  -  git -c user.name='travis' -c user.email='travis' commit -m "Update docs"
+  - git push -f -q "https://https://${GH_TOKEN}@github.com/NervJS/at-ui-nerv" master:master
+  # - git add .
+  # - git commit -m "Update docs"
+  # - git push  --quiet "https://${GH_TOKEN}@at-ui-nerv" master:master
