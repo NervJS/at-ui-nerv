@@ -1,6 +1,6 @@
-import Modal from './Modal'
-import ModalBody from './ModalBody'
-import ModalFooter from './ModalFooter'
+import Modal from './modal'
+import ModalBody from './modalBody'
+import ModalFooter from './modalFooter'
 import * as Nerv from 'nervjs'
 import { VNode } from 'nerv-shared'
 //
