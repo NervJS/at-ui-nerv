@@ -1,5 +1,6 @@
 import * as Nerv from 'nervjs'
-import  classnames from 'classnames'
+import classnames from 'classnames'
+console.log(classnames)
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 import './style.scss'
@@ -12,8 +13,7 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
   toggleMenu = () => {
     console.log('toggle')
   }
-  componentDidMount () {
-  }
+  componentDidMount () {}
   render () {
     const { collapse } = this.props
     return (
@@ -34,9 +34,7 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
           <div className='nav-right'>
             <ul className='navbar'>
               <li>
-                <a href='https://at-ui.github.io/at-ui/#/zh/guide/color'  >
-                  指南
-                </a>
+                <a href='https://at-ui.github.io/at-ui/#/zh/guide/color'>指南</a>
               </li>
               <li>
                 <NavLink activeClassName='router-link-active' to='/docs'>
@@ -44,9 +42,7 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
                 </NavLink>
               </li>
               <li>
-                <a  href='https://at-ui.github.io/at-ui/#/zh/resource/design'>
-                  资源
-                </a>
+                <a href='https://at-ui.github.io/at-ui/#/zh/resource/design'>资源</a>
               </li>
             </ul>
           </div>

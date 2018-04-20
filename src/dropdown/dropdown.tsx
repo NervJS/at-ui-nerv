@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-import Popper from 'popper.js'
-
+import * as Popper from 'popper.js'
+console.log(Popper)
 import DropdownItem from './dropdownItem'
 import DropdownMenu from './dropdownMenu'
 
@@ -53,21 +53,21 @@ class Dropdown extends Nerv.Component<DropdownProps, DropdownState> {
     this.popperJs.destroy()
   }
   setMenuPlacement = () => {
-    const { placement } = this.props
-    const container = Nerv.findDOMNode(this.container)
-    const dropdownElem = Nerv.findDOMNode(this.dropdown)
-    const placementStrategy = {
-      top: '',
-      'top-left': '',
-      'top-right': '',
-      bottom: 'bottom',
-      'bottom-left': 'bottom-start',
-      'bottom-right': 'bottom-end'
-      }
-    this.popperJs = new Popper(container, dropdownElem, {
-      placement:  placementStrategy[placement as never],
-      positionFixed: true
-    })
+    // const { placement } = this.props
+    // const container = Nerv.findDOMNode(this.container)
+    // const dropdownElem = Nerv.findDOMNode(this.dropdown)
+    // const placementStrategy = {
+    //   top: '',
+    //   'top-left': '',
+    //   'top-right': '',
+    //   bottom: 'bottom',
+    //   'bottom-left': 'bottom-start',
+    //   'bottom-right': 'bottom-end'
+    //   }
+    // this.popperJs = new Popper(container, dropdownElem, {
+    //   placement:  placementStrategy[placement as never],
+    //   positionFixed: true
+    // })
   }
   initEvent = () => {
     const { trigger } = this.props
