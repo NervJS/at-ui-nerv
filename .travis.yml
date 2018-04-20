@@ -34,7 +34,7 @@ after_success:
   -  git checkout -b gh-pages
   -  git add -f .\siteoutput
   -  git -c user.name='travis' -c user.email='travis' commit -m "Update docs"
-  - git push -f -q "https://https://${GH_TOKEN}@github.com/NervJS/at-ui-nerv" master:master
+  - git push -f -q "https://${GH_TOKEN}@github.com/NervJS/at-ui-nerv" master:master
   # - git add .
   # - git commit -m "Update docs"
   # - git push  --quiet "https://${GH_TOKEN}@at-ui-nerv" master:master
