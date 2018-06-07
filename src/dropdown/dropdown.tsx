@@ -1,7 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import * as Popper from 'popper.js'
-console.log(Popper)
 import DropdownItem from './dropdownItem'
 import DropdownMenu from './dropdownMenu'
 
