@@ -2,8 +2,6 @@ import * as Nerv from 'nervjs'
 
 import Checkbox from '@md/checkbox.md'
 
-import './style.scss'
-
 class CheckboxExample extends Nerv.Component {
   // state = {
   //   val: 'false'

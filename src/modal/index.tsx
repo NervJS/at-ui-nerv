@@ -1,4 +1,4 @@
-import Modal from './Modal'
+import Modal from './modal'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 import * as Nerv from 'nervjs'
