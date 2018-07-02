@@ -1,13 +1,19 @@
 import * as Nerv from 'nervjs'
-import { Transition } from 'react-transition-group'
+import {Transition} from 'react-transition-group'
 import * as classnames from 'classnames'
 
 import './collapseanimations.scss'
 
-class CollapseAnimation extends Nerv.Component {
+interface CollapseProps {
+}
+
+class CollapseAnimation extends Nerv.Component < CollapseProps,
+any > {
   render () {
-    const { children, timeout } = this.props
-    const tranProps = {...this.props}
+    const {children, timeout} = this.props
+    const tranProps = {
+      ...this.props
+    }
     delete tranProps.children
     return (
       <Transition {...tranProps}>
@@ -16,9 +22,8 @@ class CollapseAnimation extends Nerv.Component {
             <div
               className={classnames(`collapse collapse-${state}`)}
               style={{
-                transition: `height ${timeout}ms ease-out`
-              }}
-            >
+              transition: `height ${timeout}ms ease-out`
+            }}>
               {children}
             </div>
           )

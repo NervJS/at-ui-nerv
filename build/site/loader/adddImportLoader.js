@@ -1,7 +1,6 @@
 const mdContainer = require('markdown-it-container')
 const frontMatter = require('front-matter')
 const highlight = require('highlight.js')
-// const slugify = require('transliteration').slugify
 
 let md = require('markdown-it')
 

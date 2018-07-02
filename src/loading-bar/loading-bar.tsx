@@ -1,8 +1,6 @@
 import * as Nerv from 'nervjs'
 import * as classnames from 'classnames'
 
-import FadeTransition from '../animations/fade-animation'
-
 interface LoadingBarProps {
   width?: number
 }
@@ -13,7 +11,8 @@ interface LoadingBarState {
   percent: number
 }
 
-class LoadingBar extends Nerv.Component<LoadingBarProps, LoadingBarState> {
+class LoadingBar extends Nerv.Component < LoadingBarProps,
+LoadingBarState > {
   static defaultProps = {
     width: 2
   }
@@ -26,27 +25,24 @@ class LoadingBar extends Nerv.Component<LoadingBarProps, LoadingBarState> {
     }
   }
   render () {
-    const { show, status, percent } = this.state
-    const { width } = this.props
+    const {show, status, percent} = this.state
+    const {width} = this.props
     const barStyle = {
-      height: `${(width as never | 0) || 2}px`
+      height: `${ (width as never | 0) || 2}px`
     }
     return (
-      <FadeTransition>
-        {show ? (
-          <div
-            className={classnames('at-loading-bar', {
-              [`at-loading-bar--${status}`]: status
-            })}
-            style={barStyle}
-          >
-            <div className='at-loading-bar__inner' style={{ width: percent + '%' }} />
-          </div>
-        ) : (
-          ''
-        )}
-      </FadeTransition>
-    )
+      <div
+        className={classnames('at-loading-bar', {
+        [`at-loading-bar--${status}`]: status
+      })}
+        style={barStyle}>
+        <div
+          className='at-loading-bar__inner'
+          style={{
+          width: percent + '%'
+        }}/>
+      </div>
+    ))
   }
 }
 

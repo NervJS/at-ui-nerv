@@ -2,7 +2,7 @@ import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import BreadcrumbItem from './breadcrumb-item'
 
-interface BreadcrumbProps {
+export interface BreadcrumbProps {
     separator?: string
 }
 
