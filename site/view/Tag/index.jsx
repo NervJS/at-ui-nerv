@@ -8,11 +8,14 @@ class TagExample extends Nerv.Component {
     this.handleClose = this.handleClose.bind(this)
   }
   handleClose (evt, name) {
-    // alert(name)
     console.log(evt, name)
   }
   render () {
-    return <Tag />
+    return (
+      <div className='tag-example'>
+        <Tag />
+      </div>
+    )
   }
 }
 

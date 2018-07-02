@@ -5,7 +5,11 @@ import './style.scss'
 
 class CollapseExample extends Nerv.Component {
   render () {
-    return (<Collapse />)
+    return (
+      <div className='collapse-example'>
+        <Collapse />
+      </div>
+    )
   }
 }
 

@@ -6,14 +6,20 @@ import './style.scss'
 class InputExample extends Nerv.Component {
   constructor (...args) {
     super(...args)
-    this.onInputHandle = this.onInputHandle.bind(this)
+    this.onInputHandle = this
+      .onInputHandle
+      .bind(this)
   }
   onInputHandle (e) {
     console.log(e)
   }
 
   render () {
-    return <InputE />
+    return (
+      <div className='input-example'>
+        <InputE />
+      </div>
+    )
   }
 }
 

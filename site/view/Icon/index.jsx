@@ -5,7 +5,9 @@ import Icon from '@md/icon.md'
 class IconExample extends Nerv.Component {
   render () {
     return (
-      <Icon />
+      <div className='icon-example'>
+        <Icon />
+      </div>
     )
   }
 }
