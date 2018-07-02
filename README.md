@@ -38,8 +38,8 @@ $ yarn dev
 
 ### 视图组件 
 - [x] Alert -kyjo   
-- [ ] Badge -kyjo    
-- [ ] Card -kyjo    
+- [x] Badge -kyjo    
+- [x] Card -kyjo    
 - [ ] Collapse -kyjo  
 - [ ] LoadingBar -kyjo    
 - [ ] Modal -kyjo    

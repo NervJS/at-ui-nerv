@@ -1,6 +1,5 @@
 import * as Nerv from 'nervjs'
 import * as $ from 'webpack-zepto'
-import * as sinon from 'sinon'
 import Badge from '../'
 
 describe('Checkbox', () => {

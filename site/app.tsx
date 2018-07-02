@@ -9,7 +9,10 @@ import * as Nerv from 'nervjs'
 // import RadioExample from './view/Radio'
 // import RateExample from './view/Rate'
 // import AlertExample from './view/Alert'
-import BadgeExample from './view/Badge'
+// import BadgeExample from './view/Badge'
+// import CardExample from './view/Card'
+import CollapseExample from './view/Collapse'
+// import LoadingBarExample from './view/LoadingBar'
 
 import 'at-ui-style'
 
@@ -26,7 +29,10 @@ class App extends Nerv.Component {
         {/* <RadioExample /> */}
         {/* <RateExample /> */}
         {/* <AlertExample /> */}
-        <BadgeExample />
+        {/* <BadgeExample /> */}
+        {/* <CardExample /> */}
+        <CollapseExample />
+        {/* <LoadingBarExample /> */}
       </div>
     )
   }
