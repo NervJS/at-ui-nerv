@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Collapse} from '@src';
+    import {Collapse,Message} from '@src';
 ---
 
 # Collapse 折叠面板
@@ -48,7 +48,11 @@ imports:
 :::demo
 
 ```jsx
-<Collapse accordion value="0">
+<Collapse accordion onChange={(e)=>{
+  Message.info({
+  message: `toggle Item ${e[0]||null}`,
+  duration: 1000
+})}} value="0">
 	{[
 		{
 			title: '标题1',
@@ -65,7 +69,7 @@ imports:
 		}
 	].map((item, index) => {
 		return (
-			<Collapse.Item key="index" title={item.title}>
+			<Collapse.Item key= {index}  title={item.title}>
 				<div>{item.content}</div>
 			</Collapse.Item>
 		)
@@ -99,7 +103,7 @@ imports:
 		}
 	].map((item, index) => {
 		return (
-			<Collapse.Item key="index" title={item.title}>
+			<Collapse.Item key= {index} title={item.title}>
 				<div>
 					{index !== 0 ? item.content : ''}
 					<Collapse accordion v-if="index === 0">
@@ -172,7 +176,7 @@ imports:
 	].map((item, index) => {
 		return (
 			<Collapse.Item
-				key="index"
+				key= {index}
 				title={item.title}
 			>
 				<div>{item.content}</div>
@@ -196,7 +200,7 @@ imports:
 
 | 事件名称  | 说明             | 返回值                         |
 | --------- | ---------------- | ------------------------------ |
-| on-change | 切换面板项时触发 | 当前已展开面板项的 `name` 数组 |
+| onChange | 切换面板项时触发 | 当前已展开面板项的 `name` 数组 |
 
 ## CollapseItem 参数
 
@@ -212,25 +216,3 @@ imports:
 | ----- | ------------------------------ |
 | title | 面板项的标题（可传入任意内容） |
 | -     | 面板项的内容                   |
-
-```
-<script>
-  export default {
-    data () {
-      return {
-        list: [
-          { title: '标题1', content: '内容1' },
-          { title: '标题2', content: '内容2' },
-          { title: '标题3', content: '内容3', disabled: true }
-        ],
-        value: 'collapse1'
-      }
-    },
-    methods: {
-      changeHandle (val) {
-        this.$Message.info(`collapse change event: ${val}`)
-      }
-    }
-  }
-</script>
-```

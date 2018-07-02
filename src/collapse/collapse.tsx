@@ -29,10 +29,9 @@ CollapseState > {
   componentDidMount () {
     this.setActive()
   }
-
   setActive = () => {
     const activeKey = this.getActiveKey()
-    const {accordion, children} = this.props
+    const { accordion, children } = this.props
     return Nerv
       .Children
       .map(children as never, (child, index) => {
@@ -81,6 +80,7 @@ CollapseState > {
       }
       newActiveKey = activeKey
     }
+    console.log(onChange)
     this.setState({
       currentValue: newActiveKey
     }, () => {

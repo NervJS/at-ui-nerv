@@ -1,7 +1,8 @@
 import * as Nerv from 'nervjs'
 import * as classnames from 'classnames'
-import { CSSTransition } from 'react-transition-group'
-// import CollapseTransition from '../animations/collapse-animations'
+import CollapseTransition from '../animations/collapse-transition.jsx'
+// import {CSSTransition} from 'react-transition-group'
+import '../animations/collapseanimations.scss'
 
 interface CollapseItemProps {
   title?: string
@@ -15,7 +16,8 @@ interface CollapseItemState {
   isActive: boolean
 }
 
-class CollapseItem extends Nerv.Component <CollapseItemProps, CollapseItemState> {
+class CollapseItem extends Nerv.Component < CollapseItemProps,
+CollapseItemState > {
   static defaultProps = {
     title: '',
     disabled: false
@@ -29,32 +31,33 @@ class CollapseItem extends Nerv.Component <CollapseItemProps, CollapseItemState>
     }
   }
   toggle = () => {
-    const { disabled } = this.props
-    const { isActive: isActiveS } = this.state
+    const {_toggle, panelName, key = 0, disabled} = this.props
+    const {isActive} = this.props
     if (disabled) {
       return
     }
-    this.setState({
-      isActive: !isActiveS
+    _toggle({
+      name: panelName || key,
+      isActive
     })
   }
   panelExitedHandle = () => {
-    const { _toggle, panelName, key } = this.props
-    const { isActive } = this.state
+    const {_toggle, panelName, key} = this.props
+    const {isActive} = this.state
     _toggle({
       name: panelName || key,
       isActive
     })
   }
   render () {
-    const { title, disabled, children } = this.props
-    const { isActive } = this.state
+    const {title, disabled, children} = this.props
+    const {isActive} = this.props
     let titleSlot = null
     const contentSlot = []
-    Nerv.Children.forEach(
-      children as never,
-      (child, index) => {
-        const { props } = child
+    Nerv
+      .Children
+      .forEach(children as never, (child, index) => {
+        const {props} = child
         if (props) {
           switch (props.slot) {
             case 'title':
@@ -65,25 +68,21 @@ class CollapseItem extends Nerv.Component <CollapseItemProps, CollapseItemState>
           }
           delete child.props.slot
         }
-      },
-      this
-    )
+      }, this)
     return (
       <div
         className={classnames('at-collapse__item', {
-          'at-collapse__item--active': isActive,
-          'at-collapse__item--disabled': disabled
-        })}
-      >
+        'at-collapse__item--active': isActive,
+        'at-collapse__item--disabled': disabled
+      })}>
         <div className='at-collapse__header' onClick={this.toggle}>
-          <i className='icon at-collapse__icon icon-chevron-right' />
-          {titleSlot || <div>{title}</div>}
+          <i className='icon at-collapse__icon icon-chevron-right'/> {titleSlot || <div>{title}</div>}
         </div>
-        <CSSTransition classNames='slide-up' in={isActive} timeout={300} onExited={this.panelExitedHandle}>
-          <div className='at-collapse__body' style={{ display: this.props.isActive ? '' : 'none' }}>
+        <CollapseTransition isShow={isActive}>
+          <div className='at-collapse__body'>
             <div className='at-collapse__content'>{contentSlot}</div>
           </div>
-        </CSSTransition>
+        </CollapseTransition>
       </div>
     )
   }
