@@ -1,5 +1,5 @@
 language: node_js
-sudo: true
+sudo: false
 
 node_js:
   - "8"
@@ -18,23 +18,19 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 install:
-  - npm install
-  # - npm install -g yarn
-  # - yarn
+  - npm install -g yarn
+  - yarn
 
 script:
-  - npm run build:site
+  # - npm run build
   # - npm run test:coverage
   - BROWSER=true COVERAGE=false FLAKEY=false npm run test:karma
   # - ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info
 
-after_success:
-  - cd "$TRAVIS_BUILD_DIR"
-  -  git init
-  -  git checkout -b gh-pages
-  -  git add -f .\siteoutput
-  -  git -c user.name='travis' -c user.email='travis' commit -m "Update docs"
-  - git push -f -q "https://${GH_TOKEN}@github.com/NervJS/at-ui-nerv" master:master
-  # - git add .
-  # - git commit -m "Update docs"
-  # - git push  --quiet "https://${GH_TOKEN}@at-ui-nerv" master:master
+afterscript:
+  - cd 
+
+branches:
+  only:
+    - master
+  
