@@ -1,7 +1,7 @@
-.at-box-row{
+.at-box-row {
   height: 36px;
   border-radius: 8px;
-} 
+}
 .bg-c-brand-light {
   background-color: #93b6f6;
 }
@@ -10,8 +10,20 @@
 }
 .demo-desc {
   margin: 8px 0;
-  color: #8DABC4;
+  color: #8dabc4;
 }
 .at-row {
   // width: 100%;
+}
+
+.at-row {
+  margin-bottom: 12px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+.at-box-row {
+  height: 36px;
+  border-radius: 8px;
 }

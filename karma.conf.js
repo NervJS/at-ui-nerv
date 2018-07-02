@@ -121,14 +121,21 @@ module.exports = function (config) {
           },
           {
             test: /\.(ts|tsx)$/,
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-              compilerOptions: {
-                target: 'es3',
-                module: 'commonjs'
+            use: [
+              {
+                loader: 'babel-loader'
+              },
+              {
+                loader: 'ts-loader',
+                options: {
+                  transpileOnly: true,
+                  compilerOptions: {
+                    target: 'es6',
+                    module: 'es6'
+                  }
+                }
               }
-            }
+            ]
           },
           {
             test: /\.(css|scss|sass)(\?.*)?$/,
@@ -146,13 +153,7 @@ module.exports = function (config) {
                   ident: 'postcss',
                   plugins: () => [
                     autoprefixer({
-                      browsers: [
-                        'ie >= 9',
-                        'Chrome >= 21',
-                        'Firefox >= 1',
-                        'Edge >= 13',
-                        'last 3 versions'
-                      ],
+                      browsers: ['ie >= 9', 'Chrome >= 21', 'Firefox >= 1', 'Edge >= 13', 'last 3 versions'],
                       flexbox: 'no-2009'
                     })
                   ]

@@ -2,3 +2,4 @@
 node_modules/
 siteoutput/
 dist/
+package-lock.json

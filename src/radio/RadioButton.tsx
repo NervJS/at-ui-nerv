@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 
 interface RadioButtonProps {
   label: string | number
@@ -32,7 +32,7 @@ class RadioButton extends Nerv.Component<RadioButtonProps, RadioButtonState> {
       })
     }
   }
-  onChangeHandle = (evt: CompositionEvent) => {
+  onChangeHandle = (evt) => {
     const { onChange } = this.props
     if (evt.target instanceof HTMLInputElement) {
       const { value } = evt.target
@@ -76,7 +76,7 @@ class RadioButton extends Nerv.Component<RadioButtonProps, RadioButtonState> {
           name={name}
           disabled={disabled}
         />
-        <span className='at-radio-button__inner' style={checked ? activeStyle() : null}>
+        <span className='at-radio-button__inner' style={checked ? activeStyle() : {}}>
           {children}
         </span>
       </label>

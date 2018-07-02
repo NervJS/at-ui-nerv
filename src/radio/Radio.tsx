@@ -1,5 +1,8 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
+
+import RadioGroup from './RadioGroup'
+import RadioButton from './RadioButton'
 
 interface RadioProps {
   value: string | number
@@ -15,9 +18,11 @@ interface RadioState {
 
 class Radio extends Nerv.Component<RadioProps, RadioState> {
   static elementName = 'AtRadio'
+  static Button: typeof RadioButton
+  static Group: typeof RadioGroup
   constructor (...args) {
     super(...args)
-    const {label, value} = this.props
+    const { label, value } = this.props
     this.state = {
       focus: false,
       checked: this.isChecked(value, label)
@@ -25,7 +30,7 @@ class Radio extends Nerv.Component<RadioProps, RadioState> {
   }
   componentWillReceiveProps (nextProps: RadioProps) {
     const { value, label } = nextProps
-    const {checked } = this.state
+    const { checked } = this.state
     if (checked !== this.isChecked(value, label)) {
       this.setState({
         checked: !checked
@@ -45,8 +50,8 @@ class Radio extends Nerv.Component<RadioProps, RadioState> {
       focus: false
     })
   }
-  onChangeHandle = (evt: CompositionEvent) => {
-    const { onChange } = this.props
+  onChangeHandle = (evt) => {
+    const { onChange = () => {} } = this.props
     if (evt.target instanceof HTMLInputElement) {
       const val = evt.target.value
       onChange(val)

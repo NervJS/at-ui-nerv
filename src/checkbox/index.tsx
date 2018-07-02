@@ -1,4 +1,6 @@
 import Checkbox from './checkbox'
 import CheckboxGroup from './checkbox-group'
 
-export { Checkbox , CheckboxGroup}
+Checkbox.Group = CheckboxGroup
+
+export default Checkbox

@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 
 interface RateProps {
   value?: number
@@ -8,8 +8,8 @@ interface RateProps {
   allowHalf?: boolean
   showText?: boolean
   icon?: string
-  onChange: (a) => {}
-  allowClear: boolean
+  onChange?: (a) => void
+  allowClear?: boolean
 }
 
 interface RateState {
@@ -58,7 +58,7 @@ class Rate extends Nerv.Component<RateProps, RateState> {
     })
   }
 
-  overRateHandle = (evt: CompositionEvent) => {
+  overRateHandle = (evt) => {
     const { disabled } = this.props
     if (disabled) {
       return
@@ -67,7 +67,7 @@ class Rate extends Nerv.Component<RateProps, RateState> {
       isHoverRate: true
     })
   }
-  clacClass (index: number): object {
+  clacClass (index: number) {
     const { isHalf, hoverIndex, currentValue } = this.state
     const STAR_ON_CLASS_NAME = 'at-rate__item--on'
     const STAR_OFF_CLASS_NAME = 'at-rate__item--off'
@@ -81,7 +81,7 @@ class Rate extends Nerv.Component<RateProps, RateState> {
       [STAR_OFF_CLASS_NAME]: index > lastItemIndex
     }
   }
-  moveStarHandle = (index: number, evt: CompositionEvent) => {
+  moveStarHandle = (index: number, evt) => {
     const { disabled, allowHalf, onHoverChange } = this.props
     const {isHalf, lastHoverIndex} = this.state
     if (disabled) {
@@ -159,7 +159,7 @@ class Rate extends Nerv.Component<RateProps, RateState> {
               onMouseMove={this.moveStarHandle.bind(this, i)}
               onClick={this.confirmValue.bind(this, i)}
             >
-              <span className={classnames('icon at-rate__left', icon)} type='half' />
+              <span className={classnames('icon at-rate__left', icon)}  />
             </i>
           </li>
         ) as never)

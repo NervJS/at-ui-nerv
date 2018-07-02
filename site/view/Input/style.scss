@@ -1,0 +1,7 @@
+.at-input {
+  width: 200px;
+
+  & + .at-input {
+    margin-top: 15px;
+  }
+}

@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import classnames from 'classnames'
 
 interface InputProps {
   type?: string
@@ -60,7 +60,7 @@ class Input extends Nerv.Component<InputProps, InputState> {
       onBlur(evt)
     }
   }
-  onInputHandle (evt: CompositionEvent) {
+  onInputHandle (evt) {
     const { onInput } = this.props
     if (onInput) {
       if (evt.target instanceof HTMLInputElement) {
@@ -68,7 +68,7 @@ class Input extends Nerv.Component<InputProps, InputState> {
         this.setState({
           currentValue: val
         }, () => {
-          onInput(val)
+          onInput(val, evt)
         })
 
       }
@@ -127,11 +127,11 @@ class Input extends Nerv.Component<InputProps, InputState> {
           placeholder={placeholder}
           min={min}
           max={max}
-          minlength={minlength}
-          maxlength={maxlength}
+          minLength={minlength}
+          maxLength={maxlength}
           disabled={disabled}
-          readonly={readonly}
-          autofocus={autofocus}
+          readOnly={readonly}
+          autoFocus={autofocus}
           onFocus={this.onFoucsHandle}
           onBlur={this.onBlurHandle}
           onInput={this.onInputHandle}

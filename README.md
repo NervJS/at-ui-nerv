@@ -13,17 +13,16 @@ $ yarn dev
 
 ## TODO List
 
-*完成数量*: 0/34
 
 ### 功能 
-- [ ] 官网
+- [x] 官网
 - [ ] 国际化
 
 ### 基础组件 
 - [x] Button -lee    
 - [x] Layout  -kyjo   
 - [x] Tag -kyjo       
-- [ ] Icon       
+- [x] Icon       
 
 ### 表单组件 
 - [x] Checkbox -kyjo     
@@ -31,8 +30,8 @@ $ yarn dev
 - [x] InputNumber -kyjo     
 - [x] Radio -kyjo    
 - [x] Rate -kyjo     
-- [ ] Select       
-- [ ] Switch      
+- [x] Select       
+- [x] Switch      
 - [ ] Slider      
 - [ ] Textarea       
 
@@ -41,10 +40,10 @@ $ yarn dev
 - [x] Badge -kyjo    
 - [x] Card -kyjo    
 - [ ] Collapse -kyjo  
-- [ ] LoadingBar -kyjo    
-- [ ] Modal -kyjo    
-- [ ] Message -kyjo  
-- [ ] Notification     
+- [x] LoadingBar -kyjo    
+- [x] Modal -kyjo    
+- [x] Message -kyjo  
+- [x] Notification [kyjo]     
 - [ ] Popover     
 - [ ] Progress     
 - [ ] Timeline     
@@ -52,9 +51,9 @@ $ yarn dev
 - [ ] Table     
 
 ### 导航组件 
-- [ ] Breadcrumb -kyjo  
-- [ ] Dropdown  -kyjo   
+- [x] Breadcrumb -kyjo  
+- [x] Dropdown  -kyjo   
 - [ ] Menu     
 - [ ] Pagination     
-- [ ] Steps     
-- [ ] Tabs     
+- [x] Steps     
+- [x] Tabs     

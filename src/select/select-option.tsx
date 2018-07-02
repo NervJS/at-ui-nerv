@@ -15,14 +15,17 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   constructor (props: SelectOptionProps) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
+
   }
   static defaultProps = {
     loading: false,
     type: 'default',
     disabled: false
   }
-
-  handleClick = (e: MouseEvent) => {
+  componentWillReceiveProps (nextProps) {
+    console.log('nextProps', nextProps.style, 'this.props', this.props.style)
+  }
+  handleClick = (e) => {
     const onClick = this.props.onClick
     if (onClick) {
       onClick(e)
@@ -30,10 +33,18 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   }
   render () {
     const props = this.props
-    const { children, style } = props
+    const { children } = props
     return (
-        <li style={style} className='at-select__option' onClick={this.handleClick}>{children}</li>
+        <li ref='li' className='at-select__option' onClick={this.handleClick}>{children}</li>
     )
+  }
+  componentDidMount () {
+
+  }
+  componentDidUpdate () {
+    for (const item in this.props.style) {
+      this.refs.li.style[item] = this.props.style[item]
+    }
   }
 }
 
