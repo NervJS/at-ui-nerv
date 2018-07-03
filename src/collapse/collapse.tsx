@@ -1,5 +1,6 @@
 import * as Nerv from 'nervjs'
 import * as classnames from 'classnames'
+import CollapseItem from './collapseItem'
 
 interface CollapseProps {
   accordion?: boolean
@@ -12,7 +13,9 @@ interface CollapseState {
   currentValue: any
 }
 
-class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
+class Collapse extends Nerv.Component < CollapseProps,
+CollapseState > {
+  static Item: typeof CollapseItem
   static defaultProps = {
     accordion: false,
     simple: false
@@ -26,13 +29,12 @@ class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
   componentDidMount () {
     this.setActive()
   }
-
   setActive = () => {
     const activeKey = this.getActiveKey()
     const { accordion, children } = this.props
-    return Nerv.Children.map(
-      children as never,
-      (child, index) => {
+    return Nerv
+      .Children
+      .map(children as never, (child, index) => {
         const name = child.props.panelName || index.toString()
         return Nerv.cloneElement(child, {
           ...child,
@@ -42,12 +44,10 @@ class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
           index,
           _toggle: this.toggle
         })
-      },
-      this
-    )
+      }, this)
   }
   getActiveKey = () => {
-    const { accordion } = this.props
+    const {accordion} = this.props
     let activeKey = this.state.currentValue || []
     if (!Array.isArray(activeKey)) {
       activeKey = [activeKey]
@@ -63,8 +63,10 @@ class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
     return activeKey
   }
   toggle = (itemData) => {
-    const name = itemData.name.toString()
-    const { accordion, onChange } = this.props
+    const name = itemData
+      .name
+      .toString()
+    const {accordion, onChange} = this.props
     let newActiveKey = []
     if (accordion && !itemData.isActive) {
       newActiveKey.push(name as never)
@@ -78,28 +80,23 @@ class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
       }
       newActiveKey = activeKey
     }
-    this.setState(
-      {
-        currentValue: newActiveKey
-      },
-      () => {
-        if (typeof onChange === 'function') {
-          onChange(newActiveKey)
-        }
+    this.setState({
+      currentValue: newActiveKey
+    }, () => {
+      if (typeof onChange === 'function') {
+        onChange(newActiveKey)
       }
-    )
+    })
   }
   inputValueCheck = (val) => {
-    return typeof val === 'number' ? `${val}` : val
+    return typeof val === 'number'
+      ? `${val}`
+      : val
   }
   render () {
-    const {simple } = this.props
+    const {simple} = this.props
     return (
-      <div
-        className={classnames('at-collapse', {
-          'at-collapse--simple': simple
-        })}
-      >
+      <div className={classnames('at-collapse', {'at-collapse--simple': simple})}>
         {this.setActive()}
       </div>
     )

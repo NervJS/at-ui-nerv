@@ -2,10 +2,10 @@ import * as Nerv from 'nervjs'
 
 interface RadioGroupProps {
   value: string | number
-  size: string
+  size?: string
   fill?: string
   textColor?: string
-  onRadioGroupChange: (a) => {}
+  onRadioGroupChange?: (a) => void
 }
 
 class RadioGroup extends Nerv.Component<RadioGroupProps, null> {

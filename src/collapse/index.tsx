@@ -1,7 +1,6 @@
 import Collapse from './collapse'
-import CollapseItem from './collapse-item'
+import CollapseItem from './collapseItem'
 
-export {
-  Collapse,
-  CollapseItem
-}
+Collapse.Item = CollapseItem
+
+export default Collapse

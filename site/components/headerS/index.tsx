@@ -1,6 +1,5 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-console.log(classnames)
 import { Link, NavLink, withRouter } from 'react-router-dom'
 
 import './style.scss'

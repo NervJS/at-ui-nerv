@@ -9,17 +9,17 @@ imports:
 
 ## 基本多选框
 
-独立使用时，需要单独绑定 `model`
+独立使用时，需要单独绑定 `checked` 和`onChange`
 
 :::demo
 
 ```jsx
 <Checkbox 
-onChange={(e)=>{this.setState({val: e ? 'true':'false'})}} 
+onChange={(checked,label)=>{this.setState({val1: checked ? true:false})}} checked={this.state.val1}
 label="深圳">
 深圳
 </Checkbox>
-<p class="demo-desc">{ this.state.val }</p>
+<p class="demo-desc">{ this.state.val1 ? 'true':'false' }</p>
 ```
 
 :::
@@ -31,15 +31,18 @@ label="深圳">
 :::demo
 
 ```jsx
-<Checkbox
-onChange={(e)=>{this.setState({val: e ? 'true':'false'})}}
+<Checkbox 
+onChange={(e)=>{//this.setState({val2: e ? true:false})
+}}
 label="深圳" disabled
 >
 深圳
 </Checkbox>
 <Checkbox 
 onChange={(e)=>{
-  this.setState({val: e ? 'true':'false'})}}
+  //this.setState({val3: e ? true:false})
+  }
+  }
   label="凹凸实验室" disabled checked
   >
   凹凸实验室
@@ -56,8 +59,10 @@ onChange={(e)=>{
 
 ```jsx
 <Checkbox.Group
-value={this.state.val ||['深圳', '北京']}
-onChange={(e)=>{this.setState({val: e})}}
+value={this.state.val4 ||['深圳', '北京']}
+onChange={(e)=>{this.setState({val4: e})
+}
+}
 >
   <Checkbox label="深圳">深圳</Checkbox>
   <Checkbox label="北京">北京</Checkbox>
@@ -65,7 +70,7 @@ onChange={(e)=>{this.setState({val: e})}}
   <Checkbox label="广州" disabled>广州</Checkbox>
   <Checkbox label="凹凸实验室" disabled>凹凸实验室</Checkbox>
 </Checkbox.Group>
-<p class="demo-desc">{ `[${(this.state.val || ['深圳', '北京']).join(',')}]` }</p>
+<p class="demo-desc">{ `[${(this.state.val4 || ['深圳', '北京']).join(',')}]` }</p>
 ```
 
 :::
@@ -77,6 +82,12 @@ onChange={(e)=>{this.setState({val: e})}}
 | label    | 选中状态的值 | String  | -      | -      |
 | disabled | 是否禁用按钮 | Boolean | -      | false  |
 | checked  | 是否已勾选   | Boolean | -      | false  |
+
+## CheckboxGroup 参数
+
+| 参数     | 说明         | 类型    | 可选值 | 默认值 |
+| -------- | ------------ | ------- | ------ | ------ |
+| value    | 选中状态的值 | array  | -      | -      |
 
 ## Checkbox 事件
 

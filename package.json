@@ -8,7 +8,7 @@
     "commitmsg": "validate-commit-msg",
     "commit": "git-cz",
     "test:karma": "karma start karma.conf.js --single-run",
-    "test:karma:watch": "npm run test:karma -- no-single-run",
+    "test:karma:watch": "karma start karma.conf.js --no-single-run",
     "lint": "tslint -p tsconfig.json --project",
     "lint-staged": "lint-staged",
     "dev": "node ./build/site/dev.js",
