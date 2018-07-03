@@ -22,13 +22,11 @@ install:
   - yarn
 
 script:
-  # - npm run build
-  # - npm run test:coverage
+  - npm run lint
   - BROWSER=true COVERAGE=false FLAKEY=false npm run test:karma
+  - npm run build:site
+  # - npm run test:coverage
   # - ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info
-
-afterscript:
-  - cd 
 
 branches:
   only:
