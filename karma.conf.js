@@ -115,7 +115,7 @@ module.exports = function (config) {
         rules: [
           {
             enforce: 'pre',
-            test: /\.js$/,
+            test: /\.(js|jsx)$/,
             loader: 'babel-loader',
             exclude: /node_modules/
           },
