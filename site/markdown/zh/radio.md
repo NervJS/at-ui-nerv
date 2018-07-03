@@ -9,18 +9,18 @@ imports:
 
 ## 基本单选框
 
-每个都是独立的单选按钮，各自需要单独绑定一个 `model`
+每个都是独立的单选按钮，各自需要单独绑定到同一个变量
 
 :::demo
 
 ```jsx
 <Radio
-  onChange={(n)=>{this.setState({radio1:n})}}
-  value={this.state.radio1} label="1" >
+  onChange={(label)=>{ this.setState({radio1:label})}}
+  value={ this.state.radio1} label="1" >
   选项一
 </Radio>
 <Radio 
-  onChange={(n)=>{this.setState({radio1:n})}} 
+  onChange={(label)=>{this.setState({radio1:label})}} 
   value={this.state.radio1} label="2" >
   选项二
 </Radio>
@@ -35,8 +35,8 @@ imports:
 :::demo
 
 ```html
-<Radio onChange={(n)=>{this.setState({radio2:n})}} value={this.state.radio1} label="3" disabled>不可点且未选中</Radio>
-<Radio onChange={(n)=>{this.setState({radio2:n})}} value={this.state.radio1} label="4" disabled>不可点且选中</Radio>
+<Radio onChange={(label)=>{this.setState({radio2:label})}} value={this.state.radio1} label="3" disabled>不可点且未选中</Radio>
+<Radio onChange={(label)=>{this.setState({radio2:label})}} value={this.state.radio1} label="4" disabled>不可点且选中</Radio>
 ```
 
 :::
@@ -50,8 +50,8 @@ imports:
 ```html
 <Radio.Group 
   value={this.state.groupVal} 
-  onRadioGroupChange={(n)=>{this.setState({
-    groupVal: n
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal: label
   })}}>
   <Radio label="1">选项一</Radio>
   <Radio label="2">选项二</Radio>
@@ -69,8 +69,8 @@ imports:
 
 ```html
 <Radio.Group  value={this.state.groupVal2} 
-  onRadioGroupChange={(n)=>{this.setState({
-    groupVal2: n
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal2:label
   })}}>
   <Radio.Button label="北京">北京</Radio.Button>
   <Radio.Button label="上海" disabled>上海</Radio.Button>
@@ -92,8 +92,8 @@ imports:
 <div class="row">
   <Radio.Group  
   value={this.state.groupVal3} 
-  onRadioGroupChange={(n)=>{this.setState({
-    groupVal3: n
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal3:label
   })}} 
   fill="#FF6464">
     <Radio.Button label="北京">北京</Radio.Button>
@@ -106,8 +106,8 @@ imports:
 <div class="row">
   <Radio.Group  
   value={this.state.groupVal4} 
-  onRadioGroupChange={(n)=>{this.setState({
-    groupVal4: n
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal4:label
   })}} 
   textColor="#4C5D73">
     <Radio.Button label="北京">北京</Radio.Button>
@@ -130,8 +130,8 @@ imports:
 <div class="row">
   <Radio.Group 
   value={this.state.groupVal5} 
-  onRadioGroupChange={(n)=>{this.setState({
-    groupVal5: n
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal5:label
   })}}  
   size="large">
     <Radio.Button label="北京">北京</Radio.Button>
@@ -143,8 +143,8 @@ imports:
 <div class="row">
   <Radio.Group
   value={this.state.groupVal6} 
-  onRadioGroupChange={(n)=>{this.setState({
-    groupVal6: n
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal6:label
   })}} 
    size="normal">
     <Radio.Button label="北京">北京</Radio.Button>
@@ -156,8 +156,8 @@ imports:
 <div class="row">
   <Radio.Group 
   value={this.state.groupVal7} 
-  onRadioGroupChange={(n)=>{this.setState({
-    groupVal7: n
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal7:label
   })}}  size="small">
     <Radio.Button label="北京">北京</Radio.Button>
     <Radio.Button label="上海" disabled>上海</Radio.Button>

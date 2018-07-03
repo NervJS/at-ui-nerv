@@ -106,7 +106,7 @@ imports:
 			<Collapse.Item key= {index} title={item.title}>
 				<div>
 					{index !== 0 ? item.content : ''}
-					<Collapse accordion v-if="index === 0">
+					<Collapse accordion >
 						<Collapse.Item title="嵌套面板">
 							<div>嵌套面板的内容</div>
 						</Collapse.Item>
