@@ -17,7 +17,8 @@ interface State {
   currentValue: any
 }
 
-class Checkbox extends Nerv.Component <CheckboxProps, State> {
+class Checkbox extends Nerv.Component < CheckboxProps,
+State > {
   static Group: typeof CheckboxGroup
   static defaultProps = {
     value: false,
@@ -54,24 +55,28 @@ class Checkbox extends Nerv.Component <CheckboxProps, State> {
     }
   }
   componentWillReceiveProps (nextProps) {
-    const { checked } = nextProps
-    const { currentValue } = this.state
-    if (checked != currentValue) {
-      this.setState({
-        currentValue: checked
-      })
+    const {checked} = nextProps
+    const {currentValue} = this.state
+    if (!!checked != currentValue) {
+      this.setState({currentValue: checked})
     }
   }
   onChangeHandle (evt) {
-    const { onChange = (a, b) => {return } , label } = this.props
+    const {
+      onChange = (a, b) => {
+        return
+      },
+      label
+    } = this.props
     if (evt.target instanceof HTMLInputElement) {
       const checked = evt.target.checked
-      this.setState({ currentValue: checked }, () => {
-        onChange(
-          checked,
-          label
-        )
+
+      this.setState({
+        currentValue: checked
+      }, () => {
+        onChange(checked, label)
       })
+
     }
   }
   onFocusHandle () {
@@ -90,8 +95,7 @@ class Checkbox extends Nerv.Component <CheckboxProps, State> {
         'at-checkbox--focus': focus,
         'at-checkbox--checked': currentValue,
         'at-checkbox--disabled': disabled
-        })}
-      >
+      })}>
         <span className='at-checkbox__input'>
           <span className='at-checkbox__inner'/>
           <input
@@ -102,13 +106,10 @@ class Checkbox extends Nerv.Component <CheckboxProps, State> {
             disabled={disabled}
             onChange={this.onChangeHandle}
             onFocus={this.onFocusHandle}
-            onBlur={this.onBlurHandle}
-          />
+            onBlur={this.onBlurHandle}/>
         </span>
         <span className='at-checkbox__label'>
-          {
-            label || children
-          }
+          {label || children}
         </span>
       </label >
     )
