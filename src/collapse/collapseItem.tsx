@@ -1,7 +1,6 @@
 import * as Nerv from 'nervjs'
 import * as classnames from 'classnames'
 import CollapseTransition from '../animations/collapse-transition.jsx'
-// import {CSSTransition} from 'react-transition-group'
 import '../animations/collapseanimations.scss'
 
 interface CollapseItemProps {

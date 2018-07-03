@@ -6,7 +6,7 @@ const highlight = require('highlight.js')
 let md = require('markdown-it')
 
 let options = {
-  className: 'test'
+  className: 'wrap'
 }
 
 md = md({
@@ -106,7 +106,6 @@ const formatClosing = flag => {
 
 module.exports = function (source) {
   this.cacheable()
-
   // init options
   Object.assign(options, this.options.markdownItReact ? this.options.markdownItReact() : {})
 
@@ -114,6 +113,7 @@ module.exports = function (source) {
     body,
     attributes: { imports: importMap }
   } = frontMatter(source)
+
   const imports = "import * as Nerv from 'nervjs';  " + importMap
 
   let moduleJS = []

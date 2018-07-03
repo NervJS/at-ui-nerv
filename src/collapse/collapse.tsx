@@ -80,7 +80,6 @@ CollapseState > {
       }
       newActiveKey = activeKey
     }
-    console.log(onChange)
     this.setState({
       currentValue: newActiveKey
     }, () => {
