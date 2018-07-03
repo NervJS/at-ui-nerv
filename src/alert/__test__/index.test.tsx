@@ -24,6 +24,7 @@ describe('Alert test', () => {
     const message = '这里是提示的文案~这里是提示的文案~这里是提示的文案~'
     const alert = <Alert message={message} type='success' />
     const component = Nerv.render(alert as VNode, scratch)
+    console.log(component.dom)
     expect(
       $(component.dom)
         .find('.at-alert__message')
