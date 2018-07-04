@@ -37,7 +37,7 @@ module.exports = function (config) {
       // './node_modules/es5-polyfill/dist/polyfill.js',
       // 'browsers/ie8.js',
       // 'browsers/polyfill.js',
-      'src/*/__test__/**/*test.ts?(x)'
+      'src/**/__test__/**/*test.ts?(x)'
     ],
 
     specReporter: {

@@ -8,7 +8,7 @@ interface RadioProps {
   value: string | number
   name?: string
   label: string | number
-  disabled: boolean
+  disabled?: boolean
 }
 
 interface RadioState {
