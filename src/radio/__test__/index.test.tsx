@@ -28,6 +28,7 @@ describe('Radio test', () => {
   })
   it('basic render', () => {
     const onChange = sinon.spy()
+    Radio as any
     const radioJSX = (
 
       <Radio onChange={onChange} value={'2'} label='1'>
@@ -35,8 +36,8 @@ describe('Radio test', () => {
       </Radio>
 
     )
-    const component = Nerv.render(radioJSX, scratch)
-    expect($(component.dom).find('.at-radio__inner').hasClass('at-radio--checked')).toBeFalsy()
+    const component = Nerv.render(radioJSX as any, scratch)
+    expect($(component.vnode.dom).find('.at-radio__inner').hasClass('at-radio--checked')).toBeFalsy()
   })
   it('disabled', () => {
     const onChange = sinon.spy()
@@ -72,7 +73,7 @@ describe('Radio test', () => {
     }
     const component = Nerv.render(
       <Test/>, scratch)
-    $(component.dom)
+    $(component.vnode.dom)
       .find('.at-radio')
       .eq(0)
       .trigger('click')
@@ -94,7 +95,7 @@ describe('Radio test', () => {
       </Radio.Group>
     )
     const component = Nerv.render(radioGroupJSX, scratch)
-    $(component.dom).find('.at-radio').eq(0).trigger('click')
+    $(component.vnode.dom).find('.at-radio').eq(0).trigger('click')
     expect(onChange.args).toEqual([['1']])
   })
 })

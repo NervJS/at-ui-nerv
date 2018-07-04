@@ -26,7 +26,7 @@ describe('InputNumber test', () => {
     sizeList.forEach((size) => {
       const input = <InputNumber size={size as 'small' | 'large' | 'normal'} placeholder='请输入内容' />
       const component = Nerv.render(input as  VNode, scratch)
-      expect($(component.dom).hasClass(`at-input-number--${size}`)).toBeTruthy()
+      expect($(component.vnode.dom).hasClass(`at-input-number--${size}`)).toBeTruthy()
     })
   })
   it('test step', (done) => {
@@ -36,7 +36,7 @@ describe('InputNumber test', () => {
     }
     const input = <InputNumber step={5.1} onChange={onChangeHandle} placeholder='请输入内容' />
     const component = Nerv.render(input as  VNode, scratch)
-    $(component.dom)
+    $(component.vnode.dom)
       .find('.at-input-number__up')
       .trigger('click')
   })
@@ -44,7 +44,7 @@ describe('InputNumber test', () => {
     const input = <InputNumber disabled placeholder='请输入内容' />
     const component = Nerv.render(input as  VNode, scratch)
     expect(
-      $(component.dom)
+      $(component.vnode.dom)
         .find('.at-input-number__original')
         .prop('disabled')
     ).toBe(true)

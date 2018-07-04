@@ -5,14 +5,14 @@ import '../animations/collapseanimations.scss'
 
 interface CollapseItemProps {
   title?: string
-  panelName?: string
+  name?: string
   disabled?: boolean
-  isActive: boolean
+  isActive?: boolean
 }
 
 interface CollapseItemState {
   index: number
-  isActive: boolean
+  isActive: boolean | undefined
 }
 
 class CollapseItem extends Nerv.Component < CollapseItemProps,
@@ -26,7 +26,7 @@ CollapseItemState > {
     super(...args)
     this.state = {
       index: 0,
-      isActive: this.props.isActive
+      isActive: !!this.props.isActive
     }
   }
   toggle = () => {

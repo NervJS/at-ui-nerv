@@ -36,17 +36,17 @@ describe('card', () => {
     )
     const component = Nerv.render(card as VNode, scratch)
     expect(
-      $(component.dom)
+      $(component.vnode.dom)
         .find('.at-card__title')
         .text()
     ).toBe('title')
     expect(
-      $(component.dom)
+      $(component.vnode.dom)
         .find('.at-card__extra')
         .text()
     ).toBe('extra')
     expect(
-      $(component.dom)
+      $(component.vnode.dom)
         .find('.at-card__body')
         .html()
     ).toBe('<div>content</div>')
@@ -56,7 +56,7 @@ describe('card', () => {
     const card = <Card style={{ width: '300px' }} bodyStyle={bodyStyle} />
     const component = Nerv.render(card as VNode, scratch)
     expect(
-      $(component.dom)
+      $(component.vnode.dom)
         .find('.at-card__body')
         .css('padding')
     ).toBe('0px')
