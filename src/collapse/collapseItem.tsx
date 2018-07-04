@@ -4,8 +4,13 @@ import CollapseTransition from '../animations/collapse-transition.jsx'
 import '../animations/collapseanimations.scss'
 
 interface CollapseItemProps {
+<<<<<<< Updated upstream
   title?: string
   panelName?: string
+=======
+  titl?: string
+  name?: string
+>>>>>>> Stashed changes
   disabled?: boolean
   isActive?: boolean
 }
@@ -79,12 +84,16 @@ CollapseItemState > {
           <i className='icon at-collapse__icon icon-chevron-right'/> {titleSlot || <div>{title}</div>}
         </div>
         <CollapseTransition isShow={isActive}>
+<<<<<<< Updated upstream
         {}
+=======
+          {}
+>>>>>>> Stashed changes
           <div className='at-collapse__body'>
             <div className='at-collapse__content'>{contentSlot}</div>
           </div>
         </CollapseTransition>
-      </div>
+      </div >
     )
   }
 }

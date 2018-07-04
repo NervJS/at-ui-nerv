@@ -25,16 +25,16 @@ LoadingBarState > {
     }
   }
   render () {
-    const {show, status, percent} = this.state
+    const { status, percent} = this.state
     const {width} = this.props
     const barStyle = {
       height: `${ (width as never | 0) || 2}px`
     }
     return (
       <div
-        className={classnames('at-loading-bar', {
+        className={ classnames('at-loading-bar', {
         [`at-loading-bar--${status}`]: status
-      })}
+      } as any)}
         style={barStyle}>
         <div
           className='at-loading-bar__inner'
@@ -42,7 +42,7 @@ LoadingBarState > {
           width: percent + '%'
         }}/>
       </div>
-    ))
+    )
   }
 }
 

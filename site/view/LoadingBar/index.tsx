@@ -9,16 +9,15 @@ class LoadingBarExample extends Nerv.Component {
   error = () => {}
   update = () => { }
   componentDidMount () {
-    console.log(LoadingBar.getInstance())
   }
   render () {
     return (
       <div className='loadingbar_example'>
         <div className='basic'>
-          <Button onClick={this.start}>Start</Button>
-          <Button onClick={this.finish}>Finish</Button>
-          <Button onClick={this.error}>Error</Button>
-          <Button onClick={this.update}>Update</Button>
+          <Button onClick={this.start}>{}Start</Button>
+          <Button onClick={this.finish}>{}Finish</Button>
+          <Button onClick={this.error}>{}Error</Button>
+          <Button onClick={this.update}>{}Update</Button>
         </div>
       </div>
     )

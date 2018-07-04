@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 
-import { Collapse, CollapseItem } from '../../../src/collapse'
+import Collapse from '../../../src/collapse'
 
 interface CollapseExampleState {
   list: any[]
@@ -35,9 +35,9 @@ class CollapseExample extends Nerv.Component<any, CollapseExampleState> {
           <Collapse value={[0, 1]}>
             {list.map((item, index) => {
               return (
-                <CollapseItem key={index} title={item.title} disabled={item.disabled}>
+                <Collapse.Item key={index} title={item.title} disabled={item.disabled}>
                   <div>{item.content}</div>
-                </CollapseItem>
+                </Collapse.Item>
               )
             })}
           </Collapse>
@@ -46,9 +46,9 @@ class CollapseExample extends Nerv.Component<any, CollapseExampleState> {
           <Collapse accordion value='0'>
             {list.map((item, index) => {
               return (
-                <CollapseItem key={index} title={item.title} disabled={item.disabled}>
+                <Collapse.Item key={index} title={item.title} disabled={item.disabled}>
                   <div>{item.content}</div>
-                </CollapseItem>
+                </Collapse.Item>
               )
             })}
           </Collapse>
@@ -57,21 +57,21 @@ class CollapseExample extends Nerv.Component<any, CollapseExampleState> {
           <Collapse onChange='changeHandle' value='0'>
             {list.map((item, index) => {
               return (
-                <CollapseItem key={index} title={item.title} disabled={item.disabled}>
+                <Collapse.Item key={index} title={item.title} disabled={item.disabled}>
                   {/* <div> */}
                   {/* {index !== 0 ? item.content : ''} */}
                   {index === 0 ? (
                     <Collapse accordion>
-                      <CollapseItem title='嵌套面板'>
+                      <Collapse.Item title='嵌套面板'>
                         <div>嵌套面板的内容</div>
-                      </CollapseItem>
+                      </Collapse.Item>
                     </Collapse>
                   ) : (
                     ' '
                   )}
 
                   {/* </div> */}
-                </CollapseItem>
+                </Collapse.Item>
               )
             })}
           </Collapse>

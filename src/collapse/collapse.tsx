@@ -64,7 +64,17 @@ class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
 		return activeKey
 	}
 	toggle = (itemData) => {
+<<<<<<< Updated upstream
 		const name =  itemData.name.toString()
+=======
+		let name = ''
+		try {
+			name = itemData.name.toString()
+		} catch (error) {
+			throw new Error('name should be definded')
+		}
+
+>>>>>>> Stashed changes
 		const { accordion, onChange } = this.props
 		let newActiveKey = []
 		if (accordion && !itemData.isActive) {
