@@ -29,8 +29,8 @@ class Badge extends Nerv.Component<BadgeProps, {}> {
       if (dot) {
         return
       }
-      if (typeof value === 'number' && typeof maxNum === 'number') {
-        return value > maxNum ? `${maxNum}+` : value
+      if (typeof value === 'number') {
+        return value > Number(maxNum) ? `${maxNum}+` : value
       }
       return value
     }
