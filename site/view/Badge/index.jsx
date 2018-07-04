@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import Badge from '@md/badge.md'
-// import './style.scss'
+import './style.scss'
 
 class BadgeExample extends Nerv.Component {
   constructor (...args) {
