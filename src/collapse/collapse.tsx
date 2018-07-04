@@ -40,7 +40,7 @@ class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
 					isActive: accordion
 						? activeKey[0] === name
 						: (child.isActive = activeKey.indexOf(name) >= 0),
-					index,
+					key: index,
 					_toggle: this.toggle
 				})
 			},
@@ -64,13 +64,7 @@ class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
 		return activeKey
 	}
 	toggle = (itemData) => {
-		let name = ''
-		try {
-			name = itemData.name.toString()
-    } catch (error) {
-      throw new Error('name should be definded')
-    }
-
+		const name =  itemData.name.toString()
 		const { accordion, onChange } = this.props
 		let newActiveKey = []
 		if (accordion && !itemData.isActive) {

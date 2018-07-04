@@ -29,7 +29,9 @@ describe('Collapse', () => {
   it('basic render', (done) => {
     const onChange = sinon.spy()
     const collapseJSX = <Collapse onChange={onChange}>
+      {}
       <Collapse.Item key={'test'}>
+      {}
         <div>test</div>
       </Collapse.Item>
     </Collapse>
@@ -45,14 +47,17 @@ describe('Collapse', () => {
   it('accordion state', (done) => {
     const onChange = sinon.spy()
     const accordionJSX = <Collapse accordion onChange={onChange}>
+     {}
       <Collapse.Item key={'test'} title='title'>
+      {}
         <div>test</div>
       </Collapse.Item>
       <Collapse.Item key={'test2'}>
+        {}
         <div>test</div>
       </Collapse.Item>
     </Collapse>
-    const component = Nerv.render(accordionJSX, scratch)
+    const component = Nerv.render(accordionJSX as any, scratch)
     $(component.vnode.dom)
       .find('.at-collapse__header')
       .eq(0)
@@ -70,15 +75,19 @@ describe('Collapse', () => {
   it('nest collapse', (done) => {
     const onChange = sinon.spy()
     const nestJSX = <Collapse onChange={onChange}>
+    {}
       <Collapse.Item>
+      {}
         <Collapse accordion>
+        {}
           <Collapse.Item title='嵌套面板'>
+          {}
             <div>嵌套面板的内容</div>
           </Collapse.Item>
         </Collapse>
       </Collapse.Item>
     </Collapse>
-    const component = Nerv.render(nestJSX, scratch)
+    const component = Nerv.render(nestJSX as any, scratch)
     expect($(component.vnode.dom).find('.at-collapse__content').children('.at-collapse').length).toBe(1)
     done()
   })

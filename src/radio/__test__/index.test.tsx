@@ -3,6 +3,7 @@ import * as sinon from 'sinon'
 import * as $ from 'webpack-zepto'
 
 import Radio from '../'
+import { VNode } from 'nerv-shared'
 
 describe('Radio test', () => {
   let scratch
@@ -28,10 +29,10 @@ describe('Radio test', () => {
   })
   it('basic render', () => {
     const onChange = sinon.spy()
-    Radio as any
     const radioJSX = (
 
       <Radio onChange={onChange} value={'2'} label='1'>
+      {}
         选项一
       </Radio>
 
@@ -56,6 +57,7 @@ describe('Radio test', () => {
               disabled
               value={this.state.radio1}
               label='1'>
+              {}
               选项一
             </Radio>
             <Radio
@@ -65,6 +67,7 @@ describe('Radio test', () => {
               value={this.state.radio1}
               label='2'
               Radio>
+              {}
               选项二
             </Radio>
           </div>
@@ -72,7 +75,7 @@ describe('Radio test', () => {
       }
     }
     const component = Nerv.render(
-      <Test/>, scratch)
+      <Test/> as VNode, scratch)
     $(component.vnode.dom)
       .find('.at-radio')
       .eq(0)
@@ -88,13 +91,14 @@ describe('Radio test', () => {
         value={1}
         onRadioGroupChange={(label) => {
           onChange(label)
-      }}>
-        <Radio label='1'>选项一</Radio>
-        <Radio label='2'>选项二</Radio>
-        <Radio label='3'>选项三</Radio>
+        }}>
+        {}
+        <Radio value={1} label='1'>{}选项一</Radio>
+        <Radio  value={2} label='2'>{}选项二</Radio>
+        <Radio  value={3} label='3'>{}选项三</Radio>
       </Radio.Group>
     )
-    const component = Nerv.render(radioGroupJSX, scratch)
+    const component = Nerv.render(radioGroupJSX as any, scratch)
     $(component.vnode.dom).find('.at-radio').eq(0).trigger('click')
     expect(onChange.args).toEqual([['1']])
   })

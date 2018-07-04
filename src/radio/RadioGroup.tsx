@@ -8,7 +8,7 @@ interface RadioGroupProps {
   onRadioGroupChange?: (a) => void
 }
 
-class RadioGroup extends Nerv.Component<RadioGroupProps, null> {
+class RadioGroup extends Nerv.Component<RadioGroupProps, any> {
   getChildContext (): { RadioGroup } {
     return {
       RadioGroup: this

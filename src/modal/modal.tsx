@@ -230,7 +230,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
             </div>
           </div>
         </div>
-      </CSSTransition>,
+      </CSSTransition> as any,
       document.body
     )
   }
