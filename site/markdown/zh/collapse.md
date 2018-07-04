@@ -69,7 +69,7 @@ imports:
 		}
 	].map((item, index) => {
 		return (
-			<Collapse.Item key= {index}  title={item.title}>
+			<Collapse.Item key={index}  title={item.title}>
 				<div>{item.content}</div>
 			</Collapse.Item>
 		)
@@ -207,7 +207,7 @@ imports:
 | 参数     | 说明                                                             | 类型            | 可选值 | 默认值 |
 | -------- | ---------------------------------------------------------------- | --------------- | ------ | ------ |
 | title    | 面板项的标题（或通过 `slot: title` 传入任意内容）                | String          | -      | -      |
-| name     | 当前面板项的 `name`，与 Collapse 的 `value` 对应，不填则为索引值 | String / Object | -      | -      |
+| panelName     | 当前面板项的 `name`，与 Collapse 的 `value` 对应，不填则为索引值 | String / Object | -      | -      |
 | disabled | 是否禁用当前面板项，禁用后将无法通过用户交互改变                 | Boolean         | -      | false  |
 
 ## CollapseItem slot

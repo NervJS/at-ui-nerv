@@ -5,7 +5,7 @@ import '../animations/collapseanimations.scss'
 
 interface CollapseItemProps {
   title?: string
-  name?: string
+  panelName?: string
   disabled?: boolean
   isActive?: boolean
 }
@@ -35,6 +35,7 @@ CollapseItemState > {
     if (disabled) {
       return
     }
+    console.log(this.props)
     _toggle({
       name: panelName || key,
       isActive
@@ -78,6 +79,7 @@ CollapseItemState > {
           <i className='icon at-collapse__icon icon-chevron-right'/> {titleSlot || <div>{title}</div>}
         </div>
         <CollapseTransition isShow={isActive}>
+        {}
           <div className='at-collapse__body'>
             <div className='at-collapse__content'>{contentSlot}</div>
           </div>
