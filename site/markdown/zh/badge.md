@@ -41,10 +41,10 @@ imports:
 :::demo
 
 ```html
-Primary <Badge value="123"></Badge><br>
-Success <Badge value="123" status="success"></Badge><br>
-Warning <Badge value="123" status="warning"></Badge><br>
-Info <Badge value="123" status="info"></Badge>
+Primary <Badge value={123}></Badge><br>
+Success <Badge value={123} status="success"></Badge><br>
+Warning <Badge value={123} status="warning"></Badge><br>
+Info <Badge value={123} status="info"></Badge>
 ```
 
 :::
@@ -56,7 +56,7 @@ Info <Badge value="123" status="info"></Badge>
 :::demo
 
 ```html
-<Badge value="123" maxNum="99"></Badge>
+<Badge value={123} maxNum="99"></Badge>
 ```
 
 :::
