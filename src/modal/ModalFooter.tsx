@@ -23,7 +23,7 @@ class ModalFooter extends Nerv.Component<ModalFooterProps, any> {
     const localeOKText = okText
     const defaultFooter = (
       <div className={classnames('at-modal__footer', className as any)} style={style}>
-        {showCancel ? <Button onClick={onCancel}>{}{localeCancelText}</Button> : null}
+        {showCancel ? <Button  onClick={onCancel}>{}{localeCancelText}</Button> : null}
         <Button type='primary' onClick={onConfirm}>
           {}
           {localeOKText}
