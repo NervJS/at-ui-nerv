@@ -33,7 +33,7 @@ function getConfig (options) {
       filename: options.filename,
       library: options.library,
       libraryTarget: options.libraryTarget,
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, '../../', 'dist')
     },
     externals: {
 

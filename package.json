@@ -12,7 +12,7 @@
     "lint": "tslint -p tsconfig.json --project",
     "lint-staged": "lint-staged",
     "dev": "node ./build/site/dev.js",
-    "dist": "webpack --progress",
+    "dist": "npm run build:component&npm run build:site",
     "build:component": "node ./build/component/build.js",
     "build:site": "node ./build/site/build.js"
   },
@@ -62,6 +62,7 @@
     "at-ui-style": "^1.5.0",
     "chalk": "^2.3.0",
     "classnames": "^2.2.5",
+    "copy-to-clipboard": "^3.0.8",
     "nervjs": "^1.2.8",
     "popper.js": "^1.14.3",
     "react-transition-group": "^2.2.1",

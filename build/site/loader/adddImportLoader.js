@@ -51,7 +51,7 @@ md = md({
 const formatModule = (imports, js, jsx, state, method) => {
   let moduleText = `
     ${imports}
-    
+  
     ${js}
     
     class MarkdownItReactComponent extends Nerv.Component {
@@ -64,6 +64,9 @@ const formatModule = (imports, js, jsx, state, method) => {
             const state = {};
             state['showCode' + flag] = !this.state['showCode' + flag];
             this.setState(state);
+        }
+        handleCopyCode (code) {
+          copy(code)
         }
         ${method || ''}
         render(){
@@ -87,10 +90,7 @@ const formatOpening = (code, description, flag) => {
         ${code}
     </div>
     <div className="${options.className}-demo-meta" >
-        <div className="at-component__code" style={{display: this.state.showCode${flag}? '' : 'none' }}>
-          <span className="btn-copy">
-            <i className="icon icon-clipboard" />
-          </span>
+        <div className="at-component__code"  style={{display: this.state.showCode${flag}? '' : 'none' }}>
             `
 }
 
@@ -113,7 +113,7 @@ module.exports = function (source) {
     attributes: { imports: importMap }
   } = frontMatter(source)
 
-  const imports = "import * as Nerv from 'nervjs';  " + importMap
+  const imports = "import * as Nerv from 'nervjs';  import copy from 'copy-to-clipboard';" + importMap
 
   let moduleJS = []
 
