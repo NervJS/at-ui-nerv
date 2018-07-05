@@ -1,5 +1,7 @@
 import * as Nerv from 'nervjs'
+// tslint:disable-next-line:no-implicit-dependencies
 import * as $ from 'webpack-zepto'
+// tslint:disable-next-line:no-implicit-dependencies
 import {VNode} from 'nerv-shared'
 
 import Alert from '../alert'

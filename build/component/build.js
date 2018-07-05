@@ -1,8 +1,8 @@
 const ora = require('ora')
 const webpack = require('webpack')
 const merge = require('merge')
-const baseWebpackConfig = require('../site/webpack.base.conf')
-
+const baseWebpackConfig = require('../site/webpack.base.config.js')
+const path = require('path')
 const spinner = ora('building components for production')
 
 spinner.start()
@@ -11,13 +11,13 @@ baseWebpackConfig.entry = {}
 
 const buildsConfig = {
   dev: {
-    filename: 'at.react.js',
+    filename: 'at.nerv.js',
     library: 'at',
     libraryTarget: 'umd',
     env: 'development'
   },
   prod: {
-    filename: 'at.min.js',
+    filename: 'at.nerv.min.js',
     library: 'at',
     libraryTarget: 'umd',
     env: 'production'
@@ -32,7 +32,8 @@ function getConfig (options) {
     output: {
       filename: options.filename,
       library: options.library,
-      libraryTarget: options.libraryTarget
+      libraryTarget: options.libraryTarget,
+      path: path.resolve(__dirname, 'dist')
     },
     externals: {
 

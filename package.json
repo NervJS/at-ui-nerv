@@ -12,6 +12,7 @@
     "lint": "tslint -p tsconfig.json --project",
     "lint-staged": "lint-staged",
     "dev": "node ./build/site/dev.js",
+    "dist": "webpack --progress",
     "build:component": "node ./build/component/build.js",
     "build:site": "node ./build/site/build.js"
   },

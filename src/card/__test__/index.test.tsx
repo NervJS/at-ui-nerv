@@ -1,10 +1,7 @@
 import * as Nerv from 'nervjs'
 import * as $ from 'webpack-zepto'
 // import * as sinon from 'sinon'
-<<<<<<< HEAD
-=======
 import { VNode } from 'nerv-shared'
->>>>>>> 09ea1d76bf0345d2724506a38a1978042d623ce4
 import Card from '../'
 
 describe('card', () => {

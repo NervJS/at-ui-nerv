@@ -9,36 +9,32 @@ describe('Radio test', () => {
   let scratch
   beforeAll(() => {
     scratch = document.createElement('div')
-    document
-      .body
-      .appendChild(scratch)
+    document.body.appendChild(scratch)
   })
 
   beforeEach(() => {
     scratch = document.createElement('div')
-    document
-      .body
-      .appendChild(scratch)
+    document.body.appendChild(scratch)
   })
 
   afterAll(() => {
-    scratch
-      .parentNode
-      .removeChild(scratch)
+    scratch.parentNode.removeChild(scratch)
     scratch = null
   })
   it('basic render', () => {
     const onChange = sinon.spy()
     const radioJSX = (
-
       <Radio onChange={onChange} value={'2'} label='1'>
-      {}
+        {}
         选项一
       </Radio>
-
     )
     const component = Nerv.render(radioJSX as any, scratch)
-    expect($(component.vnode.dom).find('.at-radio__inner').hasClass('at-radio--checked')).toBeFalsy()
+    expect(
+      $(component.vnode.dom)
+        .find('.at-radio__inner')
+        .hasClass('at-radio--checked')
+    ).toBeFalsy()
   })
   it('disabled', () => {
     const onChange = sinon.spy()
@@ -53,20 +49,22 @@ describe('Radio test', () => {
               onChange={(label) => {
                 onChange()
                 this.setState({ radio1: label })
-            }}
+              }}
               disabled
               value={this.state.radio1}
-              label='1'>
+              label='1'
+            >
               {}
               选项一
             </Radio>
             <Radio
               onChange={(label) => {
-              this.setState({radio1: label})
-            }}
+                this.setState({ radio1: label })
+              }}
               value={this.state.radio1}
               label='2'
-              Radio>
+              Radio
+            >
               {}
               选项二
             </Radio>
@@ -74,8 +72,7 @@ describe('Radio test', () => {
         )
       }
     }
-    const component = Nerv.render(
-      <Test/> as VNode, scratch)
+    const component = Nerv.render(<Test /> as VNode, scratch)
     $(component.vnode.dom)
       .find('.at-radio')
       .eq(0)
@@ -91,15 +88,25 @@ describe('Radio test', () => {
         value={1}
         onRadioGroupChange={(label) => {
           onChange(label)
-        }}>
+        }}
+      >
         {}
-        <Radio value={1} label='1'>{}选项一</Radio>
-        <Radio  value={2} label='2'>{}选项二</Radio>
-        <Radio  value={3} label='3'>{}选项三</Radio>
+        <Radio value={1} label='1'>
+          {}选项一
+        </Radio>
+        <Radio value={2} label='2'>
+          {}选项二
+        </Radio>
+        <Radio value={3} label='3'>
+          {}选项三
+        </Radio>
       </Radio.Group>
     )
     const component = Nerv.render(radioGroupJSX as any, scratch)
-    $(component.vnode.dom).find('.at-radio').eq(0).trigger('click')
+    $(component.vnode.dom)
+      .find('.at-radio')
+      .eq(0)
+      .trigger('click')
     expect(onChange.args).toEqual([['1']])
   })
 })

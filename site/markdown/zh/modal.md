@@ -1,6 +1,6 @@
 ---
 imports:
-    import {Modal,Button} from '@src';
+    import {Modal,Button,Message} from '@src';
 ---
 
 # Modal 模态框
@@ -15,13 +15,13 @@ imports:
 
 通过调用 `Modal` 的方法来使用：
 
-* `Modal.alert(config)`
-* `Modal.confirm(config)`
-* `Modal.prompt(config)`
-* `Modal.info(config)`
-* `Modal.success(config)`
-* `Modal.warning(config)`
-* `Modal.error(config)`
+- `Modal.alert(config)`
+- `Modal.confirm(config)`
+- `Modal.prompt(config)`
+- `Modal.info(config)`
+- `Modal.success(config)`
+- `Modal.warning(config)`
+- `Modal.error(config)`
 
 ## 消息提醒
 
@@ -82,13 +82,19 @@ Modal.alert({
           content: (
             <div>
               <p>'请输入邮件地址：'</p>
-              <input />
+              <input onChange={(e)=>{
+
+                this.setState({
+                  value: e.target.value
+                })
+              }}/>
             </div>
             )
-        }).then((data) => {
-          this.$Message(`点击了「确认」按钮，输入框的值为 ${data.value}`)
-        }).catch(() => {
-          this.$Message('点击了「取消」按钮')
+        }).then(() => {
+          Message.info({message:`点击了「确认」按钮，输入框的值为 ${this.state.value}`,duration:1000})
+        })
+        .catch((e) => {
+          Message.info({message:'点击了「取消」按钮',duration:1000})
         })
 }}>Prompt</Button>
 ```
@@ -205,14 +211,21 @@ modal3:true
 </ Modal>
 <Modal
 value={this.state.modal3}
+onConfirm={
+  () =>{
+    this.setState({
+      modal3: false
+    })
+  }
+}
 onCancel={()=>{
   this.setState({
-    modal2: false
+    modal3: false
   })
 }}
 >
 <Modal.body>
-  <p>这里是模态框的文本内容!</p>
+  <p>这里是模态框的文本内容!(不带标题)</p>
 </Modal.body>
 <Modal.footer>
 </Modal.footer>
@@ -223,8 +236,8 @@ onCancel={()=>{
 
 ## 禁用关闭
 
-* 设置属性 `showClose` 为 `false` 可取消右上角的关闭按钮以及键盘的 `ESC` 键；
-* 设置属性 `maskClosable` 为 `false` 可取消遮罩层的点击关闭事件；
+- 设置属性 `showClose` 为 `false` 可取消右上角的关闭按钮以及键盘的 `ESC` 键；
+- 设置属性 `maskClosable` 为 `false` 可取消遮罩层的点击关闭事件；
 
 :::demo
 
@@ -242,6 +255,11 @@ onCancel={()=>{
 <Modal
 value={this.state.modal4}
 showClose={false}
+onConfirm={()=>{
+ this.setState({
+    modal4: false
+  })
+}}
 onCancel={()=>{
   this.setState({
     modal4: false
@@ -249,13 +267,20 @@ onCancel={()=>{
 }}
 >
 <Modal.body>
-  <p>这里是模态框的文本内容!</p>
+  <p>这里是模态框的文本内容!(禁用关闭按钮)</p>
 </Modal.body>
 <Modal.footer>
 </Modal.footer>
 </Modal>
 <Modal
 value={this.state.modal5}
+onConfirm={
+  ()=>{
+   this.setState({
+    modal5: false
+    })
+  }
+}
 onCancel={()=>{
   this.setState({
     modal5: false
@@ -264,7 +289,7 @@ onCancel={()=>{
 maskClosable={false}
 >
 <Modal.body>
-  <p>这里是模态框的文本内容!</p>
+  <p>这里是模态框的文本内容!(取消遮罩层关闭)</p>
 </Modal.body>
 <Modal.footer>
 </Modal.footer>

@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import * as classnames from 'classnames'
-import CollapseTransition from '../animations/collapse-animations'
+import CollapseTransition from '../animations/collapse-transition'
 
 interface CollapseItemProps {
   title?: string
@@ -79,6 +79,7 @@ class CollapseItem extends Nerv.Component<CollapseItemProps, CollapseItemState> 
           {titleSlot || <div>{title}</div>}
         </div>
         <CollapseTransition in={isActive} timeout={300} onExited={this.panelExitedHandle}>
+        {}
           <div className='at-collapse__body' style={{ display: this.props.isActive ? '' : 'none' }}>
             <div className='at-collapse__content'>{contentSlot}</div>
           </div>

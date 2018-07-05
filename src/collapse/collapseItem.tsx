@@ -4,13 +4,8 @@ import CollapseTransition from '../animations/collapse-transition.jsx'
 import '../animations/collapseanimations.scss'
 
 interface CollapseItemProps {
-<<<<<<< Updated upstream
   title?: string
   panelName?: string
-=======
-  titl?: string
-  name?: string
->>>>>>> Stashed changes
   disabled?: boolean
   isActive?: boolean
 }
@@ -20,8 +15,10 @@ interface CollapseItemState {
   isActive: boolean | undefined
 }
 
-class CollapseItem extends Nerv.Component < CollapseItemProps,
-CollapseItemState > {
+class CollapseItem extends Nerv.Component<
+  CollapseItemProps,
+  CollapseItemState
+> {
   static defaultProps = {
     title: '',
     disabled: false
@@ -35,34 +32,33 @@ CollapseItemState > {
     }
   }
   toggle = () => {
-    const {_toggle, panelName, key = 0, disabled} = this.props
-    const {isActive} = this.props
+    const { _toggle, panelName, key = 0, disabled } = this.props
+    const { isActive } = this.props
     if (disabled) {
       return
     }
-    console.log(this.props)
     _toggle({
       name: panelName || key,
       isActive
     })
   }
   panelExitedHandle = () => {
-    const {_toggle, panelName, key} = this.props
-    const {isActive} = this.state
+    const { _toggle, panelName, key } = this.props
+    const { isActive } = this.state
     _toggle({
       name: panelName || key,
       isActive
     })
   }
   render () {
-    const {title, disabled, children} = this.props
-    const {isActive} = this.props
+    const { title, disabled, children } = this.props
+    const { isActive } = this.props
     let titleSlot = null
     const contentSlot = []
-    Nerv
-      .Children
-      .forEach(children as never, (child, index) => {
-        const {props} = child
+    Nerv.Children.forEach(
+      children as never,
+      (child, index) => {
+        const { props } = child
         if (props) {
           switch (props.slot) {
             case 'title':
@@ -73,27 +69,27 @@ CollapseItemState > {
           }
           delete child.props.slot
         }
-      }, this)
+      },
+      this
+    )
     return (
       <div
         className={classnames('at-collapse__item', {
-        'at-collapse__item--active': isActive,
-        'at-collapse__item--disabled': disabled
-      })}>
+          'at-collapse__item--active': isActive,
+          'at-collapse__item--disabled': disabled
+        })}
+      >
         <div className='at-collapse__header' onClick={this.toggle}>
-          <i className='icon at-collapse__icon icon-chevron-right'/> {titleSlot || <div>{title}</div>}
+          <i className='icon at-collapse__icon icon-chevron-right' />{' '}
+          {titleSlot || <div>{title}</div>}
         </div>
         <CollapseTransition isShow={isActive}>
-<<<<<<< Updated upstream
-        {}
-=======
           {}
->>>>>>> Stashed changes
           <div className='at-collapse__body'>
             <div className='at-collapse__content'>{contentSlot}</div>
           </div>
         </CollapseTransition>
-      </div >
+      </div>
     )
   }
 }

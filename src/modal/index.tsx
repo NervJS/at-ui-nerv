@@ -4,11 +4,11 @@ import ModalFooter from './ModalFooter'
 import * as Nerv from 'nervjs'
 import { VNode } from 'nerv-shared'
 //
-Modal.body  = ModalBody
+Modal.body = ModalBody
 Modal.footer = ModalFooter
 
 // preset
-Modal.alert = function (config) {
+Modal.alert = (config) => {
   return new Promise((resolve, reject) => {
     const { title, content, callback } = config
     const modal = (
@@ -22,8 +22,7 @@ Modal.alert = function (config) {
             callback()
           }
         }}
-        willUnmount={() => {
-        }}>
+      >
         {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
@@ -32,7 +31,7 @@ Modal.alert = function (config) {
     Nerv.render(modal as VNode, document.body)
   })
 }
-Modal.confirm = function (config) {
+Modal.confirm = (config) => {
   return new Promise((resolve, reject) => {
     const { title, content, onConfirm, onCancel } = config
     const modal = (
@@ -52,18 +51,16 @@ Modal.confirm = function (config) {
             onCancel()
           }
         }}
-        willUnmount={() => {
-        }}>
+      >
         {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={true} />
       </Modal>
     )
     Nerv.render(modal as VNode, document.body)
-
   })
 }
-Modal.prompt = function (config) {
+Modal.prompt = (config) => {
   return new Promise((resolve, reject) => {
     const { title = '提示', content, onConfirm, onCancel } = config
     const modal = (
@@ -83,20 +80,16 @@ Modal.prompt = function (config) {
             onCancel()
           }
         }}
-        willUnmount={() => {
-
-        }}>
+      >
         {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={true} />
       </Modal>
     )
     Nerv.render(modal as VNode, document.body)
-
   })
 }
-Modal.info = function (config) {
-
+Modal.info = (config) => {
   return new Promise((resolve, reject) => {
     const { title = '信息', content, onConfirm, onCancel } = config
     const modal = (
@@ -116,19 +109,16 @@ Modal.info = function (config) {
             onCancel()
           }
         }}
-        willUnmount={() => {
-
-        }}>
+      >
         {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
     )
     Nerv.render(modal as VNode, document.body)
-
   })
 }
-Modal.success = function (config) {
+Modal.success = (config) => {
   return new Promise((resolve, reject) => {
     const { title = '成功', content, onConfirm, onCancel } = config
     const modal = (
@@ -148,9 +138,7 @@ Modal.success = function (config) {
             onCancel()
           }
         }}
-        willUnmount={() => {
-
-        }}>
+      >
         {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
@@ -159,7 +147,7 @@ Modal.success = function (config) {
     Nerv.render(modal as VNode, document.body)
   })
 }
-Modal.warning = function (config) {
+Modal.warning = (config) => {
   return new Promise((resolve, reject) => {
     const { title = '警告', content, onConfirm, onCancel } = config
     const modal = (
@@ -179,20 +167,16 @@ Modal.warning = function (config) {
             onCancel()
           }
         }}
-        willUnmount={() => {
-
-        }}>
+      >
         {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
     )
     Nerv.render(modal as VNode, document.body)
-
   })
 }
-Modal.error = function (config) {
-
+Modal.error = (config) => {
   return new Promise((resolve, reject) => {
     const { title = '错误', content, onConfirm, onCancel } = config
     const modal = (
@@ -212,16 +196,13 @@ Modal.error = function (config) {
             onCancel()
           }
         }}
-        willUnmount={() => {
-
-        }}>
+      >
         {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
     )
     Nerv.render(modal as VNode, document.body)
-
   })
 }
 
