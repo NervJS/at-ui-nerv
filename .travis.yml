@@ -24,9 +24,17 @@ install:
 script:
   - npm run lint
   - BROWSER=true COVERAGE=false FLAKEY=false npm run test:karma
-  # - npm run build:site
+  - npm run build:site
   # - npm run test:coverage
   # - ./node_modules/coveralls/bin/coveralls.js < ./coverage/lcov.info
+
+after_script:
+  - cd siteoutput
+  - git init
+  - git add .
+  - git commit -m "Update Document"
+  - git push --force --quiet "https://${GITHUB_TOKEN}@${GH_REF}" master:gh-pages
+
 
 # branches:
 #   only:
