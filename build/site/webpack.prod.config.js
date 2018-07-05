@@ -12,7 +12,7 @@ module.exports = {
     path: path.resolve(projectRoot, conf.output),
     filename: 'js/[name].js',
     chunkFilename: 'chunk/[name].chunk.js',
-    publicPath: '/'
+    publicPath: './'
   },
   resolve: {
     mainFields: ['main']
