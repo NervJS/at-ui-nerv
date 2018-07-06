@@ -32,6 +32,20 @@ describe('Alert test', () => {
         .text()
     ).toBe(message)
   })
+  it('different types', () => {
+    const message = '这里是提示的文案~这里是提示的文案~这里是提示的文案~'
+    const types = ['success', 'error', 'warning', 'error']
+    types.forEach((type) => {
+      const alert = <Alert message={message} type={type} />
+      const component = Nerv.render(alert as VNode, scratch)
+      expect(
+        $(component.vnode.dom)
+          .find('.at-alert__message')
+          .text()
+      ).toBe(message)
+      expect($(component.vnode.dom).hasClass(`at-alert--${type}`)).toBeTruthy()
+    })
+  })
   it('closable', (done) => {
     const alert = <Alert message={'123'} closable type='success' />
     const component = Nerv.render(alert as VNode, scratch)
