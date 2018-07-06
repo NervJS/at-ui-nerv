@@ -1,5 +1,5 @@
 # AT-UI-Nerv
-
+[![Build Status](https://www.travis-ci.org/NervJS/at-ui-nerv.svg?branch=master)](https://www.travis-ci.org/NervJS/at-ui-nerv)
 [![Coverage Status](https://coveralls.io/repos/github/NervJS/at-ui-nerv/badge.svg?branch=master)](https://coveralls.io/github/NervJS/at-ui-nerv?branch=master)
 
 <p align="center">
