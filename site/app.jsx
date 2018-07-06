@@ -34,7 +34,7 @@ class App extends Nerv.Component {
 }
 
 Nerv.render(
-  <Router>
+  <Router basename='/at-ui-nerv'>
     <App />
   </Router>,
   document.getElementById('container')
