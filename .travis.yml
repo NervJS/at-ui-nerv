@@ -22,7 +22,7 @@ install:
   - yarn
 
 script:
-  - npm run lint
+  # - npm run lint
   - BROWSER=true COVERAGE=false FLAKEY=false npm run test:karma
   - npm run build:site
   # - npm run test:coverage

@@ -7,7 +7,7 @@
     "precommit": "lint-staged",
     "commitmsg": "validate-commit-msg",
     "commit": "git-cz",
-    "test:karma": "karma start karma.conf.js --single-run",
+    "test:karma": "COVERAGE=true karma start karma.conf.js --single-run",
     "test:karma:watch": "karma start karma.conf.js --no-single-run",
     "lint": "tslint -p tsconfig.json --project",
     "lint-staged": "lint-staged",

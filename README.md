@@ -1,5 +1,7 @@
 # AT-UI-Nerv
 
+[![Coverage Status](https://coveralls.io/repos/github/NervJS/at-ui-nerv/badge.svg?branch=master)](https://coveralls.io/github/NervJS/at-ui-nerv?branch=master)
+
 <p align="center">
   
 </p>
