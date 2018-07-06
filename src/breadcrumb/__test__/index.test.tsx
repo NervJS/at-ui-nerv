@@ -28,8 +28,8 @@ describe('Breadcrumb test', () => {
       </Breadcrumb>
     )
     const component = Nerv.render(breadcrumb as VNode, scratch)
-    expect($(component.dom).hasClass('at-breadcrumb')).toBeTruthy()
-    expect($(component.dom).find('.at-breadcrumb__item').length).toBe(2)
+    expect($(component.vnode.dom).hasClass('at-breadcrumb')).toBeTruthy()
+    expect($(component.vnode.dom).find('.at-breadcrumb__item').length).toBe(2)
   })
   // it('test separator', () => {
   //   const breadcrumb = (
@@ -41,7 +41,7 @@ describe('Breadcrumb test', () => {
   //   )
   //   const component = Nerv.render(breadcrumb as VNode, scratch)
   //   expect(
-  //     $(component.dom)
+  //     $(component.vnode.dom)
   //       .find('.at-breadcrumb__separator')
   //       .text()
   //   ).toBe('\\')

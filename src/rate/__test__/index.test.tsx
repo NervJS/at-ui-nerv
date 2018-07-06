@@ -25,18 +25,18 @@ describe('InputNumber test', () => {
   it('basic render', () => {
     const rate = <Rate />
     const component = Nerv.render(rate as VNode, scratch)
-    expect($(component.dom).find('.at-rate__item').length).toBeTruthy()
+    expect($(component.vnode.dom).find('.at-rate__item').length).toBeTruthy()
   })
   it('should render text with showText props', () => {
     const rate = <Rate showText={true} />
     const component = Nerv.render(rate as VNode, scratch)
-    expect($(component.dom).find('.at-rate__text').length).toBe(1)
+    expect($(component.vnode.dom).find('.at-rate__text').length).toBe(1)
   })
   it('rendered icon type should be equal to icon props ', () => {
     const rate = <Rate icon={'icon-heart-on'} />
     const component = Nerv.render(rate as VNode, scratch)
     expect(
-      $(component.dom)
+      $(component.vnode.dom)
         .find('.icon')
         .hasClass('icon-heart-on')
     ).toBeTruthy()
@@ -46,13 +46,13 @@ describe('InputNumber test', () => {
     const rate = <Rate value={value} allowHalf={true} />
     const component = Nerv.render(rate as VNode, scratch)
     const idx = Math.floor(value)
-    expect($(component.dom).find('.at-rate__item').eq(idx).hasClass('at-rate__item--half')).toBeTruthy()
+    expect($(component.vnode.dom).find('.at-rate__item').eq(idx).hasClass('at-rate__item--half')).toBeTruthy()
   })
   it('disabled', () => {
     const onChangeHandle = sinon.spy()
     const rate = <Rate disabled={true} onChange={onChangeHandle}/>
     const component = Nerv.render(rate as VNode, scratch)
-    $(component.dom).find('.at-rate__icon').trigger('click')
+    $(component.vnode.dom).find('.at-rate__icon').trigger('click')
     expect(onChangeHandle.calledOnce).not.toBeTruthy()
   })
   it('allowClear', (done) => {
@@ -63,6 +63,6 @@ describe('InputNumber test', () => {
 
     const rate = <Rate value={3} onChange={onChangeHandle} allowClear={true}/>
     const component = Nerv.render(rate as VNode, scratch)
-    $(component.dom).find('.at-rate__icon').eq(2).trigger('click')
+    $(component.vnode.dom).find('.at-rate__icon').eq(2).trigger('click')
   })
 })

@@ -24,7 +24,7 @@ class App extends Nerv.Component {
   render () {
     return (
       <div className='wrapper' style={{ backgroundColor: '#F8FAFF' }}>
-        <Switch location={location}>
+        <Switch>
           <Route path='/' exact component={Index} />
           <Route path='/docs' component={Docs} />
         </Switch>
@@ -34,7 +34,7 @@ class App extends Nerv.Component {
 }
 
 Nerv.render(
-  <Router basename='/at-ui-nerv'>
+  <Router basename={BASE_NAME}>
     <App />
   </Router>,
   document.getElementById('container')

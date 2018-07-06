@@ -1,5 +1,5 @@
 const path = require('path')
-// const webpgit ack = require('webpack')
+const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const conf = require('./conf')
@@ -21,25 +21,28 @@ module.exports = {
     new CleanWebpackPlugin(path.join(projectRoot, 'siteoutput'), {
       verbose: false,
       exclude: ['lib']
+    }),
+    new webpack.DefinePlugin({
+      BASE_NAME: `'/at-ui-nerv'`
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: false,
+        keep_fnames: true,
+        properties: false,
+        keep_quoted: true
+      },
+      compress: {
+        warnings: false,
+        screw_ie8: false,
+        properties: false
+      },
+      output: {
+        keep_quoted_props: true
+      },
+      comments: false,
+      sourceMap: true
     })
-    // new webpack.optimize.UglifyJsPlugin({
-    //   beautify: false,
-    //   mangle: {
-    //     screw_ie8: false,
-    //     keep_fnames: true,
-    //     properties: false,
-    //     keep_quoted: true
-    //   },
-    //   compress: {
-    //     warnings: false,
-    //     screw_ie8: false,
-    //     properties: false
-    //   },
-    //   output: {
-    //     keep_quoted_props: true
-    //   },
-    //   comments: false,
-    //   sourceMap: true
-    // })
   ]
 }
