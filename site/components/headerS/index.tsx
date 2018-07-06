@@ -9,12 +9,21 @@ interface HeaderProps {
 }
 
 class HeaderS extends Nerv.Component<HeaderProps, any> {
-  toggleMenu = () => {
-    console.log('toggle')
+  constructor (...args) {
+    super(...args)
+    this.state = {
+      toggle: true
+    }
   }
-  componentDidMount () {}
+  toggleMenu = () => {
+    const _toggle = this.state.toggle
+    this.setState({
+      toggle: !_toggle
+    })
+  }
   render () {
     const { collapse } = this.props
+    const {toggle} = this.state
     return (
       <header className={classnames('page-header', { collapse })} id='J-page-header'>
         <div className='nav-container'>
@@ -30,7 +39,7 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
             </div>
             <i className='icon icon-menu nav-icon' onClick={this.toggleMenu} />
           </div>
-          <div className='nav-right'>
+          <div className='nav-right' style={{height: toggle ? '0px' : 'auto'}}>
             <ul className='navbar'>
               <li>
                 <a href='https://at-ui.github.io/at-ui/#/zh/guide/color'>指南</a>
