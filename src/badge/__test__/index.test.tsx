@@ -25,7 +25,7 @@ describe('Checkbox', () => {
       const component = Nerv.render(badge as VNode, scratch)
       expect(
         Number(
-          $(component.vnode.dom)
+          $(component.dom)
             .find('.at-badge__content')
             .text()
         )
@@ -37,7 +37,7 @@ describe('Checkbox', () => {
     const badge = <Badge value={value} />
     const component = Nerv.render(badge as VNode, scratch)
     expect(
-      $(component.vnode.dom)
+      $(component.dom)
         .find('.at-badge__content')
         .text()
     ).toBe(value)
@@ -47,18 +47,18 @@ describe('Checkbox', () => {
     statusList.forEach((status) => {
       const badge = <Badge status={status} value={123} />
       const component = Nerv.render(badge as VNode, scratch)
-      expect($(component.vnode.dom).hasClass(`at-badge--${status}`)).toBeTruthy()
+      expect($(component.dom).hasClass(`at-badge--${status}`)).toBeTruthy()
     })
   })
   it('over max num limited should render with + ', () => {
     const badge = <Badge value={100} maxNum={99} />
     const component = Nerv.render(badge as VNode, scratch)
-    expect($(component.vnode.dom).text()).toBe('99+')
+    expect($(component.dom).text()).toBe('99+')
   })
   it('dot render', () => {
     const badge = <Badge value={100} maxNum={99} dot/>
     const component = Nerv.render(badge as VNode, scratch)
-    expect($(component.vnode.dom).find('.at-badge--dot').length).toBe(1)
+    expect($(component.dom).find('.at-badge--dot').length).toBe(1)
   })
 
 })

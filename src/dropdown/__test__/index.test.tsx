@@ -35,11 +35,11 @@ describe('dropdown test', () => {
       </Dropdown>
     )
     const component = Nerv.render(DropdownElem as VNode, scratch)
-    const trigger = $(component.vnode.dom).find('.at-dropdown__trigger')
+    const trigger = $(component.dom).find('.at-dropdown__trigger')
     trigger.trigger('click')
     setTimeout(() => {
       expect(
-        $(component.vnode.dom)
+        $(component.dom)
           .find('.at-dropdown__popover')
           .css('display')
       ).toBe('block')

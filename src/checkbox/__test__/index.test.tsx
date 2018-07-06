@@ -25,8 +25,8 @@ describe('Checkbox', () => {
     const onChange = sinon.spy()
     const checkbox = <Checkbox onChange={onChange}>{}test</Checkbox>
     const component = Nerv.render(checkbox as VNode, scratch)
-    expect($(component.vnode.dom).find('.at-checkbox')).toBeDefined()
-    $(component.vnode.dom).trigger('click')
+    expect($(component.dom).find('.at-checkbox')).toBeDefined()
+    $(component.dom).trigger('click')
     Nerv.nextTick(() => {
       expect(onChange.callCount).toBe(1)
       done()
@@ -36,7 +36,7 @@ describe('Checkbox', () => {
     const checkbox = <Checkbox checked>{}Test</Checkbox>
     const component = Nerv.render(checkbox as VNode, scratch)
     expect(
-      $(component.vnode.dom)
+      $(component.dom)
         .find('input')
         .prop('checked')
     ).toBeTruthy()
@@ -51,11 +51,11 @@ describe('Checkbox', () => {
     )
     const component = Nerv.render(checkbox as VNode, scratch)
     expect(
-      $(component.vnode.dom)
+      $(component.dom)
         .find('input')
         .prop('disabled')
     ).toBeTruthy()
-    $(component.vnode.dom).trigger('click')
+    $(component.dom).trigger('click')
     Nerv.nextTick(() => {
       expect(onChange.callCount).toBe(0)
       done()
@@ -74,7 +74,7 @@ describe('Checkbox', () => {
       </Checkbox.Group>
     )
     const component = Nerv.render(CheckboxV as VNode, scratch)
-    $(component.vnode.dom)
+    $(component.dom)
       .find('.at-checkbox')
       .forEach((e) => {
         if (

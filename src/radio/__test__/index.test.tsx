@@ -31,7 +31,7 @@ describe('Radio test', () => {
     )
     const component = Nerv.render(radioJSX as any, scratch)
     expect(
-      $(component.vnode.dom)
+      $(component.dom)
         .find('.at-radio__inner')
         .hasClass('at-radio--checked')
     ).toBeFalsy()
@@ -73,7 +73,7 @@ describe('Radio test', () => {
       }
     }
     const component = Nerv.render(<Test /> as VNode, scratch)
-    $(component.vnode.dom)
+    $(component.dom)
       .find('.at-radio')
       .eq(0)
       .trigger('click')
@@ -103,7 +103,7 @@ describe('Radio test', () => {
       </Radio.Group>
     )
     const component = Nerv.render(radioGroupJSX as any, scratch)
-    $(component.vnode.dom)
+    $(component.dom)
       .find('.at-radio')
       .eq(0)
       .trigger('click')

@@ -32,8 +32,8 @@ describe('Collapse', () => {
       </Collapse>
     )
     const component = Nerv.render(collapseJSX as any, scratch)
-    expect($(component.vnode.dom).find('.at-collapse')).toBeDefined()
-    $(component.vnode.dom)
+    expect($(component.dom).find('.at-collapse')).toBeDefined()
+    $(component.dom)
       .find('.at-collapse__header')
       .trigger('click')
     Nerv.nextTick(() => {
@@ -57,13 +57,13 @@ describe('Collapse', () => {
       </Collapse>
     )
     const component = Nerv.render(accordionJSX as any, scratch)
-    $(component.vnode.dom)
+    $(component.dom)
       .find('.at-collapse__header')
       .eq(0)
       .trigger('click')
     new Promise((resolve, reject) => {
       setTimeout(() => {
-        $(component.vnode.dom)
+        $(component.dom)
           .find('.at-collapse__header')
           .eq(1)
           .trigger('click')
@@ -76,12 +76,12 @@ describe('Collapse', () => {
           'switch twice should call callback same times'
         )
         expect(
-          $(component.vnode.dom)
+          $(component.dom)
             .find('.at-collapse__item')
             .eq(0)
             .hasClass('at-collapse__item--active')
         ).toBeFalsy()
-        expect($(component.vnode.dom).find('.at-collapse__item').eq(1)
+        expect($(component.dom).find('.at-collapse__item').eq(1)
           .hasClass('at-collapse__item--active')).toBeTruthy()
         done()
       })
@@ -106,7 +106,7 @@ describe('Collapse', () => {
     )
     const component = Nerv.render(nestJSX as any, scratch)
     expect(
-      $(component.vnode.dom)
+      $(component.dom)
         .find('.at-collapse__content')
         .children('.at-collapse').length
     ).toBe(1)
