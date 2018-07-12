@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import Index from './pages/index'
 import Docs from './pages/docs.jsx'
@@ -27,6 +27,7 @@ class App extends Nerv.Component {
         <Switch>
           <Route path='/' exact component={Index} />
           <Route path='/docs' component={Docs} />
+          <Redirect to='/' />
         </Switch>
       </div>
     )
