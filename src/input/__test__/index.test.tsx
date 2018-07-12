@@ -76,4 +76,14 @@ describe('Input test', () => {
     $(component.vnode.dom).find('.at-input-group--button span').trigger('click')
     expect(onClickHandle.calledOnce).toBe(true)
   })
+  it('test input', (done) => {
+    const onInput = sinon.spy()
+    const input = <Input onInput={onInput} />
+    const component = Nerv.render(input as VNode, scratch)
+    $(Nerv.findDOMNode(component)).find('input').trigger('input', 12)
+    Nerv.nextTick(() => {
+      expect(onInput.called).toBeTruthy()
+      done()
+    })
+  })
 })
