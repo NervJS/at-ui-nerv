@@ -2,6 +2,7 @@ import * as Nerv from 'nervjs'
 // import * as sinon from 'sinon'
 import { VNode } from 'nerv-shared'
 import * as $ from 'webpack-zepto'
+import sinon from 'sinon'
 
 import InputNumber from '../InputNumber'
 
@@ -70,13 +71,27 @@ describe('InputNumber test', () => {
   })
   it('blur test', (done) => {
     const input = <InputNumber value={20} max={5} placeholder='请输入内容' />
-    const component = Nerv.render(input as  VNode, scratch)
+    const component = Nerv.render(input as VNode, scratch)
     $(Nerv.findDOMNode(component)).find('input').val(20)
-    $(Nerv.findDOMNode(component)).find('input').trigger('blur')
+    component.onBlurHandle({ target: $(Nerv.findDOMNode(component)).find('input')[0]
+    })
     Nerv.nextTick(() => {
-      expect($(Nerv.findDOMNode(component)).find('input').val()).toBe('20')
+      expect($(Nerv.findDOMNode(component)).find('input').val()).toBe('5')
       done()
 
     })
   })
+  it('focus test', (done) => {
+    const onFocus = sinon.spy()
+    const input = <InputNumber value={20} max={5} onFocus={onFocus} placeholder='请输入内容' />
+    const component = Nerv.render(input as VNode, scratch)
+    component.onFocusHandle({ target: $(Nerv.findDOMNode(component)).find('input')[0]
+    })
+    Nerv.nextTick(() => {
+      expect(onFocus.called).toBeTruthy()
+      done()
+
+    })
+  })
+
 })
