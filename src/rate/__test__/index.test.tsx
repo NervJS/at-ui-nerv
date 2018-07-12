@@ -59,6 +59,24 @@ describe('rate test', () => {
       done()
     })
   })
+  it('over Star', (done) => {
+    const rate = <Rate allowHalf={true}  />
+    const component = Nerv.render(rate as VNode, scratch)
+    $(component.vnode.dom).find('.at-rate__left').eq(2).trigger('mouseover')
+    Nerv.nextTick(() => {
+      expect(component.state.isHoverRate).toBeTruthy()
+      done()
+    })
+  })
+  it('leave Star', (done) => {
+    const rate = <Rate allowHalf={true}  />
+    const component = Nerv.render(rate as VNode, scratch)
+    $(component.vnode.dom).find('.at-rate__left').eq(2).trigger('mouseleave')
+    Nerv.nextTick(() => {
+      expect(component.state.isHoverRate).toBeFalsy()
+      done()
+    })
+  })
   it('disabled', () => {
     const onChangeHandle = sinon.spy()
     const rate = <Rate disabled={true} onChange={onChangeHandle}/>
