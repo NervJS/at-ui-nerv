@@ -49,4 +49,34 @@ describe('InputNumber test', () => {
         .prop('disabled')
     ).toBe(true)
   })
+  it('test increase', (done) => {
+    const onChange = (val) => {
+      expect(val).toBe(3)
+      done()
+    }
+    const input = <InputNumber value={2} onChange={onChange} placeholder='请输入内容' />
+    const component = Nerv.render(input as  VNode, scratch)
+    $(Nerv.findDOMNode(component)).find('.at-input-number__up').trigger('click')
+  })
+  it('test decrese', (done) => {
+    const onChange = (val) => {
+      expect(val).toBe(1)
+      done()
+    }
+    const input = <InputNumber value={2} onChange={onChange} placeholder='请输入内容' />
+    const component = Nerv.render(input as  VNode, scratch)
+    $(Nerv.findDOMNode(component)).find('.at-input-number__down').trigger('click')
+
+  })
+  it('blur test', (done) => {
+    const input = <InputNumber value={20} max={5} placeholder='请输入内容' />
+    const component = Nerv.render(input as  VNode, scratch)
+    $(Nerv.findDOMNode(component)).find('input').val(20)
+    $(Nerv.findDOMNode(component)).find('input').trigger('blur')
+    Nerv.nextTick(() => {
+      expect($(Nerv.findDOMNode(component)).find('input').val()).toBe('20')
+      done()
+
+    })
+  })
 })

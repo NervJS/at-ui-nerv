@@ -12,6 +12,7 @@ interface InputNumberProps {
   disabled?: boolean
   readonly?: boolean
   autofocus?: boolean
+  onChange?: (val: number) => void
 }
 
 interface InputNumberState {
