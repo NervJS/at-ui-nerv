@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 
 interface RadioGroupProps {
-  value: string | number
+  value: string | number | any[]
   size?: string
   fill?: string
   textColor?: string
@@ -15,7 +15,7 @@ class RadioGroup extends Nerv.Component<RadioGroupProps, any> {
     }
   }
   onChange (val) {
-    const {onRadioGroupChange} = this.props
+    const { onRadioGroupChange } = this.props
     if (onRadioGroupChange) {
       onRadioGroupChange(val)
     }

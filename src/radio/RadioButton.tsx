@@ -3,8 +3,8 @@ import classnames from 'classnames'
 
 interface RadioButtonProps {
   label: string | number
-  value: string | number
-  disabled: boolean
+  value?: string | number
+  disabled?: boolean
 }
 
 interface RadioButtonState {
@@ -39,8 +39,9 @@ class RadioButton extends Nerv.Component<RadioButtonProps, RadioButtonState> {
       onChange(value)
     }
   }
-  isChecked = (v: string | number, l: string | number): boolean => {
+  isChecked = (v: string | number | undefined, l: string | number): boolean => {
     return v === l
+
   }
   render () {
     const { label, name, disabled, size, children } = this.props
