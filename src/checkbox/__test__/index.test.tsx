@@ -92,4 +92,24 @@ describe('Checkbox', () => {
         }
       })
   })
+  it('checkboxGroup onChange test', (done) => {
+    const onChange = sinon.spy()
+    const valueList: string[] = ['复选框 A', '选中且禁用']
+    const checkbox = (
+      <Checkbox.Group value={valueList} onChange={onChange}>
+      {}
+      <Checkbox label='复选框 A' />
+      <Checkbox label='复选框 B' />
+      <Checkbox label='复选框 C' checked />
+      <Checkbox label='禁用' disabled />
+      <Checkbox label='选中且禁用' disabled />
+    </Checkbox.Group>
+    )
+    const component = Nerv.render(checkbox as VNode, scratch)
+    $(component.vnode.dom).find('.at-checkbox').eq(0).trigger('click')
+    Nerv.nextTick(() => {
+      expect(onChange.callCount).toBe(1)
+      done()
+    })
+  })
 })
