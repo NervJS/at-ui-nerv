@@ -60,7 +60,7 @@ class Button extends Nerv.Component<ButtonProps, any> {
         type={nativeType || 'button'}
         onClick={this.handleClick}>
         {loading && <i className='at-btn__loading icon icon-loader' />}
-        {icon && <i className='at-btn__icon icon' />}
+        {icon && <i className={classnames('at-btn__icon icon', icon)} />}
         {children && <span className='at-btn__text'>{children}</span>}
       </button>
     )
