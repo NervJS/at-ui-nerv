@@ -5,7 +5,7 @@ import {VNode} from 'nerv-shared'
 
 import Rate from '../rate'
 
-describe('InputNumber test', () => {
+describe('rate test', () => {
   let scratch
   beforeAll(() => {
     scratch = document.createElement('div')
@@ -48,6 +48,17 @@ describe('InputNumber test', () => {
     const idx = Math.floor(value)
     expect($(component.vnode.dom).find('.at-rate__item').eq(idx).hasClass('at-rate__item--half')).toBeTruthy()
   })
+  it('move Star', (done) => {
+    const onChangeHandle = sinon.spy()
+    const rate = <Rate allowHalf={true} onChange={onChangeHandle}/>
+    const component = Nerv.render(rate as VNode, scratch)
+    $(component.vnode.dom).find('.at-rate__left').eq(2).trigger('mousemove')
+    $(component.vnode.dom).find('.at-rate__left').eq(4).trigger('click')
+    Nerv.nextTick(() => {
+      expect(onChangeHandle.callCount).toBe(1)
+      done()
+    })
+  })
   it('disabled', () => {
     const onChangeHandle = sinon.spy()
     const rate = <Rate disabled={true} onChange={onChangeHandle}/>
@@ -60,7 +71,6 @@ describe('InputNumber test', () => {
       expect(val).toBe(0)
       done()
     }
-
     const rate = <Rate value={3} onChange={onChangeHandle} allowClear={true}/>
     const component = Nerv.render(rate as VNode, scratch)
     $(component.vnode.dom).find('.at-rate__icon').eq(2).trigger('click')

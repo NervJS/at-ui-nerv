@@ -88,7 +88,7 @@ class Rate extends Nerv.Component<RateProps, RateState> {
       return
     }
     if (evt.target instanceof HTMLElement) {
-      if (allowHalf && evt.target.getAttribute('type') === 'half') {
+      if (allowHalf && evt.target.getAttribute('data-type') === 'half') {
         this.setState({
           hoverIndex: index,
           isHalf: true
@@ -159,7 +159,7 @@ class Rate extends Nerv.Component<RateProps, RateState> {
               onMouseMove={this.moveStarHandle.bind(this, i)}
               onClick={this.confirmValue.bind(this, i)}
             >
-              <span className={classnames('icon at-rate__left', icon)}  />
+              <span className={classnames('icon at-rate__left', icon)} data-type='half' />
             </i>
           </li>
         ) as never)
