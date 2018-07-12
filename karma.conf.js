@@ -53,17 +53,22 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/*/__test__/**/*test.ts?(x)': ['webpack', 'sourcemap', 'coverage']
+      'src/*/__test__/**/*test.ts?(x)': ['webpack', 'sourcemap']
     },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec', 'jasmine-diff'].concat(coverage ? ['coverage'] : [], sauceLabs ? 'saucelabs' : []),
+    reporters: ['spec', 'jasmine-diff'].concat(coverage ? ['coverage-istanbul'] : [], sauceLabs ? 'saucelabs' : []),
+    coverageIstanbulReporter: {
+      reports: [ 'text-summary', 'lcov', 'html' ],
+      fixWebpackSourcePaths: true
+    },
     coverageReporter: {
       dir: 'coverage/',
       reporters: [
         { type: 'lcov', subdir: '.' },
+        {type: 'html'},
         { type: 'text-summary' }
       ]
     },
@@ -119,6 +124,15 @@ module.exports = function (config) {
       },
       module: {
         rules: [
+          {
+            test: /\.(jsx|tsx)$/,
+            use: {
+              loader: 'istanbul-instrumenter-loader',
+              options: { esModules: true }
+            },
+            enforce: 'post',
+            exclude: /node_modules|\.test\.tsx$/
+          },
           {
             enforce: 'pre',
             test: /\.(js|jsx)$/,
