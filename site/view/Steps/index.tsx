@@ -20,7 +20,7 @@ class StepExample extends Nerv.Component<any, any> {
     this.setState({
       current
     }, () => {
-      console.log(this.state.current)
+      // console.log(this.state.current)
     })
   }
   minusHandler (e: MouseEvent) {
@@ -31,7 +31,7 @@ class StepExample extends Nerv.Component<any, any> {
     this.setState({
       current
     }, () => {
-      console.log(this.state.current)
+      // console.log(this.state.current)
     })
   }
   render () {

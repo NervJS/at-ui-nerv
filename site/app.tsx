@@ -9,6 +9,7 @@ import TooltipExample from './view/Tooltip'
 import PopoverExample from './view/Popover'
 import StepExample from './view/Steps'
 import TextareaExample from './view/Textarea'
+import TableExample from './view/Table'
 import 'at-ui-style'
 
 class App extends Nerv.Component {
@@ -24,6 +25,7 @@ class App extends Nerv.Component {
         <PopoverExample />
         <StepExample />
         <TextareaExample />
+        <TableExample />
       </div>
     )
   }

@@ -19,7 +19,7 @@ $ yarn dev
 - [x] Button -lee    
 - [ ] Layout  -kyjo   
 - [ ] Tag -kyjo       
-- [ ] Icon -lxy      
+- [x] Icon -lxy      
 
 ### 表单组件 
 - [ ] Checkbox -kyjo     
@@ -27,10 +27,10 @@ $ yarn dev
 - [ ] InputNumber -kyjo     
 - [ ] Radio -kyjo    
 - [ ] Rate -kyjo     
-- [ ] Select -lxy      
-- [ ] Switch -lxy    
+- [x] Select -lxy      
+- [x] Switch -lxy    
 - [ ] Slider -lxy    
-- [ ] Textarea -lxy
+- [x] Textarea -lxy
 
 ### 视图组件 
 - [ ] Alert -kyjo 
@@ -41,10 +41,10 @@ $ yarn dev
 - [ ] Modal -kyjo    
 - [ ] Message -kyjo  
 - [ ] Notification -lxy    
-- [ ] Popover -lxy    
+- [x] Popover -lxy    
 - [ ] Progress -lxy    
 - [ ] Timeline -lxy    
-- [ ] Tooltip -lxy    
+- [x] Tooltip -lxy    
 - [ ] Table -lxy    
 
 ### 导航组件 
@@ -52,5 +52,5 @@ $ yarn dev
 - [ ] Dropdown  -kyjo   
 - [ ] Menu -lxy    
 - [ ] Pagination -lxy    
-- [ ] Steps -lxy    
+- [x] Steps -lxy    
 - [ ] Tabs -lxy    
