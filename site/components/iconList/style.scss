@@ -1,0 +1,27 @@
+$bg-color-light: #ecf5fd;
+.icon-example {
+  .at-icon-list__item {
+    position: relative;
+    height: 100px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      background-color: $bg-color-light;
+      transform: scale(1.2);
+    }
+    i {
+      font-size: 26px;
+    }
+    p {
+      margin-top: 5px;
+      font-size: 12px;
+    }
+  }
+  
+  .icon {
+    font-size: 20px;
+  }
+}
+

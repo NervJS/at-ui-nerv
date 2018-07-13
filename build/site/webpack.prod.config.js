@@ -12,7 +12,7 @@ module.exports = {
     path: path.resolve(projectRoot, conf.output),
     filename: 'js/[name].js',
     chunkFilename: 'chunk/[name].chunk.js',
-    publicPath: '/'
+    publicPath: './'
   },
   resolve: {
     mainFields: ['main']
@@ -21,6 +21,9 @@ module.exports = {
     new CleanWebpackPlugin(path.join(projectRoot, 'siteoutput'), {
       verbose: false,
       exclude: ['lib']
+    }),
+    new webpack.DefinePlugin({
+      BASE_NAME: `'/at-ui-nerv'`
     }),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,

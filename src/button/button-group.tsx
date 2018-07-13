@@ -5,7 +5,8 @@ import { ButtonSize } from './button'
 
 export interface ButtonGroupProps {
   size?: ButtonSize,
-  className?: string
+  className?: string,
+  children?: any[]
 }
 
 export default function ButtonGroup (props: ButtonGroupProps) {

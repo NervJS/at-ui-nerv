@@ -42,7 +42,7 @@ class TableExample extends Nerv.Component {
         </Table>
         <Table columns={columns} data={data}>
         </Table>
-        <Table columns={columns} data={data} optional>
+        <Table columns={columns} data={data} optional onSelectionChange={this.onSelectChange} onSelectAll={this.onSelectAll}>
         </Table>
         <Table stripe columns={columns} data={data}>
         </Table>
@@ -52,6 +52,12 @@ class TableExample extends Nerv.Component {
         </Table>
       </div>
     )
+  }
+  onSelectChange (value,item) {
+    console.log(value,item)
+  }
+  onSelectAll (value,item) {
+    console.log(value,item)
   }
 }
 

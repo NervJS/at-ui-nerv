@@ -1,24 +1,27 @@
 {
   "presets": [
-    ["@babel/preset-env", {
-      "spec": true,
-      "targets": {
-        "browsers": [
-          "ie >= 9",
-          "Chrome >= 21",
-          "Firefox >= 1",
-          "Edge >= 13",
-          "last 3 versions"
-        ],
-        "uglify": true,
-        "loose": false,
-        "useBuiltIns": true
+    [
+      "@babel/preset-env",
+      {
+        "spec": true,
+        "modules": false,
+        "targets": {
+          "browsers": ["ie >= 9", "Chrome >= 21", "Firefox >= 1", "Edge >= 13", "last 3 versions"],
+          "uglify": true,
+          "loose": false,
+          "useBuiltIns": true
+        }
       }
-    }]
+    ]
   ],
   "plugins": [
-    ["@babel/plugin-transform-react-jsx", {
-      "pragma": "Nerv.createElement"
-    }]
+    "syntax-dynamic-import",
+    [
+      "@babel/plugin-transform-react-jsx",
+
+      {
+        "pragma": "Nerv.createElement"
+      }
+    ]
   ]
 }

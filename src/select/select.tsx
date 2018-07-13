@@ -333,7 +333,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     let multipleChoices: any[] = []
     const dropDownStyle = `${this.state.dropDownStyle}`
     if (props.clearable) {
-      clearBtn = <Icon type='icon-x' className='at-select__clear' style={this.state.iconXShow} ref='iconx' onClick={this.handleClear} onMouseLeave={this.handleLeaveIconX}/>
+      clearBtn = <Icon type='icon-x' className='at-select__clear' style={this.state.iconXShow}  onClick={this.handleClear} onMouseLeave={this.handleLeaveIconX}/>
     }
     if (props.filterable) {
       searchInput = <input type='text' onChange={this.handleInput} value={this.state.inputValue} placeholder='请输入查询数据' className='at-select__input' />

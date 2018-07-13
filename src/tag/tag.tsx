@@ -1,46 +1,56 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
-
-import FadeAnimation from '../animations/fade-animation'
+import classnames from 'classnames'
+import { CSSTransition } from 'react-transition-group'
 
 export interface TagProps {
-  name?: string | number,
-  color?: string,
+  name?: string | number
+  color?: string
   closable?: boolean
 }
 
-const colorArr = [
-  'default',
-  'primary',
-  'success',
-  'error',
-  'warning',
-  'info'
-]
+export interface TagState {
+  show: boolean
+}
 
-class Tag extends Nerv.Component {
-  name: 'AtTag'
+const colorArr = ['default', 'primary', 'success', 'error', 'warning', 'info']
+
+class Tag extends Nerv.Component<TagProps, TagState> {
   static defaultProps = {
     color: 'default',
     closable: false
   }
-  state = { in: false
+  name: 'AtTag'
+  constructor (...args) {
+    super(...args)
+    this.closeActionHandle = this.closeActionHandle.bind(this)
+    this.state = {
+      show: true
+    }
   }
-  closeActionHandle (evt: MouseEvent) {
+  closeActionHandle (evt) {
     const name = this.props.name
     const onClose = this.props.onClose
-    if (typeof name === 'undefined') {
-      onClose(evt)
-    } else {
-      onClose(evt, name)
-    }
+    this.setState(
+      {
+        show: false
+      },
+      () => {
+        if (typeof name === 'undefined') {
+          onClose(evt)
+        } else {
+          onClose(evt, name)
+        }
+      }
+    )
   }
   colorStyle () {
     if (this.props.color && colorArr.indexOf(this.props.color) > -1) {
-      return ''
+      return {}
     } else {
-      // return {borderColor: this.props.color, backgroundColor: this.props.color}
-      return `borderColor:${this.props.color};backgroundColor:${this.props.color};`
+      return {
+        borderColor: this.props.color,
+        backgroundColor: this.props.color
+      }
     }
   }
   colorClass () {
@@ -50,30 +60,19 @@ class Tag extends Nerv.Component {
       return ''
     }
   }
-  componentDidMount () {
-    this.setState({in: true})
-  }
 
   render () {
-    const {closable, children} = this.props
-    const style = Object.assign(this.colorStyle(),this.props.style)
-    // const style = this.colorStyle() + this.props.style
-    // console.log('child', this.props.style)
+    const { closable, children } = this.props
+    const { show } = this.state
+    const style = this.colorStyle()
     const classNames = classnames('at-tag', this.colorClass())
     return (
-      <FadeAnimation >
+      <CSSTransition in={show} timeout={300} classNames='fade'>
         <span className={classNames} style={style}>
           <span className='at-tag__text'>{children}</span>
-          {closable
-            ? <i
-                className='icon icon-x at-tag__close'
-                onClick={this
-                .closeActionHandle
-                .bind(this)}></i>
-            : ''}
-
+          {closable ? <i className='icon icon-x at-tag__close' onClick={this.closeActionHandle} /> : ''}
         </span>
-      </FadeAnimation>
+      </CSSTransition>
     )
   }
 }

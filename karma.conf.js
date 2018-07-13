@@ -1,17 +1,17 @@
 const webpack = require('webpack')
 const ES3 = require('es3ify-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 const coverage = String(process.env.COVERAGE) !== 'false'
 const ci = String(process.env.CI).match(/^(1|true)$/gi)
 const realBrowser = String(process.env.BROWSER).match(/^(1|true)$/gi)
 const sauceLabs = realBrowser && ci
-const sauceLabsLaunchers = {
-  sl_win_chrome: {
-    base: 'SauceLabs',
-    browserName: 'chrome',
-    platform: 'Windows 10'
-  }
-}
-
+// const sauceLabsLaunchers = {
+//   sl_win_chrome: {
+//     base: 'SauceLabs',
+//     browserName: 'chrome',
+//     platform: 'Windows 10'
+//   }
+// }
 const travisLaunchers = {
   chrome_travis: {
     base: 'Chrome',
@@ -19,7 +19,7 @@ const travisLaunchers = {
   }
 }
 
-const localBrowsers = realBrowser ? Object.keys(travisLaunchers) : ['Chrome']
+const localBrowsers = /* realBrowser ? */ Object.keys(travisLaunchers) // : ['Chrome']
 
 module.exports = function (config) {
   config.set({
@@ -37,7 +37,7 @@ module.exports = function (config) {
       // './node_modules/es5-polyfill/dist/polyfill.js',
       // 'browsers/ie8.js',
       // 'browsers/polyfill.js',
-      'src/*/__test__/**/*test.ts?(x)'
+      'src/**/__test__/**/*test.ts?(x)'
     ],
 
     specReporter: {
@@ -59,11 +59,19 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec', 'jasmine-diff'].concat(
-      coverage ? [] : [],
-      sauceLabs ? 'saucelabs' : []
-    ),
-
+    reporters: ['spec', 'jasmine-diff'].concat(coverage ? ['coverage-istanbul'] : [], sauceLabs ? 'saucelabs' : []),
+    coverageIstanbulReporter: {
+      reports: [ 'text-summary', 'lcov', 'html' ],
+      fixWebpackSourcePaths: true
+    },
+    coverageReporter: {
+      dir: 'coverage/',
+      reporters: [
+        { type: 'lcov', subdir: '.' },
+        {type: 'html'},
+        { type: 'text-summary' }
+      ]
+    },
     browserLogOptions: { terminal: true },
     browserConsoleLogOptions: { terminal: true },
 
@@ -86,9 +94,9 @@ module.exports = function (config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: sauceLabs ? Object.keys(sauceLabsLaunchers) : localBrowsers,
+    browsers: /* sauceLabs ? Object.keys(sauceLabsLaunchers) : */ localBrowsers,
 
-    customLaunchers: sauceLabs ? sauceLabsLaunchers : travisLaunchers,
+    customLaunchers: /* sauceLabs ? sauceLabsLaunchers : */ travisLaunchers,
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -117,21 +125,62 @@ module.exports = function (config) {
       module: {
         rules: [
           {
+            test: /\.(jsx|tsx)$/,
+            use: {
+              loader: 'istanbul-instrumenter-loader',
+              options: { esModules: true }
+            },
+            enforce: 'post',
+            exclude: /node_modules|\.test\.tsx$/
+          },
+          {
             enforce: 'pre',
-            test: /\.js$/,
+            test: /\.(js|jsx)$/,
             loader: 'babel-loader',
             exclude: /node_modules/
           },
           {
             test: /\.(ts|tsx)$/,
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-              compilerOptions: {
-                target: 'es3',
-                module: 'commonjs'
+            use: [
+              {
+                loader: 'babel-loader'
+              },
+              {
+                loader: 'ts-loader',
+                options: {
+                  transpileOnly: true,
+                  compilerOptions: {
+                    target: 'es6',
+                    module: 'es6'
+                  }
+                }
               }
-            }
+            ]
+          },
+          {
+            test: /\.(css|scss|sass)(\?.*)?$/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1
+                }
+              },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  ident: 'postcss',
+                  plugins: () => [
+                    autoprefixer({
+                      browsers: ['ie >= 9', 'Chrome >= 21', 'Firefox >= 1', 'Edge >= 13', 'last 3 versions'],
+                      flexbox: 'no-2009'
+                    })
+                  ]
+                }
+              },
+              'sass-loader'
+            ]
           }
         ]
       },

@@ -1,4 +1,8 @@
 .npm
+.vscode
+.DS_Store
 node_modules/
 siteoutput/
 dist/
+coverage/
+package-lock.json

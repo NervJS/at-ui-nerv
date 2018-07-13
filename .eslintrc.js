@@ -15,6 +15,7 @@ module.exports = {
     }
   },
   globals: {
+    BASE_NAME:true,
     '__DEV__': true,
     __uri: true
   },

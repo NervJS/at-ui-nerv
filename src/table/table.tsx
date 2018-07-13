@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-
+import Checkbox from '../checkbox'
 export interface TableProps {
   className?: string,
   type?: string,
@@ -24,9 +24,13 @@ class Table extends Nerv.Component<TableProps, any> {
     super(props)
     this.state = {
       resizeHeight: 0,
-      resizeMarginTop: 0
+      resizeMarginTop: 0,
+      valueArr:[],
+      selectAll:false
     }
     this.resizeHeightHandler = this.resizeHeightHandler.bind(this)
+    // this.onSelectionChange = this.onSelectionChange.bind(this)
+    this.onSelectAll = this.onSelectAll.bind(this)
   }
   renderTableClassNames (props: TableProps) {
     return classnames('at-table', [
@@ -36,12 +40,28 @@ class Table extends Nerv.Component<TableProps, any> {
       props.height ? 'at-table--fixHeight' : ''
     ], props.className)
   }
+  componentWillMount () {
+    let {data=[],columns=[]} = this.props
+    data.forEach((item,index) => {
+      this.state.valueArr.push(false)
+    })
+    columns.forEach((item)=>{
+      this.keyArr.push(item.key)
+    })
+  }
   renderData () {
     const data = this.props.data || []
-    const dataElement: any[] = []
-    data.forEach((item) => {
-      const tdElement: any[] = []
-      this.keyArr.forEach((key) => {
+    let dataElement: any[] = []
+    
+    data.forEach((item,index) => {
+      let tdElement: any[] = []
+      //处理多选框
+      if (this.props.optional) {
+        tdElement.push(<th className='at-table__cell at-table__column-selection' value={this.state.valueArr[index]}>
+                        <Checkbox checked={this.state.valueArr[index]} onChange={this.onSelectionChange.bind(this,item,index)} />
+                       </th>)
+      }
+      this.keyArr.forEach((key,index) => {
         tdElement.push(<td className='at-table__cell'>{item[key]}</td>)
       })
       dataElement.push(<tr>{tdElement}</tr>)
@@ -55,18 +75,11 @@ class Table extends Nerv.Component<TableProps, any> {
     const columnsElement: any[] = []
     if (this.props.optional) {
       columnsElement.push(<th className='at-table__cell at-table__column-selection'>
-                            <label className='at-checkbox at-checkbox--checked'>
-                              <span className='at-checkbox__input'>
-                                <span className='at-checkbox__inner'></span>
-                                <input type='checkbox' className='at-checkbox__original'/>
-                              </span>
-                              <span className='at-checkbox__label'></span>
-                            </label>
+                           <Checkbox checked={this.state.selectAll} onChange={this.onSelectAll}/>
                           </th>)
     }
 
     columns.forEach((item) => {
-      this.keyArr.push(item.key)
       columnsElement.push(<th className='at-table__cell at-table__column' style='cursor: text;'>{item.title}</th>)
     })
 
@@ -148,11 +161,48 @@ class Table extends Nerv.Component<TableProps, any> {
       </div>
     )
   }
-  onSelectionChange () {
-    this.props.onSelectionChange()
+  onSelectionChange (item,index,value) {
+    let propsOnSelectionChange = this.props.onSelectionChange
+    if(value) {
+      //如果选中了，则返回值
+      let arrTemp = this.state.valueArr
+      arrTemp[index] = true
+      this.setState({
+        valueArr:arrTemp.concat()
+      })
+      propsOnSelectionChange && propsOnSelectionChange(value,item);
+      return item;
+    } else {
+      //如果取消选中，则返回false
+      let arrTemp = this.state.valueArr
+      arrTemp[index] = false
+      this.setState({
+        valueArr:arrTemp.concat()
+      })
+      propsOnSelectionChange && propsOnSelectionChange(value,item);
+      return value;
+    }
+    
   }
   onSelectAll () {
-    this.props.onSelectAll()
+    let arrTemp = this.state.valueArr
+    let selectAll = !this.state.selectAll
+    let dataSelected
+    for(let i=0;i<arrTemp.length;i++) {
+      if(selectAll) {
+        arrTemp[i] = true;
+        dataSelected = this.props.data
+      } else {
+        arrTemp[i] = false
+        dataSelected = []
+      }
+    }
+    this.setState({
+      valueArr:arrTemp.concat(),
+      selectAll: selectAll
+    })
+    this.props.onSelectAll(dataSelected)
+    return dataSelected
   }
   resizeHeightHandler () {
     const resizeMarginTop = this.refs.header.offsetHeight

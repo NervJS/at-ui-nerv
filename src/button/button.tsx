@@ -8,7 +8,7 @@ export type ButtonSize = 'large' | 'small' | 'smaller'
 
 export interface ButtonProps {
   type?: ButtonType
-  className?: string,
+  className?: string
   icon?: string
   size?: ButtonSize
   hollow?: boolean
@@ -19,7 +19,6 @@ export interface ButtonProps {
 }
 
 class Button extends Nerv.Component<ButtonProps, any> {
-
   static Group: typeof ButtonGroup
 
   static defaultProps = {
@@ -29,15 +28,19 @@ class Button extends Nerv.Component<ButtonProps, any> {
   }
 
   renderButtonClassNames (props: ButtonProps, hasChildren) {
-    return classnames('at-btn', [
-      props.type ? `at-btn--${props.type}` : '',
-      props.size ? `at-btn--${props.size}` : '',
-      props.hollow ? `at-btn--${props.type}--hollow` : '',
-      props.circle && !hasChildren ? 'at-btn--circle' : ''
-    ], props.className)
+    return classnames(
+      'at-btn',
+      [
+        props.type ? `at-btn--${props.type}` : '',
+        props.size ? `at-btn--${props.size}` : '',
+        props.hollow ? `at-btn--${props.type}--hollow` : '',
+        props.circle && !hasChildren ? 'at-btn--circle' : ''
+      ],
+      props.className
+    )
   }
 
-  handleClick = (e: MouseEvent) => {
+  handleClick = (e) => {
     const onClick = this.props.onClick
     if (onClick) {
       onClick(e)
@@ -56,8 +59,8 @@ class Button extends Nerv.Component<ButtonProps, any> {
         disabled={disabled}
         type={nativeType || 'button'}
         onClick={this.handleClick}>
-        {loading && <i className='at-btn__loading icon icon-loader'></i>}
-        {icon && <i className='at-btn__icon icon'></i>}
+        {loading && <i className='at-btn__loading icon icon-loader' />}
+        {icon && <i className={classnames('at-btn__icon icon', icon)} />}
         {children && <span className='at-btn__text'>{children}</span>}
       </button>
     )
