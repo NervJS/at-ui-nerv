@@ -25,7 +25,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   componentWillReceiveProps (nextProps) {
     // console.log('nextProps', nextProps.style, 'this.props', this.props.style)
   }
-  handleClick = (e) => {
+  handleClick = (e: MouseEvent) => {
     const onClick = this.props.onClick
     if (onClick) {
       onClick(e)
@@ -34,6 +34,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   render () {
     const props = this.props
     const { children } = props
+      //<SelectOption>{i}  xxx</SelectOption>  最好放进一个变量中，否则children会分成2个数组 {i} 和xxx
     return (
         <li ref='li' className='at-select__option' onClick={this.handleClick}>{children}</li>
     )

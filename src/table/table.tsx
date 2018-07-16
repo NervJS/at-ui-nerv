@@ -1,6 +1,7 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import Checkbox from '../checkbox'
+export type SortType = 'normal' | 'desc' | 'asc'  
 export interface TableProps {
   className?: string,
   type?: string,
@@ -15,7 +16,8 @@ export interface TableProps {
   showPageTotal?: boolean,
   showPageSizer?: boolean,
   showPagequickjump?: boolean,
-  height?: string | number
+  height?: string | number,
+  sortType?: SortType
 }
 
 class Table extends Nerv.Component<TableProps, any> {
@@ -162,6 +164,7 @@ class Table extends Nerv.Component<TableProps, any> {
     )
   }
   onSelectionChange (item,index,value) {
+    console.log('this',this)
     let propsOnSelectionChange = this.props.onSelectionChange
     if(value) {
       //如果选中了，则返回值
