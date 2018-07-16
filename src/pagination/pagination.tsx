@@ -167,24 +167,22 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       return this._renderPageListMoreThan9()
     }
   }
-  render () {
-    const props = this.props
-    this.page = Math.ceil(this.total / this.state.pageSize)
-    if(props.simple) {
-      return this._renderSimpleStyle()
-    }
-    let pageList = this.renderPageList()
-    const totalPage = props.showTotal ? <span className='at-pagination__total' >共 {this.total} 条</span> : null
-    const pageMinusBtnStyle =
-    this.state.currPage === 1 ? 'at-pagination__prev at-pagination--disabled' : 'at-pagination__prev';
-    const pageAddBtnStyle =
-    this.state.currPage === this.page ? 'at-pagination__next at-pagination--disabled' : 'at-pagination__next';
-    const showQuickJump = props.showQuickJump ?
+  renderPageMinusBtnStyle () {
+    return this.state.currPage === 1 ? 'at-pagination__prev at-pagination--disabled' : 'at-pagination__prev';
+  }
+  renderPageAddBtnStyle () {
+    return this.state.currPage === this.page ? 'at-pagination__next at-pagination--disabled' : 'at-pagination__next';
+  }
+  renderShowQuickJump () {
+    return this.props.showQuickJump ?
       <div className='at-pagination__quickjump'>
         <span>前往</span>
         <input type='text' className='at-input__original' ref='pageInput' onkeypress={this.keyPressHandler} value={this.state.currPage} />
         <span>页</span>
       </div> : null
+  }
+  renderShowSizer () {
+    let props = this.props
     let selectOption: any[] = []
     if (props.showSizer) {
       for (let i = 10; i < this.total / 2; i = i + 10) {
@@ -194,12 +192,25 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       }
     }
     const tempPageSize = `${this.state.pageSize} 条/页`
-    const showSizer = props.showSizer ?
+    return props.showSizer ?
       <div className="at-pagination__sizer">
         <Select optionChosen={tempPageSize}>
             {selectOption}
         </Select>
       </div> : null
+  }
+  render () {
+    const props = this.props
+    this.page = Math.ceil(this.total / this.state.pageSize)
+    if(props.simple) {
+      return this._renderSimpleStyle()
+    }
+    let pageList = this.renderPageList()
+    const totalPage = props.showTotal ? <span className='at-pagination__total' >共 {this.total} 条</span> : null
+    const pageMinusBtnStyle = this.renderPageMinusBtnStyle()
+    const pageAddBtnStyle = this.renderPageAddBtnStyle()
+    const showQuickJump = this.renderShowQuickJump()
+    const showSizer = this.renderShowSizer()
     const className = this.renderPaginationClassNames(this.props)
     return (
         <ul className={className}>
@@ -218,12 +229,17 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     
   }
   pageSizeSelectHandler (pageSize, event) {
+    let props = this.props
+    props.onPageSizeChange && props.onPageSizeChange(event,pageSize)
+    props.onPageChange && props.onPageChange(1)
     this.setState({
       pageSize,
       currPage: 1
     })
+    return pageSize
   }
   keyPressHandler (event) {
+    let props = this.props
     if (event.keyCode === 13) {
       let newPage = this.refs.pageInput.value
       if (newPage < 1) {newPage = 1}
@@ -231,9 +247,11 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       this.setState({
         currPage: newPage
       })
+      props.onPageChange && props.onPageChange(newPage,event)
     }
   }
   keyPressSimpleHandler (event) {
+    let props = this.props
     if (event.keyCode === 13) {
       let newPage = this.refs.pageInputSimple.value
       if (newPage < 1) {newPage = 1}
@@ -241,17 +259,23 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       this.setState({
         currPage: newPage
       })
+      props.onPageChange && props.onPageChange(newPage,event)
     }
   }
   pageClickHandler (page, event?) {
+    let props = this.props
+    props.onPageChange && props.onPageChange(page,event)
     this.setState({
       currPage: page
     })
+    return page
   }
-  pageMinusHandler () {
+  pageMinusHandler (event) {
     const currPage = this.state.currPage
     if (currPage === 1) {return false}
     const newPage = currPage - 1 < 1 ? 1 : currPage - 1
+    let props = this.props
+    props.onPageChange && props.onPageChange(newPage,event)
     this.setState({
       currPage: newPage
     })
@@ -260,6 +284,8 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     const currPage = this.state.currPage
     if (currPage === this.page) {return false}
     const newPage = currPage + 1 > this.page ? this.page : currPage + 1
+    let props = this.props
+    props.onPageChange && props.onPageChange(newPage,event)
     this.setState({
       currPage: Number(newPage)
     })

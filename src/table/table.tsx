@@ -1,6 +1,7 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import Checkbox from '../checkbox'
+import Pagination from '../pagination'
 export type SortType = 'normal' | 'desc' | 'asc'  
 export interface TableProps {
   className?: string,
@@ -22,17 +23,28 @@ export interface TableProps {
 
 class Table extends Nerv.Component<TableProps, any> {
   private keyArr: any[] = []
+  private sortBy: string
+  private sortType: string
+  private renderArr: any[] = []
   constructor (props) {
     super(props)
     this.state = {
       resizeHeight: 0,
       resizeMarginTop: 0,
       valueArr:[],
-      selectAll:false
+      selectAll:false,
+      currPage: 1,
+      currPageSize: 10,
+      sortedData: [],
+     
     }
     this.resizeHeightHandler = this.resizeHeightHandler.bind(this)
-    // this.onSelectionChange = this.onSelectionChange.bind(this)
+    this.pageSizeChangeHandler = this.pageSizeChangeHandler.bind(this)
+    this.pageChangeHandler = this.pageChangeHandler.bind(this)
     this.onSelectAll = this.onSelectAll.bind(this)
+    this.sortAscHandler = this.sortAscHandler.bind(this)
+    this.sortDescHandler = this.sortDescHandler.bind(this)
+    this.createSortedData = this.createSortedData.bind(this)
   }
   renderTableClassNames (props: TableProps) {
     return classnames('at-table', [
@@ -48,11 +60,67 @@ class Table extends Nerv.Component<TableProps, any> {
       this.state.valueArr.push(false)
     })
     columns.forEach((item)=>{
-      this.keyArr.push(item.key)
+      if(item.sortType) {
+        this.sortType = item.sortType,
+        this.sortBy = item.key
+      }
+      if(item.key) {
+        this.keyArr.push(item.key)
+      }
+      if(item.render) {
+        this.renderArr.push(item.render)
+      }
     })
   }
+  createPaginationData (data) {
+    let pageSize = this.state.currPageSize
+    let currPage = this.state.currPage
+    let start = (currPage -1) * pageSize 
+    let end = currPage * pageSize
+    return data.slice(start,end)
+  }
+  createSortedData (sortBy,sortType) {
+    let data = (this.props.data || []).concat()
+    if(sortType=='asc') {
+      data.sort( (a, b)=>{
+        return a[sortBy]-b[sortBy]
+      })
+    } else if(sortType=='desc') {
+      data.sort( (a, b)=>{
+        return b[sortBy]- a[sortBy]
+      })
+    }
+    return data
+  }
+  sortAscHandler () {
+    this.sortType = 'asc'
+    this.setState({})
+  }
+  sortDescHandler () {
+    this.sortType = 'desc'
+    this.setState({})
+  }
+  renderSortBtn () {
+    return (
+    <div className="at-table__column-sorter" style="cursor:pointer;">
+      <span className="at-table__column-sorter-up" onClick={this.sortAscHandler}>
+        <i className="icon icon-chevron-up"></i>
+      </span> 
+      <span className="at-table__column-sorter-down" onClick={this.sortDescHandler}>
+        <i className="icon icon-chevron-down"></i>
+      </span>
+    </div>)
+  }
   renderData () {
-    const data = this.props.data || []
+    let props = this.props
+    let data = props.data || []
+    if(this.sortBy) {
+      data = this.createSortedData(this.sortBy,this.sortType || 'normal')
+    }
+    if(props.pagination) {
+      data = this.createPaginationData(data)
+    }
+    
     let dataElement: any[] = []
     
     data.forEach((item,index) => {
@@ -65,6 +133,10 @@ class Table extends Nerv.Component<TableProps, any> {
       }
       this.keyArr.forEach((key,index) => {
         tdElement.push(<td className='at-table__cell'>{item[key]}</td>)
+      })
+      this.renderArr.forEach((render) => {
+        let {type,props,children}= render
+        tdElement.push(<td className='at-table__cell'>{Nerv.createElement(type,props,children)}</td>)
       })
       dataElement.push(<tr>{tdElement}</tr>)
     })
@@ -80,9 +152,16 @@ class Table extends Nerv.Component<TableProps, any> {
                            <Checkbox checked={this.state.selectAll} onChange={this.onSelectAll}/>
                           </th>)
     }
-
     columns.forEach((item) => {
-      columnsElement.push(<th className='at-table__cell at-table__column' style='cursor: text;'>{item.title}</th>)
+      let sortBtn
+      if(item.sortType) {
+        sortBtn = this.renderSortBtn()
+      }
+      columnsElement.push(
+      <th className='at-table__cell at-table__column' style='cursor: text;'>
+        {item.title}
+        {sortBtn}
+      </th>)
     })
 
     return (<thead className='at-table__thead'>
@@ -90,6 +169,26 @@ class Table extends Nerv.Component<TableProps, any> {
                 {columnsElement}
               </tr>
             </thead>)
+  }
+  _renderPagination () {
+    let props = this.props
+    let dataSize = props.data && props.data.length
+    let renderPagination:any =null
+    if(props.pagination) {
+      renderPagination = (<Pagination total={dataSize} showTotal showSizer showQuickJump onPageChange={this.pageChangeHandler} onPageSizeChange={this.pageSizeChangeHandler} />)
+    }
+    return renderPagination
+  }
+  pageChangeHandler (currPage,event) {
+    this.setState({
+      currPage
+    })
+  }
+  pageSizeChangeHandler (event,currPageSize) {
+    this.setState({
+      currPageSize,
+      currPage: 1
+    })
   }
   render () {
     const props = this.props
@@ -111,13 +210,13 @@ class Table extends Nerv.Component<TableProps, any> {
       }
     const classNames = this.renderTableClassNames(props)
     style = {...style, height: this.props.height + 'px'}
-    let bodyWithHeight
+    let body
     const resizeStyle = {
       height: this.state.resizeHeight + 'px',
       marginTop: this.state.resizeMarginTop + 'px'
     }
     if (!props.height) {
-      bodyWithHeight = (
+      body = (
         <div class='at-table__content'>
           <div className='at-table__body'>
             <table>
@@ -132,7 +231,7 @@ class Table extends Nerv.Component<TableProps, any> {
           </div>
         </div>
       )} else {
-        bodyWithHeight = (
+        body = (
         <div className='at-table__content' >
           <div className='at-table__header' ref='header'>
             <table>
@@ -157,14 +256,20 @@ class Table extends Nerv.Component<TableProps, any> {
         </div>
       )
     }
+    let footer:any = null
+    if(props.pagination) {
+      footer = (<div className="at-table__footer">
+                  {this._renderPagination()}
+                </div>)
+    }
     return (
       <div className={classNames} {...needProps} style={style}>
-       {bodyWithHeight}
+       {body}
+       {footer}
       </div>
     )
   }
   onSelectionChange (item,index,value) {
-    console.log('this',this)
     let propsOnSelectionChange = this.props.onSelectionChange
     if(value) {
       //如果选中了，则返回值
