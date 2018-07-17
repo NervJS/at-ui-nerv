@@ -212,8 +212,24 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     const showQuickJump = this.renderShowQuickJump()
     const showSizer = this.renderShowSizer()
     const className = this.renderPaginationClassNames(this.props)
+    const {
+      style,
+      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      children
+      } = props
+    const needProps = {
+      children,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseOut,
+      onMouseEnter,
+      onMouseLeave,
+      onClick
+      }
     return (
-        <ul className={className}>
+        <ul className={className} {...needProps} style={style}>
           {totalPage}
           <li title='上一页' className={pageMinusBtnStyle} onClick={this.pageMinusHandler}>
             <i className='icon icon-chevron-left' />

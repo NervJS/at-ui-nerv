@@ -14,6 +14,20 @@ class Timeline extends Nerv.Component<TimelineProps, any> {
   render () {
     let classNames= this.renderTimelineClassNames(this.props)
     let {children} = this.props
+    const {
+      style,
+      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      } = this.props
+    const needProps = {
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseOut,
+      onMouseEnter,
+      onMouseLeave,
+      onClick
+      }
     let count = Nerv.Children.count(children as any)
     Nerv.Children.forEach(children as any,(child,index)=>{
       if(count - 1 == index) {
@@ -21,7 +35,7 @@ class Timeline extends Nerv.Component<TimelineProps, any> {
       }
     },null)
     return (
-      <div className={classNames}>
+      <div className={classNames} style={style} {...needProps}>
         {this.props.children}
       </div>
     )

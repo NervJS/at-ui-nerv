@@ -345,7 +345,22 @@ class Select extends Nerv.Component<SelectProps, any> {
       props.placement ? `at-select__dropdown--${props.placement}` : 'at-select__dropdown--bottom'
       ]
     )
-    return (<div className={this.state.wrapperClassName} style={style}>
+    const {
+      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      children
+      } = props
+    const needProps = {
+      children,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseOut,
+      onMouseEnter,
+      onMouseLeave,
+      onClick
+      }
+    return (<div className={this.state.wrapperClassName} style={style} {...needProps}>
         <div className='at-select__selection' onClick={this.toggleDropDown} ref='trigger'>
           <span className='at-select__placeholder' style={this.state.optionChosenStyleUp}>请选择</span>
           <span className='at-select__selected' style={this.state.optionChosenStyleDown}>{this.state.optionChosen}</span>

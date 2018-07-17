@@ -45,7 +45,23 @@ class Switch extends Nerv.Component<SwitchProps, any> {
   }
   render () {
     const switchClass = this.renderButtonClassNames(this.props)
-    return (<span className={switchClass} onClick={this.onClick} value={this.props.value} style={this.props.style}>
+    const {
+      style,
+      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      children
+      } = this.props
+    const needProps = {
+      children,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseOut,
+      onMouseEnter,
+      onMouseLeave,
+      onClick
+    }
+    return (<span className={switchClass} onClick={this.onClick} value={this.props.value} style={style} {...needProps}>
               <span className='at-switch__text'>
                 {this.value ? this.checkedText : this.unCheckedText}
               </span>

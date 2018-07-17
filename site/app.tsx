@@ -11,7 +11,8 @@ import * as Nerv from 'nervjs'
 // import TextareaExample from './view/Textarea'
 // import TableExample from './view/Table'
 // import PaginationExample from './view/Pagination'
-import TimelineExample from './view/Timeline'
+// import TimelineExample from './view/Timeline'
+import ProgressExample from './view/Progress'
 import 'at-ui-style'
 
 class App extends Nerv.Component {
@@ -29,7 +30,8 @@ class App extends Nerv.Component {
         {/*<TextareaExample />*/}
         {/* <TableExample /> */}
         {/* <PaginationExample /> */}
-        <TimelineExample />
+        {/* <TimelineExample /> */}
+        <ProgressExample />
       </div>
     )
   }

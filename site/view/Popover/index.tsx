@@ -19,6 +19,7 @@ class PopoverExample extends Nerv.Component {
         <Popover content='Top Placement' title='Title' trigger='focus'>
           一段文字
         </Popover>
+        
       </div>
     )
   }
