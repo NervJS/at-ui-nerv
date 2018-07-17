@@ -34,7 +34,7 @@ MIT
 - [x] Button -lee    
 - [x] Layout  -kyjo   
 - [x] Tag -kyjo       
-- [x] Icon       
+- [ ] Icon -lxy      
 
 ### 表单组件 
 - [x] Checkbox -kyjo     
@@ -42,30 +42,30 @@ MIT
 - [x] InputNumber -kyjo     
 - [x] Radio -kyjo    
 - [x] Rate -kyjo     
-- [x] Select       
-- [x] Switch      
-- [ ] Slider      
-- [ ] Textarea       
+- [x] Select -lxy      
+- [x] Switch -lxy    
+- [x] Slider -lxy    
+- [ ] Textarea -lxy
 
 ### 视图组件 
-- [x] Alert -kyjo   
+- [x] Alert -kyjo 
 - [x] Badge -kyjo    
 - [x] Card -kyjo    
-- [ ] Collapse -kyjo  
+- [x] Collapse -kyjo  
 - [x] LoadingBar -kyjo    
 - [x] Modal -kyjo    
 - [x] Message -kyjo  
-- [x] Notification [kyjo]     
-- [ ] Popover     
-- [ ] Progress     
-- [ ] Timeline     
-- [ ] Tooltip     
-- [ ] Table     
+- [x] Notification -lxy    
+- [ ] Popover -lxy    
+- [ ] Progress -lxy    
+- [ ] Timeline -lxy    
+- [ ] Tooltip -lxy    
+- [ ] Table -lxy    
 
 ### 导航组件 
 - [x] Breadcrumb -kyjo  
 - [x] Dropdown  -kyjo   
-- [ ] Menu     
-- [ ] Pagination     
-- [x] Steps     
-- [x] Tabs     
+- [ ] Menu -lxy    
+- [ ] Pagination -lxy    
+- [ ] Steps -lxy    
+- [ ] Tabs -lxy    

@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import SelectOption from './select-option'
 import Icon from '../icon'
 import Tag from '../tag'
+// import {calculatePosition} from '../util/util'
 export type ButtonType = 'default' | 'primary' | 'success' | 'error' | 'warning' | 'info' | 'text'
 export type ButtonSize = 'large' | 'small' | 'smaller'
 
@@ -35,6 +36,7 @@ class Select extends Nerv.Component<SelectProps, any> {
   private DISPLAY_BLOCK: string
   private mulChoices: any[]
   private mulChoicesFlag: any[]
+  private value: any
   constructor (props: SelectProps) {
     super(props)
     this.mulChoices = []
@@ -56,8 +58,9 @@ class Select extends Nerv.Component<SelectProps, any> {
     this.hideAllOption = this.hideAllOption.bind(this)
     this.showAllOption = this.showAllOption.bind(this)
     this.windowClickHide = this.windowClickHide.bind(this)
+    this.value = this.props.multiple ? [] : ''
     this.state = {
-      dropDownStyle: 'display:none;',
+      dropDownStyle: 'display:block;',
       wrapperClassName: 'at-select at-select--single',
       optionChosen: '请选择',
       optionChosenStyleDown: this.DISPLAY_NONE,
@@ -71,6 +74,12 @@ class Select extends Nerv.Component<SelectProps, any> {
       mulChoices: [],
       childStyle: [],
       optionChildren: [] //props进来的选项
+    }
+  }
+  onChange (e: MouseEvent) {
+    console.log(this.value)
+    if (this.props.onChange) {
+      this.props.onChange(e, this.value)
     }
   }
   renderWrapperClassNames (props: SelectProps) {
@@ -87,17 +96,23 @@ class Select extends Nerv.Component<SelectProps, any> {
     this.setState({
       mulChoices: this.mulChoices.concat()
     })
+    this.value = this.value.splice(key, 1)
+    this.onChange(e)
   }
-  handleClick = (clickHandler, children, index) => {
+  handleClick = (clickHandler, childProps, index) => {
     return (e: MouseEvent) => {
       if (clickHandler) {
         clickHandler(e)
       }
+      const children = childProps.childShow
+      const value = childProps.value
       if (this.props.filterable) {
         this.setState({
           inputValue: children
         })
+        this.value = this.props.valueWithLabel ? {value, label: children} : value
       } else {
+        //暂时不能同时检索和多选
         if (this.props.multiple) {
           e.stopPropagation()
           if (!this.mulChoicesFlag[index]) {
@@ -105,6 +120,11 @@ class Select extends Nerv.Component<SelectProps, any> {
               'dom': children,
               'optionIndex': index
             })
+            if (this.props.valueWithLabel) {
+              this.value.push({value, label: children})
+            } else {
+              this.value.push(value)
+            }
             this.mulChoicesFlag[index] = true
             this.childStyle[index] = {...(this.childStyle[index] || {}), fontWeight: '700'}
             this.setState({
@@ -118,6 +138,7 @@ class Select extends Nerv.Component<SelectProps, any> {
             optionChosenStyleDown:  this.DISPLAY_BLOCK, //展示已选择的选项
             optionChosenStyleUp:  this.DISPLAY_NONE//收起占位符“请选择”
           })
+          this.value = this.props.valueWithLabel ? {value, label: children} : value
         }
       }
       if (this.props.clearable) {
@@ -130,6 +151,7 @@ class Select extends Nerv.Component<SelectProps, any> {
         this.toggleDropDown(e)
       }
       this.isClick = true
+      this.onChange(e)
     }
   }
   handleOverIconX () {
@@ -167,20 +189,35 @@ class Select extends Nerv.Component<SelectProps, any> {
     e.stopPropagation()
     if (this.props.filterable) {
       this.setState({
-        inputValue: '',
-        iconXShow: this.DISPLAY_NONE,
-        iconChevronShow: this.DISPLAY_BLOCK
+        inputValue: ''
       })
+      this.value = this.props.valueWithLabel ? {} : ''
       this.showAllOption()
+    } else if (this.props.multiple) {
+      this.mulChoicesFlag.forEach((item, index) => {
+        this.mulChoicesFlag[index] = false
+        this.childStyle[index] = {...(this.childStyle[index] || {}), fontWeight: ''}
+      })
+      this.mulChoices = []
+      this.setState({
+        mulChoices: [],
+        optionChosenStyleUp:  this.DISPLAY_BLOCK//收起占位符“请选择”
+      })
+      this.value = []
     } else {
       this.setState({
-        iconXShow: this.DISPLAY_NONE,
-        iconChevronShow: this.DISPLAY_BLOCK,
         optionChosenStyleDown:  this.DISPLAY_NONE,
-        optionChosenStyleUp:  this.DISPLAY_BLOCK
+        optionChosenStyleUp:  this.DISPLAY_BLOCK,
+        optionChosen: ''
       })
+      this.value = this.props.valueWithLabel ? {} : ''
     }
+    this.setState({
+      iconXShow: this.DISPLAY_NONE,
+      iconChevronShow: this.DISPLAY_BLOCK
+    })
     this.isClick = false
+    this.onChange(e)
   }
   handleInput (e) {
     const value = e.target.value
@@ -189,7 +226,10 @@ class Select extends Nerv.Component<SelectProps, any> {
     })
     if (!this.dropDown) {
       this.dropDown = !this.dropDown
-      const newDropDownStyle = this.DISPLAY_BLOCK
+      let newDropDownStyle = this.DISPLAY_BLOCK
+      if (this.props.placement == 'top') {
+        newDropDownStyle += `bottom:${this.state.calcBottom};`
+      }
       const wrapperClassName = classnames(this.initClass, 'at-select--visible')
       this.setState({
         dropDownStyle: newDropDownStyle ,
@@ -250,8 +290,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     })
   }
   _renderMultipleChoices () {
-    let multipleChoices: any[]
-    multipleChoices = []
+    const multipleChoices: any[] = []
     if (this.props.multiple) {
       this.state.mulChoices.forEach((item, index) => {
         this.mulChoicesFlag.push(false)
@@ -269,8 +308,12 @@ class Select extends Nerv.Component<SelectProps, any> {
         if (typeof childShow != 'string') {
           childShow = child.props.label
         }
+        const childProps = {
+          childShow,
+          value: child.props.value
+        }
         this.optionDataArr.push(childShow)
-        child.props.onClick = this.handleClick(child.props.onClick, childShow, i)
+        child.props.onClick = this.handleClick(child.props.onClick, childProps, i)
         child.props.style = this.state.childStyle[i] || {}
         children.push(child)
       }, null)
@@ -285,8 +328,9 @@ class Select extends Nerv.Component<SelectProps, any> {
   render () {
     const props = this.props
     const { style } = props
-    let clearBtn: any = null
-    let searchInput: any = null
+    let clearBtn = null
+    let searchInput
+    let multipleChoices: any[] = []
     const dropDownStyle = `${this.state.dropDownStyle}`
     if (props.clearable) {
       clearBtn = <Icon type='icon-x' className='at-select__clear' style={this.state.iconXShow}  onClick={this.handleClear} onMouseLeave={this.handleLeaveIconX}/>
@@ -294,17 +338,26 @@ class Select extends Nerv.Component<SelectProps, any> {
     if (props.filterable) {
       searchInput = <input type='text' onChange={this.handleInput} value={this.state.inputValue} placeholder='请输入查询数据' className='at-select__input' />
     }
-    return (
-      <div className={this.state.wrapperClassName} style={style}>
-        <div className='at-select__selection' onClick={this.toggleDropDown}>
+    if (props.multiple) {
+      multipleChoices = this._renderMultipleChoices()
+    }
+    const dropdownClass = classnames(
+      'at-select__dropdown', [
+      props.placement ? `at-select__dropdown--${props.placement}` : 'at-select__dropdown--bottom'
+      ]
+    )
+    return (<div className={this.state.wrapperClassName} style={style}>
+        <div className='at-select__selection' onClick={this.toggleDropDown} ref='trigger'>
           <span className='at-select__placeholder' style={this.state.optionChosenStyleUp}>请选择</span>
           <span className='at-select__selected' style={this.state.optionChosenStyleDown}>{this.state.optionChosen}</span>
-          {this._renderMultipleChoices()}
+          <ul>
+            {multipleChoices}
+          </ul>
           {searchInput}
           <Icon type='icon-chevron-down' className='at-select__arrow' style={this.state.iconChevronShow} onMouseEnter={this.handleOverIconX}></Icon>
           {clearBtn}
         </div>
-        <div className='at-select__dropdown at-select__dropdown--bottom' style={dropDownStyle as any}>
+        <div className={dropdownClass} style={dropDownStyle} ref='popover'>
           <ul className='at-select__not-found' style={this.state.noDataShow}>
             <li>无匹配数据</li>
           </ul>
@@ -323,7 +376,6 @@ class Select extends Nerv.Component<SelectProps, any> {
         optionChildren: this._renderPropsChildren()
       })
     })
-
   }
   componentDidMount () {
     this.initClass = this.renderWrapperClassNames(this.props)
@@ -338,17 +390,31 @@ class Select extends Nerv.Component<SelectProps, any> {
     })
     this.initChildStyle()
     window.addEventListener('click', this.windowClickHide.bind(this))
+    if (this.props.placement == 'top') {
+      this.calculatePopoverStyle()
+    }
+  }
+  calculatePopoverStyle () {
+    const bottom = this.refs.trigger.offsetHeight
+    this.setState({
+      calcBottom: `${bottom}px`
+    })
   }
   toggleDropDown (e) {
     e.stopPropagation()
     if (this.props.disabled) { return false }
     let onClickHandler: any
-    if (onClickHandler = this.props.onClick) {onClickHandler(e)}
+    if (this.props.onClick) {onClickHandler = this.props.onClick; onClickHandler(e)}
     let newDropDownStyle = ''
     let wrapperClassName = ''
     this.dropDown = !this.dropDown
     if (this.dropDown) {
       newDropDownStyle = this.DISPLAY_BLOCK
+      if (this.props.placement == 'top') {
+        newDropDownStyle += `bottom:${this.state.calcBottom};`
+      }
+      console.log(newDropDownStyle)
+
       wrapperClassName = classnames(this.initClass, 'at-select--visible')
       if (this.props.filterable) {
         this.searchOptionData('')
