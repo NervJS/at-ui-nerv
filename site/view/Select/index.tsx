@@ -126,4 +126,4 @@ class SelectExample extends Nerv.Component<any, any> {
   }
 }
 
-// export default SelectExample
+export default SelectExample

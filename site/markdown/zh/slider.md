@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Slider} from '@src';
+---
 # Slider 滑动输入条
 
 ----

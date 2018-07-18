@@ -52,6 +52,14 @@ zh:
               name: Radio
             - title: 评分
               name: Rate
+            - title: 选择器
+              name: Select
+            - title: 开关
+              name: Switch
+            # - title: 滑动输入条
+            #   name: Slider
+            - title: 文本域
+              name: Textarea
         - title: 视图组件
           items:
             - title: 警告提示
@@ -70,12 +78,18 @@ zh:
               name: Message
             - title: 通知提醒
               name: Notification
+            - title: 弹出框
+              name: Popover
+            - title: 文字提示
+              name: Tooltip
         - title: 导航组件
           items:
             - title: 面包屑
               name: Breadcrumb
             - title: 下拉菜单
               name: Dropdown
+            - title: 导航菜单
+              name: Menu
 en:
   guide:
     - title: Brand
@@ -130,6 +144,8 @@ en:
               name: Radio
             - title: Rate
               name: Rate
+            - title: Select
+              name: Select
             - title: Switch
               name: Switch
             - title: Slider

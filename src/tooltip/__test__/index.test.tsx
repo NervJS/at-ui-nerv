@@ -1,13 +1,34 @@
 import * as Nerv from 'nervjs'
-import { renderIntoDocument } from 'nerv-test-utils'
-import Icon from '../'
+import $ from 'webpack-zepto'
+import Tooltip from '../'
+import { Button } from '../../'
+import { VNode } from 'nerv-shared'
 
-describe('Icon', () => {
-  it('render Icon', () => {
-    const icon = <Icon type='icon-cloud'>Icon</Icon>
-    const component = renderIntoDocument(icon)
-    const dom = Nerv.findDOMNode(component)
-    // expect(component.props).toHaveProperty('type', 'icon-cloud')
-    expect(dom.textContent).toEqual('Icon')
+describe('toolTip test', () => {
+  let scratch
+  beforeAll(() => {
+    scratch = document.createElement('div')
+    document.body.appendChild(scratch)
+  })
+
+  beforeEach(() => {
+    scratch = document.createElement('div')
+    document.body.appendChild(scratch)
+  })
+
+  afterAll(() => {
+    scratch.parentNode.removeChild(scratch)
+    scratch = null
+  })
+  it('basic render', () => {
+    const toolTipJSX = (
+      <Tooltip placement='top' content='提示信息'>
+        {}
+        <Button>{}按钮</Button>
+      </Tooltip>
+    )
+    const component = Nerv.render(toolTipJSX as VNode, scratch)
+    $(Nerv.findDOMNode(component)).trigger('MouseEnter')
+    console.log($(Nerv.findDOMNode(component)))
   })
 })

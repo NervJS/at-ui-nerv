@@ -72,6 +72,22 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   }
   render () {
     const props = this.props
+    const {
+      style,
+      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      children
+      } = props
+    const needProps = {
+      children,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseOut,
+      onMouseEnter,
+      onMouseLeave,
+      onClick
+      }
     const tipstyle = {
       top: `${this.state.top}px`,
       left: `${this.state.left}px`,
@@ -105,7 +121,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
                 </div>)
     }
     return (
-      <div className='at-popover' ref='wrapper'>
+      <div className='at-popover' ref='wrapper' style={style} {...needProps}>
         <span className='at-popover__trigger' style={props.style} ref='trigger'>
           {props.children}
         </span>

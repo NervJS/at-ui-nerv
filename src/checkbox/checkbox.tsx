@@ -85,7 +85,6 @@ State > {
   onBlurHandle () {
     this.setState({focus: false})
   }
-
   render () {
     const {children, label, name, disabled, checked} = this.props
     const {focus, currentValue} = this.state

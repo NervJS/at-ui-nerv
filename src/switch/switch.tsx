@@ -21,7 +21,7 @@ class Switch extends Nerv.Component<SwitchProps, any> {
     }
     this.onClick = this.onClick.bind(this)
   }
-  onClick (e: MouseEvent) {
+  onClick (e: React.MouseEvent<HTMLDivElement>) {
     if (this.value) {
       this.setState({
         switchClass: ''
@@ -45,7 +45,7 @@ class Switch extends Nerv.Component<SwitchProps, any> {
   }
   render () {
     const switchClass = this.renderButtonClassNames(this.props)
-    return (<span className={switchClass} onClick={this.onClick} value={this.props.value} style={this.props.style}>
+    return (<span className={switchClass} onClick={this.onClick} data-value={this.props.value} style={this.props.style}>
               <span className='at-switch__text'>
                 {this.value ? this.checkedText : this.unCheckedText}
               </span>

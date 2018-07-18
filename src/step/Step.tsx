@@ -54,7 +54,7 @@ class Step extends Nerv.Component<StepProps, any> {
     const current = props.current || 0
     const index = props.index || 0
     let icon: any = null
-    console.log(props.index)
+    // console.log(props.index)
     if (current <= index) {
       let classname = ''
       if (props.icon) {
@@ -96,7 +96,7 @@ class Step extends Nerv.Component<StepProps, any> {
                 </div>)
       }
     }
-    let line = null
+    let line: any = null
     if (!props.last) {
       line = <div className='at-step__line' />
     }
@@ -107,7 +107,7 @@ class Step extends Nerv.Component<StepProps, any> {
     } else {
       styleComputed = { ...style, ...widthStyle}
     }
-    console.log('here', style, styleComputed)
+    // console.log('here', style, styleComputed)
     return (
       <div className={classNames} {...needProps} style={styleComputed}>
         {line}
