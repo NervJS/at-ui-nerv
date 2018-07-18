@@ -51,7 +51,7 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
     if (!contentSlot) {
       contentSlot = props.content
     }
-    const tipstyle = {
+    let tipstyle = {
       top: `${this.state.top}px`,
       left: `${this.state.left}px`,
       display: this.state.display
@@ -75,6 +75,9 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
                                 [props.placement ? `at-tooltip--${this.props.placement}` : 'at-tooltip--top'],
                                 this.props.className)
                                 
+    if(props.tipstyle) {
+      tipstyle = Object.assign({},tipstyle,props.tipstyle)
+    }
     return (
     <div className='at-tooltip' {...needProps} style={props.style} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
         <span className='at-tooltip__trigger' ref='trigger'>

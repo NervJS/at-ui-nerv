@@ -15,7 +15,7 @@ class PaginationExample extends Nerv.Component {
         <Pagination total='100' showQuickJump showSizer showTotal size="small" />
       </div>
     )
-  }
+  }y
 
 }
 

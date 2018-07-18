@@ -13,6 +13,7 @@ import * as Nerv from 'nervjs'
 // import PaginationExample from './view/Pagination'
 // import TimelineExample from './view/Timeline'
 import ProgressExample from './view/Progress'
+import SliderExample from './view/Slider'
 import 'at-ui-style'
 
 class App extends Nerv.Component {
@@ -32,6 +33,7 @@ class App extends Nerv.Component {
         {/* <PaginationExample /> */}
         {/* <TimelineExample /> */}
         <ProgressExample />
+        <SliderExample />
       </div>
     )
   }
