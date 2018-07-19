@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 
-import Slider from '../../../src/slider'
+import Slider from '@md/slider.md'
 
 class SliderExample extends Nerv.Component {
   constructor (props) {
@@ -11,19 +11,10 @@ class SliderExample extends Nerv.Component {
   }
   render () {
     return (
-      <div className='Slider-example'>
-        <Slider onChange={this.handleChange} />
-        <div style='height:100px;' />
-        <Slider disabled onChange={this.handleChange} value={20} />
-        <div style='height:100px;' />
-        <Slider onChange={this.handleChange} max={90} min={10} value={3} />
-        <div style='height:100px;' />
-        <Slider onChange={this.handleChange} step={3} />
+      <div className='slider-example'>
+        <Slider />
       </div>
     )
-  }
-  handleChange (value) {
-    console.log(value)
   }
 }
 

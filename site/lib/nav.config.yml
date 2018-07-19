@@ -56,8 +56,8 @@ zh:
               name: Select
             - title: 开关
               name: Switch
-            # - title: 滑动输入条
-            #   name: Slider
+            - title: 滑动输入条
+              name: Slider
             - title: 文本域
               name: Textarea
         - title: 视图组件
@@ -82,6 +82,8 @@ zh:
               name: Popover
             - title: 文字提示
               name: Tooltip
+            - title: 表格
+              name: Table
         - title: 导航组件
           items:
             - title: 面包屑
