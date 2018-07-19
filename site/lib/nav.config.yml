@@ -82,6 +82,8 @@ zh:
               name: Popover
             - title: 文字提示
               name: Tooltip
+            - title: 时间轴
+              name: Timeline
             - title: 表格
               name: Table
         - title: 导航组件
