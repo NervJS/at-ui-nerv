@@ -96,7 +96,7 @@ class Step extends Nerv.Component<StepProps, any> {
                 </div>)
       }
     }
-    let line
+    let line: any = null
     if (!props.last) {
       line = <div className='at-step__line' />
     }

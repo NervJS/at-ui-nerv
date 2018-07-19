@@ -2,7 +2,7 @@ import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import Checkbox from '../checkbox'
 import Pagination from '../pagination'
-export type SortType = 'normal' | 'desc' | 'asc'  
+export type SortType = 'normal' | 'desc' | 'asc'
 export interface TableProps {
   className?: string,
   type?: string,
@@ -31,12 +31,12 @@ class Table extends Nerv.Component<TableProps, any> {
     this.state = {
       resizeHeight: 0,
       resizeMarginTop: 0,
-      valueArr:[],
-      selectAll:false,
+      valueArr: [],
+      selectAll: false,
       currPage: 1,
       currPageSize: 10,
-      sortedData: [],
-     
+      sortedData: []
+
     }
     this.resizeHeightHandler = this.resizeHeightHandler.bind(this)
     this.pageSizeChangeHandler = this.pageSizeChangeHandler.bind(this)
@@ -55,39 +55,39 @@ class Table extends Nerv.Component<TableProps, any> {
     ], props.className)
   }
   componentWillMount () {
-    let {data=[],columns=[]} = this.props
-    data.forEach((item,index) => {
+    const {data= [], columns= []} = this.props
+    data.forEach((item, index) => {
       this.state.valueArr.push(false)
     })
-    columns.forEach((item)=>{
-      if(item.sortType) {
+    columns.forEach((item) => {
+      if (item.sortType) {
         this.sortType = item.sortType,
         this.sortBy = item.key
       }
-      if(item.key) {
+      if (item.key) {
         this.keyArr.push(item.key)
       }
-      if(item.render) {
+      if (item.render) {
         this.renderArr.push(item.render)
       }
     })
   }
   createPaginationData (data) {
-    let pageSize = this.state.currPageSize
-    let currPage = this.state.currPage
-    let start = (currPage -1) * pageSize 
-    let end = currPage * pageSize
-    return data.slice(start,end)
+    const pageSize = this.state.currPageSize
+    const currPage = this.state.currPage
+    const start = (currPage - 1) * pageSize
+    const end = currPage * pageSize
+    return data.slice(start, end)
   }
-  createSortedData (sortBy,sortType) {
-    let data = (this.props.data || []).concat()
-    if(sortType=='asc') {
-      data.sort( (a, b)=>{
-        return a[sortBy]-b[sortBy]
+  createSortedData (sortBy, sortType) {
+    const data = (this.props.data || []).concat()
+    if (sortType == 'asc') {
+      data.sort((a, b) => {
+        return a[sortBy] - b[sortBy]
       })
-    } else if(sortType=='desc') {
-      data.sort( (a, b)=>{
-        return b[sortBy]- a[sortBy]
+    } else if (sortType == 'desc') {
+      data.sort((a, b) => {
+        return b[sortBy] - a[sortBy]
       })
     }
     return data
@@ -102,41 +102,41 @@ class Table extends Nerv.Component<TableProps, any> {
   }
   renderSortBtn () {
     return (
-    <div className="at-table__column-sorter" style="cursor:pointer;">
-      <span className="at-table__column-sorter-up" onClick={this.sortAscHandler}>
-        <i className="icon icon-chevron-up"></i>
-      </span> 
-      <span className="at-table__column-sorter-down" onClick={this.sortDescHandler}>
-        <i className="icon icon-chevron-down"></i>
+    <div className='at-table__column-sorter' style='cursor:pointer;'>
+      <span className='at-table__column-sorter-up' onClick={this.sortAscHandler}>
+        <i className='icon icon-chevron-up'></i>
+      </span>
+      <span className='at-table__column-sorter-down' onClick={this.sortDescHandler}>
+        <i className='icon icon-chevron-down'></i>
       </span>
     </div>)
   }
   renderData () {
-    let props = this.props
+    const props = this.props
     let data = props.data || []
-    if(this.sortBy) {
-      data = this.createSortedData(this.sortBy,this.sortType || 'normal')
+    if (this.sortBy) {
+      data = this.createSortedData(this.sortBy, this.sortType || 'normal')
     }
-    if(props.pagination) {
+    if (props.pagination) {
       data = this.createPaginationData(data)
     }
-    
-    let dataElement: any[] = []
-    
-    data.forEach((item,index) => {
-      let tdElement: any[] = []
+
+    const dataElement: any[] = []
+
+    data.forEach((item, index) => {
+      const tdElement: any[] = []
       //处理多选框
       if (this.props.optional) {
         tdElement.push(<th className='at-table__cell at-table__column-selection' value={this.state.valueArr[index]}>
-                        <Checkbox checked={this.state.valueArr[index]} onChange={this.onSelectionChange.bind(this,item,index)} />
+                        <Checkbox checked={this.state.valueArr[index]} onChange={this.onSelectionChange.bind(this, item, index)} />
                        </th>)
       }
-      this.keyArr.forEach((key,index) => {
+      this.keyArr.forEach((key, index) => {
         tdElement.push(<td className='at-table__cell'>{item[key]}</td>)
       })
       this.renderArr.forEach((render) => {
-        let {type,props,children}= render
-        tdElement.push(<td className='at-table__cell'>{Nerv.createElement(type,props,children)}</td>)
+        const {type, props, children} = render
+        tdElement.push(<td className='at-table__cell'>{Nerv.createElement(type, props, children)}</td>)
       })
       dataElement.push(<tr>{tdElement}</tr>)
     })
@@ -154,7 +154,7 @@ class Table extends Nerv.Component<TableProps, any> {
     }
     columns.forEach((item) => {
       let sortBtn
-      if(item.sortType) {
+      if (item.sortType) {
         sortBtn = this.renderSortBtn()
       }
       columnsElement.push(
@@ -171,20 +171,20 @@ class Table extends Nerv.Component<TableProps, any> {
             </thead>)
   }
   _renderPagination () {
-    let props = this.props
-    let dataSize = props.data && props.data.length
-    let renderPagination:any =null
-    if(props.pagination) {
+    const props = this.props
+    const dataSize = props.data && props.data.length
+    let renderPagination: any = null
+    if (props.pagination) {
       renderPagination = (<Pagination total={dataSize} showTotal showSizer showQuickJump onPageChange={this.pageChangeHandler} onPageSizeChange={this.pageSizeChangeHandler} />)
     }
     return renderPagination
   }
-  pageChangeHandler (currPage,event) {
+  pageChangeHandler (currPage, event) {
     this.setState({
       currPage
     })
   }
-  pageSizeChangeHandler (event,currPageSize) {
+  pageSizeChangeHandler (event, currPageSize) {
     this.setState({
       currPageSize,
       currPage: 1
@@ -256,9 +256,9 @@ class Table extends Nerv.Component<TableProps, any> {
         </div>
       )
     }
-    let footer:any = null
-    if(props.pagination) {
-      footer = (<div className="at-table__footer">
+    let footer: any = null
+    if (props.pagination) {
+      footer = (<div className='at-table__footer'>
                   {this._renderPagination()}
                 </div>)
     }
@@ -269,36 +269,36 @@ class Table extends Nerv.Component<TableProps, any> {
       </div>
     )
   }
-  onSelectionChange (item,index,value) {
-    let propsOnSelectionChange = this.props.onSelectionChange
-    if(value) {
+  onSelectionChange (item, index, value) {
+    const propsOnSelectionChange = this.props.onSelectionChange
+    if (value) {
       //如果选中了，则返回值
-      let arrTemp = this.state.valueArr
+      const arrTemp = this.state.valueArr
       arrTemp[index] = true
       this.setState({
-        valueArr:arrTemp.concat()
+        valueArr: arrTemp.concat()
       })
-      propsOnSelectionChange && propsOnSelectionChange(value,item);
-      return item;
+      propsOnSelectionChange && propsOnSelectionChange(value, item)
+      return item
     } else {
       //如果取消选中，则返回false
-      let arrTemp = this.state.valueArr
+      const arrTemp = this.state.valueArr
       arrTemp[index] = false
       this.setState({
-        valueArr:arrTemp.concat()
+        valueArr: arrTemp.concat()
       })
-      propsOnSelectionChange && propsOnSelectionChange(value,item);
-      return value;
+      propsOnSelectionChange && propsOnSelectionChange(value, item)
+      return value
     }
-    
+
   }
   onSelectAll () {
-    let arrTemp = this.state.valueArr
-    let selectAll = !this.state.selectAll
+    const arrTemp = this.state.valueArr
+    const selectAll = !this.state.selectAll
     let dataSelected
-    for(let i=0;i<arrTemp.length;i++) {
-      if(selectAll) {
-        arrTemp[i] = true;
+    for (let i = 0; i < arrTemp.length; i++) {
+      if (selectAll) {
+        arrTemp[i] = true
         dataSelected = this.props.data
       } else {
         arrTemp[i] = false
@@ -306,8 +306,8 @@ class Table extends Nerv.Component<TableProps, any> {
       }
     }
     this.setState({
-      valueArr:arrTemp.concat(),
-      selectAll: selectAll
+      valueArr: arrTemp.concat(),
+      selectAll
     })
     this.props.onSelectAll(dataSelected)
     return dataSelected

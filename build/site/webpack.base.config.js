@@ -9,7 +9,7 @@ const siteRoot = path.join(projectRoot, 'site')
 
 module.exports = {
   entry: {
-    index: `${siteRoot}/app.tsx`
+    index: `${siteRoot}/app.jsx`
   },
   module: {
     rules: [

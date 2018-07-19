@@ -1,3 +1,8 @@
+---
+imports:
+  import {Progress} from '@src'
+
+---
 # Progress 进度条
 
 ----

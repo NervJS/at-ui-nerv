@@ -27,7 +27,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   }
   renderPaginationClassNames (props: PaginationProps) {
     return classnames('at-pagination', [
-      props.size && props.size=='small' ? 'at-pagination--small' : ''
+      props.size && props.size == 'small' ? 'at-pagination--small' : ''
     ], props.className)
   }
   componentWillMount () {
@@ -46,14 +46,14 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     page ? this.pageClickHandler(page) : this.pageClickHandler(1)
   }
   handleJumpNext () {
-    const page = this.state.currPage + 5;
+    const page = this.state.currPage + 5
     page > this.totalPage ? this.pageClickHandler(this.totalPage) : this.pageClickHandler(page)
   }
   pageRange () {
-    const range:any[] = []
-    let start:number = 1
-    let visiblePage = this.visiblePage()
-    let totalPage = this.totalPage()
+    const range: any[] = []
+    let start: number = 1
+    const visiblePage = this.visiblePage()
+    const totalPage = this.totalPage()
     if (this.state.currPage + (visiblePage / 2) > totalPage) {
       start = totalPage - visiblePage + 1
       start = start > 0 ? start : 1
@@ -66,7 +66,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     return range
   }
   _renderPageListLessThan9 () {
-    let pageRange = this.pageRange()
+    const pageRange = this.pageRange()
     const list: any[] = []
     pageRange.forEach((item) => {
       let classname = 'at-pagination__item'
@@ -78,100 +78,100 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     return list
   }
   _renderPageListMoreThan9 () {
-    let totalPage = this.totalPage()
-    let list:any[] = []
-    let currPage = this.state.currPage
+    const totalPage = this.totalPage()
+    const list: any[] = []
+    const currPage = this.state.currPage
 
     let className = 'at-pagination__item'
-    if(currPage == 1) { className += ' at-pagination__item--active'}
-    list.push(<li className={className} onClick={this.pageClickHandler.bind(this,1)} >1</li>)
+    if (currPage == 1) { className += ' at-pagination__item--active'}
+    list.push(<li className={className} onClick={this.pageClickHandler.bind(this, 1)} >1</li>)
 
-    if ( currPage > 4 ) {
+    if (currPage > 4) {
       list.push(
-        <li className="at-pagination__item at-pagination__item--jump-prev" onClick={this.handleJumpPrev}>
-          <i className="icon icon-chevrons-left"></i>
+        <li className='at-pagination__item at-pagination__item--jump-prev' onClick={this.handleJumpPrev}>
+          <i className='icon icon-chevrons-left'></i>
         </li>
       )
-    } 
-    if ( currPage > 3 ) {
-      let pageNum = currPage - 2
+    }
+    if (currPage > 3) {
+      const pageNum = currPage - 2
       list.push(
-        <li className="at-pagination__item"  onClick={this.pageClickHandler.bind(this,pageNum)}>{pageNum}</li>
+        <li className='at-pagination__item'  onClick={this.pageClickHandler.bind(this, pageNum)}>{pageNum}</li>
       )
-    } 
-    if ( currPage > 2 ) {
-      let pageNum = currPage - 1
+    }
+    if (currPage > 2) {
+      const pageNum = currPage - 1
       list.push (
-        <li className="at-pagination__item" onClick={this.pageClickHandler.bind(this,pageNum)}>{pageNum}</li>
-      )
-    } 
-    if( currPage !== 1 && currPage !== totalPage) {
-      list.push(
-        <li className="at-pagination__item at-pagination__item--active" onClick={this.pageClickHandler.bind(this,currPage)}>{currPage}</li>
+        <li className='at-pagination__item' onClick={this.pageClickHandler.bind(this, pageNum)}>{pageNum}</li>
       )
     }
-    if ( currPage < totalPage -1 ) {
+    if (currPage !== 1 && currPage !== totalPage) {
       list.push(
-        <li className="at-pagination__item" onClick={this.pageClickHandler.bind(this,currPage+1)}>{currPage + 1}</li>
+        <li className='at-pagination__item at-pagination__item--active' onClick={this.pageClickHandler.bind(this, currPage)}>{currPage}</li>
       )
     }
-    if ( currPage < totalPage - 2 ) {
+    if (currPage < totalPage - 1) {
       list.push(
-        <li className="at-pagination__item" onClick={this.pageClickHandler.bind(this,currPage+2)}>{currPage + 2}</li>
+        <li className='at-pagination__item' onClick={this.pageClickHandler.bind(this, currPage + 1)}>{currPage + 1}</li>
       )
     }
-     if ( currPage < totalPage - 3) {
+    if (currPage < totalPage - 2) {
       list.push(
-      <li className="at-pagination__item at-pagination__item--jump-next" onClick={this.handleJumpNext}>
-        <i className="icon icon-chevrons-right"></i>
+        <li className='at-pagination__item' onClick={this.pageClickHandler.bind(this, currPage + 2)}>{currPage + 2}</li>
+      )
+    }
+    if (currPage < totalPage - 3) {
+      list.push(
+      <li className='at-pagination__item at-pagination__item--jump-next' onClick={this.handleJumpNext}>
+        <i className='icon icon-chevrons-right'></i>
       </li>
       )
-    } 
-    if ( totalPage > 1) {
+    }
+    if (totalPage > 1) {
       let className = 'at-pagination__item'
-      if(this.state.currPage == totalPage) { className += ' at-pagination__item--active'}
+      if (this.state.currPage == totalPage) { className += ' at-pagination__item--active'}
       list.push(
-        <li className={className} onClick={this.pageClickHandler.bind(this,totalPage)}>{totalPage}</li>
+        <li className={className} onClick={this.pageClickHandler.bind(this, totalPage)}>{totalPage}</li>
       )
     }
     return list
   }
   _renderSimpleStyle () {
     let prevBtnClassName = 'at-pagination__prev'
-    if(this.state.currPage <= 1) {
+    if (this.state.currPage <= 1) {
       prevBtnClassName += ' at-pagination--disabled'
     }
     let nextBtnClassName = 'at-pagination__next'
     if (this.state.currPage >= this.totalPage()) {
       nextBtnClassName += ' at-pagination--disabled'
     }
-    let div = (
-      <ul className="at-pagination at-pagination--simple">
-        <li title="上一页" className={prevBtnClassName} onClick={this.pageMinusHandler}>
-          <i className="icon icon-chevron-left"></i>
+    const div = (
+      <ul className='at-pagination at-pagination--simple'>
+        <li title='上一页' className={prevBtnClassName} onClick={this.pageMinusHandler}>
+          <i className='icon icon-chevron-left'></i>
         </li>
-        <div className="at-pagination__simple-paging">
-          <input ref='pageInputSimple' type="text" className="at-input__original" value={this.state.currPage} onkeypress={this.keyPressSimpleHandler} />
+        <div className='at-pagination__simple-paging'>
+          <input ref='pageInputSimple' type='text' className='at-input__original' value={this.state.currPage} onkeypress={this.keyPressSimpleHandler} />
           <span>/</span>
-          <span className="at-pagination__paging-total">{this.page}</span>
+          <span className='at-pagination__paging-total'>{this.page}</span>
         </div>
-        <li title="下一页" className={nextBtnClassName}><i className="icon icon-chevron-right" onClick={this.pageAddHandler}></i></li>
+        <li title='下一页' className={nextBtnClassName}><i className='icon icon-chevron-right' onClick={this.pageAddHandler}></i></li>
       </ul>
     )
-    return div;
+    return div
   }
   renderPageList () {
-    if(this.page < 9) {
+    if (this.page < 9) {
       return this._renderPageListLessThan9()
     } else {
       return this._renderPageListMoreThan9()
     }
   }
   renderPageMinusBtnStyle () {
-    return this.state.currPage === 1 ? 'at-pagination__prev at-pagination--disabled' : 'at-pagination__prev';
+    return this.state.currPage === 1 ? 'at-pagination__prev at-pagination--disabled' : 'at-pagination__prev'
   }
   renderPageAddBtnStyle () {
-    return this.state.currPage === this.page ? 'at-pagination__next at-pagination--disabled' : 'at-pagination__next';
+    return this.state.currPage === this.page ? 'at-pagination__next at-pagination--disabled' : 'at-pagination__next'
   }
   renderShowQuickJump () {
     return this.props.showQuickJump ?
@@ -182,18 +182,18 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       </div> : null
   }
   renderShowSizer () {
-    let props = this.props
-    let selectOption: any[] = []
+    const props = this.props
+    const selectOption: any[] = []
     if (props.showSizer) {
       for (let i = 10; i < this.total / 2; i = i + 10) {
-        let pageTemp = i + ' 条/页'
+        const pageTemp = i + ' 条/页'
         selectOption.push(
-            <SelectOption key={i} onClick={this.pageSizeSelectHandler.bind(i,i)} value={i}>{pageTemp}</SelectOption>)
+            <SelectOption key={i} onClick={this.pageSizeSelectHandler.bind(i, i)} value={i}>{pageTemp}</SelectOption>)
       }
     }
     const tempPageSize = `${this.state.pageSize} 条/页`
     return props.showSizer ?
-      <div className="at-pagination__sizer">
+      <div className='at-pagination__sizer'>
         <Select optionChosen={tempPageSize}>
             {selectOption}
         </Select>
@@ -202,10 +202,10 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   render () {
     const props = this.props
     this.page = Math.ceil(this.total / this.state.pageSize)
-    if(props.simple) {
+    if (props.simple) {
       return this._renderSimpleStyle()
     }
-    let pageList = this.renderPageList()
+    const pageList = this.renderPageList()
     const totalPage = props.showTotal ? <span className='at-pagination__total' >共 {this.total} 条</span> : null
     const pageMinusBtnStyle = this.renderPageMinusBtnStyle()
     const pageAddBtnStyle = this.renderPageAddBtnStyle()
@@ -242,11 +242,11 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
           {showQuickJump}
         </ul>
      )
-    
+
   }
   pageSizeSelectHandler (pageSize, event) {
-    let props = this.props
-    props.onPageSizeChange && props.onPageSizeChange(event,pageSize)
+    const props = this.props
+    props.onPageSizeChange && props.onPageSizeChange(event, pageSize)
     props.onPageChange && props.onPageChange(1)
     this.setState({
       pageSize,
@@ -255,7 +255,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     return pageSize
   }
   keyPressHandler (event) {
-    let props = this.props
+    const props = this.props
     if (event.keyCode === 13) {
       let newPage = this.refs.pageInput.value
       if (newPage < 1) {newPage = 1}
@@ -263,11 +263,11 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       this.setState({
         currPage: newPage
       })
-      props.onPageChange && props.onPageChange(newPage,event)
+      props.onPageChange && props.onPageChange(newPage, event)
     }
   }
   keyPressSimpleHandler (event) {
-    let props = this.props
+    const props = this.props
     if (event.keyCode === 13) {
       let newPage = this.refs.pageInputSimple.value
       if (newPage < 1) {newPage = 1}
@@ -275,12 +275,12 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       this.setState({
         currPage: newPage
       })
-      props.onPageChange && props.onPageChange(newPage,event)
+      props.onPageChange && props.onPageChange(newPage, event)
     }
   }
   pageClickHandler (page, event?) {
-    let props = this.props
-    props.onPageChange && props.onPageChange(page,event)
+    const props = this.props
+    props.onPageChange && props.onPageChange(page, event)
     this.setState({
       currPage: page
     })
@@ -290,8 +290,8 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     const currPage = this.state.currPage
     if (currPage === 1) {return false}
     const newPage = currPage - 1 < 1 ? 1 : currPage - 1
-    let props = this.props
-    props.onPageChange && props.onPageChange(newPage,event)
+    const props = this.props
+    props.onPageChange && props.onPageChange(newPage, event)
     this.setState({
       currPage: newPage
     })
@@ -300,8 +300,8 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     const currPage = this.state.currPage
     if (currPage === this.page) {return false}
     const newPage = currPage + 1 > this.page ? this.page : currPage + 1
-    let props = this.props
-    props.onPageChange && props.onPageChange(newPage,event)
+    const props = this.props
+    props.onPageChange && props.onPageChange(newPage, event)
     this.setState({
       currPage: Number(newPage)
     })

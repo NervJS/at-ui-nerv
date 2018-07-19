@@ -45,7 +45,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
   static warning: ModalFunc
   static confirm: ModalFunc
   static prompt: ModalFunc
-  static displayName: 'AtModal'
+
   static defaultProps = {
     value: false,
     maskClosable: true,
@@ -56,7 +56,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
     width: 520,
     closeOnPressEsc: true
   }
-
+  displayName: 'AtModal'
   constructor (...args) {
     super(...args)
     this.state = {
@@ -71,7 +71,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
     }
   }
   componentDidMount () {
-    const {  value } = this.props
+    const { value } = this.props
     if (value) {
       this.setState({
         visible: true

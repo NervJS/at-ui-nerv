@@ -12,11 +12,11 @@ class Timeline extends Nerv.Component<TimelineProps, any> {
     return classnames('at-timeline', props.className)
   }
   render () {
-    let classNames= this.renderTimelineClassNames(this.props)
-    let {children} = this.props
+    const classNames = this.renderTimelineClassNames(this.props)
+    const {children} = this.props
     const {
       style,
-      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick
       } = this.props
     const needProps = {
       onDragLeave,
@@ -28,12 +28,12 @@ class Timeline extends Nerv.Component<TimelineProps, any> {
       onMouseLeave,
       onClick
       }
-    let count = Nerv.Children.count(children as any)
-    Nerv.Children.forEach(children as any,(child,index)=>{
-      if(count - 1 == index) {
+    const count = Nerv.Children.count(children as any)
+    Nerv.Children.forEach(children as any, (child, index) => {
+      if (count - 1 == index) {
         child.props.classFromParent = ' at-timeline__item--last '
       }
-    },null)
+    }, null)
     return (
       <div className={classNames} style={style} {...needProps}>
         {this.props.children}

@@ -19,11 +19,11 @@ class TableExample extends Nerv.Component {
       {
         title: '年龄',
         key: 'age',
-        sortType:'desc'
+        sortType: 'desc'
       },
       {
         title: '地址',
-        key: 'address',
+        key: 'address'
       },
       {
         title: '操作',
@@ -154,7 +154,7 @@ class TableExample extends Nerv.Component {
       }]
     return (
       <div className='table_example'>
-        {/* <Table size='large' columns={columns} data={data}>
+        <Table size='large' columns={columns} data={data}>
         </Table>
         <Table size='small' columns={columns} data={data}>
         </Table>
@@ -167,17 +167,17 @@ class TableExample extends Nerv.Component {
         <Table border columns={columns} data={data}>
         </Table>
         <Table height='120' columns={columns} data={data}>
-        </Table> */}
+        </Table>
         <Table pagination columns={columns} data={data}>
         </Table>
       </div>
     )
   }
-  onSelectChange (value,item) {
-    console.log(value,item)
+  onSelectChange (value, item) {
+    console.log(value, item)
   }
-  onSelectAll (value,item) {
-    console.log(value,item)
+  onSelectAll (value, item) {
+    console.log(value, item)
   }
 }
 

@@ -27,7 +27,7 @@ class ProgressExample extends Nerv.Component {
           <Progress percent='50' status='error' strokeWidth='4' />
         </div>
         <div>
-          <Progress percent={this.state.percent} onStatusSuccess={this.onSuccess}/>
+          <Progress percent={this.state.percent} onStatusSuccess={this.onSuccess} />
           <ButtonGroup size='small'>
             <Button onClick={this.descPercent}><i className='icon icon-minus' /></Button>
             <Button onClick={this.inscPercent}><i className='icon icon-plus' /></Button>

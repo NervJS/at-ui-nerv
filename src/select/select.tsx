@@ -327,7 +327,7 @@ class Select extends Nerv.Component<SelectProps, any> {
   render () {
     const props = this.props
     const { style } = props
-    let clearBtn = null
+    let clearBtn: any = null
     let searchInput
     let multipleChoices: any[] = []
     const dropDownStyle = `${this.state.dropDownStyle}`
@@ -371,7 +371,7 @@ class Select extends Nerv.Component<SelectProps, any> {
           <Icon type='icon-chevron-down' className='at-select__arrow' style={this.state.iconChevronShow} onMouseEnter={this.handleOverIconX}></Icon>
           {clearBtn}
         </div>
-        <div className={dropdownClass} style={dropDownStyle} ref='popover'>
+        <div className={dropdownClass} style={dropDownStyle as any} ref='popover'>
           <ul className='at-select__not-found' style={this.state.noDataShow}>
             <li>无匹配数据</li>
           </ul>
