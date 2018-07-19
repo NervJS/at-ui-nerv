@@ -49,18 +49,22 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   }
   clickCancelHandler (e: MouseEvent) {
     if (this.enter) {
-      this.setState({
-        display: 'none'
-      })
-      this.enter = false
+      setTimeout(()=>{
+        this.setState({
+          display: 'none'
+        })
+        this.enter = false
+      },200)
     }
   }
   onMouseEnter (e: MouseEvent) {
-    this.setState({
-      display: 'block',
-      top: this.top,
-      left: this.left
-    })
+    setTimeout(()=>{
+      this.setState({
+        display: 'block',
+        top: this.top,
+        left: this.left
+      })
+    },200)
   }
   onMouseLeave (e: MouseEvent) {
     this.setState({

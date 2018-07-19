@@ -106,8 +106,6 @@ class Select extends Nerv.Component<SelectProps, any> {
       const children = childProps.childShow
       const value = childProps.value
       if (this.props.filterable) {
-        console.log('stop propagation')
-        e.stopPropagation()
         this.setState({
           inputValue: children
         })
@@ -151,7 +149,7 @@ class Select extends Nerv.Component<SelectProps, any> {
       if (!this.props.multiple) {
         this.toggleDropDown(e)
       }
-      // this.forceUpdate()
+      this.forceUpdate()
       this.onChange(e)
     }
   }
@@ -329,7 +327,7 @@ class Select extends Nerv.Component<SelectProps, any> {
   render () {
     const props = this.props
     const { style } = props
-    let clearBtn = null
+    let clearBtn: any = null
     let searchInput
     let multipleChoices: any[] = []
     const dropDownStyle = `${this.state.dropDownStyle}`
@@ -337,7 +335,6 @@ class Select extends Nerv.Component<SelectProps, any> {
       clearBtn = <Icon type='icon-x' className='at-select__clear' style={this.state.iconXShow} ref='iconx' onClick={this.handleClear} onMouseLeave={this.handleLeaveIconX}/>
     }
     if (props.filterable) {
-      console.log(props.filterable)
       searchInput = <input type='text' onChange={this.handleInput} value={this.state.inputValue} placeholder='请输入查询数据' className='at-select__input' />
     }
     if (props.multiple) {
@@ -348,7 +345,22 @@ class Select extends Nerv.Component<SelectProps, any> {
       props.placement ? `at-select__dropdown--${props.placement}` : 'at-select__dropdown--bottom'
       ]
     )
-    return (<div className={this.state.wrapperClassName} style={style}>
+    const {
+      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      children
+      } = props
+    const needProps = {
+      children,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseOut,
+      onMouseEnter,
+      onMouseLeave,
+      onClick
+      }
+    return (<div className={this.state.wrapperClassName} style={style} {...needProps}>
         <div className='at-select__selection' onClick={this.toggleDropDown} ref='trigger'>
           <span className='at-select__placeholder' style={this.state.optionChosenStyleUp}>请选择</span>
           <span className='at-select__selected' style={this.state.optionChosenStyleDown}>{this.state.optionChosen}</span>
@@ -359,12 +371,12 @@ class Select extends Nerv.Component<SelectProps, any> {
           <Icon type='icon-chevron-down' className='at-select__arrow' style={this.state.iconChevronShow} onMouseEnter={this.handleOverIconX}></Icon>
           {clearBtn}
         </div>
-        <div className={dropdownClass} style={dropDownStyle} ref='popover'>
+        <div className={dropdownClass} style={dropDownStyle as any} ref='popover'>
           <ul className='at-select__not-found' style={this.state.noDataShow}>
             <li>无匹配数据</li>
           </ul>
           <ul className='at-select__list' style={this.state.dataShow}>
-            {this._renderPropsChildren()}
+            {this.state.optionChildren}
           </ul>
         </div>
       </div>
@@ -373,6 +385,10 @@ class Select extends Nerv.Component<SelectProps, any> {
   initChildStyle () {
     this.setState({
       childStyle: this.childStyle.concat()
+    }, () => {
+      this.setState({
+        optionChildren: this._renderPropsChildren()
+      })
     })
   }
   componentDidMount () {

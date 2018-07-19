@@ -31,7 +31,7 @@ class PopoverExample extends Nerv.Component {
         <Popover trigger="hover" content="Top Placement" placement="right">
           <Button size="small">Right</Button>
       </Popover>
-      <Popover placement="top" v-model="show">
+      <Popover placement="top">
         <Button size="small">删除</Button>
           <template slot="content">
             <p>这是一段内容，确定删除吗？</p>

@@ -6,7 +6,7 @@ import * as Nerv from 'nervjs'
 // import IconExample from './view/Icon'
 // import SwitchExample from './view/Switch'
 // import TooltipExample from './view/Tooltip'
-import PopoverExample from './view/Popover'
+// import PopoverExample from './view/Popover'
 // import StepExample from './view/Steps'
 // import TextareaExample from './view/Textarea'
 // import TableExample from './view/Table'
@@ -27,7 +27,7 @@ class App extends Nerv.Component {
         {/* <IconExample /> */}
         {/* <SwitchExample /> */}
         {/*<TooltipExample />*/}
-        <PopoverExample />
+        {/* <PopoverExample /> */}
         {/*<StepExample />*/}
         {/*<TextareaExample />*/}
         {/* <TableExample /> */}

@@ -14,12 +14,14 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   private navOffset:number
   private lastActiveRight:number
   private lastActiveLeft:number
+  private launchByActive:boolean
   // private activeRight:number
   // private scrollRight:number
   constructor (props) {
     super(props)
     this.prevable = false
     this.nextable = false
+    this.launchByActive = false
     this.navOffset =0
     this.lastActiveRight = -1
     this.lastActiveLeft = -1
@@ -78,7 +80,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   }
   handlePrev () {
     if (!this.prevable) return
-
+    this.launchByActive = true
     const containerWidth = this.refs.navScroll.offsetWidth
     const currentOffset = this.state.navOffset
 
@@ -92,6 +94,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   }
   handleNext () {
     if (!this.nextable) return
+    this.launchByActive = true
     const containerWidth = this.refs.navScroll.offsetWidth
     const currentOffset = this.state.navOffset
     const navWidth = this.refs.nav.offsetWidth
@@ -261,21 +264,26 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     if(prevState.navOffset != this.navOffset) {
       this.setState({
         navOffset: this.navOffset
-      },()=>{
-        console.log(this.state.navOffset)
       })
     }
   }
-  componentWillUpdate (nextProps)
-  {
-  } 
   componentDidUpdate (prevProps, prevState) {
     this.updateHandle()
-    this.scrollToActiveTab()
+    //如果不是由前后跳转按钮触发，那么就不需要进行scrollToActiveTab操作
+    if(!this.launchByActive)
+    {
+      this.scrollToActiveTab()
+    }
     this.updateAfterUpdate(prevState,'update')
+    // this.launchByActive = false
+  }
+  componentWillUpdate (nextProps) {
+    if(nextProps.activeIndex != this.props.activeIndex) {
+      this.launchByActive = false
+    }
   }
   scrollToActiveTab () {
-    if (!this.state.scrollable && !(this.prevable || this.nextable)) return
+    if (!this.state.scrollable && !(this.prevable || this.nextable) || this.launchByActive) return
     const activeTab = this.refs.activeTab
     const navScroll = this.refs.navScroll
     const activeTabBounds = activeTab.getBoundingClientRect()
@@ -283,23 +291,18 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     const currentOffset = this.state.navOffset
     let newOffset = currentOffset
     if (activeTabBounds.left < navScrollBounds.left) {
-      console.log('activeTabBounds.left',activeTabBounds.left,'navScrollBounds.left',navScrollBounds.left)
       if(activeTabBounds.left != this.lastActiveLeft) {
-        newOffset = currentOffset - (navScrollBounds.left - activeTabBounds.left)
+        newOffset = currentOffset - (navScrollBounds.left - activeTabBounds.left) - activeTabBounds.width
         this.lastActiveLeft = activeTabBounds.left
       }
     }
     if (activeTabBounds.right > navScrollBounds.right) {
-      console.log('activeTabBounds.right',activeTabBounds.right,'navScrollBounds.right',navScrollBounds.right)
       if(activeTabBounds.right != this.lastActiveRight) {
         newOffset = currentOffset + (activeTabBounds.right - navScrollBounds.right) + activeTabBounds.width
         this.lastActiveRight = activeTabBounds.right
       }
     }
     this.navOffset = newOffset
-    // this.setState({
-    //   navOffset:newOffset
-    // })
   }
   componentWillReceiveProps (nextProps) {
   }
