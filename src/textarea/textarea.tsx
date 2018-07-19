@@ -94,7 +94,7 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
       </div>
     )
   }
-  inputHandler (e: React.FormEvent<HTMLTextAreaElement>) {
+  inputHandler (e: any) {
     const propsHandler = this.props.onInput
     if (propsHandler) {
       propsHandler.onInput(e)

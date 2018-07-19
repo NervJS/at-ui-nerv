@@ -34,7 +34,7 @@ class MenuItem extends Nerv.Component<MenuItemProps, MenuItemState> {
       }
     }
   }
-  handleClick = (evt: React.MouseEvent<HTMLElement>) => {
+  handleClick = (evt: any) => {
     evt.preventDefault()
     const { name, disabled, _onSelect, rootElem } = this.props
     const { onItemSelect } = rootElem

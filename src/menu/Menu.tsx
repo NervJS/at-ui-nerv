@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-import { CSSProperties } from 'react'
+// import { CSSProperties } from 'react'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import MenuSub from './MenuSub'
@@ -121,7 +121,7 @@ class Menu extends Nerv.Component<MenuProps, any> {
 
   render () {
     const { width, theme, mode } = this.props
-    const ulStyle = (): CSSProperties => {
+    const ulStyle = (): any => {
       const style: {
         width?: string
       } = {}

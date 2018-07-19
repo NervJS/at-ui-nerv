@@ -34,20 +34,17 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   clickHandler (e: MouseEvent) {
     e.stopPropagation()
     if (this.enter) {
-      console.log(this.enter)
       this.setState({
         display: 'none'
       })
       this.enter = false
     } else {
-      console.log(this.enter)
       this.setState({
         display: 'block',
         top: this.top,
         left: this.left
       })
       this.enter = true
-      console.log(this.enter)
     }
   }
   clickCancelHandler (e: MouseEvent) {
@@ -98,9 +95,10 @@ class Popover extends Nerv.Component<PopoverProps, any> {
                                 this.props.className)
     let title: any = null
     let content: any = null
+    let contentFlag=false
     Nerv.Children.map(props.children as any, (child) => {
       if (child.props && child.props.slot) {
-        if (child.props.slot === 'content') {content = child.children}
+        if (child.props.slot === 'content') {content = child.children;contentFlag=true}
         if (child.props.slot === 'title') {title = child.children}
       }
     }, null)
@@ -115,9 +113,9 @@ class Popover extends Nerv.Component<PopoverProps, any> {
                 <div>{props.title}</div>
               </div>)
     }
-    if (props.content) {
+    if (contentFlag) {
       content = (<div className='at-popover__content'>
-                  <div>{props.content}</div>
+                  <div>{content}</div>
                 </div>)
     }
     return (
