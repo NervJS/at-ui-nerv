@@ -2,7 +2,7 @@ import * as Nerv from 'nervjs'
 
 // import ButtonExample from './view/Button'
 // import TagExample from './view/Tag'
-// import SelectExample from './view/Select'
+import SelectExample from './view/Select'
 // import IconExample from './view/Icon'
 // import SwitchExample from './view/Switch'
 // import TooltipExample from './view/Tooltip'
@@ -12,8 +12,9 @@ import * as Nerv from 'nervjs'
 // import TableExample from './view/Table'
 // import PaginationExample from './view/Pagination'
 // import TimelineExample from './view/Timeline'
-import ProgressExample from './view/Progress'
-import SliderExample from './view/Slider'
+// import ProgressExample from './view/Progress'
+// import SliderExample from './view/Slider'
+import TabExample from './view/Tab'
 import 'at-ui-style'
 
 class App extends Nerv.Component {
@@ -22,7 +23,7 @@ class App extends Nerv.Component {
       <div className='app' id='app'>
         {/* <ButtonExample /> */}
         {/* <TagExample /> */}
-        {/* <SelectExample /> */}
+        <SelectExample />
         {/* <IconExample /> */}
         {/*<SwitchExample />*/}
         {/*<TooltipExample />*/}
@@ -32,8 +33,9 @@ class App extends Nerv.Component {
         {/* <TableExample /> */}
         {/* <PaginationExample /> */}
         {/* <TimelineExample /> */}
-        <ProgressExample />
-        <SliderExample />
+        {/* <ProgressExample /> */}
+        {/* <SliderExample /> */}
+        <TabExample />
       </div>
     )
   }
