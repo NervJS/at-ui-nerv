@@ -1,9 +1,9 @@
 import * as Nerv from 'nervjs'
-import IntroductionElem from '../../markdown/zh/introduction.md'
+import IntroductionElem from '@md/introduction.md'
 
 class Introduction extends Nerv.Component {
   render () {
-    return IntroductionElem()
+    return <IntroductionElem />
   }
 }
 
