@@ -16,7 +16,7 @@ describe('Checkbox', () => {
 		document.body.appendChild(scratch)
 	})
 
-	afterAll(() => {
+	afterEach(() => {
 		scratch.parentNode.removeChild(scratch)
 		scratch = null
 	})

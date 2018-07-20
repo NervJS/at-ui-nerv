@@ -16,7 +16,7 @@ describe('toolTip test', () => {
     document.body.appendChild(scratch)
   })
 
-  afterAll(() => {
+  afterEach(() => {
     scratch.parentNode.removeChild(scratch)
     scratch = null
   })
@@ -29,6 +29,5 @@ describe('toolTip test', () => {
     )
     const component = Nerv.render(toolTipJSX as VNode, scratch)
     $(Nerv.findDOMNode(component)).trigger('MouseEnter')
-    console.log($(Nerv.findDOMNode(component)))
   })
 })
