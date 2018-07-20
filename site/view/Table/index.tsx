@@ -154,7 +154,7 @@ class TableExample extends Nerv.Component {
       }]
     return (
       <div className='table_example'>
-        {/* <Table size='large' columns={columns} data={data}>
+        <Table size='large' columns={columns} data={data}>
         </Table>
         <Table size='small' columns={columns} data={data}>
         </Table>
@@ -167,7 +167,7 @@ class TableExample extends Nerv.Component {
         <Table border columns={columns} data={data}>
         </Table>
         <Table height='120' columns={columns} data={data}>
-        </Table> */}
+        </Table>
         <Table pagination columns={columns} data={data}>
         </Table>
       </div>

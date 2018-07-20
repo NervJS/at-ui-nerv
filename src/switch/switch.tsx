@@ -21,7 +21,8 @@ class Switch extends Nerv.Component<SwitchProps, any> {
     }
     this.onClick = this.onClick.bind(this)
   }
-  onClick (e: React.MouseEvent<HTMLDivElement>) {
+  onClick (e: any) {
+    if(this.props.disabled) return
     if (this.value) {
       this.setState({
         switchClass: ''

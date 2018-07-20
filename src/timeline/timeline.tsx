@@ -9,7 +9,9 @@ export interface TimelineProps {
 class Timeline extends Nerv.Component<TimelineProps, any> {
   static Item: typeof TimelineItem
   renderTimelineClassNames (props: TimelineProps) {
-    return classnames('at-timeline', props.className)
+    return classnames('at-timeline', [
+      props.pending ?  'at-timeline--pending' :''
+    ],props.className)
   }
   render () {
     const classNames = this.renderTimelineClassNames(this.props)
@@ -30,8 +32,17 @@ class Timeline extends Nerv.Component<TimelineProps, any> {
       }
     const count = Nerv.Children.count(children as any)
     Nerv.Children.forEach(children as any, (child, index) => {
-      if (count - 1 == index) {
-        child.props.classFromParent = ' at-timeline__item--last '
+      if(this.props.pending) {
+        if(count - 2== index) {
+          child.props.classFromParent = ' at-timeline__item--last '
+        }
+        if (count - 1 == index) {
+          child.props.classFromParent = ' at-timeline__item--pending '
+        }
+      } else {
+        if (count - 1 == index) {
+          child.props.classFromParent = ' at-timeline__item--last '
+        }
       }
     }, null)
     return (
