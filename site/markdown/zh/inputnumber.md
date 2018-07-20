@@ -11,7 +11,7 @@ imports:
 支持传入 `step` 精度，以及指定取值范围 `max` , `min`。默认 `step` 取整数 1
 
 :::demo
-```html
+```jsx
 <p class="demo-desc">基本输入框</p>
 <div class="row no-gutter">
   <div class="col-md-4">
@@ -32,7 +32,7 @@ imports:
 设置属性 `disabled` 禁用输入框
 
 :::demo
-```html
+```jsx
 <div class="row no-gutter">
   <div class="col-md-4">
     <InputNumber disabled></InputNumber>
@@ -46,7 +46,7 @@ imports:
 参数 `step` 可以配置成小数
 
 :::demo
-```html
+```jsx
 <p class="demo-desc">step=0.3, min=1</p>
 <div class="row no-gutter">
   <div class="col-md-4">
@@ -61,7 +61,7 @@ imports:
 配置属性 `size`，可控制输入框的尺寸，默认支持三种尺寸：`large`，`normal`，`small`
 
 :::demo
-```html
+```jsx
 <div class="row">
   <div class="col-sm-12 col-md-4">
     <InputNumber size="small"></InputNumber>

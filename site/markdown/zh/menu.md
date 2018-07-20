@@ -16,7 +16,7 @@ imports:
 :::demo
 
 ```jsx
-<Menu mode="horizontal" activeName={this.state.activeName99}>
+<Menu mode="horizontal" activeName={this.state.activeName99} >
   <Menu.Item name="1">
     <i className="icon icon-home" />导航菜单一
   </Menu.Item>
