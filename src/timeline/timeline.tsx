@@ -30,8 +30,17 @@ class Timeline extends Nerv.Component<TimelineProps, any> {
       }
     const count = Nerv.Children.count(children as any)
     Nerv.Children.forEach(children as any, (child, index) => {
-      if (count - 1 == index) {
-        child.props.classFromParent = ' at-timeline__item--last '
+      if(this.props.pending) {
+        if(count - 2== index) {
+          child.props.classFromParent = ' at-timeline__item--last '
+        }
+        if (count - 1 == index) {
+          child.props.classFromParent = ' at-timeline__item--pending '
+        }
+      } else {
+        if (count - 1 == index) {
+          child.props.classFromParent = ' at-timeline__item--last '
+        }
       }
     }, null)
     return (

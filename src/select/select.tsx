@@ -1,449 +1,348 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
 import SelectOption from './select-option'
-import Icon from '../icon'
-import Tag from '../tag'
-// import {calculatePosition} from '../util/util'
-export type ButtonType = 'default' | 'primary' | 'success' | 'error' | 'warning' | 'info' | 'text'
-export type ButtonSize = 'large' | 'small' | 'smaller'
-
+import SelectOptionGroup from './select-optiongroup'
 export interface SelectProps {
-  type?: ButtonType
-  className?: string,
-  icon?: string
-  size?: ButtonSize
-  hollow?: boolean
-  nativeType?: string
-  loading?: boolean
-  circle?: boolean
-  disabled?: boolean
+    className?: string,
+    icon?: string
+    hollow?: boolean
+    nativeType?: string
+    loading?: boolean
+    circle?: boolean
+    disabled?: boolean
 }
 
 class Select extends Nerv.Component<SelectProps, any> {
-  static Option: typeof SelectOption
-  static defaultProps = {
-    loading: false,
-    type: 'default',
-    disabled: false
-  }
-
-  private dropDown: boolean
-  private initClass: string
-  private optionDataArr: any[]
-  private isClick: boolean
-  private childStyle: any[]
-  private DISPLAY_NONE: string
-  private DISPLAY_BLOCK: string
-  private mulChoices: any[]
-  private mulChoicesFlag: any[]
-  private value: any
-  constructor (props: SelectProps) {
-    super(props)
-    this.mulChoices = []
-    this.mulChoicesFlag = [] //判断某个选项是否已选的数组
-    this.DISPLAY_NONE = 'display:none;'
-    this.DISPLAY_BLOCK = 'display:block;'
-    this.dropDown = false
-    this.isClick = false //是否选中了某个选项，专门用于处理clearable情况
-    this.initClass = 'at-select at-select--single'
-    this.optionDataArr = []
-    this.childStyle = []
-    this.toggleDropDown = this.toggleDropDown.bind(this) //选项列表的出现与否
-    this.handleClick = this.handleClick.bind(this) //点中某个选项
-    this.renderWrapperClassNames = this.renderWrapperClassNames.bind(this)
-    this.handleOverIconX = this.handleOverIconX.bind(this)
-    this.handleLeaveIconX = this.handleLeaveIconX.bind(this)
-    this.handleClear = this.handleClear.bind(this) //清空选项
-    this.handleInput = this.handleInput.bind(this)
-    this.hideAllOption = this.hideAllOption.bind(this)
-    this.showAllOption = this.showAllOption.bind(this)
-    this.windowClickHide = this.windowClickHide.bind(this)
-    this.value = this.props.multiple ? [] : ''
-    this.state = {
-      dropDownStyle: 'display:block;',
-      wrapperClassName: 'at-select at-select--single',
-      optionChosen: this.props.optionChosen ||  '请选择',
-      optionChosenStyleDown: this.props.optionChosen ? this.DISPLAY_BLOCK : this.DISPLAY_NONE,
-      optionChosenStyleUp: this.props.optionChosen ? this.DISPLAY_NONE : this.DISPLAY_BLOCK,
-      iconXShow:  this.DISPLAY_NONE,
-      iconChevronShow:  this.DISPLAY_BLOCK,
-      inputValue: '',
-      noDataShow: this.DISPLAY_NONE,
-      dataShow: this.DISPLAY_NONE,
-      mulChoicesStyle: [],
-      mulChoices: [],
-      childStyle: [],
-      optionChildren: [] //props进来的选项
-    }
-  }
-  onChange (e: MouseEvent) {
-    if (this.props.onChange) {
-      this.props.onChange(e, this.value)
-    }
-  }
-  renderWrapperClassNames (props: SelectProps) {
-    return classnames(this.initClass, [
-      props.disabled ? `at-select--disabled` : '',
-      props.size ? `at-select--${props.size}` : `at-select--normal`
-    ], props.className)
-  }
-  handleClose (key, index, e) {
-    e.stopPropagation()
-    this.mulChoices.splice(key, 1)
-    this.mulChoicesFlag[index] = false
-    this.childStyle[index] = {...(this.childStyle[index] || {}), fontWeight: ''}
-    this.setState({
-      mulChoices: this.mulChoices.concat()
-    })
-    this.value = this.value.splice(key, 1)
-    this.onChange(e)
-  }
-  handleClick = (clickHandler, childProps, index) => {
-    return (e: MouseEvent) => {
-      if (clickHandler) {
-        clickHandler(e)
+    static Option: typeof SelectOption
+    static OptionGroup: typeof SelectOptionGroup
+    private DISPLAY_BLOCK = { display: 'block'}
+    private DISPLAY_NONE = { display: 'none'}
+    private propsSelectOption:any[]
+    private mulOptionChosen:any[]
+    private searchOption:any[]
+    constructor (props) {
+      super(props)
+      let optionChosen:any = []
+      if(this.props.value) {
+        optionChosen = optionChosen.concat(this.props.value)
       }
-      const children = childProps.childShow
-      const value = childProps.value
-      if (this.props.filterable) {
-        console.log('stop propagation')
-        e.stopPropagation()
-        this.setState({
-          inputValue: children
+      this.state = {
+        isDropDown: false,
+        optionChosen: optionChosen || [], //存的都是下标
+        optionShow: [],//针对filterable,存的也是下标
+        selected: optionChosen.length > 0 ? true : false,
+        calcBottom: 0
+      }
+      this.mulOptionChosen = []
+      this.propsSelectOption = []
+      this.searchOption = []
+      this.handleClick = this.handleClick.bind(this)
+      this.toggleDropDown = this.toggleDropDown.bind(this)
+      this.windowClickHideAll = this.windowClickHideAll.bind(this)
+      this.handleChose = this.handleChose.bind(this)
+      this.handleClear = this.handleClear.bind(this)
+      this.handleInput = this.handleInput.bind(this)
+    }
+    renderSelectOption () {
+      if(this.props.filterable) {
+        let optionShowDom:any[] = []
+        this.state.optionShow.forEach((item)=>{
+          optionShowDom.push((this.props.children || [])[item])
         })
-        this.value = this.props.valueWithLabel ? {value, label: children} : value
+        return optionShowDom
       } else {
-        //暂时不能同时检索和多选
-        if (this.props.multiple) {
-          e.stopPropagation()
-          if (!this.mulChoicesFlag[index]) {
-            this.mulChoices.push({
-              'dom': children,
-              'optionIndex': index
-            })
-            if (this.props.valueWithLabel) {
-              this.value.push({value, label: children})
-            } else {
-              this.value.push(value)
-            }
-            this.mulChoicesFlag[index] = true
-            this.childStyle[index] = {...(this.childStyle[index] || {}), fontWeight: '700'}
-            this.setState({
-              mulChoices: this.mulChoices.concat(),
-              optionChosenStyleUp:  this.DISPLAY_NONE//收起占位符“请选择”
-            })
-          }
-        } else {
-          this.setState({
-            optionChosen: children,
-            optionChosenStyleDown:  this.DISPLAY_BLOCK, //展示已选择的选项
-            optionChosenStyleUp:  this.DISPLAY_NONE//收起占位符“请选择”
-          })
-          this.value = this.props.valueWithLabel ? {value, label: children} : value
-        }
-      }
-      if (this.props.clearable) {
-        const tempStyle = 'at-select--show-clear'
-        this.setState({
-          wrapperClassName: this.state.wrapperClassName + tempStyle
-        })
-      }
-      if (!this.props.multiple) {
-        this.toggleDropDown(e)
-      }
-      // this.forceUpdate()
-      this.onChange(e)
-    }
-  }
-  handleOverIconX () {
-    if (this.props.clearable) {
-      if (this.props.filterable) {
-        //如果是可检索类型，只需要input框非空
-        if (this.state.inputValue != '') {
-          this.setState({
-            iconXShow: this.DISPLAY_BLOCK,
-            iconChevronShow:  this.DISPLAY_NONE
-          })
-        }
-      } else {
-        //非检索类型，还要点击以后
-        if (this.isClick) {
-          this.setState({
-            iconXShow: this.DISPLAY_BLOCK,
-            iconChevronShow:  this.DISPLAY_NONE
-          })
-        }
+        return this.props.children
       }
     }
-  }
-  handleLeaveIconX () {
-    if (this.isClick && this.props.clearable && this.state.inputValue != '') {
-      //是否点击了选项
-      this.setState({
-        iconXShow:  this.DISPLAY_NONE,
-        iconChevronShow: this.DISPLAY_BLOCK
-      })
+    renderToggleArrowClass () {
+      let style = 'at-select '
+      if (this.props.disabled) {
+        style += ' at-select--disabled'
+      }
+      if(this.props.clearable && this.state.selected) {
+        style += ' at-select--show-clear'
+      }
+      style += this.state.isDropDown ? ' at-select--visible' : ''
+      style += ' at-select--single at-select--normal'
+      return style
     }
-  }
-  handleClear (e: MouseEvent) {
-    //处理clearable清空选项的功能
-    e.stopPropagation()
-    if (this.props.filterable) {
-      this.setState({
-        inputValue: ''
-      })
-      this.value = this.props.valueWithLabel ? {} : ''
-      this.showAllOption()
-    } else if (this.props.multiple) {
-      this.mulChoicesFlag.forEach((item, index) => {
-        this.mulChoicesFlag[index] = false
-        this.childStyle[index] = {...(this.childStyle[index] || {}), fontWeight: ''}
-      })
-      this.mulChoices = []
-      this.setState({
-        mulChoices: [],
-        optionChosenStyleUp:  this.DISPLAY_BLOCK//收起占位符“请选择”
-      })
-      this.value = []
-    } else {
-      this.setState({
-        optionChosenStyleDown:  this.DISPLAY_NONE,
-        optionChosenStyleUp:  this.DISPLAY_BLOCK,
-        optionChosen: ''
-      })
-      this.value = this.props.valueWithLabel ? {} : ''
+    renderSingleSelect () {
+      if(this.props.multiple || this.props.filterable) {return}
+      let propsChildren = this.getPropsSelectOption()
+      let style = this.state.selected ? this.DISPLAY_BLOCK : this.DISPLAY_NONE
+      let chosen = this.state.optionChosen[0]
+      let chosenChildren = propsChildren[chosen] || {props:{label:'',children:[]}}
+      let chosenSpan = chosenChildren.props.label || chosenChildren.props.children//没有label会选择标签结构本身
+      return <span className='at-select__selected' style={style}>{chosenSpan}</span>
     }
-    this.setState({
-      iconXShow: this.DISPLAY_NONE,
-      iconChevronShow: this.DISPLAY_BLOCK
-    })
-    this.isClick = false
-    this.onChange(e)
-  }
-  handleInput (e) {
-    const value = e.target.value
-    this.setState({
-      inputValue: value
-    })
-    if (!this.dropDown) {
-      this.dropDown = !this.dropDown
-      let newDropDownStyle = this.DISPLAY_BLOCK
+    renderMultipleSelect () {
+      if(!this.props.multiple) {return}
+      let chosen = this.state.optionChosen
+      let result:any[] = []
+      chosen.forEach((item,index)=>{
+        let chosenChildren = (this.getPropsSelectOption() || [])[item]
+        let key = chosenChildren.props.key
+        let chosenSpan = chosenChildren.props.label || chosenChildren.props.children
+        result.push(<span className="at-tag">
+                        <span className="at-tag__text">{chosenSpan}</span> 
+                        <i className="icon icon-x at-tag__close" onClick={this.removeMultipleChoice.bind(this,key)}></i>
+                      </span>)
+      })
+      return result
+    }
+    getPropsSelectOption () {
+      return this.propsSelectOption //特别针对OptionGroup
+    }
+    calculatePopoverStyle () {
+      const bottom = this.refs.trigger.offsetHeight
+      this.setState({
+        calcBottom: bottom
+      })
+    } 
+    prepareDropDownStyle () {
+      let newDropDownStyle ={}
       if (this.props.placement == 'top') {
-        newDropDownStyle += `bottom:${this.state.calcBottom};`
+        newDropDownStyle = {
+          bottom: `${this.state.calcBottom}px`
+        }
       }
-      const wrapperClassName = classnames(this.initClass, 'at-select--visible')
-      this.setState({
-        dropDownStyle: newDropDownStyle ,
-        wrapperClassName
-      })
+      let style = Object.assign({},newDropDownStyle,this.state.isDropDown ? this.DISPLAY_BLOCK : this.DISPLAY_NONE)
+      console.log(style)
+      return style
     }
-    this.searchOptionData (value)
-  }
-  searchOptionData (val) {
-    let arrShow: any[]
-    arrShow = []
-    let allHide = true
-    this.optionDataArr.forEach((value, index) => {
-      const pattern = new RegExp(val)
-      if (pattern.test(value)) {
-        arrShow.push(index)
-        allHide = false
+    render () {
+      let dropDownStyle = this.prepareDropDownStyle()
+      let {style} = this.props
+      let placeholderStyle = {}
+      if(this.state.selected || this.props.filterable) {
+        placeholderStyle = this.DISPLAY_NONE
+      } else {
+        placeholderStyle = this.DISPLAY_BLOCK
       }
-    })
-    if (!allHide) {
-      this.setState({
-        noDataShow: this.DISPLAY_NONE,
-        dataShow: this.DISPLAY_BLOCK
-      })
-      if (this.childStyle.length > 0) {
-        this.childStyle.forEach((item, index) => {
-          if (arrShow.indexOf(index) === -1) {
-            this.childStyle[index] = {...(item || {}), display: 'none'}
-          } else {
-            this.childStyle[index] = {...(item || {}), display: 'block'}
-          }
+      let renderSelectDom = this.renderSelectOption()
+      let notFoundStyle = this.DISPLAY_NONE
+      let listStyle = this.DISPLAY_BLOCK
+      if(this.props.filterable && this.state.notFound) {
+          notFoundStyle = this.DISPLAY_BLOCK
+          listStyle = this.DISPLAY_NONE
+      }
+      return (
+      <div className={this.renderToggleArrowClass()} data-v-a01f69b8='' style={style}>
+        <div className='at-select__selection' ref='trigger' onClick={this.handleClick}>
+          {this.renderMultipleSelect()}
+          <span className='at-select__placeholder' style={placeholderStyle}>{this.props.placeholder || '请选择'}</span>
+          {this.renderSingleSelect()}
+          {this.renderSearchInput()}
+          <i className='icon icon-chevron-down at-select__arrow'/>
+          {this.renderClearBtn()}
+        </div>
+        <div className='at-select__dropdown at-select__dropdown--bottom' style={dropDownStyle}>
+          <ul className='at-select__not-found' style={notFoundStyle}>
+            <li>{this.props.notFoundText ||'无匹配数据' }</li>
+          </ul>
+          <ul className='at-select__list' style={listStyle}>{renderSelectDom}</ul>
+        </div>
+      </div>)
+    }
+    renderSearchInput (){
+      if(this.props.filterable) {
+        let chosenIndex = this.state.optionChosen[0]
+        let propsChildren = this.props.children || []
+        let chosenChild = propsChildren[chosenIndex] || {label:''}
+        let chosenSpan = chosenChild.label || (chosenChild.props || {}).children
+        return (<input type="text" placeholder={this.props.placeholder || '请选择'} value={chosenSpan} onChange={this.handleInput} className="at-select__input" />)
+      } 
+    }
+    handleInput (event) {
+      let inputValue = event.target.value
+      let result :any[] = []
+      if(event.target.value == '') {
+        this.propsSelectOption.forEach((item,index)=>{
+          result.push(index)
         })
         this.setState({
-          childStyle: this.childStyle.concat()
+          optionChosen:[],
+          notFound: false
+        })
+      } else {
+        this.searchOption.forEach((item,index)=>{
+          const pattern = new RegExp(inputValue)
+          if (pattern.test(item)) {
+            result.push(index)
+          }
         })
       }
-    } else {
+      if(result.length>0) {
+        this.setState({
+          optionShow:result,
+          notFound: false
+        })
+      }  else {
+        this.setState({
+          notFound: true
+        })
+      }
+    }
+    renderClearBtn () {
+      if(!this.props.multiple && this.props.clearable && this.state.selected) {
+        return (<i className='icon icon-x at-select__clear' onClick={this.handleClear}></i>)
+      } 
+      return 
+    }
+    handleClear (event) {
+      event.stopPropagation()
       this.setState({
-        noDataShow: this.DISPLAY_BLOCK,
-        dataShow: this.DISPLAY_NONE
+        optionChosen: [],
+        selected : false
       })
     }
-  }
-  hideAllOption () {
-    this.childStyle.forEach((item, index) => {
-      this.childStyle[index] = {...(item || {}), display: 'none'}
-    })
-    this.setState({
-      childStyle: this.childStyle.concat()
-    })
-  }
-  showAllOption () {
-    this.childStyle.forEach((item, index) => {
-      this.childStyle[index] = {...(item || {}), display: 'block'}
-    })
-    this.setState({
-      childStyle: this.childStyle.concat()
-    })
-  }
-  _renderMultipleChoices () {
-    const multipleChoices: any[] = []
-    if (this.props.multiple) {
-      this.state.mulChoices.forEach((item, index) => {
-        this.mulChoicesFlag.push(false)
-        multipleChoices.push(<Tag closable onClose={this.handleClose.bind(this, index, item['optionIndex'])} key={index}>{item['dom']}</Tag>)
-      })
+    handleChose(event,index,disabled) {
+      if(disabled) {
+        event.stopPropagation()
+        return
+      }
+      let returnValue:any[] = []
+      if(this.props.multiple) {
+        event.stopPropagation()
+        if(this.mulOptionChosen.indexOf(index) == -1) {
+          this.mulOptionChosen.push(index)
+          this.setState({
+            optionChosen: this.mulOptionChosen,
+            selected : true
+          })
+          this.mulOptionChosen.forEach((item)=>{
+            let child = this.propsSelectOption[item] || {}
+            let value = child.props.value
+            let label = child.props.label
+            returnValue = this.prepareReturnValue(returnValue,value,label)
+          })
+        }
+      } else {
+          let optionChosen: any[] = []
+          optionChosen.push(index)
+          this.setState({
+            optionChosen,
+            selected : true
+          })
+          optionChosen.forEach((item)=>{
+            let child = this.propsSelectOption[item] || {}
+            let value = child.value
+            let label = child.label
+            returnValue = this.prepareReturnValue(returnValue,value,label)
+          })
+      }
+      this.props.onChange && this.props.onChange(returnValue)
+      console.log('returnValue',returnValue)
+      return returnValue
     }
-    return multipleChoices
-  }
-  _renderPropsChildren () {
-    let children: any[]
-    children = []
-    if (this.props.children as any) {
-      Nerv.Children.map(this.props.children as any, (child, i) => {
-        let childShow = child.props.children
-        if (typeof childShow != 'string') {
-          childShow = child.props.label
+    prepareReturnValue (returnValue,value,label) {
+      if(this.props.valueWithLabel) {
+        returnValue.push({
+          value:value
+        })
+      } else {
+        returnValue.push({
+          value:value,
+          label:label
+        })
+      }
+      return returnValue
+    }
+    removeMultipleChoice(index,event) {
+      if(this.props.multiple) {
+        event.stopPropagation()
+        let optionChosen = this.state.optionChosen //选项的下标
+        let indexInArr = 0 
+        optionChosen.forEach((item,i)=>{
+          if(index == item) {
+            indexInArr = i
+          }
+        })
+        optionChosen.splice(indexInArr,1)
+        // this.mulOptionChosen.splice(indexInArr,1)
+        let selected = optionChosen.length <=0 ? false : true
+        this.setState({
+            optionChosen: optionChosen,
+            selected : selected
+        })
+        let returnValue:any[]= []
+        optionChosen.forEach((item)=>{
+          let child = this.propsSelectOption[item] || {}
+          let value = child.props.value
+          let label = child.props.label
+          returnValue = this.prepareReturnValue(returnValue,value,label)
+        })
+        this.props.onChange && this.props.onChange(returnValue)
+      }
+      
+    }
+    componentWillMount (){
+      let count = 0
+      //目前只会处理一次select选项处理。一旦SelectOption有变化,将得不到变化。
+      Nerv.Children.forEach(this.props.children as any,(child, index) => {
+        if(child.name != 'SelectOptionGroup') {
+          child.props.onClick = this.handleChose
+          child.props.key = index
+          child.key = index
+          this.propsSelectOption.push(child)
+          this.searchOption.push(child.label || child.props.children) //特别针对输入查找的情况，缓存在一个属性中，加快查找速度，只允许lable和文字嵌套在第一层
+        } else  {
+          Nerv.Children.forEach(child.props.children as any, (child)=>{
+            child.props.onClick = this.handleChose
+            child.props.key = count
+            child.key = count
+            this.propsSelectOption.push(child)
+            this.searchOption.push(child.label || child.props.children)
+            count ++
+          },null)
         }
-        const childProps = {
-          childShow,
-          value: child.props.value
-        }
-        this.optionDataArr.push(childShow)
-        child.props.onClick = this.handleClick(child.props.onClick, childProps, i)
-        child.props.style = this.state.childStyle[i] || {}
-        children.push(child)
       }, null)
     }
-    return children
-  }
-  componentWillMount () {
-    Nerv.Children.map(this.props.children as any, (child, i) => {
-      this.childStyle.push(child.props.style || {})
-    }, null)
-  }
-  render () {
-    const props = this.props
-    const { style } = props
-    let clearBtn = null
-    let searchInput
-    let multipleChoices: any[] = []
-    const dropDownStyle = `${this.state.dropDownStyle}`
-    if (props.clearable) {
-      clearBtn = <Icon type='icon-x' className='at-select__clear' style={this.state.iconXShow} ref='iconx' onClick={this.handleClear} onMouseLeave={this.handleLeaveIconX}/>
+    componentWillUpdate (nextProps,nextState) {
+      Nerv.Children.forEach(this.props.children as any,(child, index) => {
+        if(child.name != 'SelectOptionGroup') {
+          //单选选择，通知每个选项，是否要变黑加粗
+          child.props.chosenIndex = nextState.optionChosen
+        } else  {
+          Nerv.Children.forEach(child.props.children as any, (child)=>{
+            //单选选择，通知每个选项，是否要变黑加粗
+            child.props.chosenIndex = nextState.optionChosen
+          },null)
+        }
+      },null)
     }
-    if (props.filterable) {
-      console.log(props.filterable)
-      searchInput = <input type='text' onChange={this.handleInput} value={this.state.inputValue} placeholder='请输入查询数据' className='at-select__input' />
-    }
-    if (props.multiple) {
-      multipleChoices = this._renderMultipleChoices()
-    }
-    const dropdownClass = classnames(
-      'at-select__dropdown', [
-      props.placement ? `at-select__dropdown--${props.placement}` : 'at-select__dropdown--bottom'
-      ]
-    )
-    return (<div className={this.state.wrapperClassName} style={style}>
-        <div className='at-select__selection' onClick={this.toggleDropDown} ref='trigger'>
-          <span className='at-select__placeholder' style={this.state.optionChosenStyleUp}>请选择</span>
-          <span className='at-select__selected' style={this.state.optionChosenStyleDown}>{this.state.optionChosen}</span>
-          <ul>
-            {multipleChoices}
-          </ul>
-          {searchInput}
-          <Icon type='icon-chevron-down' className='at-select__arrow' style={this.state.iconChevronShow} onMouseEnter={this.handleOverIconX}></Icon>
-          {clearBtn}
-        </div>
-        <div className={dropdownClass} style={dropDownStyle} ref='popover'>
-          <ul className='at-select__not-found' style={this.state.noDataShow}>
-            <li>无匹配数据</li>
-          </ul>
-          <ul className='at-select__list' style={this.state.dataShow}>
-            {this._renderPropsChildren()}
-          </ul>
-        </div>
-      </div>
-    )
-  }
-  initChildStyle () {
-    this.setState({
-      childStyle: this.childStyle.concat()
-    })
-  }
-  componentDidMount () {
-    this.initClass = this.renderWrapperClassNames(this.props)
-    if (this.props.filterable) {
-      this.setState({
-        optionChosenStyleDown: this.DISPLAY_NONE,
-        optionChosenStyleUp: this.DISPLAY_NONE
-      })
-    }
-    this.setState({
-      wrapperClassName: this.initClass
-    })
-    this.initChildStyle()
-    window.addEventListener('click', this.windowClickHide.bind(this))
-    if (this.props.placement == 'top') {
-      this.calculatePopoverStyle()
-    }
-  }
-  calculatePopoverStyle () {
-    const bottom = this.refs.trigger.offsetHeight
-    this.setState({
-      calcBottom: `${bottom}px`
-    })
-  }
-  toggleDropDown (e) {
-    e.stopPropagation()
-    if (this.props.disabled) { return false }
-    let onClickHandler: any
-    if (this.props.onClick) {onClickHandler = this.props.onClick; onClickHandler(e)}
-    let newDropDownStyle = ''
-    let wrapperClassName = ''
-    this.dropDown = !this.dropDown
-    if (this.dropDown) {
-      newDropDownStyle = this.DISPLAY_BLOCK
-      if (this.props.placement == 'top') {
-        newDropDownStyle += `bottom:${this.state.calcBottom};`
-      }
-      wrapperClassName = classnames(this.initClass, 'at-select--visible')
-      if (this.props.filterable) {
-        this.searchOptionData('')
-      } else {
+    handleClick (event) {
+      if(this.props.disabled) { return }
+      event.stopPropagation()
+      this.toggleDropDown()
+      if(this.props.filterable) {
+        let optionShow:any[] = []
+        this.propsSelectOption.forEach((item,index)=>{
+          optionShow.push(index)
+        })
         this.setState({
-          noDataShow: this.DISPLAY_NONE,
-          dataShow: this.DISPLAY_BLOCK
+          optionShow
         })
       }
-    } else {
-      newDropDownStyle =  this.DISPLAY_NONE
-      wrapperClassName = classnames(this.initClass)
     }
-    this.setState({
-      dropDownStyle: newDropDownStyle ,
-      wrapperClassName
-    })
-  }
-  windowClickHide (e) {
-    if (this.dropDown) {
-      let wrapperClassName = ''
-      this.dropDown = false
-      const newDropDownStyle =  this.DISPLAY_NONE
-      wrapperClassName = classnames(this.initClass)
+    toggleDropDown () {
+      const isDropDown = this.state.isDropDown
       this.setState({
-        dropDownStyle: newDropDownStyle ,
-        wrapperClassName
+        isDropDown: !isDropDown
       })
     }
-  }
-  assignStyle () {
-
-  }
-}
+    windowClickHideAll () {
+      this.setState({
+        isDropDown: false
+      })
+    }
+    componentDidMount () {
+      this.calculatePopoverStyle() 
+      window.addEventListener('click',this.windowClickHideAll)
+    }
+    componentWillUnmount () {
+      window.removeEventListener('click',this.windowClickHideAll)
+    }
+    
+ }
 
 export default Select
