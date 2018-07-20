@@ -101,7 +101,6 @@ class Menu extends Nerv.Component<MenuProps, any> {
         if (onSelect instanceof Function) {
           onSelect(e)
         }
-        console.log('ItemSelect' + e)
       }
     )
   }
