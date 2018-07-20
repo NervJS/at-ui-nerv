@@ -9,7 +9,9 @@ export interface TimelineProps {
 class Timeline extends Nerv.Component<TimelineProps, any> {
   static Item: typeof TimelineItem
   renderTimelineClassNames (props: TimelineProps) {
-    return classnames('at-timeline', props.className)
+    return classnames('at-timeline', [
+      props.pending ?  'at-timeline--pending' :''
+    ],props.className)
   }
   render () {
     const classNames = this.renderTimelineClassNames(this.props)

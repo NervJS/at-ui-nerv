@@ -2,7 +2,7 @@ import * as Nerv from 'nervjs'
 
 // import ButtonExample from './view/Button'
 // import TagExample from './view/Tag'
-import SelectExample from './view/Select'
+// import SelectExample from './view/Select'
 // import IconExample from './view/Icon'
 // import SwitchExample from './view/Switch'
 // import TooltipExample from './view/Tooltip'
@@ -11,7 +11,7 @@ import SelectExample from './view/Select'
 // import TextareaExample from './view/Textarea'
 // import TableExample from './view/Table'
 // import PaginationExample from './view/Pagination'
-// import TimelineExample from './view/Timeline'
+import TimelineExample from './view/Timeline'
 // import ProgressExample from './view/Progress'
 // import SliderExample from './view/Slider'
 // import TabExample from './view/Tab'
@@ -23,7 +23,7 @@ class App extends Nerv.Component {
       <div className='app' id='app'>
         {/* <ButtonExample /> */}
         {/* <TagExample /> */}
-        <SelectExample />
+        {/* <SelectExample /> */}
         {/* <IconExample /> */}
         {/* <SwitchExample /> */}
         {/*<TooltipExample />*/}
@@ -32,7 +32,7 @@ class App extends Nerv.Component {
         {/*<TextareaExample />*/}
         {/* <TableExample /> */}
         {/* <PaginationExample /> */}
-        {/* <TimelineExample /> */}
+        <TimelineExample />
         {/* <ProgressExample /> */}
         {/* <SliderExample /> */}
         {/* <TabExample /> */}

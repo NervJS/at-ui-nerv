@@ -23,6 +23,13 @@ class SelectExample extends Nerv.Component<any, any> {
           <TimelineItem value='4'>北京</TimelineItem>
           <TimelineItem value='5'>成都</TimelineItem>
         </Timeline>
+        <Timeline pending>
+          <TimelineItem value='1'>深圳</TimelineItem>
+          <TimelineItem value='2'>广州</TimelineItem>
+          <TimelineItem value='3'>上海</TimelineItem>
+          <TimelineItem value='4'>北京</TimelineItem>
+          <TimelineItem value='5'>成都</TimelineItem>
+        </Timeline>
         <Timeline>
           <TimelineItem color='blue' value='1'>刷牙</TimelineItem>
           <TimelineItem color='green'　value='2'>吃早餐</TimelineItem>
