@@ -25,8 +25,7 @@ describe('modal test', () => {
   it('basic render', (done) => {
     Modal.alert({
       title: '这里是标题名称',
-      content: '这里是文本内容',
-      callback (action) {}
+      content: '这里是文本内容'
     })
     setTimeout(() => {
       expect($('.at-modal__container').length).toBeTruthy()
@@ -127,7 +126,7 @@ describe('modal test', () => {
     const modalJSX = (
       <Modal value={true} title={'这是标题4'} onCancel={onCancel}>
         {}
-        <Modal.body style='text-align:center;'>
+        <Modal.body style={{ textAlign: 'center' }}>
           {} <p>能看到这里的内容吗？</p>
         </Modal.body>
         <Modal.footer showCancel />
