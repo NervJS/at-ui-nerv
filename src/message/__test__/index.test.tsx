@@ -1,5 +1,4 @@
 import * as Nerv from 'nervjs'
-import sinon from 'sinon'
 import $ from 'webpack-zepto'
 import Message from '../'
 

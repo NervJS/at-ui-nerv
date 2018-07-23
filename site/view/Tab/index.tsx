@@ -2,11 +2,11 @@ import * as Nerv from 'nervjs'
 
 import Tabs from '../../../src/tab'
 const Tabpane = Tabs.Pane
-class TabExample extends Nerv.Component<any,any> {
+class TabExample extends Nerv.Component<any, any> {
   constructor (props) {
     super(props)
     this.onTabRemoveHanlder = this.onTabRemoveHanlder.bind(this)
-    this.handleAdd =this.handleAdd.bind(this)
+    this.handleAdd = this.handleAdd.bind(this)
     this.tabChangeHandler = this.tabChangeHandler.bind(this)
     this.changeActiveTab = this.changeActiveTab.bind(this)
     this.state = {
@@ -135,13 +135,14 @@ class TabExample extends Nerv.Component<any,any> {
     }
   }
   render () {
-    let tabListAddable:any[] = []
+    const tabListAddable: any[] = []
     this.state.tabList.forEach((item, index) => {
       let unclosableFlag = false
-      if(this.state.tabList.length == 1 && index == 0) {
+      if (this.state.tabList.length === 1 && index === 0) {
         unclosableFlag = true
       }
       tabListAddable.push(<Tabpane key={index} label={item.label} name={item.name} unclosable={unclosableFlag}>
+      {}
                             <p>{item.content}</p>
                           </Tabpane>)
     })
@@ -262,9 +263,10 @@ class TabExample extends Nerv.Component<any,any> {
         </Tabs> */}
         可变数量的tabs
         <Tabs animated='false' onChange={this.tabChangeHandler} activeIndex={this.state.activeIndex} value='tab6' closable onTabRemove={this.onTabRemoveHanlder}>
+        {}
           {tabListAddable}
           <div slot='extra'>
-            <button style='height:20px;width:100px;' onClick={this.handleAdd}>添加</button>
+            <button style={{ height: '20px', width: '100px' }} onClick={this.handleAdd}>添加</button>
           </div>
         </Tabs>
         <button onClick={this.changeActiveTab}>xxxx</button>
@@ -272,36 +274,36 @@ class TabExample extends Nerv.Component<any,any> {
     )
   }
   tabChangeHandler (index) {
-    console.log('xxx',index)
+    console.log('xxx', index)
     this.setState({
       activeIndex : index
     })
   }
   changeActiveTab () {
-    
+
     this.setState({
-      activeIndex :24
-    },()=>{
-      console.log('xxxclick',this.state.activeIndex)
+      activeIndex : 24
+    }, () => {
+      console.log('xxxclick', this.state.activeIndex)
     })
   }
   handleAdd () {
-    let tabList= this.state.tabList.concat()
-    let length = tabList.length
+    const tabList = this.state.tabList.concat()
+    const length = tabList.length
     tabList.push({
-      label: `Tab${length+1}`,
-        name: `Tab${length+1}`,
-        content: `tab${length+1} content`
+      label: `Tab${length + 1}`,
+      name: `Tab${length + 1}`,
+      content: `tab${length + 1} content`
     })
     this.setState({
-      tabList: tabList
+      tabList
     })
   }
-  onTabRemoveHanlder (index,event) {
-    let tabList= this.state.tabList.concat()
-    tabList.splice(index,1)
+  onTabRemoveHanlder (index, event) {
+    const tabList = this.state.tabList.concat()
+    tabList.splice(index, 1)
     this.setState({
-      tabList: tabList
+      tabList
     })
   }
 }
