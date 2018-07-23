@@ -47,7 +47,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
     }
       // <SelectOption>{i}  xxx</SelectOption>  最好放进一个变量中，否则children会分成2个数组 {i} 和xxx
     return (
-        <li ref='li' className={classname} onClick={this.handleClick}>{children}</li>
+        <li ref='li' className={classname} onClick={this.handleClick as any}>{children}</li>
     )
   }
   componentDidMount () {

@@ -262,9 +262,10 @@ class TabExample extends Nerv.Component {
         </Tabs> */
   /* 可变数量的tabs
         <Tabs animated='false' onChange={this.tabChangeHandler} activeIndex={this.state.activeIndex} value='tab6' closable onTabRemove={this.onTabRemoveHanlder}>
+        {}
           {tabListAddable}
           <div slot='extra'>
-            <button style='height:20px;width:100px;' onClick={this.handleAdd}>添加</button>
+            <button style={{ height: '20px', width: '100px' }} onClick={this.handleAdd}>添加</button>
           </div>
         </Tabs>
         <button onClick={this.changeActiveTab}>xxxx</button>
