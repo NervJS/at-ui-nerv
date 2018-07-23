@@ -1,5 +1,4 @@
 import * as Nerv from 'nervjs'
-import sinon from 'sinon'
 import $ from 'webpack-zepto'
 import Steps from '../'
 import { VNode } from 'nerv-shared'
