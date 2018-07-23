@@ -35,7 +35,7 @@ class App extends Nerv.Component {
 }
 
 Nerv.render(
-  <Router basename={BASE_NAME}>
+  <Router >
     <App />
   </Router>,
   document.getElementById('container')
