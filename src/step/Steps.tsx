@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-import Step from './step'
+import Step from './Step'
 export interface StepsProps {
   className?: string,
   current?: number,
