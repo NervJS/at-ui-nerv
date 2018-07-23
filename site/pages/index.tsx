@@ -86,8 +86,8 @@ class Index extends Nerv.Component {
               </div>
               <div className='title'>组件</div>
               <div className='desc'>
-                基于 Vue 的 UI 组件化，可以通过组件的 Demo
-                体验交互细节，开发中既可以根据需要单独引用，也可以使用全局方式引入所有组件。
+                基于 Nerv 的 UI 组件化，可以通过组件的 Demo
+                体验交互细节，开发中既可以根据需要单独引用，也可以使用引入所有组件。
               </div>
               <div className='btn-readmore'>
                 <Link to='/docs'>
