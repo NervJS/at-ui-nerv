@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 
-import Quickstart from '@md/Quickstart.md'
+import Quickstart from '@md/quickstart.md'
 
 class QuickstartExample extends Nerv.Component {
   render () {
