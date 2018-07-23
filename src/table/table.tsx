@@ -102,7 +102,7 @@ class Table extends Nerv.Component<TableProps, any> {
   }
   renderSortBtn () {
     return (
-    <div className='at-table__column-sorter' style='cursor:pointer;'>
+      <div className='at-table__column-sorter' style={{ cursor: 'pointer' }}>
       <span className='at-table__column-sorter-up' onClick={this.sortAscHandler}>
         <i className='icon icon-chevron-up'></i>
       </span>
@@ -125,9 +125,9 @@ class Table extends Nerv.Component<TableProps, any> {
 
     data.forEach((item, index) => {
       const tdElement: any[] = []
-      //处理多选框
+      // 处理多选框
       if (this.props.optional) {
-        tdElement.push(<th className='at-table__cell at-table__column-selection' value={this.state.valueArr[index]}>
+        tdElement.push(<th className='at-table__cell at-table__column-selection' data-value={this.state.valueArr[index]}>
                         <Checkbox checked={this.state.valueArr[index]} onChange={this.onSelectionChange.bind(this, item, index)} />
                        </th>)
       }
@@ -158,7 +158,7 @@ class Table extends Nerv.Component<TableProps, any> {
         sortBtn = this.renderSortBtn()
       }
       columnsElement.push(
-      <th className='at-table__cell at-table__column' style='cursor: text;'>
+        <th className='at-table__cell at-table__column' style={{ cursor: 'text' }}>
         {item.title}
         {sortBtn}
       </th>)
@@ -217,7 +217,7 @@ class Table extends Nerv.Component<TableProps, any> {
     }
     if (!props.height) {
       body = (
-        <div class='at-table__content'>
+        <div className='at-table__content'>
           <div className='at-table__body'>
             <table>
               <colgroup>
@@ -272,7 +272,7 @@ class Table extends Nerv.Component<TableProps, any> {
   onSelectionChange (item, index, value) {
     const propsOnSelectionChange = this.props.onSelectionChange
     if (value) {
-      //如果选中了，则返回值
+      // 如果选中了，则返回值
       const arrTemp = this.state.valueArr
       arrTemp[index] = true
       this.setState({
@@ -281,7 +281,7 @@ class Table extends Nerv.Component<TableProps, any> {
       propsOnSelectionChange && propsOnSelectionChange(value, item)
       return item
     } else {
-      //如果取消选中，则返回false
+      // 如果取消选中，则返回false
       const arrTemp = this.state.valueArr
       arrTemp[index] = false
       this.setState({

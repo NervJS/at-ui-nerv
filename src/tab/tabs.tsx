@@ -111,7 +111,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     const {children, closable= false} = this.props
     const closableFlag =  closable || closable === 'true'
     const navArr: any[] = []
-    let extra: any[] = []
+    let extra: any = []
     Nerv.Children.forEach(children as any, (child, index) => {
       const props = child.props
       if (props.slot && props.slot == 'extra') {

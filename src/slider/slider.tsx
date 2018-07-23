@@ -77,9 +77,9 @@ class Slider extends Nerv.Component<SliderProps, any> {
     if (props.disabled) { trackClass += ' at-slider--disabled'}
     return (
       <div className='at-slider' {...needProps} style={style}>
-        <div className='at-input-number at-slider__input at-input-number--normal' style='display: none;'>
+        <div className='at-input-number at-slider__input at-input-number--normal' style={{ display: 'none' }}>
           <div className='at-input-number__input'>
-            <input type='number' max='100' min='0' class='at-input-number__original' />
+            <input type='number' max='100' min='0' className='at-input-number__original' />
           </div>
           <div className='at-input-number__handler'>
             <span className='at-input-number__up'>
@@ -90,10 +90,11 @@ class Slider extends Nerv.Component<SliderProps, any> {
             </span>
           </div>
         </div>
-        <div className={trackClass} style='width:80%;margin-left:10%;' ref='bar'>
+        <div className={trackClass} style={{ width: '80%', marginLeft: '10%' }} ref='bar'>
           <div className='at-slider__bar' style={currentWidth}></div>
           <div className='at-slider__dot-wrapper at-slider__dot-wrapper--hover' style={currentLeft} onMouseDown={this.onMouseDownHandler} onMouseLeave={this.onMouseLeaveHandler} onMouseEnter={this.onMouseEnterHandler}>
             <Tooltip content={this.state.value} placement='top' tipstyle={this.state.tipStyle}>
+              {}
               <div className='at-slider__dot'></div>
             </Tooltip>
           </div>
@@ -123,7 +124,7 @@ class Slider extends Nerv.Component<SliderProps, any> {
   onDragging (event) {
     if (this.isDrag) {
       this.currX = event.clientX
-      let diff = Math.round((this.currX - this.startX) / this.sliderWidth * 100)  //转换成百分制的前进距离
+      let diff = Math.round((this.currX - this.startX) / this.sliderWidth * 100)  // 转换成百分制的前进距离
       if (this.step) {
         diff = Math.round((diff / this.step)) * this.step
       }

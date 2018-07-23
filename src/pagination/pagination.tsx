@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-import Select from '../Select'
+import Select from '../select'
 const SelectOption = Select.Option
 export interface PaginationProps {
   className?: string,
@@ -27,7 +27,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   }
   renderPaginationClassNames (props: PaginationProps) {
     return classnames('at-pagination', [
-      props.size && props.size == 'small' ? 'at-pagination--small' : ''
+      props.size && props.size === 'small' ? 'at-pagination--small' : ''
     ], props.className)
   }
   componentWillMount () {
@@ -70,7 +70,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     const list: any[] = []
     pageRange.forEach((item) => {
       let classname = 'at-pagination__item'
-      if (this.state.currPage == item) {
+      if (this.state.currPage === item) {
         classname += ' at-pagination__item--active'
       }
       list.push(<li className={classname} onClick={this.pageClickHandler.bind(this, item)}>{item}</li>)
@@ -83,7 +83,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     const currPage = this.state.currPage
 
     let className = 'at-pagination__item'
-    if (currPage == 1) { className += ' at-pagination__item--active'}
+    if (currPage === 1) { className += ' at-pagination__item--active'}
     list.push(<li className={className} onClick={this.pageClickHandler.bind(this, 1)} >1</li>)
 
     if (currPage > 4) {
@@ -129,7 +129,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     }
     if (totalPage > 1) {
       let className = 'at-pagination__item'
-      if (this.state.currPage == totalPage) { className += ' at-pagination__item--active'}
+      if (this.state.currPage === totalPage) { className += ' at-pagination__item--active'}
       list.push(
         <li className={className} onClick={this.pageClickHandler.bind(this, totalPage)}>{totalPage}</li>
       )
@@ -151,7 +151,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
           <i className='icon icon-chevron-left'></i>
         </li>
         <div className='at-pagination__simple-paging'>
-          <input ref='pageInputSimple' type='text' className='at-input__original' value={this.state.currPage} onkeypress={this.keyPressSimpleHandler} />
+          <input ref='pageInputSimple' type='text' className='at-input__original' value={this.state.currPage} onKeyPress={this.keyPressSimpleHandler} />
           <span>/</span>
           <span className='at-pagination__paging-total'>{this.page}</span>
         </div>
@@ -177,7 +177,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     return this.props.showQuickJump ?
       <div className='at-pagination__quickjump'>
         <span>前往</span>
-        <input type='text' className='at-input__original' ref='pageInput' onkeypress={this.keyPressHandler} value={this.state.currPage} />
+        <input type='text' className='at-input__original' ref='pageInput' onKeyPress={this.keyPressHandler} value={this.state.currPage} />
         <span>页</span>
       </div> : null
   }
@@ -188,7 +188,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       for (let i = 10; i < this.total / 2; i = i + 10) {
         const pageTemp = i + ' 条/页'
         selectOption.push(
-            <SelectOption key={i} onClick={this.pageSizeSelectHandler.bind(i, i)} value={i}>{pageTemp}</SelectOption>)
+          <SelectOption key={i} onClick={this.pageSizeSelectHandler.bind(i, i)} value={i}>{}{pageTemp}</SelectOption>)
       }
     }
     const tempPageSize = `${this.state.pageSize} 条/页`

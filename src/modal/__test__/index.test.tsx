@@ -42,7 +42,7 @@ describe('modal test', () => {
         <Modal.footer />
       </Modal>
     )
-    const component = Nerv.render(modalJSX as VNode, scratch)
+    Nerv.render(modalJSX as VNode, scratch)
     Nerv.nextTick(() => {
       expect($('.at-modal__container').length).toBeTruthy()
       done()
@@ -106,7 +106,7 @@ describe('modal test', () => {
         <Modal.footer />
       </Modal>
     )
-    const component = Nerv.render(modalJSX as VNode, scratch)
+    Nerv.render(modalJSX as VNode, scratch)
     new Promise((resolve, reject) => {
       Nerv.nextTick(() => {
         $('.at-modal__container')
@@ -132,7 +132,7 @@ describe('modal test', () => {
         <Modal.footer showCancel />
       </Modal>
     )
-    const component = Nerv.render(modalJSX as VNode, scratch)
+    Nerv.render(modalJSX as VNode, scratch)
     new Promise((resolve, reject) => {
       Nerv.nextTick(() => {
         $('.at-modal__container')

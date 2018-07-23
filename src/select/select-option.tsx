@@ -23,7 +23,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
     // console.log('nextProps', nextProps.style, 'this.props', this.props.style)
   }
 
-  handleClick = (e: MouseEvent) => {
+  handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
 
     const onClick = this.props.onClick
     const index = this.props.key
@@ -45,7 +45,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
     if (props.disabled) {
       classname += ' at-select__option--disabled'
     }
-      //<SelectOption>{i}  xxx</SelectOption>  最好放进一个变量中，否则children会分成2个数组 {i} 和xxx
+      // <SelectOption>{i}  xxx</SelectOption>  最好放进一个变量中，否则children会分成2个数组 {i} 和xxx
     return (
         <li ref='li' className={classname} onClick={this.handleClick}>{children}</li>
     )
