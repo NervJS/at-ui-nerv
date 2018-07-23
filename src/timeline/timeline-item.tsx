@@ -10,7 +10,6 @@ export interface TimelineItemProps {
 
 class TimelineItem extends Nerv.Component<TimelineItemProps, any> {
   renderTimelineItemClassNames (props: TimelineItemProps, withSlot) {
-    console.log(props.classFromParent)
     let colorClass = ''
     switch (props.color) {
       case 'blue':
@@ -39,7 +38,6 @@ class TimelineItem extends Nerv.Component<TimelineItemProps, any> {
     let slot: any
     let content: any
     Nerv.Children.forEach(children, (child) => {
-      console.log('child', child)
       if (child.props && child.props.slot) {
         slot = child
       } else {
@@ -55,7 +53,6 @@ class TimelineItem extends Nerv.Component<TimelineItemProps, any> {
     const props = this.props
     const {slot, content} = this.renderContentAndSlot(props)
     const classname = this.renderTimelineItemClassNames(props, slot)
-    console.log('asdasdasd',classname)
     return (
       <div className={classname}>
         <div className='at-timeline__tail'></div>
