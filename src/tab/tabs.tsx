@@ -239,9 +239,9 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     return children
   }
   componentDidMount () {
-    this.updateHandle() //没有setState，给scrollable赋值
-    this.scrollToActiveTab()//没哟setState,给this.navOffset赋值
-    this.updateAfterUpdate(this.state, 'mount') //setState,更新页面，显示按钮
+    this.updateHandle() // 没有setState，给scrollable赋值
+    this.scrollToActiveTab()// 没哟setState,给this.navOffset赋值
+    this.updateAfterUpdate(this.state, 'mount') // setState,更新页面，显示按钮
     window.addEventListener('resize', this.updateHandle, false)
   }
   updateAfterUpdate (prevState, str?) {
