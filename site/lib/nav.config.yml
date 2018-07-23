@@ -94,6 +94,12 @@ zh:
               name: Dropdown
             - title: 导航菜单
               name: Menu
+            - pagination: 分页
+              name: Pagination
+            - Steps: 步骤条
+              name: Steps
+            - Tabs: 标签页
+              name: Tabs
 en:
   guide:
     - title: Brand

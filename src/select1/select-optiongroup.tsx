@@ -14,17 +14,16 @@ class SelectOptionGroup extends Nerv.Component<SelectOptionGroupProps, any> {
 
   constructor (props: SelectOptionGroupProps) {
     super(props)
-    this.state ={
-      
+    this.state = {
+
     }
   }
- 
-  
+
   render () {
     return (
-      <ul className="at-option-group">
-        <li className="at-option-group__label">{this.props.label}</li> 
-        <ul className="at-option-group__list">
+      <ul className='at-option-group'>
+        <li className='at-option-group__label'>{this.props.label}</li>
+        <ul className='at-option-group__list'>
           {this.props.children}
         </ul>
       </ul>

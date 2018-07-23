@@ -1,7 +1,6 @@
 ---
 imports:
-  import {Table} from '@src';
-
+  import {Table,Button} from '@src';
 ---
 # Table 表格
 
@@ -81,7 +80,7 @@ imports:
 
 :::demo
 ```jsx
-<Table columns={[
+<Table stripe columns={[
       {
         title: '姓名',
         key: 'name'
@@ -139,7 +138,7 @@ imports:
             age: 19,
             address: '北京市朝阳区'
           }
-        ]}></Table>
+        ]} />
 ```
 :::
 
@@ -149,7 +148,7 @@ imports:
 
 :::demo
 ```jsx
-<Table columns={[
+<Table border columns={[
       {
         title: '姓名',
         key: 'name'
@@ -207,7 +206,7 @@ imports:
             age: 19,
             address: '北京市朝阳区'
           }
-        ]}></Table>
+        ]} />
 
 ```
 :::
@@ -218,7 +217,7 @@ imports:
 
 :::demo
 ```jsx
-<Table columns={[
+<Table height={100} columns={[
       {
         title: '姓名',
         key: 'name'
@@ -276,7 +275,7 @@ imports:
             age: 19,
             address: '北京市朝阳区'
           }
-        ]}></Table>
+        ]} />
 ```
 :::
 
@@ -286,7 +285,7 @@ imports:
 
 :::demo
 ```jsx
-<Table columns={[
+<Table optional columns={[
       {
         title: '姓名',
         key: 'name'
@@ -344,7 +343,7 @@ imports:
             age: 19,
             address: '北京市朝阳区'
           }
-        ]}></Table>
+        ]} />
 ```
 :::
 
@@ -364,6 +363,7 @@ imports:
       {
         title: '年龄',
         key: 'age',
+        sortType:'asc'
       },
       {
         title: '地址',
@@ -414,7 +414,7 @@ imports:
             age: 19,
             address: '北京市朝阳区'
           }
-        ]}></Table>
+        ]} />
 ```
 :::
 
@@ -438,6 +438,18 @@ imports:
       {
         title: '地址',
         key: 'address'
+      },
+      {
+        title: '操作',
+        render: {
+          type:Button,
+          props:{
+            onClick:(event,index)=>{
+              console.log('this',this,index)
+            }
+          },
+          children:'查看名字'
+        }
       }]} data={[
           {
             name: '库里',
@@ -484,7 +496,7 @@ imports:
             age: 19,
             address: '北京市朝阳区'
           }
-        ]}></Table>
+        ]} />
 ```
 :::
 
@@ -494,7 +506,7 @@ imports:
 
 :::demo
 ```jsx
-<Table columns={[
+<Table size='small' columns={[
       {
         title: '姓名',
         key: 'name'
@@ -552,7 +564,7 @@ imports:
             age: 19,
             address: '北京市朝阳区'
           }
-        ]}></Table>
+        ]} />
 ```
 :::
 
@@ -562,7 +574,7 @@ imports:
 
 :::demo
 ```jsx
-<Table columns={[
+<Table pagination columns={[
       {
         title: '姓名',
         key: 'name'
@@ -619,8 +631,413 @@ imports:
             name: '托马斯',
             age: 19,
             address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
           }
-        ]}></Table>
+        ]} />
 
 ```
 :::

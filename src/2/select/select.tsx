@@ -27,21 +27,12 @@ class Select extends Nerv.Component<SelectProps, any> {
       if(this.props.value) {
         optionChosen = optionChosen.concat(this.props.value)
       }
-      let chosenSpan
-      if(optionChosen.length > 0) {
-        let chosenIndex = optionChosen[0]
-        let propsChildren = this.props.children || []
-        let chosenChild = propsChildren[chosenIndex] || {label:''}
-        chosenSpan = chosenChild.label || (chosenChild.props || {}).children || ''
-      }
       this.state = {
         isDropDown: false,
         optionChosen: optionChosen || [], //存的都是下标
         optionShow: [],//针对filterable,存的也是下标
         selected: optionChosen.length > 0 ? true : false,
-        calcBottom: 0,
-        inputValue: chosenSpan,
-        
+        calcBottom: 0
       }
       this.mulOptionChosen = []
       this.propsSelectOption = []
@@ -62,6 +53,7 @@ class Select extends Nerv.Component<SelectProps, any> {
         })
         return optionShowDom
       } else {
+        console.log(this.props.children)
         return this.props.children
       }
     }
@@ -99,6 +91,7 @@ class Select extends Nerv.Component<SelectProps, any> {
                         <i className="icon icon-x at-tag__close" onClick={this.removeMultipleChoice.bind(this,key)}></i>
                       </span>)
         option.key = index
+        console.log(option)
         result.push(option)
       })
       return result
@@ -139,10 +132,9 @@ class Select extends Nerv.Component<SelectProps, any> {
           listStyle = this.DISPLAY_NONE
       }
       let dropDownClass = 'at-select__dropdown at-select__dropdown--bottom'
-      if(this.state.isDropDown) {
-        dropDownClass += ' slide-up-enter slide-up-enter-active'
-      } 
-      // else {
+      // if(this.state.isDropDown) {
+      //   dropDownClass += ' slide-up-enter slide-up-enter-active'
+      // } else {
       //   dropDownClass += ' slide-up-leave slide-up-leave-active'
       // }
       // dropDownClass += ' slide-up-leave slide-up-leave-active'
@@ -166,15 +158,16 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     renderSearchInput (){
       if(this.props.filterable) {
-        return (<input type="text" placeholder={this.props.placeholder || '请选择'}  value={this.state.inputValue} onChange={this.handleInput} className="at-select__input" />)
+        let chosenIndex = this.state.optionChosen[0]
+        let propsChildren = this.props.children || []
+        let chosenChild = propsChildren[chosenIndex] || {label:''}
+        let chosenSpan = chosenChild.label || (chosenChild.props || {}).children
+        return (<input type="text" placeholder={this.props.placeholder || '请选择'} value={chosenSpan} onChange={this.handleInput} className="at-select__input" />)
       } 
     }
     handleInput (event) {
       let inputValue = event.target.value
       let result :any[] = []
-      this.setState({
-        inputValue: inputValue
-      })
       if(event.target.value == '') {
         this.propsSelectOption.forEach((item,index)=>{
           result.push(index)
@@ -185,20 +178,7 @@ class Select extends Nerv.Component<SelectProps, any> {
         })
       } else {
         this.searchOption.forEach((item,index)=>{
-          let arr =((inputValue)|| '').split(/\\/g)
-          if(arr.length>0) {
-            console.log(arr)
-          }
-          let newInputValue = ''
-          arr.forEach((item,index)=>{
-            if(index == arr.length - 1) {
-              newInputValue+= item 
-            } else {
-              newInputValue+= item + '\\'+'\\'
-            }
-          })
-          console.log(newInputValue)
-          const pattern = new RegExp(newInputValue)
+          const pattern = new RegExp(inputValue)
           if (pattern.test(item)) {
             result.push(index)
           }
@@ -216,10 +196,11 @@ class Select extends Nerv.Component<SelectProps, any> {
       }
     }
     renderClearBtn () {
-      // let style = this.DISPLAY_NONE
+      let style = this.DISPLAY_NONE
       if(!this.props.multiple && this.props.clearable && this.state.selected) {
-        return (<i className='icon icon-x at-select__clear' onClick={this.handleClear}></i>)
+        style = this.DISPLAY_BLOCK
       } 
+      return (<i className='icon icon-x at-select__clear' style={style}onClick={this.handleClear}></i>)
     }
     handleClear (event) {
       event.stopPropagation()
@@ -256,18 +237,6 @@ class Select extends Nerv.Component<SelectProps, any> {
             optionChosen,
             selected : true
           })
-          let chosenSpan = ''
-          if(optionChosen.length > 0) {
-            let chosenIndex = optionChosen[0]
-            let propsChildren = this.props.children || []
-            let chosenChild = propsChildren[chosenIndex] || {label:''}
-            chosenSpan = chosenChild.label || (chosenChild.props || {}).children || ''
-          }
-          if(this.props.filterable) {
-            this.setState({
-              inputValue:chosenSpan
-            })
-          }
           optionChosen.forEach((item)=>{
             let child = this.propsSelectOption[item] || {}
             let value = child.value
@@ -276,6 +245,7 @@ class Select extends Nerv.Component<SelectProps, any> {
           })
       }
       this.props.onChange && this.props.onChange(returnValue)
+      console.log('returnValue',returnValue)
       return returnValue
     }
     prepareReturnValue (returnValue,value,label) {
@@ -345,6 +315,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     componentWillUpdate (nextProps,nextState) {
       if(nextProps.children != this.props.children) {
+        console.log('xxx',nextProps.children,this.props.children)
         this.propsSelectOption = []
         this.searchOption = []
         this.preparePropsSelection(nextProps)
@@ -385,6 +356,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     windowClickHideAll (event) {
       if (this.state.isDropDown) {
         if(this.clickTarget != event.target) {
+          console.log(this.state.isDropDown, event)
           this.setState({
             isDropDown: false
           })

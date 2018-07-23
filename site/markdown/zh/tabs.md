@@ -1,6 +1,8 @@
-
+---
+imports:
+  import {Tabs} from '@src';
+---
 # Tabs 标签页
-
 ----
 
 ## 基本用法
@@ -10,15 +12,15 @@
 :::demo
 ```html
 <Tabs>
-  <Tabpane label="Tab1" name="name1">
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </Tabpane>
-  <Tabpane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </Tabpane>
-  <Tabpane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </Tabpane>
+  </Tabs.Pane>
 </Tabs>
 ```
 :::
@@ -31,15 +33,15 @@
 :::demo
 ```html
 <Tabs>
-  <Tabpane label="Tab1" name="name1">
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </Tabpane>
-  <Tabpane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </Tabpane>
-  <Tabpane label="Tab3" name="name3" disabled="true">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3" disabled="true">
     <p>Content of Tab Pane 3</p>
-  </Tabpane>
+  </Tabs.Pane>
 </Tabs>
 ```
 :::
@@ -51,15 +53,15 @@
 :::demo
 ```html
 <Tabs>
-  <Tabpane label="Tab1" name="name1" icon="icon-github">
+  <Tabs.Pane label="Tab1" name="name1" icon="icon-github">
     <p>Content of Tab Pane 1</p>
-  </Tabpane>
-  <Tabpane label="Tab2" name="name2" icon="icon-twitter">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2" icon="icon-twitter">
     <p>Content of Tab Pane 2</p>
-  </Tabpane>
-  <Tabpane label="Tab3" name="name3" icon="icon-pocket">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3" icon="icon-pocket">
     <p>Content of Tab Pane 3</p>
-  </Tabpane>
+  </Tabs.Pane>
 </Tabs>
 ```
 :::
@@ -71,15 +73,15 @@
 :::demo
 ```html
 <Tabs>
-  <Tabpane label="Tab1" name="name1">
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </Tabpane>
-  <Tabpane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </Tabpane>
-  <Tabpane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </Tabpane>
+  </Tabs.Pane>
   <div slot="extra">
     <at-button size="small">额外内容</at-button>
   </div>
@@ -94,15 +96,15 @@
 :::demo
 ```html
 <Tabs size="small">
-  <Tabpane label="Tab1" name="name1">
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </Tabpane>
-  <Tabpane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </Tabpane>
-  <Tabpane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </Tabpane>
+  </Tabs.Pane>
   <div slot="extra">
     <at-button size="small">额外内容</at-button>
   </div>
@@ -116,16 +118,16 @@
 
 :::demo
 ```html
-<Tabs type="card" v-model="activeKey">
-  <Tabpane label="Tab1" name="name1">
+<Tabs type="card" >
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </Tabpane>
-  <Tabpane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </Tabpane>
-  <Tabpane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </Tabpane>
+  </Tabs.Pane>
   <div slot="extra">
     <at-button size="small">额外内容</at-button>
   </div>
@@ -139,16 +141,16 @@
 
 :::demo
 ```html
-<Tabs type="card" v-model="activeKey" size="small">
-  <Tabpane label="Tab1" name="name1">
+<Tabs type="card" size="small">
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </Tabpane>
-  <Tabpane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </Tabpane>
-  <Tabpane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </Tabpane>
+  </Tabs.Pane>
   <div slot="extra">
     <at-button size="small">额外内容</at-button>
   </div>
@@ -162,36 +164,27 @@
 
 :::demo
 ```html
-<Tabs :animated="false" v-model="activeKey">
-  <Tabpane label="Tab1" name="name1">
+<Tabs animated="false" v-model="activeKey">
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </Tabpane>
-  <Tabpane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </Tabpane>
-  <Tabpane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </Tabpane>
+  </Tabs.Pane>
 </Tabs>
 ```
 :::
 
 ## 新增和关闭页签
 
-可以动态增加或关闭标签，但需要监听 `on-tab-remove` 事件，手动删除 `Tabpane`
+可以动态增加或关闭标签，但需要监听 `on-tab-remove` 事件，手动删除 `Tabs.Pane`
 
 :::demo
 ```html
-<Tabs :animated="false" value="tab6" closable @on-tab-remove="removeHandle">
-  <Tabpane
-    v-for="(item, index) in tabList" :key="index"
-    :label="item.label" :name="item.name" :unclosable="index === 0 ? true : false">
-    <p>{{ item.content }}</p>
-  </Tabpane>
-  <div slot="extra">
-    <at-button size="small" @click="addHandle">添加</at-button>
-  </div>
-</Tabs>
+
 ```
 :::
 
@@ -209,8 +202,8 @@
 
 | 事件名称      | 说明          | 返回值  |
 |---------- |-------------- |---------- |
-| on-change | 切换 tab 时触发 | 当前标签的 `{index, name}` |
-| on-tab-remove | 删除 tab 时触发 | 被删除标签的 `{index, name}` |
+| on-change | 切换 tab 时触发 | 当前标签的index, name |
+| on-tab-remove | 删除 tab 时触发 | 被删除标签的index, name |
 
 ## Tabs slot
 
@@ -219,7 +212,7 @@
 | extra | 标签右侧的附件内容 |
 | - | tab-pane 组件 和 slot extra 内容 |
 
-## TabPane 参数
+## Tabs.Pane 参数
 
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -229,7 +222,7 @@
 | disabled | 是否禁用该标签 | Boolean | - | false |
 | closable | 是否可以关闭该标签，优先级高于 Tabs 的 `closable` | Boolean | - | true |
 
-## TabPane slot
+## Tabs.Pane slot
 
 | 名称      | 说明 |
 |----------|-------- |

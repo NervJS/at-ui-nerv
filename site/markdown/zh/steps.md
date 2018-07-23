@@ -1,3 +1,7 @@
+---
+imports:
+    import {Steps,Button} from '@src';
+---
 
 # Steps 步骤条
 
@@ -10,14 +14,14 @@
 简单的步骤条
 :::demo
 ```html
-<at-steps :current='current'>
-  <at-step title="Step1" description="This is a description."></at-step>
-  <at-step title="Step2" description="This is a description."></at-step>
-  <at-step title="Step3"></at-step>
-</at-steps>
+<Steps current='current'>
+  <Steps.step title="Step1" description="This is a description."></Steps.step>
+  <Steps.step title="Step2" description="This is a description."></Steps.step>
+  <Steps.step title="Step3"></Steps.step>
+</Steps>
 
-<at-button type="primary" @click="prev" style="margin-top: 12px;">Prev</at-button>
-<at-button type="primary" @click="next" style="margin-top: 12px;">Next</at-button>
+<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
 ```
 :::
 
@@ -27,14 +31,14 @@
 
 :::demo
 ```html
-<at-steps size="small" :current='current'>
-  <at-step title="Step1" description="This is a description."></at-step>
-  <at-step title="Step2" description="This is a description."></at-step>
-  <at-step title="Step3"></at-step>
-</at-steps>
+<Steps size="small" current='current'>
+  <Steps.step title="Step1" description="This is a description."></Steps.step>
+  <Steps.step title="Step2" description="This is a description."></Steps.step>
+  <Steps.step title="Step3"></Steps.step>
+</Steps>
 
-<at-button type="primary" @click="prev" style="margin-top: 12px;">Prev</at-button>
-<at-button type="primary" @click="next" style="margin-top: 12px;">Next</at-button>
+<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
 ```
 :::
 
@@ -44,14 +48,14 @@
 
 :::demo
 ```html
-<at-steps :current='current'>
-  <at-step title="Step1" description="This is a description." icon="icon-user"></at-step>
-  <at-step title="Step2" description="This is a description." icon="icon-airplay"></at-step>
-  <at-step title="Step3" icon="icon-pocket"></at-step>
-</at-steps>
+<Steps current='current'>
+  <Steps.step title="Step1" description="This is a description." icon="icon-user"></Steps.step>
+  <Steps.step title="Step2" description="This is a description." icon="icon-airplay"></Steps.step>
+  <Steps.step title="Step3" icon="icon-pocket"></Steps.step>
+</Steps>
 
-<at-button type="primary" @click="prev" style="margin-top: 12px;">Prev</at-button>
-<at-button type="primary" @click="next" style="margin-top: 12px;">Next</at-button>
+<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
 ```
 :::
 
@@ -61,17 +65,17 @@
 
 :::demo
 ```html
-<at-steps :current='current'>
-  <at-step v-for="(step, index) in steps"
+<Steps current='current'>
+  <Steps.step v-for="(step, index) in steps"
     :title="step.title"
-    :key="index"></at-step>
-</at-steps>
+    :key="index"></Steps.step>
+</Steps>
 <div class="steps-content" style="margin-top: 16px; border: 1px solid #e9e9e9; border-radius: 6px;background-color: #fafafa; min-height: 200px; text-align: center; padding-top:80px;">
   {{ steps[current].content }}
 </div>
 
-<at-button type="primary" @click="prev" style="margin-top: 12px;">Prev</at-button>
-<at-button type="primary" @click="next" style="margin-top: 12px;">Next</at-button>
+<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
 
 <script>
   export default {
@@ -112,14 +116,14 @@
 
 :::demo
 ```html
-<at-steps :current='current' direction="vertical">
-  <at-step title="Step1" description="This is a description."></at-step>
-  <at-step title="Step2" description="This is a description."></at-step>
-  <at-step title="Step3" description="This is a description."></at-step>
-</at-steps>
+<Steps current='current' direction="vertical">
+  <Steps.step title="Step1" description="This is a description."></Steps.step>
+  <Steps.step title="Step2" description="This is a description."></Steps.step>
+  <Steps.step title="Step3" description="This is a description."></Steps.step>
+</Steps>
 
-<at-button type="primary" @click="prev" style="margin-top: 12px;">Prev</at-button>
-<at-button type="primary" @click="next" style="margin-top: 12px;">Next</at-button>
+<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
 ```
 :::
 
@@ -129,14 +133,14 @@
 
 :::demo
 ```html
-<at-steps :current='current' size="small" direction="vertical">
-  <at-step title="Step1" description="This is a description."></at-step>
-  <at-step title="Step2" description="This is a description."></at-step>
-  <at-step title="Step3" description="This is a description."></at-step>
-</at-steps>
+<Steps current='current' size="small" direction="vertical">
+  <Steps.step title="Step1" description="This is a description."></Steps.step>
+  <Steps.step title="Step2" description="This is a description."></Steps.step>
+  <Steps.step title="Step3" description="This is a description."></Steps.step>
+</Steps>
 
-<at-button type="primary" @click="prev" style="margin-top: 12px;">Prev</at-button>
-<at-button type="primary" @click="next" style="margin-top: 12px;">Next</at-button>
+<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
 ```
 :::
 
@@ -146,14 +150,14 @@
 
 :::demo
 ```html
-<at-steps :current='current' status="error">
-  <at-step title="Step1" description="This is a description."></at-step>
-  <at-step title="Step2" description="This is a description."></at-step>
-  <at-step title="Step3"></at-step>
-</at-steps>
+<Steps current='current' status="error">
+  <Steps.step title="Step1" description="This is a description."></Steps.step>
+  <Steps.step title="Step2" description="This is a description."></Steps.step>
+  <Steps.step title="Step3"></Steps.step>
+</Steps>
 
-<at-button type="primary" @click="prev" style="margin-top: 12px;">Prev</at-button>
-<at-button type="primary" @click="next" style="margin-top: 12px;">Next</at-button>
+<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
 ```
 :::
 
