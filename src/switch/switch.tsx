@@ -15,13 +15,13 @@ class Switch extends Nerv.Component<SwitchProps, any> {
   private unCheckedText: any
   constructor (props) {
     super(props)
-    this.value = props.value == 'true' ?　true : false
+    this.value = props.value === 'true' ?　true : false
     this.state = {
       switchClass: this.value ? 'at-switch--checked' : ''
     }
     this.onClick = this.onClick.bind(this)
   }
-  onClick (e: MouseEvent) {
+  onClick (e: React.MouseEvent<HTMLSpanElement>) {
     if (this.value) {
       this.setState({
         switchClass: ''
@@ -45,7 +45,7 @@ class Switch extends Nerv.Component<SwitchProps, any> {
   }
   render () {
     const switchClass = this.renderButtonClassNames(this.props)
-    return (<span className={switchClass} onClick={this.onClick} value={this.props.value} style={this.props.style}>
+    return (<span className={switchClass} onClick={this.onClick} data-value={this.props.value} style={this.props.style}>
               <span className='at-switch__text'>
                 {this.value ? this.checkedText : this.unCheckedText}
               </span>
@@ -55,13 +55,13 @@ class Switch extends Nerv.Component<SwitchProps, any> {
     Nerv.Children.forEach(props.children as any, (child) => {
       const childOfChild = child.children
       if (child.props.slot === 'checkedText') {
-        if (childOfChild.vtype != 1) {
+        if (childOfChild.vtype !== 1) {
           this.checkedText = child.children
         } else {
           this.checkedText = <span>{childOfChild.text}</span>
         }
       } else if (child.props.slot === 'unCheckedText') {
-        if (childOfChild.vtype != 1) {
+        if (childOfChild.vtype !== 1) {
           this.unCheckedText = child.children
         } else {
           this.unCheckedText = <span>{childOfChild.text}</span>

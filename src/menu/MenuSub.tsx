@@ -29,7 +29,6 @@ class MenuSub extends Nerv.Component<MenuSubProps, any> {
       isOpen: false
     }
   }
-  componentDidMount () {}
   handleClick = (evt: React.MouseEvent<HTMLDivElement>) => {
     evt.stopPropagation()
     const { mode, disabled } = this.props

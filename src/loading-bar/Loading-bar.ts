@@ -7,12 +7,14 @@ class LoadingBar {
   constructor (options) {
     options = options || {}
 
+    document.body.appendChild(this.container)
     instance = Nerv.createElement(LoadingbarElem, {
       ...options
     })
-    Nerv.render(instance, document.body)
-    document.body.appendChild(instance.dom)
+    Nerv.render(instance, this.container)
+    // document.body.appendChild(instance.dom)
   }
+  container = document.createElement('div')
 
   update (newOptions) {
     if (newOptions.percent) {
@@ -28,7 +30,7 @@ class LoadingBar {
   }
 
   destroy () {
-    document.body.removeChild(instance.dom)
+    document.body.removeChild(this.container)
   }
 }
 

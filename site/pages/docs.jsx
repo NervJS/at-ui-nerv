@@ -26,7 +26,7 @@ class Docs extends Nerv.Component {
                     return (
                       <Route
                         path={`/docs/${item.name.toLowerCase()}`}
-                        component={require(`../view/${'Button'}`).default}
+                        component={require(`../view/${item.name}`).default}
                       />
                     )
                   })

@@ -9,17 +9,17 @@
 
 :::demo
 ```html
-<at-tabs>
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs>
+  <Tabpane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabpane>
+  <Tabpane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabpane>
+  <Tabpane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-</at-tabs>
+  </Tabpane>
+</Tabs>
 ```
 :::
 
@@ -30,17 +30,17 @@
 
 :::demo
 ```html
-<at-tabs>
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs>
+  <Tabpane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabpane>
+  <Tabpane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3" :disabled="true">
+  </Tabpane>
+  <Tabpane label="Tab3" name="name3" disabled="true">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-</at-tabs>
+  </Tabpane>
+</Tabs>
 ```
 :::
 
@@ -50,17 +50,17 @@
 
 :::demo
 ```html
-<at-tabs>
-  <at-tab-pane label="Tab1" name="name1" icon="icon-github">
+<Tabs>
+  <Tabpane label="Tab1" name="name1" icon="icon-github">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2" icon="icon-twitter">
+  </Tabpane>
+  <Tabpane label="Tab2" name="name2" icon="icon-twitter">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3" icon="icon-pocket">
+  </Tabpane>
+  <Tabpane label="Tab3" name="name3" icon="icon-pocket">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-</at-tabs>
+  </Tabpane>
+</Tabs>
 ```
 :::
 
@@ -70,20 +70,20 @@
 
 :::demo
 ```html
-<at-tabs>
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs>
+  <Tabpane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabpane>
+  <Tabpane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabpane>
+  <Tabpane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
+  </Tabpane>
   <div slot="extra">
     <at-button size="small">额外内容</at-button>
   </div>
-</at-tabs>
+</Tabs>
 ```
 :::
 
@@ -93,20 +93,20 @@
 
 :::demo
 ```html
-<at-tabs size="small">
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs size="small">
+  <Tabpane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabpane>
+  <Tabpane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabpane>
+  <Tabpane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
+  </Tabpane>
   <div slot="extra">
     <at-button size="small">额外内容</at-button>
   </div>
-</at-tabs>
+</Tabs>
 ```
 :::
 
@@ -116,20 +116,20 @@
 
 :::demo
 ```html
-<at-tabs type="card" v-model="activeKey">
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs type="card" v-model="activeKey">
+  <Tabpane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabpane>
+  <Tabpane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabpane>
+  <Tabpane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
+  </Tabpane>
   <div slot="extra">
     <at-button size="small">额外内容</at-button>
   </div>
-</at-tabs>
+</Tabs>
 ```
 :::
 
@@ -139,20 +139,20 @@
 
 :::demo
 ```html
-<at-tabs type="card" v-model="activeKey" size="small">
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs type="card" v-model="activeKey" size="small">
+  <Tabpane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabpane>
+  <Tabpane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabpane>
+  <Tabpane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
+  </Tabpane>
   <div slot="extra">
     <at-button size="small">额外内容</at-button>
   </div>
-</at-tabs>
+</Tabs>
 ```
 :::
 
@@ -162,84 +162,36 @@
 
 :::demo
 ```html
-<at-tabs :animated="false" v-model="activeKey">
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs :animated="false" v-model="activeKey">
+  <Tabpane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabpane>
+  <Tabpane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabpane>
+  <Tabpane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-</at-tabs>
+  </Tabpane>
+</Tabs>
 ```
 :::
 
 ## 新增和关闭页签
 
-可以动态增加或关闭标签，但需要监听 `on-tab-remove` 事件，手动删除 `at-tab-pane`
+可以动态增加或关闭标签，但需要监听 `on-tab-remove` 事件，手动删除 `Tabpane`
 
 :::demo
 ```html
-<at-tabs :animated="false" value="tab6" closable @on-tab-remove="removeHandle">
-  <at-tab-pane
+<Tabs :animated="false" value="tab6" closable @on-tab-remove="removeHandle">
+  <Tabpane
     v-for="(item, index) in tabList" :key="index"
     :label="item.label" :name="item.name" :unclosable="index === 0 ? true : false">
     <p>{{ item.content }}</p>
-  </at-tab-pane>
+  </Tabpane>
   <div slot="extra">
     <at-button size="small" @click="addHandle">添加</at-button>
   </div>
-</at-tabs>
-
-<script>
-  export default {
-    data () {
-      return {
-        tabList: [{
-          label: 'Tab1',
-          name: 'tab1',
-          content: 'tab1 content'
-        }, {
-          label: 'Tab2',
-          name: 'tab2',
-          content: 'tab2 content'
-        }, {
-          label: 'Tab3',
-          name: 'tab3',
-          content: 'tab3 content'
-        }, {
-          label: 'Tab4',
-          name: 'tab4',
-          content: 'tab4 content'
-        }, {
-          label: 'Tab5',
-          name: 'tab5',
-          content: 'tab5 content'
-        }, {
-          label: 'Tab6',
-          name: 'tab6',
-          content: 'tab6 content'
-        }],
-        count: 7
-      }
-    },
-    methods: {
-      addHandle () {
-        const count = this.count++
-        this.tabList.push({
-          label: `Tab${count}`,
-          name: `tab${count}`,
-          content: `Tab${count} content`,
-        })
-      },
-      removeHandle (data) {
-        this.tabList.splice(data.index, 1)
-      }
-    }
-  }
-</script>
+</Tabs>
 ```
 :::
 
@@ -285,52 +237,4 @@
 
 
 ```
-<script>
-export default {
-  data () {
-    return {
-      activeKey: 'name3',
-      tabList: [{
-        label: 'Tab1',
-        name: 'tab1',
-        content: 'tab1 content'
-      }, {
-        label: 'Tab2',
-        name: 'tab2',
-        content: 'tab2 content'
-      }, {
-        label: 'Tab3',
-        name: 'tab3',
-        content: 'tab3 content'
-      }, {
-        label: 'Tab4',
-        name: 'tab4',
-        content: 'tab4 content'
-      }, {
-        label: 'Tab5',
-        name: 'tab5',
-        content: 'tab5 content'
-      }, {
-        label: 'Tab6',
-        name: 'tab6',
-        content: 'tab6 content'
-      }],
-      count: 7
-    }
-  },
-  methods: {
-    addHandle () {
-      const count = this.count++
-      this.tabList.push({
-        label: `Tab${count}`,
-        name: `tab${count}`,
-        content: `Tab${count} content`,
-      })
-    },
-    removeHandle (data) {
-      this.tabList.splice(data.index, 1)
-    }
-  }
-}
-</script>
 ```

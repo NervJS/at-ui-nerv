@@ -116,7 +116,7 @@ module.exports = function (source) {
   const imports = "import * as Nerv from 'nervjs';  import copy from 'copy-to-clipboard';" + importMap
 
   let moduleJS = []
-
+  let state = ''
   // 放在这里应该没有问题， 反正是顺序执行的
   let flag = ''
 
@@ -152,6 +152,9 @@ module.exports = function (source) {
             } else if (token.info === 'jsx' || token.info === 'html') {
               // 插入render内
               jsx = token.content
+            } else if (token.info === 'state') {
+              // console.log(typeof )
+              state = token.content.replace(/\\[a-z]/g, ' ').replace(/'/g, `"`)
             }
           }
           i++
@@ -170,5 +173,5 @@ module.exports = function (source) {
     .replace(/<hr>/g, '<hr />')
     .replace(/<br>/g, '<br />')
     .replace(/class=/g, 'className=')
-  return formatModule(imports, moduleJS.join('\n'), content)
+  return formatModule(imports, moduleJS.join('\n'), content, state)
 }

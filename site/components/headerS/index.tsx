@@ -42,7 +42,7 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
           <div className='nav-right' style={{height: toggle ? '0px' : 'auto'}}>
             <ul className='navbar'>
               <li>
-                <a href='https://at-ui.github.io/at-ui/#/zh/guide/color'>指南</a>
+                <a href='https://at-ui.github.io/at-ui/#/zh/guide/color' target='_blank'>指南</a>
               </li>
               <li>
                 <NavLink activeClassName='router-link-active' to='/docs'>

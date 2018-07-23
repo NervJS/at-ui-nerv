@@ -1,0 +1,58 @@
+.tooltip-example {
+  .at-tooltip {
+    & + .at-tooltip {
+      margin-left: 16px;
+    }
+    span {
+      font-size: 12px;
+    }
+    p {
+      color: #fff;
+      font-size: 12px;
+    }
+  }
+  .show-box {
+    max-width: 600px;
+
+    .at-tooltip + .at-tooltip {
+      margin: 0;
+    }
+  }
+  .top,
+  .bottom {
+    padding: 20px;
+    width: 100%;
+
+    .item + .item {
+      margin-left: 30px;
+    }
+  }
+  .center {
+    width: 100%;
+
+    .item + .item {
+      margin-top: 20px;
+    }
+  }
+  .left {
+    flex-direction: column;
+  }
+
+  .item > span {
+    display: inline-block;
+    width: 60px;
+    height: 32px;
+    line-height: 32px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      color: #a0c1ff;
+      border-color: #a0c1ff;
+    }
+  }
+}

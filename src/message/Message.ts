@@ -19,9 +19,15 @@ interface MessageInterface {
   (options?: OptionsContent | string): void
   close?: (id: string, customCloseFunc: (a: VNode) => void) => void
   closeAll?: () => void
+  info?: (e: any) => void
+  success?: (e: any) => void
+  warning?: (e: any) => void
+  error?: (e: any) => void
 }
 
-const Message: MessageInterface = (options = { type: 'info', duration: 3000, icon: 'info' }) => {
+const Message: MessageInterface = (
+  options = { type: 'info', duration: 3000, icon: 'info' }
+) => {
   const container = document.createElement('div')
   document.body.appendChild(container)
   if (typeof options === 'string' || Nerv.isValidElement(options)) {
@@ -80,7 +86,9 @@ Message.close = (id, customCloseFunc) => {
 
   if (len > 1) {
     for (let i = index; i < len - 1; i++) {
-      (instances[i].dom as HTMLElement).style.top = `${parseInt((instances[i].dom as any).style.top) -
+      (instances[i].dom as HTMLElement).style.top = `${parseInt(
+        (instances[i].dom as any).style.top
+      ) -
         removedHeight -
         8}px`
     }

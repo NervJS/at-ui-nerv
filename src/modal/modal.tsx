@@ -20,7 +20,7 @@ interface ModalProps {
   showInput?: boolean
   width?: number | string
   closeOnPressEsc?: boolean
-  type: string
+  type?: string
   willUnmount?: () => void
 }
 
@@ -45,7 +45,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
   static warning: ModalFunc
   static confirm: ModalFunc
   static prompt: ModalFunc
-  static displayName: 'AtModal'
+
   static defaultProps = {
     value: false,
     maskClosable: true,
@@ -54,9 +54,10 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
     showFooter: true,
     showInput: true,
     width: 520,
-    closeOnPressEsc: true
+    closeOnPressEsc: true,
+    type: 'info'
   }
-
+  displayName: 'AtModal'
   constructor (...args) {
     super(...args)
     this.state = {
@@ -71,7 +72,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
     }
   }
   componentDidMount () {
-    const {  value } = this.props
+    const { value } = this.props
     if (value) {
       this.setState({
         visible: true
@@ -129,6 +130,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
       willUmount()
     }
   }
+
   enhanceChildren = () => {
     const { children, onConfirm, onCancel, cancelText, okText } = this.props
     return Nerv.Children.map(
@@ -189,61 +191,65 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
       warning: 'icon-alert-circle',
       info: 'icon-info'
     }
-    const iconClass = classArr[type] || ''
+    const iconClass = classArr[type as never] || ''
     const isIconType = (() => {
-      return ['success', 'error', 'warning', 'info'].indexOf(type) > -1
+      return ['success', 'error', 'warning', 'info'].indexOf(type as never) > -1
     })()
-    return Nerv.createPortal(
-      (
-        <CSSTransition
-          classNames={{
-            enter: 'fade-enter',
-            enterActive: 'fade-enter-active',
-            exit: 'fade-leave',
-            exitActive: 'fade-leave-active'
-          }}
-          in={visible}
-          timeout={300}
-          // onEntered={this.enter}
-          // onExited={this.afterclose}
-          unmountOnExit
-        >
-          <div>
-            <div className={'at-modal__mask'} onClick={this.close} />
-            <div
-              className={classnames('at-modal__wrapper', {
-                'at-modal--hidden': false,
-                'at-modal--confirm': isIconType,
-                [`at-modal--confirm-${type}`]: isIconType
-              })}
-              onClick={this.handleMaskClick}
-            >
+    return (
+      Nerv.createPortal(
+        (
+          <CSSTransition
+            classNames={{
+              enter: 'fade-enter',
+              enterActive: 'fade-enter-active',
+              exit: 'fade-leave',
+              exitActive: 'fade-leave-active'
+            }}
+            in={visible}
+            timeout={300}
+            // onEntered={this.enter}
+            // onExit={this.afterclose}
+            mountOnEnter
+            unmountOnExit
+          >
+            <div className='at-modal__container' >
+              <div className={'at-modal__mask'} onClick={this.close} />
               <div
-                className={classnames('at-modal', modalClass)}
-                style={{ width: `${width}px`, ...modalStyle }}
+                className={classnames('at-modal__wrapper', {
+                  'at-modal--hidden': false,
+                  'at-modal--confirm': isIconType,
+                  [`at-modal--confirm-${type}`]: isIconType
+                })}
+                onClick={this.handleMaskClick}
               >
-                {title ? (
-                  <div className={'at-modal__header'}>
-                    <div className='at-modal__title'>{title}</div>
-                  </div>
-                ) : null}
-                {this.enhanceChildren()}
-                <i className={classnames('icon at-modal__icon', iconClass)} />
-                {showClose ? (
-                  <span
-                    className='at-modal__close'
-                    onClick={this.closeBtnHandle}
-                  >
-                    <i className='icon icon-x' />
-                  </span>
-                ) : null}
+                <div
+                  className={classnames('at-modal', modalClass)}
+                  style={{ width: `${width}px`, ...modalStyle }}
+                >
+                  {title ? (
+                    <div className={'at-modal__header'}>
+                      <div className='at-modal__title'>{title}</div>
+                    </div>
+                  ) : null}
+                  {this.enhanceChildren()}
+                  <i className={classnames('icon at-modal__icon', iconClass)} />
+                  {showClose ? (
+                    <span
+                      className='at-modal__close'
+                      onClick={this.closeBtnHandle}
+                    >
+                      <i className='icon icon-x' />
+                    </span>
+                  ) : null}
+                </div>
               </div>
             </div>
-          </div>
-        </CSSTransition>
-      ) as any,
-      document.body
+          </CSSTransition>
+        ) as any,
+        document.body
+      )
     )
+
   }
 }
 

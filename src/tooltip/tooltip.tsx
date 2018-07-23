@@ -28,14 +28,14 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
       props.type ? `${props.type}` : ''
     ], props.className)
   }
-  onMouseEnter (e: MouseEvent) {
+  onMouseEnter (e: React.MouseEvent<HTMLDivElement>) {
     this.setState({
       display: 'block',
       top: this.top,
       left: this.left
     })
   }
-  onMouseLeave (e: MouseEvent) {
+  onMouseLeave (e: React.MouseEvent<HTMLDivElement>) {
     this.setState({
       display: 'none'
     })
@@ -51,16 +51,35 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
     if (!contentSlot) {
       contentSlot = props.content
     }
-    const tipstyle = {
+    let tipstyle = {
       top: `${this.state.top}px`,
       left: `${this.state.left}px`,
       display: this.state.display
     }
+    const {
+      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      children
+      } = props
+    const needProps = {
+      children,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseOut,
+      onMouseEnter,
+      onMouseLeave,
+      onClick
+      }
     const classname = classnames('at-tooltip__popper',
                                 [props.placement ? `at-tooltip--${this.props.placement}` : 'at-tooltip--top'],
                                 this.props.className)
+
+    if (props.tipstyle) {
+      tipstyle = {...tipstyle, ...props.tipstyle}
+    }
     return (
-    <div className='at-tooltip' style={props.style} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+    <div className='at-tooltip' {...needProps} style={props.style} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
         <span className='at-tooltip__trigger' ref='trigger'>
           {this.props.children}
         </span>

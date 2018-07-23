@@ -138,9 +138,183 @@ describe('menu test', () => {
       .trigger('click')
     Nerv.nextTick(() => {
       setTimeout(() => {
-        expect($(Nerv.findDOMNode(component)).find('.at-menu__submenu--opened').length).toBe(1)
+        expect(
+          $(Nerv.findDOMNode(component)).find('.at-menu__submenu--opened')
+            .length
+        ).toBe(1)
         done()
       }, 2000)
     })
   })
+  it('mouse enter control', (done) => {
+    const onSelect = sinon.spy()
+    const menuJSX = (
+      <Menu onSelect={onSelect} mode={`horizontal`}>
+        {}
+        <Menu.Sub
+          name='1'
+          opened
+          title={
+            <span>
+              <i className='icon icon-life-buoy' />导航菜单一
+            </span>
+          }
+        >
+          {}
+          <Menu.Group title='分组一'>
+            {}
+            <Menu.Item name='1-1'>{}子菜单一</Menu.Item>
+            <Menu.Item name='1-2'>{}子菜单二</Menu.Item>
+          </Menu.Group>
+          <Menu.Group title='分组二'>
+            {}
+            <Menu.Item name='1-3'>{}子菜单三</Menu.Item>
+            <Menu.Item name='1-4'>{}子菜单四</Menu.Item>
+          </Menu.Group>
+        </Menu.Sub>
+        <Menu.Sub
+          name='2'
+          title={
+            <span>
+              <i className='icon icon-life-buoy' />导航菜单二
+            </span>
+          }
+        >
+          {}
+          <Menu.Item name='2-1'>{}子菜单一</Menu.Item>
+          <Menu.Item name='2-2'>{}子菜单二</Menu.Item>
+          <Menu.Item name='2-3'>{}子菜单三</Menu.Item>
+          <Menu.Item name='2-4'>{}子菜单四</Menu.Item>
+        </Menu.Sub>
+      </Menu>
+    )
+    const component = Nerv.render(menuJSX as VNode, scratch)
+    $(Nerv.findDOMNode(component))
+      .find('.at-menu__submenu')
+      .eq(0)
+      .trigger('mouseenter')
+    Nerv.nextTick(() => {
+      expect(
+        $(Nerv.findDOMNode(component))
+          .find('.at-menu__submenu')
+          .eq(0)
+          .hasClass('at-menu__submenu--opened')
+      ).toBeTruthy()
+      done()
+    })
+  })
+  it('mouse leave control', (done) => {
+    const onSelect = sinon.spy()
+    const menuJSX = (
+      <Menu onSelect={onSelect} mode={`horizontal`}>
+        {}
+        <Menu.Sub
+          name='1'
+          opened
+          title={
+            <span>
+              <i className='icon icon-life-buoy' />导航菜单一
+            </span>
+          }
+        >
+          {}
+          <Menu.Group title='分组一'>
+            {}
+            <Menu.Item name='1-1'>{}子菜单一</Menu.Item>
+            <Menu.Item name='1-2'>{}子菜单二</Menu.Item>
+          </Menu.Group>
+          <Menu.Group title='分组二'>
+            {}
+            <Menu.Item name='1-3'>{}子菜单三</Menu.Item>
+            <Menu.Item name='1-4'>{}子菜单四</Menu.Item>
+          </Menu.Group>
+        </Menu.Sub>
+        <Menu.Sub
+          name='2'
+          title={
+            <span>
+              <i className='icon icon-life-buoy' />导航菜单二
+            </span>
+          }
+        >
+          {}
+          <Menu.Item name='2-1'>{}子菜单一</Menu.Item>
+          <Menu.Item name='2-2'>{}子菜单二</Menu.Item>
+          <Menu.Item name='2-3'>{}子菜单三</Menu.Item>
+          <Menu.Item name='2-4'>{}子菜单四</Menu.Item>
+        </Menu.Sub>
+      </Menu>
+    )
+    const component = Nerv.render(menuJSX as VNode, scratch)
+    $(Nerv.findDOMNode(component))
+      .find('.at-menu__submenu')
+      .eq(0)
+      .trigger('mouseenter')
+    $(Nerv.findDOMNode(component))
+      .find('.at-menu__submenu')
+      .eq(0)
+      .trigger('mouseleave')
+    Nerv.nextTick(() => {
+      expect(
+        $(Nerv.findDOMNode(component))
+          .find('.at-menu__submenu')
+          .eq(0)
+          .hasClass('at-menu__submenu--opened')
+      ).toBeFalsy()
+      done()
+    })
+  })
+  it('onSelect', (done) => {
+    const onSelect = sinon.spy()
+    const menuJSX = (
+      <Menu onSelect={onSelect} mode={`horizontal`}>
+        {}
+        <Menu.Sub
+          name='1'
+          opened
+          title={
+            <span>
+              <i className='icon icon-life-buoy' />导航菜单一
+            </span>
+          }
+        >
+          {}
+          <Menu.Group title='分组一'>
+            {}
+            <Menu.Item name='1-1'>{}子菜单一</Menu.Item>
+            <Menu.Item name='1-2'>{}子菜单二</Menu.Item>
+          </Menu.Group>
+          <Menu.Group title='分组二'>
+            {}
+            <Menu.Item name='1-3'>{}子菜单三</Menu.Item>
+            <Menu.Item name='1-4'>{}子菜单四</Menu.Item>
+          </Menu.Group>
+        </Menu.Sub>
+        <Menu.Sub
+          name='2'
+          title={
+            <span>
+              <i className='icon icon-life-buoy' />导航菜单二
+            </span>
+          }
+        >
+          {}
+          <Menu.Item name='2-1'>{}子菜单一</Menu.Item>
+          <Menu.Item name='2-2'>{}子菜单二</Menu.Item>
+          <Menu.Item name='2-3'>{}子菜单三</Menu.Item>
+          <Menu.Item name='2-4'>{}子菜单四</Menu.Item>
+        </Menu.Sub>
+      </Menu>
+    )
+    const component = Nerv.render(menuJSX as VNode, scratch)
+    $(Nerv.findDOMNode(component))
+      .find('.at-menu__submenu')
+      .find('.at-menu__item').eq(0)
+      .trigger('click')
+    Nerv.nextTick(() => {
+      expect(onSelect.callCount).toBe(1)
+      done()
+    })
+  })
+
 })

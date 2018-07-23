@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Switch} from '@src';
+---
 # Switch 开关
 
 ----
@@ -10,9 +13,11 @@
 基础用法，状态切换会触发事件
 
 :::demo
-```html
-<at-switch v-model="check" @change="changeStatus"></at-switch>
-<span>{{check}}</span>
+ ```jsx
+<Switch    onChange={(val)=>{this.setState({
+  check: val
+})}}></Switch>
+<span>{this.state.check}</span>
 ```
 :::
 
@@ -21,15 +26,15 @@
 开关内部内容可自定义，例如插入文字或图标，增强视觉效果。通过 `slot="checkedText"` 和 `slot="unCheckedText"` 完成
 
 :::demo
-```html
-<at-switch>
+ ```jsx
+<Switch>
   <span slot="checkedText">开</span>
   <span slot="unCheckedText">关</span>
-</at-switch>
-<at-switch>
+</Switch>
+<Switch>
   <span slot="checkedText"><i class="icon icon-left-arrow"></i></span>
   <span slot="unCheckedText"><i class="icon icon-right-arrow"></i></span>
-</at-switch>
+</Switch>
 ```
 :::
 
@@ -38,16 +43,16 @@
 添加属性 `disabled` 禁用开关按钮
 
 :::demo
-```html
-<at-switch disabled :value="true">
+ ```jsx
+<Switch disabled value="true">
   <span slot="checkedText">开</span>
   <span slot="unCheckedText">关</span>
-</at-switch>
-<at-switch disabled>
+</Switch>
+<Switch disabled>
   <span slot="checkedText">开</span>
   <span slot="unCheckedText">关</span>
-</at-switch>
-<at-switch disabled></at-switch>
+</Switch>
+<Switch disabled></Switch>
 ```
 :::
 
@@ -56,30 +61,30 @@
 添加属性 `size` 可设置按钮的尺寸大小，默认提供三种尺寸：`small`，`normal`，`large`
 
 :::demo
-```html
+ ```jsx
 <div>
-  <at-switch size="small"></at-switch>
-  <at-switch size="small">
+  <Switch size="small"></Switch>
+  <Switch size="small">
     <span slot="checkedText">开</span>
     <span slot="unCheckedText">关</span>
-  </at-switch>
-  <at-switch size="small" disabled></at-switch>
+  </Switch>
+  <Switch size="small" disabled></Switch>
 </div>
 <div style="margin-top: 8px;">
-  <at-switch></at-switch>
-  <at-switch>
+  <Switch></Switch>
+  <Switch>
     <span slot="checkedText">开</span>
     <span slot="unCheckedText">关</span>
-  </at-switch>
-  <at-switch disabled></at-switch>
+  </Switch>
+  <Switch disabled></Switch>
 </div>
 <div style="margin-top: 8px;">
-  <at-switch size="large"></at-switch>
-  <at-switch size="large">
+  <Switch size="large"></Switch>
+  <Switch size="large">
     <span slot="checkedText">开</span>
     <span slot="unCheckedText">关</span>
-  </at-switch size="large">
-  <at-switch size="large" disabled></at-switch>
+  </Switch >
+  <Switch size="large" disabled></Switch>
 </div>
 ```
 :::
@@ -103,27 +108,4 @@
 
 | 事件名称      | 说明          | 返回值  |
 |---------- |-------------- |---------- |
-| change | 开关状态变化时触发 | 开关的状态 |
-
-```
-<script>
-export default {
-  data() {
-    return {
-      check: true
-    }
-  },
-  methods: {
-    changeStatus(status) {
-      this.check = status
-    }
-  }
-}
-</script>
-
-<style lang="scss" scoped>
-.at-switch + .at-switch {
-  margin-left: 20px;
-}
-</style>
-```
+| onChange | 开关状态变化时触发 | 开关的状态 |

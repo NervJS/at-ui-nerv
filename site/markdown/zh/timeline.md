@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Timeline} from '@src';
+---
 # Timeline 时间轴
 
 ---
@@ -8,13 +11,13 @@
 基本的时间轴。
 
 :::demo
-```html
-<at-timeline>
-  <at-timeline-item><p>刷牙洗脸</p></at-timeline-item>
-  <at-timeline-item><p>吃早餐</p></at-timeline-item>
-  <at-timeline-item><p>上班</p></at-timeline-item>
-  <at-timeline-item><p>睡觉</p></at-timeline-item>
-</at-timeline>
+```jsx
+<Timeline>
+  <Timeline.Item><p>刷牙洗脸</p></Timeline.Item>
+  <Timeline.Item><p>吃早餐</p></Timeline.Item>
+  <Timeline.Item><p>上班</p></Timeline.Item>
+  <Timeline.Item><p>睡觉</p></Timeline.Item>
+</Timeline>
 ```
 :::
 
@@ -23,13 +26,13 @@
 圆圈颜色，绿色用于已完成、成功状态，红色表示错误状态，黄色表示警告状态，蓝色可表示正在进行或其他默认状态。
 
 :::demo
-```html
-<at-timeline>
-  <at-timeline-item color="blue"><p>刷牙洗脸</p></at-timeline-item>
-  <at-timeline-item color="green"><p>吃早餐</p></at-timeline-item>
-  <at-timeline-item color="red"><p>上班</p></at-timeline-item>
-  <at-timeline-item color="yellow"><p>睡觉</p></at-timeline-item>
-</at-timeline>
+```jsx
+<Timeline>
+  <Timeline.Item color="blue"><p>刷牙洗脸</p></Timeline.Item>
+  <Timeline.Item color="green"><p>吃早餐</p></Timeline.Item>
+  <Timeline.Item color="red"><p>上班</p></Timeline.Item>
+  <Timeline.Item color="yellow"><p>睡觉</p></Timeline.Item>
+</Timeline>
 ```
 :::
 
@@ -38,13 +41,13 @@
 在最后位置添加一个幽灵节点，表示时间轴未完成，还在记录过程中。
 
 :::demo
-```html
-<at-timeline pending>
-  <at-timeline-item><p>刷牙洗脸</p></at-timeline-item>
-  <at-timeline-item><p>吃早餐</p></at-timeline-item>
-  <at-timeline-item><p>上班</p></at-timeline-item>
-  <at-timeline-item><p>睡觉</p></at-timeline-item>
-</at-timeline>
+```jsx
+<Timeline pending>
+  <Timeline.Item><p>刷牙洗脸</p></Timeline.Item>
+  <Timeline.Item><p>吃早餐</p></Timeline.Item>
+  <Timeline.Item><p>上班</p></Timeline.Item>
+  <Timeline.Item><p>睡觉</p></Timeline.Item>
+</Timeline>
 ```
 :::
 
@@ -53,25 +56,25 @@
 接受一个 `slot` 来自定义轴点的内容，比如一个图标。
 
 :::demo
-```html
-<at-timeline>
-  <at-timeline-item color="blue">
+```jsx
+<Timeline>
+  <Timeline.Item color="blue">
     <i slot="dot" class="icon icon-github"></i>
     <p>刷牙洗脸</p>
-  </at-timeline-item>
-  <at-timeline-item color="green">
+  </Timeline.Item>
+  <Timeline.Item color="green">
     <i slot="dot" class="icon icon-zap"></i>
     <p>吃早餐</p>
-  </at-timeline-item>
-  <at-timeline-item color="red">
+  </Timeline.Item>
+  <Timeline.Item color="red">
     <i slot="dot" class="icon icon-award"></i>
     <p>上班</p>
-  </at-timeline-item>
-  <at-timeline-item color="yellow">
+  </Timeline.Item>
+  <Timeline.Item color="yellow">
     <i slot="dot" class="icon icon-watch"></i>
     <p>睡觉</p>
-  </at-timeline-item>
-</at-timeline>
+  </Timeline.Item>
+</Timeline>
 ```
 :::
 

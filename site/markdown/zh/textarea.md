@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Textarea} from '@src';
+---
 # Textarea 文本域
 
 ----
@@ -10,8 +13,8 @@
 默认固定为两行的文本域，使用方法类似 `AtInput` 组件
 
 :::demo
-```html
-<at-textarea v-model="inputValue" placeholder="这里是输入框..."></at-textarea>
+```jsx
+<Textarea   placeholder="这里是输入框..."></Textarea>
 ```
 :::
 
@@ -20,8 +23,8 @@
 添加属性 `disabled` 禁用文本域输入框
 
 :::demo
-```html
-<at-textarea v-model="inputValue" placeholder="这里是输入框..." disabled></at-textarea>
+```jsx
+<Textarea   placeholder="这里是输入框..." disabled></Textarea>
 ```
 :::
 
@@ -30,9 +33,9 @@
 可根据输入文本的行数，自动调整输入框的高度，可分别通过 `minRows` 和 `maxRows` 属性来设置文本域的最小和最大行数
 
 :::demo
-```html
+```jsx
 <p class="demo-desc">minRows=2, maxRows=4</p>
-<at-textarea v-model="inputValue2" min-rows="2" max-rows="4" placeholder="这里输入内容，请输入多行"></at-textarea>
+<Textarea   min-rows="2" max-rows="4" placeholder="这里输入内容，请输入多行"></Textarea>
 ```
 :::
 
@@ -41,8 +44,8 @@
 设置属性 `autosize`，可根据输入文本的行数，自动调整输入框的高度，不限制行数。如果同时使用 `autosize` 和 `minRows`，会优先使用 `autosize`
 
 :::demo
-```html
-<at-textarea v-model="inputValue3" autosize placeholder="这里输入内容，请输入多行"></at-textarea>
+```jsx
+<Textarea   autosize placeholder="这里输入内容，请输入多行"></Textarea>
 ```
 :::
 
@@ -72,8 +75,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .at-textarea {
-    & + .at-textarea {
+  .Textarea {
+    & + .Textarea {
       margin-top: 15px;
     }
   }

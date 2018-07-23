@@ -85,7 +85,7 @@ onClick={
 
 ## 不同类型的通知提醒
 
-设置参数 `type` 定义不同类型的通知提醒，默认支持四种类型：`success`，`Error`，`Warning`，`Info`
+设置参数 `type` 定义不同类型的通知提醒，默认支持四种类型：`success`，`error`，`warning`，`info`
 
 :::demo
 
