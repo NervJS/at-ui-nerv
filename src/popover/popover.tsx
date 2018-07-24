@@ -1,15 +1,15 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-import {calculatePosition} from '../util/util'
+import { calculatePosition } from '../util/util'
 
 type triggerType = 'hover' | 'focus' | 'click'
 export interface PopoverProps {
-  className?: string,
-  type?: string,
-  content?: string,
-  placement?: string,
-  title?: string,
-  trigger?: triggerType,
+  className?: string
+  type?: string
+  content?: string
+  placement?: string
+  title?: string
+  trigger?: triggerType
 }
 
 class Popover extends Nerv.Component<PopoverProps, any> {
@@ -19,9 +19,9 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   constructor (props) {
     super(props)
     this.state = {
-        top: 0,
-        left: 0,
-        display: 'block'
+      top: 0,
+      left: 0,
+      display: 'block'
     }
     this.onMouseEnter = this.onMouseEnter.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
@@ -49,22 +49,22 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   }
   clickCancelHandler (e: MouseEvent) {
     if (this.enter) {
-      setTimeout(()=>{
+      setTimeout(() => {
         this.setState({
           display: 'none'
         })
         this.enter = false
-      },200)
+      }, 200)
     }
   }
   onMouseEnter (e: MouseEvent) {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setState({
         display: 'block',
         top: this.top,
         left: this.left
       })
-    },200)
+    }, 200)
   }
   onMouseLeave (e: MouseEvent) {
     this.setState({
@@ -75,9 +75,16 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     const props = this.props
     const {
       style,
-      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseEnter,
+      onMouseOut,
+      onMouseLeave,
+      onClick,
       children
-      } = props
+    } = props
     const needProps = {
       children,
       onDragLeave,
@@ -88,24 +95,39 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       onMouseEnter,
       onMouseLeave,
       onClick
-      }
+    }
     const tipstyle = {
       top: `${this.state.top}px`,
       left: `${this.state.left}px`,
       display: this.state.display
     }
-    const classname = classnames('at-popover__popper',
-                                [props.placement ? `at-popover--${this.props.placement}` : 'at-popover--top'],
-                                this.props.className)
+    const classname = classnames(
+      'at-popover__popper',
+      [
+        props.placement
+          ? `at-popover--${this.props.placement}`
+          : 'at-popover--top'
+      ],
+      this.props.className
+    )
     let title: any = null
     let content: any = null
-    let contentFlag=false
-    Nerv.Children.map(props.children as any, (child) => {
-      if (child.props && child.props.slot) {
-        if (child.props.slot === 'content') {content = child.children;contentFlag=true}
-        if (child.props.slot === 'title') {title = child.children}
-      }
-    }, null)
+    let contentFlag = false
+    Nerv.Children.map(
+      props.children as any,
+      (child) => {
+        if (child.props && child.props.slot) {
+          if (child.props.slot === 'content') {
+            content = child.children
+            contentFlag = true
+          }
+          if (child.props.slot === 'title') {
+            title = child.children
+          }
+        }
+      },
+      null
+    )
     if (!content && props.content) {
       content = props.content
     }
@@ -113,14 +135,18 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       title = props.title
     }
     if (props.title) {
-      title = (<div className='at-popover__title'>
-                <div>{props.title}</div>
-              </div>)
+      title = (
+        <div className='at-popover__title'>
+          <div>{props.title}</div>
+        </div>
+      )
     }
     if (contentFlag) {
-      content = (<div className='at-popover__content'>
-                  <div>{content}</div>
-                </div>)
+      content = (
+        <div className='at-popover__content'>
+          <div>{content}</div>
+        </div>
+      )
     }
     return (
       <div className='at-popover' ref='wrapper' style={style} {...needProps}>
@@ -128,7 +154,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
           {props.children}
         </span>
         <div className={classname} style={tipstyle} ref='popper'>
-          <div className='at-popover__arrow'></div>
+          <div className='at-popover__arrow' />
           {title}
           {content}
         </div>
@@ -157,16 +183,18 @@ class Popover extends Nerv.Component<PopoverProps, any> {
         this.refs.wrapper.addEventListener('focus', this.onMouseEnter)
         this.refs.wrapper.addEventListener('blur', this.onMouseLeave)
         break
-      default :
+      default:
         this.refs.wrapper.addEventListener('click', this.clickHandler)
         window.addEventListener('click', this.clickCancelHandler)
         break
     }
   }
   componentWillUnMount () {
-    this.refs.wrapper.removeEventListener(this.props.trigger || 'click', this.onMouseEnter)
+    this.refs.wrapper.removeEventListener(
+      this.props.trigger || 'click',
+      this.onMouseEnter
+    )
   }
-
 }
 
 export default Popover

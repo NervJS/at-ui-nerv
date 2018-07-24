@@ -2,7 +2,7 @@ import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
 import CollapseTransition from '../animations/collapse-transition'
-// import { CSSProperties } from 'react'
+import { CSSProperties } from 'react'
 import { getStyle } from '../utils/util'
 
 interface MenuSubProps {
@@ -29,8 +29,7 @@ class MenuSub extends Nerv.Component<MenuSubProps, any> {
       isOpen: false
     }
   }
-  componentDidMount () {}
-  handleClick = (evt: any) => {
+  handleClick = (evt: React.MouseEvent<HTMLDivElement>) => {
     evt.stopPropagation()
     const { mode, disabled } = this.props
     const { isOpen } = this.state
@@ -145,7 +144,7 @@ class MenuSub extends Nerv.Component<MenuSubProps, any> {
   render () {
     const { disabled, title, mode, active } = this.props
     const { isOpen } = this.state
-    const dropStyle: any = {
+    const dropStyle: CSSProperties = {
       minWidth: getStyle(Nerv.findDOMNode(this), 'width')
     }
     return (

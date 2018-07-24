@@ -17,7 +17,7 @@ describe('menu test', () => {
     document.body.appendChild(scratch)
   })
 
-  afterEach(() => {
+  afterAll(() => {
     scratch.parentNode.removeChild(scratch)
     scratch = null
   })
@@ -127,7 +127,6 @@ describe('menu test', () => {
         </Menu.Sub>
       </Menu>
     )
-
     const component = Nerv.render(menuJSX as VNode, scratch)
     $(Nerv.findDOMNode(component))
       .find('.at-menu__submenu-title')

@@ -1,4 +1,3 @@
-
 import * as Nerv from 'nervjs'
 
 import Button from '../../../src/button'

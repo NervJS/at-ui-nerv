@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-// import { CSSProperties } from 'react'
+import { CSSProperties } from 'react'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
 import MenuSub from './MenuSub'
@@ -16,7 +16,6 @@ interface MenuProps {
 }
 
 class Menu extends Nerv.Component<MenuProps, any> {
-  displayName = 'AtMenu'
   static Group: typeof MenuGroup
   static Item: typeof MenuItem
   static Sub: typeof MenuSub
@@ -27,6 +26,7 @@ class Menu extends Nerv.Component<MenuProps, any> {
     width: '240px',
     router: false
   }
+  displayName = 'AtMenu'
   constructor (...args) {
     super(...args)
     const { activeName } = this.props
@@ -69,7 +69,7 @@ class Menu extends Nerv.Component<MenuProps, any> {
               ...child.props,
               mode: inlineCollapsed ? 'inlineCollapsed' : mode,
               name: child.props.name ? child.props.name : idx,
-              active: child.props.name == currentActiveChildName,
+              active: child.props.name === currentActiveChildName,
               _onSelect: this.onChildSelect,
               _onOpened: this.onChildOpened,
               parentElem: this,
@@ -112,15 +112,14 @@ class Menu extends Nerv.Component<MenuProps, any> {
       this.setState(
         {
           currentActiveItemName: activeName
-        },
-        () => {}
+        }
       )
     }
   }
 
   render () {
     const { width, theme, mode } = this.props
-    const ulStyle = (): any => {
+    const ulStyle = (): CSSProperties => {
       const style: {
         width?: string
       } = {}

@@ -114,8 +114,8 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     let extra: any = []
     Nerv.Children.forEach(children as any, (child, index) => {
       const props = child.props
-      if (props.slot && props.slot === 'extra') {
-        // 如果是附加内容
+      if (props.slot && props.slot == 'extra') {
+        //如果是附加内容
         extra.push(child)
       } else {
         const {disabled= false, label, icon} = props
@@ -126,7 +126,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
         let refTab: string = ''
         if (disabledFlag) {
           classname += ' at-tabs-nav__item--disabled'
-        } else if (this.props.activeIndex === index) {
+        } else if (this.props.activeIndex == index) {
           classname += ' at-tabs-nav__item--active'
           refTab = 'activeTab'
         }
@@ -158,10 +158,10 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     props.onChange && props.onChange (index)
   }
   renderTransitionStyle () {
-    // 这个是tabbody的动画移动
+    //这个是tabbody的动画移动
     const animated = this.props.animated || true
     let offset = - (this.props.activeIndex * 100)
-    if (!animated || animated === 'false') {
+    if (!animated || animated == 'false') {
       offset = 0
     }
     return {transform: `translate3d(${offset}%, 0px, 0px)`}
@@ -225,43 +225,55 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   renderBody () {
     const {children, animated= true} = this.props
     const childrenResult: any[] = []
-    if (!animated || animated === 'false') {
+    if (!animated || animated == 'false') {
       Nerv.Children.forEach(children as any, (child, index) => {
-        if (!(child.props.slot && child.props.slot === 'extra')) {
+        if (!(child.props.slot && child.props.slot == 'extra')) {
+          console.log('not')
           child.props.animated = false
           child.props.activeIndex = this.props.activeIndex
           child.props.index = index
           childrenResult.push(child)
         }
       }, null)
+      console.log(childrenResult)
+      return childrenResult
+    } else {
+      Nerv.Children.forEach(children as any, (child, index) => {
+        if (!(child.props.slot && child.props.slot == 'extra')) {
+          console.log('not')
+          child.props.activeIndex = this.props.activeIndex
+          child.props.index = index
+          childrenResult.push(child)
+        }
+      }, null)
+      console.log(childrenResult)
       return childrenResult
     }
-    return children
   }
   componentDidMount () {
-    this.updateHandle() // 没有setState，给scrollable赋值
-    this.scrollToActiveTab()// 没哟setState,给this.navOffset赋值
-    this.updateAfterUpdate(this.state, 'mount') // setState,更新页面，显示按钮
+    this.updateHandle() //没有setState，给scrollable赋值
+    this.scrollToActiveTab()//没哟setState,给this.navOffset赋值
+    this.updateAfterUpdate(this.state, 'mount') //setState,更新页面，显示按钮
     window.addEventListener('resize', this.updateHandle, false)
   }
   updateAfterUpdate (prevState, str?) {
     const flag = this.prevable || this.nextable
-    if (prevState.scrollable !== flag) {
+    if (prevState.scrollable != flag) {
       this.setState({
         scrollable: flag
       })
     }
-    if (prevState.prevable !== this.prevable) {
+    if (prevState.prevable != this.prevable) {
       this.setState({
         prevable: this.prevable
       })
     }
-    if (prevState.nextable !== this.nextable) {
+    if (prevState.nextable != this.nextable) {
       this.setState({
         nextable: this.nextable
       })
     }
-    if (prevState.navOffset !== this.navOffset) {
+    if (prevState.navOffset != this.navOffset) {
       this.setState({
         navOffset: this.navOffset
       })
@@ -269,7 +281,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   }
   componentDidUpdate (prevProps, prevState) {
     this.updateHandle()
-    // 如果不是由前后跳转按钮触发，那么就不需要进行scrollToActiveTab操作
+    //如果不是由前后跳转按钮触发，那么就不需要进行scrollToActiveTab操作
     if (!this.launchByActive) {
       this.scrollToActiveTab()
     }
@@ -277,7 +289,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     // this.launchByActive = false
   }
   componentWillUpdate (nextProps) {
-    if (nextProps.activeIndex !== this.props.activeIndex) {
+    if (nextProps.activeIndex != this.props.activeIndex) {
       this.launchByActive = false
     }
   }
@@ -290,13 +302,13 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     const currentOffset = this.state.navOffset
     let newOffset = currentOffset
     if (activeTabBounds.left < navScrollBounds.left) {
-      if (activeTabBounds.left !== this.lastActiveLeft) {
+      if (activeTabBounds.left != this.lastActiveLeft) {
         newOffset = currentOffset - (navScrollBounds.left - activeTabBounds.left) - activeTabBounds.width
         this.lastActiveLeft = activeTabBounds.left
       }
     }
     if (activeTabBounds.right > navScrollBounds.right) {
-      if (activeTabBounds.right !== this.lastActiveRight) {
+      if (activeTabBounds.right != this.lastActiveRight) {
         newOffset = currentOffset + (activeTabBounds.right - navScrollBounds.right) + activeTabBounds.width
         this.lastActiveRight = activeTabBounds.right
       }

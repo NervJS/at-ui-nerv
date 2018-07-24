@@ -47,7 +47,8 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   }
   handleJumpNext () {
     const page = this.state.currPage + 5
-    page > this.totalPage ? this.pageClickHandler(this.totalPage) : this.pageClickHandler(page)
+    const totalPage = this.totalPage()
+    page > totalPage ? this.pageClickHandler(totalPage) : this.pageClickHandler(page)
   }
   pageRange () {
     const range: any[] = []
@@ -105,7 +106,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
         <li className='at-pagination__item' onClick={this.pageClickHandler.bind(this, pageNum)}>{pageNum}</li>
       )
     }
-    if (currPage !== 1 && currPage !== totalPage) {
+    if (currPage != 1 && currPage != totalPage) {
       list.push(
         <li className='at-pagination__item at-pagination__item--active' onClick={this.pageClickHandler.bind(this, currPage)}>{currPage}</li>
       )
@@ -151,7 +152,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
           <i className='icon icon-chevron-left'></i>
         </li>
         <div className='at-pagination__simple-paging'>
-          <input ref='pageInputSimple' type='text' className='at-input__original' value={this.state.currPage}  />
+          <input ref='pageInputSimple' type='text' className='at-input__original' value={this.state.currPage} onKeyPress={this.keyPressSimpleHandler} />
           <span>/</span>
           <span className='at-pagination__paging-total'>{this.page}</span>
         </div>
@@ -177,7 +178,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     return this.props.showQuickJump ?
       <div className='at-pagination__quickjump'>
         <span>前往</span>
-        <input type='text' className='at-input__original' ref='pageInput'  value={this.state.currPage} />
+        <input type='text' className='at-input__original' ref='pageInput' onKeyPress={this.keyPressHandler} value={this.state.currPage} />
         <span>页</span>
       </div> : null
   }

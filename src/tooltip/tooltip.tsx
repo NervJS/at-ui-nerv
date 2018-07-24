@@ -28,14 +28,14 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
       props.type ? `${props.type}` : ''
     ], props.className)
   }
-  onMouseEnter (e: any) {
+  onMouseEnter (e: React.MouseEvent<HTMLDivElement>) {
     this.setState({
       display: 'block',
       top: this.top,
       left: this.left
     })
   }
-  onMouseLeave (e: any) {
+  onMouseLeave (e: React.MouseEvent<HTMLDivElement>) {
     this.setState({
       display: 'none'
     })

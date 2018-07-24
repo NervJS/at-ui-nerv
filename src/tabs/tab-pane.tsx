@@ -5,23 +5,23 @@ export interface TabPaneProps {
   className?: string,
   type?: string,
   name?: string | number,
-  label?:string,
-  icon?:string,
+  label?: string,
+  icon?: string,
   disabled?: boolean | string,
   closable?: boolean | string
 }
 
 class TabPane extends Nerv.Component<TabPaneProps, any> {
-  private index:number
+  private index: number
   constructor (props) {
     super(props)
     this.index = props.index
   }
   renderTabPaneClassNames (props: TabPaneProps) {
-    return classnames("at-tabs__pane", [
+    return classnames('at-tabs__pane', [
     ], props.className)
   }
- 
+
   render () {
     const props = this.props
     let {
@@ -41,19 +41,18 @@ class TabPane extends Nerv.Component<TabPaneProps, any> {
       onClick
       }
     const classNames = this.renderTabPaneClassNames(props)
-    if(props.animated == false) {
+    if (props.animated == false) {
       let display
-      if(this.props.activeIndex == this.index) {
+      if (this.props.activeIndex == this.index) {
         display = 'block'
       } else {
         display = 'none'
       }
-      style = Object.assign({},style,{
-        display:display
-      })
+      style = {...style,
+               display}
     }
-    if(props.closable) {
-      
+    if (props.closable) {
+
     }
     return (
       <div className={classNames} {...needProps} style={style} >

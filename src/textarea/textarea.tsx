@@ -62,7 +62,7 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
       disabled = true
     }
     let styleComputed: any = {}
-    if (typeof style == 'string' || style instanceof String) {
+    if (typeof style === 'string' || style instanceof String) {
       styleComputed = Object.assign(styleStr2Obj(style), {
         height: this.state.height
       })

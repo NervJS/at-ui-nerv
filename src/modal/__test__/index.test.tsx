@@ -15,7 +15,6 @@ describe('modal test', () => {
     document.body.appendChild(scratch)
   })
   afterEach(() => {
-    //   console.log($('.at-modal__container'))
     $('.at-modal__container').remove()
   })
   afterAll(() => {
@@ -124,7 +123,7 @@ describe('modal test', () => {
   it('取消 btn should trigger onCancel', (done) => {
     const onCancel = sinon.spy()
     const modalJSX = (
-      <Modal value={true} title={'这是标题4'} onCancel={onCancel}>
+      <Modal value={true} title={'这是标题4'} type={'success'} onCancel={onCancel}>
         {}
         <Modal.body style={{ textAlign: 'center' }}>
           {} <p>能看到这里的内容吗？</p>
@@ -146,5 +145,32 @@ describe('modal test', () => {
         done()
       })
     })
+  })
+  it('different mode should work', async () => {
+    const modes = {
+      info: 'icon-info',
+      success: 'icon-check-circle',
+      warning: 'icon-alert-circle',
+      error: 'icon-x-circle'
+    }
+    for (const mode in modes) {
+      const modalJSX = (
+        <Modal value={true}  type={mode}>
+        {}
+        <Modal.body style={{ textAlign: 'center' }}>
+          {} <p>能看到这里的内容吗？</p>
+        </Modal.body>
+        <Modal.footer showCancel />
+      </Modal>
+      )
+      Nerv.render(modalJSX as VNode, scratch)
+      await new Promise((resolve, reject) => {
+        Nerv.nextTick(() => {
+          expect($('.at-modal__icon').hasClass(modes[mode])).toBeTruthy()
+          $('.at-btn--primary').trigger('click')
+          resolve()
+        })
+      })
+    }
   })
 })

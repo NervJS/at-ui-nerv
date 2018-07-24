@@ -9,7 +9,6 @@ export interface SelectProps {
     loading?: boolean
     circle?: boolean
     disabled?: boolean
-    value?: string | number
 }
 
 class Select extends Nerv.Component<SelectProps, any> {
@@ -20,28 +19,18 @@ class Select extends Nerv.Component<SelectProps, any> {
     private propsSelectOption: any[]
     private mulOptionChosen: any[]
     private searchOption: any[]
-    private clickTarget: any
     constructor (props) {
       super(props)
       let optionChosen: any = []
       if (this.props.value) {
         optionChosen = optionChosen.concat(this.props.value)
       }
-      let chosenSpan
-      if (optionChosen.length > 0) {
-        const chosenIndex = optionChosen[0]
-        const propsChildren = this.props.children || []
-        const chosenChild = propsChildren[chosenIndex] || {label: ''}
-        chosenSpan = chosenChild.label || (chosenChild.props || {}).children || ''
-      }
       this.state = {
         isDropDown: false,
         optionChosen: optionChosen || [], //存的都是下标
         optionShow: [], //针对filterable,存的也是下标
         selected: optionChosen.length > 0 ? true : false,
-        calcBottom: 0,
-        inputValue: chosenSpan
-
+        calcBottom: 0
       }
       this.mulOptionChosen = []
       this.propsSelectOption = []
@@ -57,8 +46,7 @@ class Select extends Nerv.Component<SelectProps, any> {
       if (this.props.filterable) {
         const optionShowDom: any[] = []
         this.state.optionShow.forEach((item) => {
-          const option = (this.props.children || [])[item]
-          optionShowDom.push(option)
+          optionShowDom.push((this.props.children || [])[item])
         })
         return optionShowDom
       } else {
@@ -78,9 +66,9 @@ class Select extends Nerv.Component<SelectProps, any> {
       return style
     }
     renderSingleSelect () {
+      if (this.props.multiple || this.props.filterable) {return}
       const propsChildren = this.getPropsSelectOption()
-      let style = this.state.selected ? this.DISPLAY_BLOCK : this.DISPLAY_NONE
-      if (this.props.multiple || this.props.filterable) {style = this.DISPLAY_NONE}
+      const style = this.state.selected ? this.DISPLAY_BLOCK : this.DISPLAY_NONE
       const chosen = this.state.optionChosen[0]
       const chosenChildren = propsChildren[chosen] || {props: {label: '', children: []}}
       const chosenSpan = chosenChildren.props.label || chosenChildren.props.children//没有label会选择标签结构本身
@@ -94,12 +82,10 @@ class Select extends Nerv.Component<SelectProps, any> {
         const chosenChildren = (this.getPropsSelectOption() || [])[item]
         const key = chosenChildren.props.key
         const chosenSpan = chosenChildren.props.label || chosenChildren.props.children
-        const option = (<span className='at-tag'>
+        result.push(<span className='at-tag'>
                         <span className='at-tag__text'>{chosenSpan}</span>
                         <i className='icon icon-x at-tag__close' onClick={this.removeMultipleChoice.bind(this, key)}></i>
                       </span>)
-        option.key = index
-        result.push(option)
       })
       return result
     }
@@ -138,14 +124,6 @@ class Select extends Nerv.Component<SelectProps, any> {
           notFoundStyle = this.DISPLAY_BLOCK
           listStyle = this.DISPLAY_NONE
       }
-      let dropDownClass = 'at-select__dropdown at-select__dropdown--bottom'
-      if (this.state.isDropDown) {
-        dropDownClass += ' slide-up-enter slide-up-enter-active'
-      }
-      // else {
-      //   dropDownClass += ' slide-up-leave slide-up-leave-active'
-      // }
-      // dropDownClass += ' slide-up-leave slide-up-leave-active'
       return (
       <div className={this.renderToggleArrowClass()} data-v-a01f69b8='' style={style}>
         <div className='at-select__selection' ref='trigger' onClick={this.handleClick}>
@@ -156,7 +134,7 @@ class Select extends Nerv.Component<SelectProps, any> {
           <i className='icon icon-chevron-down at-select__arrow'/>
           {this.renderClearBtn()}
         </div>
-        <div className={dropDownClass} style={dropDownStyle}>
+        <div className='at-select__dropdown at-select__dropdown--bottom' style={dropDownStyle}>
           <ul className='at-select__not-found' style={notFoundStyle}>
             <li>{this.props.notFoundText || '无匹配数据'}</li>
           </ul>
@@ -166,15 +144,16 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     renderSearchInput () {
       if (this.props.filterable) {
-        return (<input type='text' placeholder={this.props.placeholder || '请选择'}  value={this.state.inputValue} onChange={this.handleInput} className='at-select__input' />)
+        const chosenIndex = this.state.optionChosen[0]
+        const propsChildren = this.props.children || []
+        const chosenChild = propsChildren[chosenIndex] || {label: ''}
+        const chosenSpan = chosenChild.label || (chosenChild.props || {}).children
+        return (<input type='text' placeholder={this.props.placeholder || '请选择'} value={chosenSpan} onChange={this.handleInput} className='at-select__input' />)
       }
     }
     handleInput (event) {
       const inputValue = event.target.value
       const result: any[] = []
-      this.setState({
-        inputValue
-      })
       if (event.target.value == '') {
         this.propsSelectOption.forEach((item, index) => {
           result.push(index)
@@ -185,20 +164,7 @@ class Select extends Nerv.Component<SelectProps, any> {
         })
       } else {
         this.searchOption.forEach((item, index) => {
-          const arr = ((inputValue) || '').split(/\\/g)
-          if (arr.length > 0) {
-            console.log(arr)
-          }
-          let newInputValue = ''
-          arr.forEach((item, index) => {
-            if (index == arr.length - 1) {
-              newInputValue += item
-            } else {
-              newInputValue += item + '\\' + '\\'
-            }
-          })
-          console.log(newInputValue)
-          const pattern = new RegExp(newInputValue)
+          const pattern = new RegExp(inputValue)
           if (pattern.test(item)) {
             result.push(index)
           }
@@ -216,10 +182,10 @@ class Select extends Nerv.Component<SelectProps, any> {
       }
     }
     renderClearBtn () {
-      // let style = this.DISPLAY_NONE
       if (!this.props.multiple && this.props.clearable && this.state.selected) {
         return (<i className='icon icon-x at-select__clear' onClick={this.handleClear}></i>)
       }
+      return
     }
     handleClear (event) {
       event.stopPropagation()
@@ -256,18 +222,6 @@ class Select extends Nerv.Component<SelectProps, any> {
             optionChosen,
             selected : true
           })
-          let chosenSpan = ''
-          if (optionChosen.length > 0) {
-            const chosenIndex = optionChosen[0]
-            const propsChildren = this.props.children || []
-            const chosenChild = propsChildren[chosenIndex] || {label: ''}
-            chosenSpan = chosenChild.label || (chosenChild.props || {}).children || ''
-          }
-          if (this.props.filterable) {
-            this.setState({
-              inputValue: chosenSpan
-            })
-          }
           optionChosen.forEach((item) => {
             const child = this.propsSelectOption[item] || {}
             const value = child.value
@@ -317,14 +271,12 @@ class Select extends Nerv.Component<SelectProps, any> {
         })
         this.props.onChange && this.props.onChange(returnValue)
       }
+
     }
     componentWillMount () {
-      this.preparePropsSelection(this.props)
-    }
-    preparePropsSelection (props) {
       let count = 0
       //目前只会处理一次select选项处理。一旦SelectOption有变化,将得不到变化。
-      Nerv.Children.forEach(props.children as any, (child, index) => {
+      Nerv.Children.forEach(this.props.children as any, (child, index) => {
         if (child.name != 'SelectOptionGroup') {
           child.props.onClick = this.handleChose
           child.props.key = index
@@ -344,18 +296,13 @@ class Select extends Nerv.Component<SelectProps, any> {
       }, null)
     }
     componentWillUpdate (nextProps, nextState) {
-      if (nextProps.children != this.props.children) {
-        this.propsSelectOption = []
-        this.searchOption = []
-        this.preparePropsSelection(nextProps)
-      }
       Nerv.Children.forEach(this.props.children as any, (child, index) => {
         if (child.name != 'SelectOptionGroup') {
-          // 单选选择，通知每个选项，是否要变黑加粗
+          //单选选择，通知每个选项，是否要变黑加粗
           child.props.chosenIndex = nextState.optionChosen
         } else  {
           Nerv.Children.forEach(child.props.children as any, (child) => {
-            // 单选选择，通知每个选项，是否要变黑加粗
+            //单选选择，通知每个选项，是否要变黑加粗
             child.props.chosenIndex = nextState.optionChosen
           }, null)
         }
@@ -363,8 +310,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     handleClick (event) {
       if (this.props.disabled) { return }
-      // event.stopPropagation()
-      this.clickTarget = event.target
+      event.stopPropagation()
       this.toggleDropDown()
       if (this.props.filterable) {
         const optionShow: any[] = []
@@ -382,14 +328,10 @@ class Select extends Nerv.Component<SelectProps, any> {
         isDropDown: !isDropDown
       })
     }
-    windowClickHideAll (event) {
-      if (this.state.isDropDown) {
-        if (this.clickTarget != event.target) {
-          this.setState({
-            isDropDown: false
-          })
-        }
-      }
+    windowClickHideAll () {
+      this.setState({
+        isDropDown: false
+      })
     }
     componentDidMount () {
       this.calculatePopoverStyle()
@@ -398,6 +340,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     componentWillUnmount () {
       window.removeEventListener('click', this.windowClickHideAll)
     }
+
  }
 
 export default Select

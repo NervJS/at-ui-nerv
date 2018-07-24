@@ -43,8 +43,8 @@ const Message: MessageInterface = (
 
   options.onClose = () => {
     (Message as any).close(id, customCloseFunc)
-     Nerv.unmountComponentAtNode(container)
-     document.body.removeChild(container)
+    Nerv.unmountComponentAtNode(container)
+    document.body.removeChild(container)
   }
   const instance = Nerv.createElement(MessageElem, {
     ...options

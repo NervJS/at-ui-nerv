@@ -21,7 +21,7 @@ class Step extends Nerv.Component<StepProps, any> {
     let statusClass: string = ''
     const current = props.current || 0
     const index = props.index || 0
-    if (current == index) {
+    if (current === index) {
       statusClass = props.status ? `at-step--${props.status}` : 'at-step--process'
     } else if (current > index) {
       statusClass = 'at-step--finish'
@@ -68,16 +68,16 @@ class Step extends Nerv.Component<StepProps, any> {
                             {~index ? index + 1 : 0}
                   </div>
                 </div>)
-        if (props.status && (current == index)) {
-          if (props.status == 'error') {
+        if (props.status && (current === index)) {
+          if (props.status === 'error') {
             icon = (<div className='at-step__label'>
                       <div><i className='icon icon-x'></i></div>
                     </div>)
-          } else if (props.status == 'finish') {
+          } else if (props.status === 'finish') {
             icon = (<div className='at-step__label'>
                       <div><i className='icon icon-check'></i></div>
                     </div>)
-          } else if (props.status == 'wait' || props.status == 'process') {
+          } else if (props.status === 'wait' || props.status === 'process') {
             icon = (<div className='at-step__label'>
                       <div className='at-step__order'>
                                 {~index ? index + 1 : 0}
@@ -102,7 +102,7 @@ class Step extends Nerv.Component<StepProps, any> {
     }
     const widthStyle = {width: `${(1 / (props.length) || 3) * 100}%`}
     let styleComputed: any = {}
-    if (typeof style == 'string' || style instanceof String) {
+    if (typeof style === 'string' || style instanceof String) {
       styleComputed = Object.assign(styleStr2Obj(style), widthStyle)
     } else {
       styleComputed = { ...style, ...widthStyle}
