@@ -3,7 +3,6 @@ import $ from 'webpack-zepto'
 import Tooltip from '../'
 import { Button } from '../../'
 import { VNode } from 'nerv-shared'
-import { doesNotReject, rejects } from 'assert'
 
 describe('toolTip test', () => {
   let scratch
@@ -69,7 +68,6 @@ describe('toolTip test', () => {
       $(Nerv.findDOMNode(component)).trigger('MouseEnter')
       await new Promise((resolve, reject) => {
         Nerv.nextTick(() => {
-          console.log(placement)
           expect(
             $(Nerv.findDOMNode(component))
               .find('.at-tooltip__popper')
