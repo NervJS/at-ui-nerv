@@ -187,7 +187,7 @@ class Select extends Nerv.Component<SelectProps, any> {
         this.searchOption.forEach((item, index) => {
           const arr = ((inputValue) || '').split(/\\/g)
           if (arr.length > 0) {
-            console.log(arr)
+            // console.log(arr)
           }
           let newInputValue = ''
           arr.forEach((item, index) => {
@@ -197,7 +197,6 @@ class Select extends Nerv.Component<SelectProps, any> {
               newInputValue += item + '\\' + '\\'
             }
           })
-          console.log(newInputValue)
           const pattern = new RegExp(newInputValue)
           if (pattern.test(item)) {
             result.push(index)

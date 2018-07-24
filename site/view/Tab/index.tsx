@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 
-import Tabs from '../../../src/tab'
+import Tabs from '../../../src/tabs'
 const Tabpane = Tabs.Pane
 class TabExample extends Nerv.Component<any, any> {
   constructor (props) {

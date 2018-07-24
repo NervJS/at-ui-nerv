@@ -42,7 +42,6 @@ class Steps extends Nerv.Component<StepsProps, any> {
     const length = Nerv.Children.count(children as any)
     Nerv.Children.map(children as any, (child, index) => {
       child.props.current = this.props.current
-      console.log(child.props.current)
       child.props.index = index
       child.props.status = status
       child.props.length = length

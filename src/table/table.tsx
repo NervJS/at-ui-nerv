@@ -70,10 +70,8 @@ class Table extends Nerv.Component<TableProps, any> {
         this.keyArr.push(item.key)
       }
       if (item.render) {
-        console.log('item.render')
         this.renderArr.push(item.render)
       }
-      console.log(this.renderArr)
     })
   }
   createPaginationData (data) {
@@ -155,7 +153,6 @@ class Table extends Nerv.Component<TableProps, any> {
       })
       this.renderArr.forEach((render) => {
         const { type, props, children } = render
-        console.log(props.onClick)
         const element = Nerv.createElement(type, props, children)
         tdElement.push(<td className='at-table__cell'>{element}</td>)
       })
