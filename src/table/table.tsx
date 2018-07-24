@@ -67,11 +67,12 @@ class Table extends Nerv.Component<TableProps, any> {
       if (item.key) {
         this.keyArr.push(item.key)
       }
-      if (item.render) {
-        console.log('item.render')
-        this.renderArr.push(item.render)
+      if(item.component) {
+        this.renderArr.push({
+          render:item.component,
+          action: item.action || ''
+        })
       }
-      console.log(this.renderArr)
     })
   }
   createPaginationData (data) {
@@ -136,10 +137,11 @@ class Table extends Nerv.Component<TableProps, any> {
       this.keyArr.forEach((key, index) => {
         tdElement.push(<td className='at-table__cell'>{item[key]}</td>)
       })
-      this.renderArr.forEach((render) => {
+      this.renderArr.forEach((item) => {
+        const {action,render} = item
         const {type, props, children} = render
-        console.log(props.onClick)
         let element = Nerv.createElement(type, props, children)
+        element.props[action] = element.props[action].bind(element,index)
         tdElement.push(<td className='at-table__cell'>{element}</td>)
       })
       dataElement.push(<tr>{tdElement}</tr>)
@@ -167,7 +169,6 @@ class Table extends Nerv.Component<TableProps, any> {
         {sortBtn}
       </th>)
     })
-
     return (<thead className='at-table__thead'>
               <tr>
                 {columnsElement}

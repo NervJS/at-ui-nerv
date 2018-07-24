@@ -18,6 +18,12 @@ imports:
   val1:val
 })}} ></ Slider>
 ```
+```state
+{
+  val1:1
+}
+```
+
 :::
 
 ## 不可用状态

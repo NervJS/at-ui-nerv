@@ -425,32 +425,9 @@ imports:
 `render` 函数接收两个参数 `h`, `object`，`object` 包含 `item`, `column`, `index`，分别指当前单元格的数据，当前列的标题数据，当前的行号
 
 :::demo
-```jsx
-<Table columns={[
-      {
-        title: '姓名',
-        key: 'name'
-      },
-      {
-        title: '年龄',
-        key: 'age',
-      },
-      {
-        title: '地址',
-        key: 'address'
-      },
-      {
-        title: '操作',
-        render: {
-          type:Button,
-          props:{
-            onClick:(event,index)=>{
-              console.log('this',this,index)
-            }
-          },
-          children:'查看名字'
-        }
-      }]} data={[
+```state
+{
+  data:[
           {
             name: '库里',
             age: 18,
@@ -496,7 +473,35 @@ imports:
             age: 19,
             address: '北京市朝阳区'
           }
-        ]} />
+        ]
+}
+```
+```html
+<Table  data={this.state.data} columns={[
+      {
+        title: '姓名',
+        key: 'name'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+      },
+      {
+        title: '地址',
+        key: 'address'
+      },
+      {
+        title: '操作',
+        action: 'onMouseOver',
+        component:<div onMouseOver={(index,event)=>{console.log('xx');alert(this.state.data[index].address)}}>查看地址</div>
+      },
+      {
+        title: '操作',
+        action: 'onClick',
+        component:<Button onClick={(index,event)=>{alert(this.state.data[index].name)}}>查看名字</Button>
+      }
+      ]}
+      />
 ```
 :::
 
