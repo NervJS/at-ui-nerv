@@ -207,8 +207,70 @@ imports:
 可以动态增加或关闭标签，但需要监听 `on-tab-remove` 事件，手动删除 `Tabs.Pane`
 
 :::demo
+```state
+{
+  activeIndex8:0,
+  data: [{
+          label: 'Tab1',
+          name: 'tab1',
+          content: 'tab1 content'
+        }, {
+          label: 'Tab2',
+          name: 'tab2',
+          content: 'tab2 content'
+        }, {
+          label: 'Tab3',
+          name: 'tab3',
+          content: 'tab3 content'
+        }, {
+          label: 'Tab4',
+          name: 'tab4',
+          content: 'tab4 content'
+        }, {
+          label: 'Tab5',
+          name: 'tab5',
+          content: 'tab5 content'
+        }, {
+          label: 'Tab6',
+          name: 'tab6',
+          content: 'tab6 content'
+        }]
+}
+```
 ```html
-
+<Tabs animation='false' activeIndex={this.state.activeIndex8} onChange={(index)=>{
+  this.setState({
+    activeIndex8:index
+  })
+}} closable onTabRemove={(index,event) =>{
+    event.stopPropagation()
+    let data= this.state.data.concat()
+    data.splice(index,1)
+    this.setState({
+      data
+    })
+  }
+}>
+  {this.state.data.map((item)=>{
+    return (<Tabs.Pane label={item.label} name={item.name}>
+              <p>{item.content}</p>
+            </Tabs.Pane>)
+  })}
+  <div slot='extra'>
+    <Button onClick={()=>{
+      let data= this.state.data.concat()
+      let length = data.length
+      data.push({
+        label: `Tab${length+1}`,
+          name: `Tab${length+1}`,
+          content: `tab${length+1} content`
+      })
+      this.setState({
+        data
+      })
+    }}>添加</Button>
+  </div>
+</Tabs>
 ```
 :::
 
@@ -226,8 +288,8 @@ imports:
 
 | 事件名称      | 说明          | 返回值  |
 |---------- |-------------- |---------- |
-| on-change | 切换 tab 时触发 | 当前标签的index, name |
-| on-tab-remove | 删除 tab 时触发 | 被删除标签的index, name |
+| onChange | 切换 tab 时触发 | 当前标签的index, name |
+| onTabRemove | 删除 tab 时触发 | 被删除标签的index, name |
 
 ## Tabs slot
 

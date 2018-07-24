@@ -51,9 +51,6 @@ class TabPane extends Nerv.Component<TabPaneProps, any> {
       style = {...style, 
         display}
     }
-    if (props.closable) {
-
-    }
     return (
       <div className={classNames} {...needProps} style={style} >
         {children}
