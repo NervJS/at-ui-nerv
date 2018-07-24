@@ -14,14 +14,25 @@ imports:
 简单的步骤条
 :::demo
 ```html
-<Steps current='current'>
-  <Steps.step title="Step1" description="This is a description."></Steps.step>
-  <Steps.step title="Step2" description="This is a description."></Steps.step>
-  <Steps.step title="Step3"></Steps.step>
+<Steps current={this.state.current}>
+  <Steps.Step title="Step1" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step2" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step3"></Steps.Step>
 </Steps>
 
-<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
-<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
+<Button type="primary" onClick={()=>{
+    let current = this.state.current || 0;
+    current = current-1 <0? 0:current - 1
+    if(this.state.current){
+      this.setState({current: current})
+    }
+    }} style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick={()=>{
+  let current = this.state.current || 0;
+  current = current+1 > 2? 2:current + 1
+  console.log('test',current)
+  this.setState({current: current})
+}} style={{marginTop: '12px'}}>Next</Button>
 ```
 :::
 
@@ -31,14 +42,25 @@ imports:
 
 :::demo
 ```html
-<Steps size="small" current='current'>
-  <Steps.step title="Step1" description="This is a description."></Steps.step>
-  <Steps.step title="Step2" description="This is a description."></Steps.step>
-  <Steps.step title="Step3"></Steps.step>
+<Steps current={this.state.current} size='small'>
+  <Steps.Step title="Step1" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step2" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step3"></Steps.Step>
 </Steps>
 
-<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
-<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
+<Button type="primary" onClick={()=>{
+    let current = this.state.current || 0;
+    current = current-1 <0? 0:current - 1
+    if(this.state.current){
+      this.setState({current: current})
+    }
+    }} style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick={()=>{
+  let current = this.state.current || 0;
+  current = current+1 > 2? 2:current + 1
+  console.log('test',current)
+  this.setState({current: current})
+}} style={{marginTop: '12px'}}>Next</Button>
 ```
 :::
 
@@ -48,14 +70,25 @@ imports:
 
 :::demo
 ```html
-<Steps current='current'>
-  <Steps.step title="Step1" description="This is a description." icon="icon-user"></Steps.step>
-  <Steps.step title="Step2" description="This is a description." icon="icon-airplay"></Steps.step>
-  <Steps.step title="Step3" icon="icon-pocket"></Steps.step>
+<Steps current={this.state.current}>
+  <Steps.Step title="Step1" description="This is a description." icon="icon-user"></Steps.Step>
+  <Steps.Step title="Step2" description="This is a description." icon="icon-airplay"></Steps.Step>
+  <Steps.Step title="Step3" icon="icon-pocket"></Steps.Step>
 </Steps>
 
-<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
-<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
+<Button type="primary" onClick={()=>{
+    let current = this.state.current || 0;
+    current = current-1 <0? 0:current - 1
+    if(this.state.current){
+      this.setState({current: current})
+    }
+    }} style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick={()=>{
+  let current = this.state.current || 0;
+  current = current+1 > 2? 2:current + 1
+  console.log('test',current)
+  this.setState({current: current})
+}} style={{marginTop: '12px'}}>Next</Button>
 ```
 :::
 
@@ -65,48 +98,26 @@ imports:
 
 :::demo
 ```html
-<Steps current='current'>
-  <Steps.step v-for="(step, index) in steps"
-    :title="step.title"
-    :key="index"></Steps.step>
+<Steps current={this.state.current}>
+  <Steps.Step title="Step1" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step2" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step3"></Steps.Step>
 </Steps>
-<div class="steps-content" style="margin-top: 16px; border: 1px solid #e9e9e9; border-radius: 6px;background-color: #fafafa; min-height: 200px; text-align: center; padding-top:80px;">
-  {{ steps[current].content }}
-</div>
+<div style='margin-top: 16px; border: 1px solid rgb(233, 233, 233); border-radius: 6px; background-color: rgb(250, 250, 250); min-height: 200px; text-align: center; padding-top: 80px;'>步骤{this.state.current}</div>
 
-<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
-<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
-
-<script>
-  export default {
-    data() {
-      return {
-        current: 0,
-        steps: [{
-          title: 'First',
-          content: 'First-content'
-        }, {
-          title: 'Second',
-          content: 'Second-content'
-        }, {
-          title: 'Last',
-          content: 'Last-content'
-        }]
-      }
-    },
-
-    methods: {
-      prev () {
-        if (this.current-- <= 0)
-          this.current = 0
-      },
-      next () {
-        if (this.current++ >= 2)
-          this.current = 2
-      }
+<Button type="primary" onClick={()=>{
+    let current = this.state.current || 0;
+    current = current-1 <0? 0:current - 1
+    if(this.state.current){
+      this.setState({current: current})
     }
-  }
-</script>
+    }} style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick={()=>{
+  let current = this.state.current || 0;
+  current = current+1 > 2? 2:current + 1
+  console.log('test',current)
+  this.setState({current: current})
+}} style={{marginTop: '12px'}}>Next</Button>
 ```
 :::
 
@@ -116,14 +127,25 @@ imports:
 
 :::demo
 ```html
-<Steps current='current' direction="vertical">
-  <Steps.step title="Step1" description="This is a description."></Steps.step>
-  <Steps.step title="Step2" description="This is a description."></Steps.step>
-  <Steps.step title="Step3" description="This is a description."></Steps.step>
+<Steps current={this.state.current} direction='vertical'>
+  <Steps.Step title="Step1" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step2" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step3"></Steps.Step>
 </Steps>
 
-<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
-<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
+<Button type="primary" onClick={()=>{
+    let current = this.state.current || 0;
+    current = current-1 <0? 0:current - 1
+    if(this.state.current){
+      this.setState({current: current})
+    }
+    }} style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick={()=>{
+  let current = this.state.current || 0;
+  current = current+1 > 2? 2:current + 1
+  console.log('test',current)
+  this.setState({current: current})
+}} style={{marginTop: '12px'}}>Next</Button>
 ```
 :::
 
@@ -133,14 +155,25 @@ imports:
 
 :::demo
 ```html
-<Steps current='current' size="small" direction="vertical">
-  <Steps.step title="Step1" description="This is a description."></Steps.step>
-  <Steps.step title="Step2" description="This is a description."></Steps.step>
-  <Steps.step title="Step3" description="This is a description."></Steps.step>
+<Steps current={this.state.current} size='small' direction='vertical'>
+  <Steps.Step title="Step1" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step2" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step3"></Steps.Step>
 </Steps>
 
-<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
-<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
+<Button type="primary" onClick={()=>{
+    let current = this.state.current || 0;
+    current = current-1 <0? 0:current - 1
+    if(this.state.current){
+      this.setState({current: current})
+    }
+    }} style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick={()=>{
+  let current = this.state.current || 0;
+  current = current+1 > 2? 2:current + 1
+  console.log('test',current)
+  this.setState({current: current})
+}} style={{marginTop: '12px'}}>Next</Button>
 ```
 :::
 
@@ -150,14 +183,25 @@ imports:
 
 :::demo
 ```html
-<Steps current='current' status="error">
-  <Steps.step title="Step1" description="This is a description."></Steps.step>
-  <Steps.step title="Step2" description="This is a description."></Steps.step>
-  <Steps.step title="Step3"></Steps.step>
+<Steps current={this.state.current} status='error'>
+  <Steps.Step title="Step1" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step2" description="This is a description."></Steps.Step>
+  <Steps.Step title="Step3"></Steps.Step>
 </Steps>
 
-<Button type="primary" onClick="prev" style="margin-top: 12px;">Prev</Button>
-<Button type="primary" onClick="next" style="margin-top: 12px;">Next</Button>
+<Button type="primary" onClick={()=>{
+    let current = this.state.current || 0;
+    current = current-1 <0? 0:current - 1
+    if(this.state.current){
+      this.setState({current: current})
+    }
+    }} style="margin-top: 12px;">Prev</Button>
+<Button type="primary" onClick={()=>{
+  let current = this.state.current || 0;
+  current = current+1 > 2? 2:current + 1
+  console.log('test',current)
+  this.setState({current: current})
+}} style={{marginTop: '12px'}}>Next</Button>
 ```
 :::
 

@@ -78,6 +78,8 @@ zh:
               name: Message
             - title: 通知提醒
               name: Notification
+            - title: 进度条
+              name: Progress  
             - title: 弹出框
               name: Popover
             - title: 文字提示
@@ -86,6 +88,7 @@ zh:
               name: Timeline
             - title: 表格
               name: Table
+    
         - title: 导航组件
           items:
             - title: 面包屑
@@ -94,12 +97,13 @@ zh:
               name: Dropdown
             - title: 导航菜单
               name: Menu
-            - pagination: 分页
-              name: Pagination
+            - Pagination: 分页
+              name: Pagination  
             - Steps: 步骤条
               name: Steps
             - Tabs: 标签页
               name: Tabs
+            
 en:
   guide:
     - title: Brand

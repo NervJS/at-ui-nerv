@@ -281,7 +281,7 @@ imports:
 
 ## 多选
 
-设置属性 `optional` 可开启多选功能；选中某一项会触发 `on-selection-change` 事件，点击「全选按钮」会触发 `on-select-all` 事件
+设置属性 `optional` 可开启多选功能；选中某一项会触发 `onSelectionChange` 事件，点击「全选按钮」会触发 `onSelectAll` 事件
 
 :::demo
 ```jsx
@@ -1053,20 +1053,20 @@ imports:
 | columns | 表单的标题数据 | Array | - | [] |
 | optional | 是否支持选择 | Boolean | - | false |
 | pagination | 是否显示分页 | Boolean | - | false |
-| page-size | 每页的数据量 | Number | - | 10 |
-| show-page-total | 是否显示数据总数 | Boolean | - | true |
-| show-page-sizer | 是否显示更改每页展示数的选择框 | Boolean | - | false |
-| show-page-quickjump | 是否显示快速跳转 | Boolean | - | false |
+| pageSize | 每页的数据量 | Number | - | 10 |
+| showPageTotal | 是否显示数据总数 | Boolean | - | true |
+| showPageSizer | 是否显示更改每页展示数的选择框 | Boolean | - | false |
+| showPageQuickjump | 是否显示快速跳转 | Boolean | - | false |
 | height | 指定表格的高度 | Number / String | - | - |
 
 ## Table 事件
 
 | 事件名称      | 说明          | 返回值  |
 |---------- |-------------- |---------- |
-| on-selection-change | 选中值有变化时触发 | 选中的行的对象数组 |
-| on-select-all | 只有全选时才会触发 | 所有行组成的对象数组 |
-| on-page-change | 页码改变时触发的回调 | 页码 |
-| on-page-size-change | 切换每页显示的条数时触发的回调 | 每页的条目数 |
+| onSelectionChange | 选中值有变化时触发 | 选中的行的对象数组 |
+| onSelectAll | 只有全选时才会触发 | 所有行组成的对象数组 |
+| onPageChange | 页码改变时触发的回调 | 页码 |
+| onPageSizeChange | 切换每页显示的条数时触发的回调 | 每页的条目数 |
 
 ```
 ```

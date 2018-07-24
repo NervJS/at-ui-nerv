@@ -47,7 +47,8 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   }
   handleJumpNext () {
     const page = this.state.currPage + 5
-    page > this.totalPage ? this.pageClickHandler(this.totalPage) : this.pageClickHandler(page)
+    let totalPage = this.totalPage()
+    page > totalPage ? this.pageClickHandler(totalPage) : this.pageClickHandler(page)
   }
   pageRange () {
     const range: any[] = []
@@ -105,7 +106,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
         <li className='at-pagination__item' onClick={this.pageClickHandler.bind(this, pageNum)}>{pageNum}</li>
       )
     }
-    if (currPage !== 1 && currPage !== totalPage) {
+    if (currPage != 1 && currPage != totalPage) {
       list.push(
         <li className='at-pagination__item at-pagination__item--active' onClick={this.pageClickHandler.bind(this, currPage)}>{currPage}</li>
       )

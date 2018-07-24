@@ -1,6 +1,6 @@
 ---
 imports:
-  import {Tabs} from '@src';
+  import {Tabs,Button} from '@src';
 ---
 # Tabs 标签页
 ----
@@ -11,7 +11,11 @@ imports:
 
 :::demo
 ```html
-<Tabs>
+<Tabs activeIndex={this.state.activeIndex} onChange={(index)=>{
+  this.setState({
+    activeIndex:index
+  })
+}}>
   <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
   </Tabs.Pane>
@@ -32,14 +36,18 @@ imports:
 
 :::demo
 ```html
-<Tabs>
+<Tabs activeIndex={this.state.activeIndex1} onChange={(index)=>{
+  this.setState({
+    activeIndex1:index
+  })
+}}>
   <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
   </Tabs.Pane>
   <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
   </Tabs.Pane>
-  <Tabs.Pane label="Tab3" name="name3" disabled="true">
+  <Tabs.Pane label="Tab3" name="name3" disabled='true'>
     <p>Content of Tab Pane 3</p>
   </Tabs.Pane>
 </Tabs>
@@ -52,7 +60,11 @@ imports:
 
 :::demo
 ```html
-<Tabs>
+<Tabs activeIndex={this.state.activeIndex2} onChange={(index)=>{
+  this.setState({
+    activeIndex2:index
+  })
+}}>
   <Tabs.Pane label="Tab1" name="name1" icon="icon-github">
     <p>Content of Tab Pane 1</p>
   </Tabs.Pane>
@@ -72,20 +84,25 @@ imports:
 
 :::demo
 ```html
-<Tabs>
-  <Tabs.Pane label="Tab1" name="name1">
+<Tabs activeIndex={this.state.activeIndex3} onChange={(index)=>{
+  this.setState({
+    activeIndex3:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1" icon="icon-github">
     <p>Content of Tab Pane 1</p>
   </Tabs.Pane>
-  <Tabs.Pane label="Tab2" name="name2">
+  <Tabs.Pane label="Tab2" name="name2" icon="icon-twitter">
     <p>Content of Tab Pane 2</p>
   </Tabs.Pane>
-  <Tabs.Pane label="Tab3" name="name3">
+  <Tabs.Pane label="Tab3" name="name3" icon="icon-pocket">
     <p>Content of Tab Pane 3</p>
   </Tabs.Pane>
   <div slot="extra">
-    <at-button size="small">额外内容</at-button>
+    <Button size="small">额外内容</Button>
   </div>
 </Tabs>
+
 ```
 :::
 
@@ -95,7 +112,11 @@ imports:
 
 :::demo
 ```html
-<Tabs size="small">
+<Tabs activeIndex={this.state.activeIndex4} size='small' onChange={(index)=>{
+  this.setState({
+    activeIndex4:index
+  })
+}}>
   <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
   </Tabs.Pane>
@@ -105,9 +126,6 @@ imports:
   <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
   </Tabs.Pane>
-  <div slot="extra">
-    <at-button size="small">额外内容</at-button>
-  </div>
 </Tabs>
 ```
 :::
@@ -118,7 +136,11 @@ imports:
 
 :::demo
 ```html
-<Tabs type="card" >
+<Tabs type='card' activeIndex={this.state.activeIndex5} onChange={(index)=>{
+  this.setState({
+    activeIndex5:index
+  })
+}}>
   <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
   </Tabs.Pane>
@@ -128,9 +150,6 @@ imports:
   <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
   </Tabs.Pane>
-  <div slot="extra">
-    <at-button size="small">额外内容</at-button>
-  </div>
 </Tabs>
 ```
 :::
@@ -141,7 +160,11 @@ imports:
 
 :::demo
 ```html
-<Tabs type="card" size="small">
+<Tabs type='card' size='small' activeIndex={this.state.activeIndex6} onChange={(index)=>{
+  this.setState({
+    activeIndex6:index
+  })
+}}>
   <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
   </Tabs.Pane>
@@ -151,9 +174,6 @@ imports:
   <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
   </Tabs.Pane>
-  <div slot="extra">
-    <at-button size="small">额外内容</at-button>
-  </div>
 </Tabs>
 ```
 :::
@@ -164,7 +184,11 @@ imports:
 
 :::demo
 ```html
-<Tabs animated="false" v-model="activeKey">
+<Tabs animated='false' activeIndex={this.state.activeIndex7} onChange={(index)=>{
+  this.setState({
+    activeIndex7:index
+  })
+}}>
   <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
   </Tabs.Pane>
@@ -192,7 +216,7 @@ imports:
 ## Tabs 参数
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | 当前激活 tab 面板的 name，可以使用 v-model 双向绑定数据 | String | - | 第一项的 `name` |
+| activeIndex | 当前激活 tab 面板的 index | String | - | 第一项的下标0 |
 | type | 标签的样式类型 | String | `line` `card` | `line` |
 | size | 标签的尺寸 | String | `default` `small` | `default` |
 | closable | 标签是否可关闭 | Boolean | - | false |
