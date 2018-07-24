@@ -81,6 +81,30 @@ describe('modal test', () => {
 
     done()
   })
+  it('prompt test', (done) => {
+    const onConfirm = sinon.spy()
+    Modal.prompt({
+      title: '提示',
+      content: (
+        <div>
+          <p>'请输入邮件地址：'</p>
+          <input
+            onChange={(e) => {
+              this.setState({
+                value: e.target.value
+              })
+            }}
+          />
+        </div>
+      ),
+      onConfirm
+    })
+    $('.at-btn--primary').trigger('click')
+    Nerv.nextTick(() => {
+      expect($('.at-modal__container').length).toBeFalsy()
+      done()
+    })
+  })
   it('close btn click should close modal', (done) => {
     Modal.confirm({
       title: '提示2',
@@ -123,7 +147,12 @@ describe('modal test', () => {
   it('取消 btn should trigger onCancel', (done) => {
     const onCancel = sinon.spy()
     const modalJSX = (
-      <Modal value={true} title={'这是标题4'} type={'success'} onCancel={onCancel}>
+      <Modal
+        value={true}
+        title={'这是标题4'}
+        type={'success'}
+        onCancel={onCancel}
+      >
         {}
         <Modal.body style={{ textAlign: 'center' }}>
           {} <p>能看到这里的内容吗？</p>
@@ -155,19 +184,20 @@ describe('modal test', () => {
     }
     for (const mode in modes) {
       const modalJSX = (
-        <Modal value={true}  type={mode}>
-        {}
-        <Modal.body style={{ textAlign: 'center' }}>
-          {} <p>能看到这里的内容吗？</p>
-        </Modal.body>
-        <Modal.footer showCancel />
-      </Modal>
+        <Modal value={true} type={mode}>
+          {}
+          <Modal.body style={{ textAlign: 'center' }}>
+            {} <p>能看到这里的内容吗？</p>
+          </Modal.body>
+          <Modal.footer showCancel />
+        </Modal>
       )
       Nerv.render(modalJSX as VNode, scratch)
       await new Promise((resolve, reject) => {
         Nerv.nextTick(() => {
           expect($('.at-modal__icon').hasClass(modes[mode])).toBeTruthy()
           $('.at-btn--primary').trigger('click')
+          Nerv.unmountComponentAtNode(scratch)
           resolve()
         })
       })
