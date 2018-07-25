@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import HeaderS from '../components/headerS'
 import Sidebar from '../components/sidebar'
 
@@ -44,6 +44,7 @@ class Docs extends Nerv.Component {
                   })
                 }
               })}
+              <Redirect path='/' to={{pathname: '/docs/introduction'}} />
             </div>
           </div>
         </div>
