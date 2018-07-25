@@ -8,6 +8,7 @@ export interface SelectOptionProps {
   loading?: boolean
   circle?: boolean
   disabled?: boolean
+  value?: string | number
 }
 
 class SelectOption extends Nerv.Component<SelectOptionProps, any> {
@@ -16,7 +17,6 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.state = {
-
     }
   }
   componentWillReceiveProps (nextProps) {
@@ -27,9 +27,6 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
 
     const onClick = this.props.onClick
     const index = this.props.key
-    this.setState({
-      chosen : true
-    })
     if (onClick) {
       if (this.props.disabled) {onClick(e, index, true); return}
       onClick(e, index)

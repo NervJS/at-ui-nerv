@@ -59,7 +59,8 @@ Modal.alert({
   ()=>{
     Modal.confirm({
       title: '提示',
-      content: '此操作需要非常谨慎，您确定要这么做吗？'
+      content: '此操作需要非常谨慎，您确定要这么做吗？',
+
     })
 
   }

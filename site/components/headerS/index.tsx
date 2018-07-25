@@ -50,7 +50,7 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
                 </NavLink>
               </li>
               <li>
-                <a href='https://at-ui.github.io/at-ui/#/zh/resource/design'>资源</a>
+                <a href='https://at-ui.github.io/at-ui/#/zh/resource/design' target='_blank'>资源</a>
               </li>
             </ul>
           </div>

@@ -1,6 +1,6 @@
 ---
 imports:
-  import {Progress} from '@src'
+  import {Progress,Button} from '@src'
 
 ---
 # Progress 进度条
@@ -15,25 +15,25 @@ imports:
 
 :::demo
 ```html
-<at-progress :percent="0"></at-progress>
-<at-progress :percent="60"></at-progress>
-<at-progress :percent="100"></at-progress>
-<at-progress :percent="50" status="error"></at-progress>
+<Progress percent="0"></Progress>
+<Progress percent="60"></Progress>
+<Progress percent="100"></Progress>
+<Progress percent="50" status="error"></Progress>
 ```
 :::
 
 ## 小型进度条
 
-在一些狭小的区域，需要使用小型进度条。通过参数 `stroke-width` 可配置进度条的线宽
+在一些狭小的区域，需要使用小型进度条。通过参数 `strokeWidth` 可配置进度条的线宽
 
 :::demo
 ```html
 <div class="row no-gutter">
   <div class="col-sm-24 col-md-12">
-    <at-progress :percent="0" :stroke-width="4"></at-progress>
-    <at-progress :percent="60" :stroke-width="4"></at-progress>
-    <at-progress :percent="100" :stroke-width="4"></at-progress>
-    <at-progress :percent="50" status="error" :stroke-width="4"></at-progress>
+    <Progress percent="0" strokeWidth="4"></Progress>
+    <Progress percent="60" strokeWidth="4"></Progress>
+    <Progress percent="100" strokeWidth="4"></Progress>
+    <Progress percent="50" status="error" strokeWidth="4"></Progress>
   </div>
 </div>
 ```
@@ -45,31 +45,24 @@ imports:
 
 :::demo
 ```html
-<at-progress :percent="percent"></at-progress>
-<at-button-group size="small">
-  <at-button @click="descPercent"><i class="icon icon-minus"></i></at-button>
-  <at-button @click="inscPercent"><i class="icon icon-plus"></i></at-button>
-</at-button-group>
+<Progress percent={this.state.percent}></Progress>
+<Button.Group size="small">
+  <Button onClick={()=>{
+    let percent = this.state.percent || 0
+    percent = percent -10 < 0 ? 0: percent-10
+    this.setState({
+      percent
+    })
+    }}><i class="icon icon-minus"></i></Button>
+  <Button onClick={()=>{
+    let percent = this.state.percent || 0
+    percent = percent +10 > 100 ? 100: percent+10
+    this.setState({
+      percent
+    })
+    }}><i class="icon icon-plus"></i></Button>
+</Button.Group>
 
-<script>
-  export default {
-    data () {
-      return {
-        percent: 0
-      }
-    },
-    methods: {
-      descPercent () {
-        this.percent -= 10
-        this.percent = this.percent < 0 ? 0 : this.percent
-      },
-      inscPercent () {
-        this.percent += 10
-        this.percent = this.percent > 100 ? 100 : this.percent
-      }
-    }
-  }
-</script>
 ```
 :::
 
@@ -79,38 +72,13 @@ imports:
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | percent | 百分比 | Number | - | 0 |
 | status | 进度条状态 | String | `success`, `error` | - |
-| stroke-width | 进度条的线宽 | Number | - | 8 |
+| strokeWidth | 进度条的线宽 | Number | - | 8 |
 
 ## Progress 事件
 
 | 事件名称      | 说明          | 返回值  |
 |------------- |-------------- |---------- |
-| on-status-success | 进度到 `100%` 时触发 | 触发时 `percent` 的值 |
+| onStatusSuccess | 进度到 `100%` 时触发 | 触发时 `percent` 的值 |
 
 ```
-<style lang="scss" scoped>
-.at-progress {
-  margin-bottom: 8px;
-}
-</style>
-
-<script>
-export default {
-  data () {
-    return {
-      percent: 0
-    }
-  },
-  methods: {
-    descPercent () {
-      this.percent -= 10
-      this.percent = this.percent < 0 ? 0 : this.percent
-    },
-    inscPercent () {
-      this.percent += 10
-      this.percent = this.percent > 100 ? 100 : this.percent
-    }
-  }
-}
-</script>
 ```
