@@ -31,6 +31,39 @@ declare module 'at-ui-nerv' {
   export import Pagination = AtUINerv.Pagination
   export import Progress = AtUINerv.Progress
 }
+declare module '@o2team/at-ui-nerv' {
+  export import Button = AtUINerv.Button
+  export import Alert = AtUINerv.Alert
+  export import Card = AtUINerv.CardL
+  export import Loadingbar = AtUINerv.Loadingbar
+  export import Message = AtUINerv.Message
+  export import Notification = AtUINerv.Notification
+  export import Badge = AtUINerv.Badge
+  export import Input = AtUINerv.Input
+  export import Icon = AtUINerv.Icon
+  export import Breadcrumb = AtUINerv.Breadcrumb
+  export import InputNumber = AtUINerv.InputNumber
+  export import Checkbox = AtUINerv.Checkbox
+  export import Tag = AtUINerv.Tag
+  export import Dropdown = AtUINerv.Dropdown
+  export import Select = AtUINerv.Select
+  export import Radio = AtUINerv.Radio
+  export import Rate = AtUINerv.Rate
+  export import Modal = AtUINerv.Modal
+  export import Collapse = AtUINerv.Collapse
+  export import Menu = AtUINerv.Menu
+  export import Switch = AtUINerv.Switch
+  export import Tooltip = AtUINerv.Tooltip
+  export import Slider = AtUINerv.Slider
+  export import Textarea = AtUINerv.Textarea
+  export import Timeline = AtUINerv.Timeline
+  export import Popover = AtUINerv.Popover
+  export import Tabs = AtUINerv.Tabs
+  export import Table = AtUINerv.Table
+  export import Steps = AtUINerv.Steps
+  export import Pagination = AtUINerv.Pagination
+  export import Progress = AtUINerv.Progress
+}
 declare namespace AtUINerv {
   //Button
   export type ButtonType =
