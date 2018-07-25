@@ -20,7 +20,7 @@ imports:
   <Select.Option value="5">成都</Select.Option>
 </Select>
 
-<Select   style="width:100px">
+<Select value="1"  style="width:100px">
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州</Select.Option>
 </Select>

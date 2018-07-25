@@ -8,6 +8,7 @@ export interface SelectOptionGroupProps {
   loading?: boolean
   circle?: boolean
   disabled?: boolean
+  value?: any
 }
 
 class SelectOptionGroup extends Nerv.Component<SelectOptionGroupProps, any> {

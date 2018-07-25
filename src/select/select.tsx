@@ -325,7 +325,7 @@ class Select extends Nerv.Component<SelectProps, any> {
       let count = 0
       //目前只会处理一次select选项处理。一旦SelectOption有变化,将得不到变化。
       Nerv.Children.forEach(props.children as any,(child, index) => {
-        if(child.name != 'SelectOptionGroup') {
+        if(child && child.name && child.name != 'SelectOptionGroup') {
           child.props.onClick = this.handleChose
           child.props.key = index
           child.key = index
