@@ -89,121 +89,43 @@ Modal.prompt = (config) => {
     Nerv.render(modal as VNode, document.body)
   })
 }
-Modal.info = (config) => {
-  return new Promise((resolve, reject) => {
-    const { title = '信息', content, onConfirm, onCancel } = config
-    const modal = (
-      <Modal
-        value={true}
-        title={title}
-        type={'info'}
-        onConfirm={() => {
-          resolve()
-          if (onConfirm instanceof Function) {
-            onConfirm()
-          }
-        }}
-        onCancel={() => {
-          // reject()
-          if (onCancel instanceof Function) {
-            onCancel()
-          }
-        }}
-      >
-        {}
-        <ModalBody>{content}</ModalBody>
-        <ModalFooter showCancel={false} />
-      </Modal>
-    )
-    Nerv.render(modal as VNode, document.body)
-  })
+const modes = {
+  info: '信息',
+  success: '成功',
+  warning: '警告',
+  error: '错误'
 }
-Modal.success = (config) => {
-  return new Promise((resolve, reject) => {
-    const { title = '成功', content, onConfirm, onCancel } = config
-    const modal = (
-      <Modal
-        value={true}
-        title={title}
-        type={'success'}
-        onConfirm={() => {
-          resolve()
-          if (onConfirm instanceof Function) {
-            onConfirm()
-          }
-        }}
-        onCancel={() => {
-          // reject()
-          if (onCancel instanceof Function) {
-            onCancel()
-          }
-        }}
-      >
-        {}
-        <ModalBody>{content}</ModalBody>
-        <ModalFooter showCancel={false} />
-      </Modal>
-    )
-    Nerv.render(modal as VNode, document.body)
-  })
-}
-Modal.warning = (config) => {
-  return new Promise((resolve, reject) => {
-    const { title = '警告', content, onConfirm, onCancel } = config
-    const modal = (
-      <Modal
-        value={true}
-        title={title}
-        type={'warning'}
-        onConfirm={() => {
-          resolve()
-          if (onConfirm instanceof Function) {
-            onConfirm()
-          }
-        }}
-        onCancel={() => {
-          // reject()
-          if (onCancel instanceof Function) {
-            onCancel()
-          }
-        }}
-      >
-        {}
-        <ModalBody>{content}</ModalBody>
-        <ModalFooter showCancel={false} />
-      </Modal>
-    )
-    Nerv.render(modal as VNode, document.body)
-  })
-}
-Modal.error = (config) => {
-  return new Promise((resolve, reject) => {
-    const { title = '错误', content, onConfirm, onCancel } = config
-    const modal = (
-      <Modal
-        value={true}
-        title={title}
-        type={'error'}
-        onConfirm={() => {
-          resolve()
-          if (onConfirm instanceof Function) {
-            onConfirm()
-          }
-        }}
-        onCancel={() => {
-          // reject()
-          if (onCancel instanceof Function) {
-            onCancel()
-          }
-        }}
-      >
-        {}
-        <ModalBody>{content}</ModalBody>
-        <ModalFooter showCancel={false} />
-      </Modal>
-    )
-    Nerv.render(modal as VNode, document.body)
-  })
-}
+Object.keys(modes).forEach((mode) => {
+  const presetTitle = modes[mode]
+  Modal[mode] = (config) => {
+    return new Promise((resolve, reject) => {
+      const { title = presetTitle, content, onConfirm, onCancel } = config
+      const modal = (
+        <Modal
+          value={true}
+          title={title}
+          type={mode}
+          onConfirm={() => {
+            resolve()
+            if (onConfirm instanceof Function) {
+              onConfirm()
+            }
+          }}
+          onCancel={() => {
+            // reject()
+            if (onCancel instanceof Function) {
+              onCancel()
+            }
+          }}
+        >
+          {}
+          <ModalBody>{content}</ModalBody>
+          <ModalFooter showCancel={false} />
+        </Modal>
+      )
+      Nerv.render(modal as VNode, document.body)
+    })
+  }
+})
 
 export default Modal

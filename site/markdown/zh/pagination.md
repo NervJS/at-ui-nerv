@@ -53,7 +53,7 @@ imports:
 
 :::demo
 ```html
-<Pagination total="100" showSizer />
+<Pagination total="100" showSizer onPageSizeChange={(event,pageSize)=>{console.log('pageSize',pageSize)}}/>
 ```
 :::
 

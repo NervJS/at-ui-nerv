@@ -31,19 +31,19 @@ describe('Breadcrumb test', () => {
     expect($(component.vnode.dom).hasClass('at-breadcrumb')).toBeTruthy()
     expect($(component.vnode.dom).find('.at-breadcrumb__item').length).toBe(2)
   })
-  // it('test separator', () => {
-  //   const breadcrumb = (
-  //     <Breadcrumb separator='\'>
-  //       {}
-  //       <Breadcrumb.Item>{}首页</Breadcrumb.Item>
-  //       <Breadcrumb.Item>{}活动管理</Breadcrumb.Item>
-  //     </Breadcrumb>
-  //   )
-  //   const component = Nerv.render(breadcrumb as VNode, scratch)
-  //   expect(
-  //     $(component.vnode.dom)
-  //       .find('.at-breadcrumb__separator')
-  //       .text()
-  //   ).toBe('\\')
-  // })
+  it('test separator', () => {
+    const breadcrumb = (
+      <Breadcrumb separator={`\\`}>
+        {}
+        <Breadcrumb.Item>{}首页</Breadcrumb.Item>
+        <Breadcrumb.Item>{}活动管理</Breadcrumb.Item>
+      </Breadcrumb>
+    )
+    const component = Nerv.render(breadcrumb as VNode, scratch)
+    expect(
+      $(Nerv.findDOMNode(component))
+        .find('.at-breadcrumb__separator')
+        .text()
+    ).toBe('\\')
+  })
 })

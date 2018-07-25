@@ -285,7 +285,9 @@ imports:
 
 :::demo
 ```jsx
-<Table optional columns={[
+<Table optional onSelectionChange={(sth,test)=>{
+  console.log('selectionChange',sth,test)
+}} columns={[
       {
         title: '姓名',
         key: 'name'

@@ -288,8 +288,13 @@ imports:
 
 | 事件名称      | 说明          | 返回值  |
 |---------- |-------------- |---------- |
+<<<<<<< HEAD
 | onChange | 切换 tab 时触发 | 当前标签的index, name |
 | onTabRemove | 删除 tab 时触发 | 被删除标签的index, name |
+=======
+| on-change | 切换 tab 时触发 | 当前标签的index, name |
+| on-tab-remove | 删除 tab 时触发 | 被删除标签的index, name |
+>>>>>>> 1cf505f11c13fd042dda423f4e387c12a579a14e
 
 ## Tabs slot
 

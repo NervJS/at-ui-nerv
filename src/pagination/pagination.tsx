@@ -47,7 +47,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   }
   handleJumpNext () {
     const page = this.state.currPage + 5
-    let totalPage = this.totalPage()
+    const totalPage = this.totalPage()
     page > totalPage ? this.pageClickHandler(totalPage) : this.pageClickHandler(page)
   }
   pageRange () {
@@ -189,7 +189,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       for (let i = 10; i < this.total / 2; i = i + 10) {
         const pageTemp = i + ' 条/页'
         selectOption.push(
-          <SelectOption key={i} onClick={this.pageSizeSelectHandler.bind(i, i)} value={i}>{}{pageTemp}</SelectOption>)
+          <SelectOption key={i} onPageSizeChange={this.pageSizeSelectHandler.bind(i, i)} value={i}>{}{pageTemp}</SelectOption>)
       }
     }
     const tempPageSize = `${this.state.pageSize} 条/页`

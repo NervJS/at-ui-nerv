@@ -112,16 +112,14 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     )
     let title: any = null
     let content: any = null
-    let contentFlag = false
     Nerv.Children.map(
       props.children as any,
       (child) => {
         if (child.props && child.props.slot) {
-          if (child.props.slot === 'content') {
+          if (child.props.slot == 'content') {
             content = child.children
-            contentFlag = true
           }
-          if (child.props.slot === 'title') {
+          if (child.props.slot == 'title') {
             title = child.children
           }
         }
@@ -134,14 +132,14 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     if (!title && props.title) {
       title = props.title
     }
-    if (props.title) {
+    if (title) {
       title = (
         <div className='at-popover__title'>
-          <div>{props.title}</div>
+          <div>{title}</div>
         </div>
       )
     }
-    if (contentFlag) {
+    if (content) {
       content = (
         <div className='at-popover__content'>
           <div>{content}</div>

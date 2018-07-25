@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import Index from './pages/index'
 import Docs from './pages/docs.jsx'
@@ -35,7 +35,7 @@ class App extends Nerv.Component {
 }
 
 Nerv.render(
-  <Router basename={BASE_NAME}>
+  <Router >
     <App />
   </Router>,
   document.getElementById('container')

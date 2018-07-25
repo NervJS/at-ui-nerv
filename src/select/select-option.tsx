@@ -16,7 +16,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   constructor (props: SelectOptionProps) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    this.state ={
+    this.state = {
     }
   }
   componentWillReceiveProps (nextProps) {
@@ -25,6 +25,9 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   handleClick = (e: any) => {
     const onClick = this.props.onClick
     const index = this.props.key
+    const onPageSizeChange = this.props.onPageSizeChange
+    if(onPageSizeChange) {onPageSizeChange(e)}
+
     if (onClick) {
       if(this.props.disabled) {onClick(e, index,true);return}
       onClick(e, index)
@@ -42,7 +45,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
     }
       //<SelectOption>{i}  xxx</SelectOption>  最好放进一个变量中，否则children会分成2个数组 {i} 和xxx
     return (
-        <li ref='li' className={classname} onClick={this.handleClick}>{children}</li>
+        <li ref='li' className={classname} onClick={this.handleClick as any}>{children}</li>
     )
   }
   componentDidMount () {

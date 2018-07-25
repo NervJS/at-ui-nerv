@@ -34,7 +34,7 @@ module.exports = function (config) {
     files: [
       // 'browsers/karma.js',
       // './node_modules/es6-promise/dist/es6-promise.auto.min.js',
-      // './node_modules/es5-polyfill/dist/polyfill.js',
+      './node_modules/babel-polyfill/dist/polyfill.js',
       // 'browsers/ie8.js',
       // 'browsers/polyfill.js',
       'src/**/__test__/**/*test.ts?(x)'

@@ -119,7 +119,7 @@ class Select extends Nerv.Component<SelectProps, any> {
           bottom: `${this.state.calcBottom}px`
         }
       }
-      let style = Object.assign({},newDropDownStyle,this.state.isDropDown ? this.DISPLAY_BLOCK : this.DISPLAY_NONE)
+      const style = {...newDropDownStyle, ...(this.state.isDropDown ? this.DISPLAY_BLOCK : this.DISPLAY_NONE)}
       return style
     }
     render () {
@@ -164,19 +164,19 @@ class Select extends Nerv.Component<SelectProps, any> {
         </div>
       </div>)
     }
-    renderSearchInput (){
-      if(this.props.filterable) {
-        return (<input type="text" placeholder={this.props.placeholder || '请选择'}  value={this.state.inputValue} onChange={this.handleInput} className="at-select__input" />)
-      } 
+    renderSearchInput () {
+      if (this.props.filterable) {
+        return (<input type='text' placeholder={this.props.placeholder || '请选择'}  value={this.state.inputValue} onChange={this.handleInput} className='at-select__input' />)
+      }
     }
     handleInput (event) {
-      let inputValue = event.target.value
-      let result :any[] = []
+      const inputValue = event.target.value
+      const result: any[] = []
       this.setState({
-        inputValue: inputValue
+        inputValue
       })
-      if(event.target.value == '') {
-        this.propsSelectOption.forEach((item,index)=>{
+      if (event.target.value == '') {
+        this.propsSelectOption.forEach((item, index) => {
           result.push(index)
         })
         this.setState({
@@ -184,17 +184,17 @@ class Select extends Nerv.Component<SelectProps, any> {
           notFound: false
         })
       } else {
-        this.searchOption.forEach((item,index)=>{
-          let arr =((inputValue)|| '').split(/\\/g)
-          if(arr.length>0) {
+        this.searchOption.forEach((item, index) => {
+          const arr = ((inputValue) || '').split(/\\/g)
+          if (arr.length > 0) {
             console.log(arr)
           }
           let newInputValue = ''
-          arr.forEach((item,index)=>{
-            if(index == arr.length - 1) {
-              newInputValue+= item 
+          arr.forEach((item, index) => {
+            if (index == arr.length - 1) {
+              newInputValue += item
             } else {
-              newInputValue+= item + '\\'+'\\'
+              newInputValue += item + '\\' + '\\'
             }
           })
           console.log(newInputValue)
@@ -217,9 +217,9 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     renderClearBtn () {
       // let style = this.DISPLAY_NONE
-      if(!this.props.multiple && this.props.clearable && this.state.selected) {
+      if (!this.props.multiple && this.props.clearable && this.state.selected) {
         return (<i className='icon icon-x at-select__clear' onClick={this.handleClear}></i>)
-      } 
+      }
     }
     handleClear (event) {
       event.stopPropagation()
@@ -257,22 +257,22 @@ class Select extends Nerv.Component<SelectProps, any> {
             selected : true
           })
           let chosenSpan = ''
-          if(optionChosen.length > 0) {
-            let chosenIndex = optionChosen[0]
-            let propsChildren = this.props.children || []
-            let chosenChild = propsChildren[chosenIndex] || {label:''}
+          if (optionChosen.length > 0) {
+            const chosenIndex = optionChosen[0]
+            const propsChildren = this.props.children || []
+            const chosenChild = propsChildren[chosenIndex] || {label: ''}
             chosenSpan = chosenChild.label || (chosenChild.props || {}).children || ''
           }
-          if(this.props.filterable) {
+          if (this.props.filterable) {
             this.setState({
-              inputValue:chosenSpan
+              inputValue: chosenSpan
             })
           }
-          optionChosen.forEach((item)=>{
-            let child = this.propsSelectOption[item] || {}
-            let value = child.value
-            let label = child.label
-            returnValue = this.prepareReturnValue(returnValue,value,label)
+          optionChosen.forEach((item) => {
+            const child = this.propsSelectOption[item] || {}
+            const value = child.value
+            const label = child.label
+            returnValue = this.prepareReturnValue(returnValue, value, label)
           })
       }
       this.props.onChange && this.props.onChange(returnValue)
@@ -318,14 +318,14 @@ class Select extends Nerv.Component<SelectProps, any> {
         this.props.onChange && this.props.onChange(returnValue)
       }
     }
-    componentWillMount (){
+    componentWillMount () {
       this.preparePropsSelection(this.props)
     }
     preparePropsSelection (props) {
       let count = 0
       //目前只会处理一次select选项处理。一旦SelectOption有变化,将得不到变化。
-      Nerv.Children.forEach(props.children as any,(child, index) => {
-        if(child && child.name && child.name != 'SelectOptionGroup') {
+      Nerv.Children.forEach(props.children as any, (child, index) => {
+        if (child.name != 'SelectOptionGroup') {
           child.props.onClick = this.handleChose
           child.props.key = index
           child.key = index
@@ -343,18 +343,18 @@ class Select extends Nerv.Component<SelectProps, any> {
         }
       }, null)
     }
-    componentWillUpdate (nextProps,nextState) {
-      if(nextProps.children != this.props.children) {
+    componentWillUpdate (nextProps, nextState) {
+      if (nextProps.children != this.props.children) {
         this.propsSelectOption = []
         this.searchOption = []
         this.preparePropsSelection(nextProps)
       }
-      Nerv.Children.forEach(this.props.children as any,(child, index) => {
-        if(child.name != 'SelectOptionGroup') {
+      Nerv.Children.forEach(this.props.children as any, (child, index) => {
+        if (child.name != 'SelectOptionGroup') {
           // 单选选择，通知每个选项，是否要变黑加粗
           child.props.chosenIndex = nextState.optionChosen
         } else  {
-          Nerv.Children.forEach(child.props.children as any, (child)=>{
+          Nerv.Children.forEach(child.props.children as any, (child) => {
             // 单选选择，通知每个选项，是否要变黑加粗
             child.props.chosenIndex = nextState.optionChosen
           },null)
@@ -362,8 +362,8 @@ class Select extends Nerv.Component<SelectProps, any> {
       },null)
     }
     handleClick (event) {
-      if(this.props.disabled) { return }
-      // event.stopPropagation() 
+      if (this.props.disabled) { return }
+      // event.stopPropagation()
       this.clickTarget = event.target
       this.toggleDropDown()
       if(this.props.filterable) {
@@ -384,7 +384,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     windowClickHideAll (event) {
       if (this.state.isDropDown) {
-        if(this.clickTarget != event.target) {
+        if (this.clickTarget != event.target) {
           this.setState({
             isDropDown: false
           })

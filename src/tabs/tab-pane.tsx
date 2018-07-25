@@ -48,8 +48,8 @@ class TabPane extends Nerv.Component<TabPaneProps, any> {
       } else {
         display = 'none'
       }
-      style = {...style, 
-        display}
+      style = {...style,
+               display}
     }
     return (
       <div className={classNames} {...needProps} style={style} >

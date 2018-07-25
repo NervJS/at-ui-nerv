@@ -44,7 +44,7 @@ class Index extends Nerv.Component {
                 <Link to='/docs/introduction'>开始使用</Link>
               </div>
               <div className='btn btn-github'>
-                <a href='https://github.com/at-ui/at-ui'>Github</a>
+                <a href='https://github.com/NervJS/at-ui-nerv'>Github</a>
               </div>
             </div>
           </div>
