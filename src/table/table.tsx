@@ -36,10 +36,6 @@ class Table extends Nerv.Component<TableProps, any> {
       currPage: 1,
       currPageSize: 10,
       sortedData: []
-<<<<<<< HEAD
-
-=======
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
     }
     this.resizeHeightHandler = this.resizeHeightHandler.bind(this)
     this.pageSizeChangeHandler = this.pageSizeChangeHandler.bind(this)
@@ -73,16 +69,11 @@ class Table extends Nerv.Component<TableProps, any> {
       if (item.key) {
         this.keyArr.push(item.key)
       }
-<<<<<<< HEAD
       if(item.component) {
         this.renderArr.push({
           render:item.component,
           action: item.action || ''
         })
-=======
-      if (item.render) {
-        this.renderArr.push(item.render)
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
       }
     })
   }
@@ -163,17 +154,11 @@ class Table extends Nerv.Component<TableProps, any> {
       this.keyArr.forEach((key, index) => {
         tdElement.push(<td className='at-table__cell'>{item[key]}</td>)
       })
-<<<<<<< HEAD
       this.renderArr.forEach((item) => {
         const {action,render} = item
         const {type, props, children} = render
         let element = Nerv.createElement(type, props, children)
         element.props[action] = element.props[action].bind(element,index)
-=======
-      this.renderArr.forEach((render) => {
-        const { type, props, children } = render
-        const element = Nerv.createElement(type, props, children)
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
         tdElement.push(<td className='at-table__cell'>{element}</td>)
       })
       dataElement.push(<tr>{tdElement}</tr>)
@@ -208,40 +193,18 @@ class Table extends Nerv.Component<TableProps, any> {
         </th>
       )
     })
-<<<<<<< HEAD
     return (<thead className='at-table__thead'>
               <tr>
                 {columnsElement}
               </tr>
             </thead>)
-=======
-
-    return (
-      <thead className='at-table__thead'>
-        <tr>{columnsElement}</tr>
-      </thead>
-    )
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
   }
   _renderPagination () {
     const props = this.props
     const dataSize = props.data && props.data.length
     let renderPagination: any = null
     if (props.pagination) {
-<<<<<<< HEAD
       renderPagination = (<Pagination total={dataSize} showTotal showSizer showQuickJump onPageChange={this.pageChangeHandler} onPageSizeChange={this.pageSizeChangeHandler} />)
-=======
-      renderPagination = (
-        <Pagination
-          total={dataSize}
-          showTotal
-          showSizer
-          showQuickJump
-          onPageChange={this.pageChangeHandler}
-          onPageSizeChange={this.pageSizeChangeHandler}
-        />
-      )
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
     }
     return renderPagination
   }
@@ -260,22 +223,9 @@ class Table extends Nerv.Component<TableProps, any> {
     const props = this.props
     let {
       style,
-<<<<<<< HEAD
       onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
       children
       } = props
-=======
-      onDragLeave,
-      onDragOver,
-      onDrop,
-      onMouseOver,
-      onMouseEnter,
-      onMouseOut,
-      onMouseLeave,
-      onClick,
-      children
-    } = props
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
     const needProps = {
       children,
       onDragLeave,
@@ -286,15 +236,9 @@ class Table extends Nerv.Component<TableProps, any> {
       onMouseEnter,
       onMouseLeave,
       onClick
-<<<<<<< HEAD
       }
     const classNames = this.renderTableClassNames(props)
     style = {...style, height: this.props.height + 'px'}
-=======
-    }
-    const classNames = this.renderTableClassNames(props)
-    style = { ...style, height: this.props.height + 'px' }
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
     let body
     const resizeStyle = {
       height: this.state.resizeHeight + 'px',
@@ -306,22 +250,15 @@ class Table extends Nerv.Component<TableProps, any> {
           <div className='at-table__body'>
             <table>
               <colgroup>
-<<<<<<< HEAD
                 <col width='240'/>
                 <col width='157'/>
                 <col width='383'/>
-=======
-                <col width='240' />
-                <col width='157' />
-                <col width='383' />
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
               </colgroup>
               {this.renderColumns()}
               {this.renderData()}
             </table>
           </div>
         </div>
-<<<<<<< HEAD
       )} else {
         body = (
         <div className='at-table__content' >
@@ -331,18 +268,6 @@ class Table extends Nerv.Component<TableProps, any> {
                 <col width='241'/>
                 <col width='149'/>
                 <col width='373'/>
-=======
-      )
-    } else {
-      body = (
-        <div className='at-table__content'>
-          <div className='at-table__header' ref='header'>
-            <table>
-              <colgroup>
-                <col width='241' />
-                <col width='149' />
-                <col width='373' />
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
               </colgroup>
               {this.renderColumns()}
             </table>
@@ -350,15 +275,9 @@ class Table extends Nerv.Component<TableProps, any> {
           <div className='at-table__body' style={resizeStyle}>
             <table>
               <colgroup>
-<<<<<<< HEAD
                 <col width='241'/>
                 <col width='149'/>
                 <col width='373'/>
-=======
-                <col width='241' />
-                <col width='149' />
-                <col width='373' />
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
               </colgroup>
               {this.renderData()}
             </table>
@@ -368,7 +287,6 @@ class Table extends Nerv.Component<TableProps, any> {
     }
     let footer: any = null
     if (props.pagination) {
-<<<<<<< HEAD
       footer = (<div className='at-table__footer'>
                   {this._renderPagination()}
                 </div>)
@@ -377,16 +295,6 @@ class Table extends Nerv.Component<TableProps, any> {
       <div className={classNames} {...needProps} style={style}>
        {body}
        {footer}
-=======
-      footer = (
-        <div className='at-table__footer'>{this._renderPagination()}</div>
-      )
-    }
-    return (
-      <div className={classNames} {...needProps} style={style}>
-        {body}
-        {footer}
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
       </div>
     )
   }
@@ -411,10 +319,6 @@ class Table extends Nerv.Component<TableProps, any> {
       propsOnSelectionChange && propsOnSelectionChange(value, item)
       return value
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
   }
   onSelectAll () {
     const arrTemp = this.state.valueArr
@@ -449,12 +353,8 @@ class Table extends Nerv.Component<TableProps, any> {
       this.resizeHeightHandler()
     }
   }
-<<<<<<< HEAD
   componentWillReceiveProps (nextProps) {
   }
-=======
-  componentWillReceiveProps (nextProps) {}
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
 }
 
 export default Table
