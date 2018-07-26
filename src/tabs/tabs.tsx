@@ -5,6 +5,7 @@ export interface TabsProps {
   className?: string,
   size?: string,
   type?: 'card' | 'line'
+  closable?: boolean | string
 }
 
 class Tabs extends Nerv.Component<TabsProps, any> {
@@ -228,7 +229,6 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     if (!animated || animated === 'false') {
       Nerv.Children.forEach(children as any, (child, index) => {
         if (!(child.props.slot && child.props.slot === 'extra')) {
-          console.log('not')
           child.props.animated = false
           child.props.activeIndex = this.props.activeIndex
           child.props.index = index
@@ -247,6 +247,15 @@ class Tabs extends Nerv.Component<TabsProps, any> {
         }
       }, null)
       console.log(childrenResult)
+      return childrenResult
+    } else {
+      Nerv.Children.forEach(children as any, (child, index) => {
+        if (!(child.props.slot && child.props.slot === 'extra')) {
+          child.props.activeIndex = this.props.activeIndex
+          child.props.index = index
+          childrenResult.push(child)
+        }
+      }, null)
       return childrenResult
     }
   }
