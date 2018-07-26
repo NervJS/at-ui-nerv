@@ -49,24 +49,23 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   }
   clickCancelHandler (e: MouseEvent) {
     if (this.enter) {
-      setTimeout(() => {
-        this.setState({
-          display: 'none'
-        })
-        this.enter = false
-      }, 200)
+      this.setState({
+        display: 'none'
+      })
+      this.enter = false
     }
   }
   onMouseEnter (e: MouseEvent) {
-    setTimeout(() => {
-      this.setState({
-        display: 'block',
-        top: this.top,
-        left: this.left
-      })
-    }, 200)
+    console.log('mouseEnter')
+    if(this.state.display == 'block') {return}
+    this.setState({
+      display: 'block',
+      top: this.top,
+      left: this.left
+    })
   }
   onMouseLeave (e: MouseEvent) {
+    console.log('mouseleave')
     this.setState({
       display: 'none'
     })
@@ -108,6 +107,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
           ? `at-popover--${this.props.placement}`
           : 'at-popover--top'
       ],
+      'fade-enter-active fade-enter-to',
       this.props.className
     )
     let title: any = null
@@ -188,10 +188,24 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     }
   }
   componentWillUnMount () {
-    this.refs.wrapper.removeEventListener(
-      this.props.trigger || 'click',
-      this.onMouseEnter
-    )
+    switch (this.props.trigger) {
+      case 'hover':
+        this.refs.wrapper.removeEventListener('mouseenter', this.onMouseEnter)
+        this.refs.wrapper.removeEventListener('mouseleave', this.onMouseLeave)
+        break
+      case 'click':
+        window.removeEventListener('click', this.clickCancelHandler)
+        this.refs.wrapper.removeEventListener('click', this.clickHandler)
+        break
+      case 'focus':
+        this.refs.wrapper.removeEventListener('focus', this.onMouseEnter)
+        this.refs.wrapper.removeEventListener('blur', this.onMouseLeave)
+        break
+      default:
+        this.refs.wrapper.removeEventListener('click', this.clickHandler)
+        window.removeEventListener('click', this.clickCancelHandler)
+        break
+    }
   }
 }
 

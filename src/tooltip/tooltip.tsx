@@ -73,6 +73,7 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
       }
     const classname = classnames('at-tooltip__popper',
                                 [props.placement ? `at-tooltip--${this.props.placement}` : 'at-tooltip--top'],
+                                'fade-enter-active fade-enter-to',
                                 this.props.className)
 
     if (props.tipstyle) {

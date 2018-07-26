@@ -89,7 +89,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
 
     if (currPage > 4) {
       list.push(
-        <li className='at-pagination__item at-pagination__item--jump-prev' onClick={this.handleJumpPrev}>
+        <li className='at-pagination__item at-pagination__item--jump-prev' title="向前5页" onClick={this.handleJumpPrev}>
           <i className='icon icon-chevrons-left'></i>
         </li>
       )
@@ -123,7 +123,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     }
     if (currPage < totalPage - 3) {
       list.push(
-      <li className='at-pagination__item at-pagination__item--jump-next' onClick={this.handleJumpNext}>
+      <li className='at-pagination__item at-pagination__item--jump-next' title="向后5页"  onClick={this.handleJumpNext}>
         <i className='icon icon-chevrons-right'></i>
       </li>
       )

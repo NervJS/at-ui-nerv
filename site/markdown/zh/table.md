@@ -422,9 +422,7 @@ imports:
 
 ## 自定义列模板
 
-给 `columns` 的数据项设置一个函数 `render`，可以自定义该列的渲染模板，可以渲染自定义的组件，它是基于 Vue 的 `Render` 函数。
-
-`render` 函数接收两个参数 `h`, `object`，`object` 包含 `item`, `column`, `index`，分别指当前单元格的数据，当前列的标题数据，当前的行号
+给 `columns` 的数据项设置`action`和`component`属性。`action`指定需要监听的事件，`component`指定自定义组件。
 
 :::demo
 ```state

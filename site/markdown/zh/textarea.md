@@ -60,25 +60,3 @@ imports:
 | disabled | 是否禁用（原生属性） | Boolean | - | false |
 | autofocus | 是否自动获取焦点（原生属性） | Boolean | - | false |
 | resize | 是否能被用户缩放 | String | `none`, `both`, `horizontal`, `vertical`  | `vertical` |
-
-```
-<script>
-export default {
-  data() {
-    return {
-      inputValue: '',
-      inputValue2: '',
-      inputValue3: ''
-    }
-  }
-}
-</script>
-
-<style lang="scss" scoped>
-  .Textarea {
-    & + .Textarea {
-      margin-top: 15px;
-    }
-  }
-</style>
-```
