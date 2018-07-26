@@ -382,11 +382,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     windowClickHideAll (event) {
       if (this.state.isDropDown) {
-<<<<<<< HEAD
         if (this.clickTarget != event.target) {
-=======
-        if (this.clickTarget !== event.target) {
->>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
           this.setState({
             isDropDown: false
           })
