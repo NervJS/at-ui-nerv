@@ -42,7 +42,7 @@ module.exports = {
           },
           {
             test: /\.md$/,
-            loader: `babel-loader!${path.join(__dirname, './loader/adddImportLoader.js')}`
+            loader: `babel-loader!${path.join(__dirname, './loader/addImportLoader.js')}`
           },
           {
             test: /\.(css|scss|sass)(\?.*)?$/,

@@ -235,10 +235,18 @@ class Tabs extends Nerv.Component<TabsProps, any> {
           childrenResult.push(child)
         }
       }, null)
+<<<<<<< HEAD
       return childrenResult
     } else {
       Nerv.Children.forEach(children as any, (child, index) => {
         if (!(child.props.slot && child.props.slot == 'extra')) {
+=======
+      // console.log(childrenResult)
+      return childrenResult
+    } else {
+      Nerv.Children.forEach(children as any, (child, index) => {
+        if (!(child.props.slot && child.props.slot === 'extra')) {
+>>>>>>> cf5d18d95cd7d0d2d98b3a49f2cf15b15ff0e146
           child.props.activeIndex = this.props.activeIndex
           child.props.index = index
           childrenResult.push(child)
