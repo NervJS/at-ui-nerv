@@ -5,6 +5,7 @@ export interface TabsProps {
   className?: string,
   size?: string,
   type?: 'card' | 'line'
+  closable?: boolean | string
 }
 
 class Tabs extends Nerv.Component<TabsProps, any> {
@@ -228,14 +229,12 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     if (!animated || animated === 'false') {
       Nerv.Children.forEach(children as any, (child, index) => {
         if (!(child.props.slot && child.props.slot === 'extra')) {
-          console.log('not')
           child.props.animated = false
           child.props.activeIndex = this.props.activeIndex
           child.props.index = index
           childrenResult.push(child)
         }
       }, null)
-      console.log(childrenResult)
       return childrenResult
     } else {
       Nerv.Children.forEach(children as any, (child, index) => {
@@ -249,8 +248,8 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     }
   }
   componentDidMount () {
-    this.updateHandle() // 没有setState，给scrollable赋值
-    this.scrollToActiveTab()// 没哟setState,给this.navOffset赋值
+    this.updateHandle() // 未setState，给scrollable赋值
+    this.scrollToActiveTab()// 未setState,给this.navOffset赋值
     this.updateAfterUpdate(this.state, 'mount') // setState,更新页面，显示按钮
     window.addEventListener('resize', this.updateHandle, false)
   }

@@ -56,7 +56,6 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     }
   }
   onMouseEnter (e: MouseEvent) {
-    console.log('mouseEnter')
     if(this.state.display == 'block') {return}
     this.setState({
       display: 'block',
@@ -65,7 +64,6 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     })
   }
   onMouseLeave (e: MouseEvent) {
-    console.log('mouseleave')
     this.setState({
       display: 'none'
     })

@@ -204,7 +204,7 @@ imports:
 
 ## 新增和关闭页签
 
-可以动态增加或关闭标签，但需要监听 `on-tab-remove` 事件，手动删除 `Tabs.Pane`
+可以动态增加或关闭标签，但需要监听 `onTabRemove` 事件，手动删除 `Tabs.Pane`
 
 :::demo
 ```state
