@@ -111,7 +111,8 @@ module.exports = {
       react: 'nervjs',
       'react-dom': 'nervjs',
       '@md': path.resolve(__dirname, '../../site/markdown/zh/'),
-      '@src': path.resolve(__dirname, '../../src/')
+      '@src': path.resolve(__dirname, '../../src/'),
+      '@lib': path.resolve(__dirname, '../../libs/')
     }
   },
   plugins: [

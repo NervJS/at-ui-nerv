@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 import CheckboxGroup from './checkbox-group'
 
 type labelType = string | number | boolean
@@ -17,7 +17,7 @@ interface State {
   currentValue: any
 }
 
-class Checkbox extends Nerv.Component < CheckboxProps,
+class Checkbox extends Component < CheckboxProps,
 State > {
   static Group: typeof CheckboxGroup
   static defaultProps = {
@@ -57,7 +57,7 @@ State > {
   componentWillReceiveProps (nextProps) {
     const {checked} = nextProps
     const {currentValue} = this.state
-    if (!!checked != currentValue) {
+    if (!!checked !== currentValue) {
       this.setState({currentValue: checked})
     }
   }
@@ -90,7 +90,7 @@ State > {
     const {focus, currentValue} = this.state
     return (
       <label
-        className={classnames('at-checkbox', {
+        className={this.className('at-checkbox', {
         'at-checkbox--focus': focus,
         'at-checkbox--checked': currentValue,
         'at-checkbox--disabled': disabled

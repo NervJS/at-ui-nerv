@@ -1,6 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
-// import { CSSTransition } from 'react-transition-group'
+import Component from '@lib/component'
 
 interface LoadingbarElemProps {
   status?: string
@@ -9,7 +8,7 @@ interface LoadingbarElemProps {
   show?: boolean
 }
 
-class LoadingbarElem extends Nerv.Component<LoadingbarElemProps, null> {
+class LoadingbarElem extends Component<LoadingbarElemProps, null> {
   static defaultProps = {
     show: false,
     status: 'success',
@@ -30,7 +29,7 @@ class LoadingbarElem extends Nerv.Component<LoadingbarElemProps, null> {
     return (
       // <CSSTransition className='fade' in={show}>
         <div
-          className={classnames('at-loading-bar', {
+          className={this.className('at-loading-bar', {
             [`at-loading-bar--${status}`]: status as any
           })}
           style={barStyle()}>

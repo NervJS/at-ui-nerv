@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 import { CSSTransition } from 'react-transition-group'
 
 import ModalBody from './ModalBody'
@@ -35,7 +35,7 @@ interface ModalState {
   visible: boolean
 }
 
-class Modal extends Nerv.Component<ModalProps, ModalState> {
+class Modal extends Component<ModalProps, ModalState> {
   static body: typeof ModalBody
   static footer: typeof ModalFooter
   static alert: ModalFunc
@@ -212,10 +212,10 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
             mountOnEnter
             unmountOnExit
           >
-            <div className='at-modal__container' >
+            <div className={this.className('at-modal__container')} >
               <div className={'at-modal__mask'} onClick={this.close} />
               <div
-                className={classnames('at-modal__wrapper', {
+                className={this.classnames('at-modal__wrapper', {
                   'at-modal--hidden': false,
                   'at-modal--confirm': isIconType,
                   [`at-modal--confirm-${type}`]: isIconType
@@ -223,7 +223,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
                 onClick={this.handleMaskClick}
               >
                 <div
-                  className={classnames('at-modal', modalClass)}
+                  className={this.classnames('at-modal', modalClass)}
                   style={{ width: `${width}px`, ...modalStyle }}
                 >
                   {title ? (
@@ -232,7 +232,7 @@ class Modal extends Nerv.Component<ModalProps, ModalState> {
                     </div>
                   ) : null}
                   {this.enhanceChildren()}
-                  <i className={classnames('icon at-modal__icon', iconClass)} />
+                  <i className={this.classnames('icon at-modal__icon', iconClass)} />
                   {showClose ? (
                     <span
                       className='at-modal__close'

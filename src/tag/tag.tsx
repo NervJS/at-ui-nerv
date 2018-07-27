@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 import { CSSTransition } from 'react-transition-group'
 
 export interface TagProps {
@@ -14,7 +14,7 @@ export interface TagState {
 
 const colorArr = ['default', 'primary', 'success', 'error', 'warning', 'info']
 
-class Tag extends Nerv.Component<TagProps, TagState> {
+class Tag extends Component<TagProps, TagState> {
   static defaultProps = {
     color: 'default',
     closable: false
@@ -65,7 +65,7 @@ class Tag extends Nerv.Component<TagProps, TagState> {
     const { closable, children } = this.props
     const { show } = this.state
     const style = this.colorStyle()
-    const classNames = classnames('at-tag', this.colorClass())
+    const classNames = this.className('at-tag', this.colorClass())
     return (
       <CSSTransition in={show} timeout={300} classNames='fade'>
         <span className={classNames} style={style}>

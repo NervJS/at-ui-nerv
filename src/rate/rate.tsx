@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 interface RateProps {
   value?: number
@@ -24,7 +24,7 @@ const checkIsHalf = (val: number, allowHalf: boolean): boolean => {
   return allowHalf && val.toString().indexOf('.') >= 0
 }
 
-class Rate extends Nerv.Component<RateProps, RateState> {
+class Rate extends Component<RateProps, RateState> {
   static defaultProps = {
     value: 0,
     count: 5,
@@ -153,13 +153,13 @@ class Rate extends Nerv.Component<RateProps, RateState> {
       const result: Nerv.Component[] = []
       for (let i = 1; i <= c; i++) {
         result.push((
-          <li className={classnames('at-rate__item', this.clacClass(i))}>
+          <li className={this.classnames('at-rate__item', this.clacClass(i))}>
             <i
-              className={classnames('icon at-rate__icon', icon)}
+              className={this.classnames('icon at-rate__icon', icon)}
               onMouseMove={this.moveStarHandle.bind(this, i)}
               onClick={this.confirmValue.bind(this, i)}
             >
-              <span className={classnames('icon at-rate__left', icon)} data-type='half' />
+              <span className={this.classnames('icon at-rate__left', icon)} data-type='half' />
             </i>
           </li>
         ) as never)
@@ -167,9 +167,9 @@ class Rate extends Nerv.Component<RateProps, RateState> {
       return result
     }
     return (
-      <div className='at-rate'>
+      <div className={this.className('at-rate')}>
         <ul
-          className={classnames('at-rate__list', {
+          className={this.classnames('at-rate__list', {
             'at-rate--disabled': disabled
           })}
           onMouseOver={this.overRateHandle}

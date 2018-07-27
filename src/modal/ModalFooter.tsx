@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 import Button from '../button'
 
@@ -11,7 +11,7 @@ interface ModalFooterProps {
   showCancel?: boolean
 }
 
-class ModalFooter extends Nerv.Component<ModalFooterProps, any> {
+class ModalFooter extends Component<ModalFooterProps, any> {
   static defaultProps = {
     showCancel: true,
     cancelText: '取消',
@@ -22,7 +22,7 @@ class ModalFooter extends Nerv.Component<ModalFooterProps, any> {
     const localeCancelText = cancelText
     const localeOKText = okText
     const defaultFooter = (
-      <div className={classnames('at-modal__footer', className as any)} style={style}>
+      <div className={this.classnames('at-modal__footer', className as any)} style={style}>
         {showCancel ? <Button  onClick={onCancel}>{}{localeCancelText}</Button> : null}
         <Button type='primary' onClick={onConfirm}>
           {}
@@ -31,7 +31,7 @@ class ModalFooter extends Nerv.Component<ModalFooterProps, any> {
       </div>
     )
     return Nerv.isValidElement(children) ? (
-      <div className={classnames('at-modal__footer', className as any)} style={style}>
+      <div className={this.classnames('at-modal__footer', className as any)} style={style}>
         {children}
       </div>
     ) : (

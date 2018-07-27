@@ -1,6 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
-// import * as Popper from 'popper.js'
+import Component from '@lib/component'
 import DropdownItem from './dropdownItem'
 import DropdownMenu from './dropdownMenu'
 
@@ -26,7 +25,7 @@ interface DropdownState {
 	visible: boolean
 }
 
-class Dropdown extends Nerv.Component<DropdownProps, DropdownState> {
+class Dropdown extends Component<DropdownProps, DropdownState> {
 	static Item: typeof DropdownItem
 	static Menu: typeof DropdownMenu
 	static elementName = 'AtDropDown'
@@ -150,7 +149,7 @@ class Dropdown extends Nerv.Component<DropdownProps, DropdownState> {
 		const { menu, trigger } = this.splitChildren()
 		return (
 			<div
-				className={classnames('at-dropdown')}
+				className={this.className('at-dropdown')}
 				ref={(elem) => {
 					this.container = elem
 				}}
@@ -163,7 +162,7 @@ class Dropdown extends Nerv.Component<DropdownProps, DropdownState> {
 				>
 					{trigger}
 					<div
-						className={classnames('at-dropdown__popover')}
+						className={this.classnames('at-dropdown__popover')}
 						style={{
 							display: visible ? 'block' : 'none'
 						}}

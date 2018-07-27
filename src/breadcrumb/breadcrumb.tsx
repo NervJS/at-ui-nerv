@@ -1,19 +1,19 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 import BreadcrumbItem from './breadcrumb-item'
 
 export interface BreadcrumbProps {
     separator?: string
 }
 
-class Breadcrumb extends Nerv.Component < BreadcrumbProps,
+class Breadcrumb extends Component < BreadcrumbProps,
 any > {
     static Item: typeof BreadcrumbItem
     static defaultProps = {
         separator: '/'
     }
     render () {
-        const {children, separator, className} = this.props
+        const {children, separator} = this.props
         const crumbs = children
             ? Nerv
                 .Children
@@ -28,7 +28,7 @@ any > {
                 }, this)
             : null
         return (
-            <div className={classnames('at-breadcrumb', className as any)}>
+            <div className={this.className('at-breadcrumb')}>
                 {crumbs}
             </div>
         )

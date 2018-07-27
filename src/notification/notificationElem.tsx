@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 import { CSSTransition } from 'react-transition-group'
 import { VNode } from 'nerv-shared'
 
@@ -27,7 +27,7 @@ const classArr = {
   loading: 'icon-loader'
 }
 
-class NotificationElem extends Nerv.Component<NotificationElemProps, NotificationElemState> {
+class NotificationElem extends Component<NotificationElemProps, NotificationElemState> {
   static defaultProps = {
     type: 'info',
     duration: 4000,
@@ -77,7 +77,7 @@ class NotificationElem extends Nerv.Component<NotificationElemProps, Notificatio
     return (
       <CSSTransition in={visible} classNames={'notification-fade'} timeout={300} onExited={this.doDestroy}>
         <div
-          className={classnames('at-notification', {
+          className={this.className('at-notification', {
             [`at-notification--${type}`]: type as any,
             'at-notification--with-message': message,
             'at-notification--hover': !showClose
@@ -86,7 +86,7 @@ class NotificationElem extends Nerv.Component<NotificationElemProps, Notificatio
           onClick={!showClose ? this.onCloseHandle : () => {}}
           onMouseLeave={this.startTimer}
           onMouseEnter={this.clearTimer}>
-          <i className={classnames('icon', 'at-notification__icon', iconClass)}  />
+          <i className={this.classnames('icon', 'at-notification__icon', iconClass)}  />
           <div className='at-notification__content'>
              <p className='at-notification__title'>{title}</p>
              <p className='at-notification__message'>{message}</p>

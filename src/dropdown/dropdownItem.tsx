@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 interface DropdownItemProps {
     name?: string
@@ -7,7 +7,7 @@ interface DropdownItemProps {
     divided?: boolean
 }
 
-class DropdownItem extends Nerv.Component < DropdownItemProps,
+class DropdownItem extends Component < DropdownItemProps,
 any > {
     static elementName = 'AtDropdownItem'
     static defaultProps = {
@@ -32,7 +32,7 @@ any > {
 
         return (
             <li
-                className={classnames('at-dropdown-menu__item', {
+                className={this.className('at-dropdown-menu__item', {
                 'at-dropdown-menu__item--disabled': disabled,
                 'at-dropdown-menu__item--divided': divided
             })}

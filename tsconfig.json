@@ -16,7 +16,12 @@
     "baseUrl": ".",
     "rootDir": ".",
     "jsx": "react",
-    "jsxFactory": "Nerv.createElement"
+    "jsxFactory": "Nerv.createElement",
+    "paths": {
+        "@md/*": ["site/markdown/*"],
+        "@lib/*":["libs/*"],
+        "@src/*":["src/*"]
+    }
   },
   "include": [
     "src",

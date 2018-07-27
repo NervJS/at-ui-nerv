@@ -1,4 +1,5 @@
 import * as Nerv from 'nervjs'
+import Component from '@lib/component'
 
 interface RadioGroupProps {
   value: string | number | any[]
@@ -8,7 +9,7 @@ interface RadioGroupProps {
   onRadioGroupChange?: (a) => void
 }
 
-class RadioGroup extends Nerv.Component<RadioGroupProps, any> {
+class RadioGroup extends Component<RadioGroupProps, any> {
   getChildContext (): { RadioGroup } {
     return {
       RadioGroup: this
@@ -44,7 +45,7 @@ class RadioGroup extends Nerv.Component<RadioGroupProps, any> {
         )
       : ''
     return (
-      <div className='at-radio-group' style={style}>
+      <div className={this.className('at-radio-group')} style={style}>
         {children}
       </div>
     )

@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const path = require('path')
 const ES3 = require('es3ify-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const coverage = String(process.env.COVERAGE) !== 'false'
@@ -111,7 +112,8 @@ module.exports = function (config) {
       resolve: {
         alias: {
           react: 'nervjs',
-          'react-dom': 'nervjs'
+          'react-dom': 'nervjs',
+          '@lib': path.resolve(__dirname, 'libs/')
           // nervjs: resolve('nerv'),
           // 'nerv-devtools': resolve('nerv-devtools'),
           // 'nerv-shared': resolve('nerv-shared'),

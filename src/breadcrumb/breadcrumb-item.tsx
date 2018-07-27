@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 interface BreadCrumbItemProps {
     href?: string
@@ -11,13 +11,13 @@ interface BreadCrumbItemState {
     separator?: string
 }
 
-class BreadCrumbItem extends Nerv.Component < BreadCrumbItemProps,
+class BreadCrumbItem extends Component < BreadCrumbItemProps,
     BreadCrumbItemState> {
     static elementName = 'AtBreadcrumbItem'
     render () {
         const {children, separator, className} = this.props
         return (
-            <span className={classnames('at-breadcrumb__item', className as any)}>
+            <span className={this.className('at-breadcrumb__item', className as any)}>
                 {
                     children
                 }

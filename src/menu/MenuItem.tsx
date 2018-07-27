@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 interface MenuItemProps {
   name?: string | number
@@ -13,7 +13,7 @@ interface MenuItemState {
   active: boolean
 }
 
-class MenuItem extends Nerv.Component<MenuItemProps, MenuItemState> {
+class MenuItem extends Component<MenuItemProps, MenuItemState> {
   static defaultProps = {
     disabled: false
   }
@@ -45,10 +45,10 @@ class MenuItem extends Nerv.Component<MenuItemProps, MenuItemState> {
   }
   render () {
     const { disabled, children, name, rootElem } = this.props
-    const active = rootElem.state.currentActiveItemName == name
+    const active = rootElem.state.currentActiveItemName === name
     return (
       <li
-        className={classnames('at-menu__item', {
+        className={this.className('at-menu__item', {
           'at-menu__item--active': active,
           'at-menu__item--disabled': disabled
         })}

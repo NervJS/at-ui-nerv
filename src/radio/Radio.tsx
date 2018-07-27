@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 import RadioGroup from './RadioGroup'
 import RadioButton from './RadioButton'
@@ -16,7 +16,7 @@ interface RadioState {
   checked: boolean
 }
 
-class Radio extends Nerv.Component<RadioProps, RadioState> {
+class Radio extends Component<RadioProps, RadioState> {
   static elementName = 'AtRadio'
   static Button: typeof RadioButton
   static Group: typeof RadioGroup
@@ -61,10 +61,10 @@ class Radio extends Nerv.Component<RadioProps, RadioState> {
     const { label, disabled, children } = this.props
     const { focus, checked } = this.state
     return (
-      <label className='at-radio'>
+      <label className={this.className('at-radio')}>
         <span className='at-radio__input'>
           <span
-            className={classnames('at-radio__inner', {
+            className={this.classnames('at-radio__inner', {
               'at-radio--focus': focus,
               'at-radio--checked': checked,
               'at-radio--disabled': disabled

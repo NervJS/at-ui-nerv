@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 import { CSSProperties } from 'react'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'
@@ -15,7 +15,7 @@ interface MenuProps {
   onSelect?: (e: string | number) => void
 }
 
-class Menu extends Nerv.Component<MenuProps, any> {
+class Menu extends Component<MenuProps, any> {
   static Group: typeof MenuGroup
   static Item: typeof MenuItem
   static Sub: typeof MenuSub
@@ -132,7 +132,7 @@ class Menu extends Nerv.Component<MenuProps, any> {
     }
     return (
       <ul
-        className={classnames('at-menu', menuClassName as any)}
+        className={this.className('at-menu', menuClassName as any)}
         style={ulStyle()}
       >
         {this.enhanceChildren()}

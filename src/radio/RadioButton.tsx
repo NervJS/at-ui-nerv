@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 interface RadioButtonProps {
   label: string | number
@@ -11,7 +11,7 @@ interface RadioButtonState {
   checked: boolean
 }
 
-class RadioButton extends Nerv.Component<RadioButtonProps, RadioButtonState> {
+class RadioButton extends Component<RadioButtonProps, RadioButtonState> {
   static defaultProps = {
     disabled: false
   }
@@ -63,7 +63,7 @@ class RadioButton extends Nerv.Component<RadioButtonProps, RadioButtonState> {
     }
     return (
       <label
-        className={classnames('at-radio-button', {
+        className={this.className('at-radio-button', {
           [`at-radio-button--${size}`]: !!size,
           'at-radio--checked': checked
         })}

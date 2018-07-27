@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 interface BadgeProps {
   value?: string | number
@@ -11,7 +11,7 @@ interface BadgeProps {
 
 // interface BadgeState {}
 
-class Badge extends Nerv.Component<BadgeProps, {}> {
+class Badge extends Component<BadgeProps, {}> {
   static defaultProps = {
     value: '',
     maxNum: 99,
@@ -36,14 +36,14 @@ class Badge extends Nerv.Component<BadgeProps, {}> {
     }
     return (
       <span
-        className={classnames('at-badge', {
+        className={this.className('at-badge', {
           [`at-badge--${status}`]: !!status,
           'at-badge--alone': !Nerv.Children.count(children as never)
         })}
       >
         {children}
         <sup
-          className={classnames('at-badge__content', {
+          className={this.classnames('at-badge__content', {
             'at-badge--corner': Nerv.Children.count(children as never),
             'at-badge--dot': dot
           } as any)}

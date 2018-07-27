@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
+import Component from '@lib/component'
 
 interface AlertProps {
   type?: string
@@ -17,7 +17,7 @@ interface AlertState {
   isExited: boolean
 }
 
-class Alert extends Nerv.Component<AlertProps, AlertState> {
+class Alert extends Component<AlertProps, AlertState> {
   static defaultProps = {
     type: 'info',
     message: '',
@@ -67,19 +67,19 @@ class Alert extends Nerv.Component<AlertProps, AlertState> {
           })
         }}>
         <div
-          className={classnames('at-alert', {
+          className={this.className('at-alert', {
             [`at-alert--${type}`]: !!type  as any,
             'at-alert--with-description': description
           })}
-          style={{ display: isExited ? 'none' : '' }}>
-          {showIcon ? <i className={classnames('icon at-alert__icon', iconClass)} /> : ''}
+          style={this.style({ display: isExited ? 'none' : '' })}>
+          {showIcon ? <i className={this.classnames('icon at-alert__icon', iconClass)} /> : ''}
 
           <div className='at-alert__content'>
             {message ? <p className='at-alert__message'>{message}</p> : ''}
             {description ? <p className='at-alert__description'>{description}</p> : ''}
           </div>
           <i
-            className={classnames('icon at-alert__close', {
+            className={this.classnames('icon at-alert__close', {
               'at-alert__close--custom': !!closeText,
               'icon-x': !closeText
             })}
