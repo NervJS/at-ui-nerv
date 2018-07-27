@@ -44,7 +44,7 @@ class Docs extends Nerv.Component {
                   })
                 }
               })}
-              <Redirect path='/' to={{pathname: '/docs/introduction'}} />
+              <Redirect path='/docs/' to={{pathname: '/docs/introduction'}} />
             </div>
           </div>
         </div>

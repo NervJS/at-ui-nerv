@@ -145,7 +145,8 @@ class MenuSub extends Component<MenuSubProps, any> {
     const { disabled, title, mode, active } = this.props
     const { isOpen } = this.state
     const dropStyle: CSSProperties = {
-      minWidth: getStyle(Nerv.findDOMNode(this), 'width')
+      minWidth: getStyle(Nerv.findDOMNode(this), 'width'),
+      marginLeft: mode === 'vertical' ? '20px' : '0px'
     }
     return (
       <li

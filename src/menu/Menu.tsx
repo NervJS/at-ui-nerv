@@ -31,7 +31,7 @@ class Menu extends Component<MenuProps, any> {
     super(...args)
     const { activeName } = this.props
     this.state = {
-      currentActiveItemName: activeName,
+      currentActiveItemName: activeName || null,
       currentActiveChildName: null
     }
   }
