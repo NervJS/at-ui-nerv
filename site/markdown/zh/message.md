@@ -111,4 +111,8 @@ imports:
 | message  | 提示的内容                         | String   | -                                     | -      |
 | duration | 自动关闭的延时，默认为 `3000` 毫秒 | Number   | -                                     | 3000   |
 | icon     | 自定义类别 ICON                    | String   | -                                     | `info` |
-| onClose  | 关闭提示框时的回调函数             | Function | -                                     | -      |
+
+## Message 事件
+| 事件名称  | 说明               | 返回参数 |
+| --------- | ------------------ | -------- |
+| onClose  | 关闭提示框时的回调函数  | -      |

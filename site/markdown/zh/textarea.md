@@ -54,7 +54,7 @@ imports:
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | name | 原生属性 | String | - | - |
-| value | 文本域的值，可通过 `v-model` 绑定 | String | - | - |
+| value | 文本域的值， | String | - | - |
 | autosize | 是否自动调整输入框高度 | Boolean | - | false |
 | placeholder | 占位文本（原生属性） | String | - | - |
 | disabled | 是否禁用（原生属性） | Boolean | - | false |

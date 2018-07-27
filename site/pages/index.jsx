@@ -1,15 +1,34 @@
 import * as Nerv from 'nervjs'
 import { Link } from 'react-router-dom'
+import {Modal} from '@src'
 
 import HeaderS from '../components/headerS'
 
 import '../assets/style/index.scss'
 
 class Index extends Nerv.Component {
+  goToGuide (e) {
+    e.preventDefault()
+    Modal.confirm({
+      title: '提示',
+      content: '即将跳转到AT-UI原版文档（vue），是否跳转'
+    }).then(() => {
+      window.location.href = 'https://at-ui.github.io/at-ui/#/zh/guide/color'
+    })
+  }
+  goToSource (e) {
+    e.preventDefault()
+    Modal.confirm({
+      title: '提示',
+      content: '即将跳转到AT-UI原版文档（vue），是否跳转'
+    }).then(() => {
+      window.location.href = 'https://at-ui.github.io/at-ui/#/zh/resource/design'
+    })
+  }
   render () {
     return (
       <div className='wrapper'>
-        <HeaderS collapse={true} />
+        <HeaderS collapse />
         <section className='section section-banner'>
           <div className='container'>
             <div className='logo'>
@@ -75,9 +94,9 @@ class Index extends Nerv.Component {
                 了解设计指南，利用统一的规范进行设计赋能，帮助产品设计师，前端工程师，后台工程师迅速搭建中后台产品。
               </div>
               <div className='btn-readmore'>
-                <Link to='/guide'>
+                <a onClick={this.goToGuide} href='https://at-ui.github.io/at-ui/#/zh/guide/color' target='__blank'>
                   查看详情 <i className='icon icon-chevron-right' />
-                </Link>
+                </a>
               </div>
             </div>
             <div className='navigation-panel'>
@@ -104,9 +123,11 @@ class Index extends Nerv.Component {
                 提供视觉稿原稿下载，产品可直接用 Sketch 工具快速搭建高保真的产品原型稿，减少沟通成本，提升工作效率。
               </div>
               <div className='btn-readmore'>
-                <Link to='/resource'>
+                <a onClick={
+                  this.goToSource
+                }>
                   查看详情 <i className='icon icon-chevron-right' />
-                </Link>
+                </a>
               </div>
             </div>
           </div>

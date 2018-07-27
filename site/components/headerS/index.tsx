@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import { Link, NavLink, withRouter } from 'react-router-dom'
-
+import { Modal } from '../../../src'
 import './style.scss'
 
 interface HeaderProps {
@@ -21,11 +21,33 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
       toggle: !_toggle
     })
   }
+  goToGuide (e) {
+    e.preventDefault()
+    Modal.confirm({
+      title: '提示',
+      content: '即将跳转到AT-UI原版文档（vue），是否跳转'
+    }).then(() => {
+      window.location.href = 'https://at-ui.github.io/at-ui/#/zh/guide/color'
+    })
+  }
+  goToSource (e) {
+    e.preventDefault()
+    Modal.confirm({
+      title: '提示',
+      content: '即将跳转到AT-UI原版文档（vue），是否跳转'
+    }).then(() => {
+      window.location.href =
+        'https://at-ui.github.io/at-ui/#/zh/resource/design'
+    })
+  }
   render () {
     const { collapse } = this.props
-    const {toggle} = this.state
+    const { toggle } = this.state
     return (
-      <header className={classnames('page-header', { collapse })} id='J-page-header'>
+      <header
+        className={classnames('page-header', { collapse })}
+        id='J-page-header'
+      >
         <div className='nav-container'>
           <div className='nav-left'>
             <div className='logo'>
@@ -39,10 +61,19 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
             </div>
             <i className='icon icon-menu nav-icon' onClick={this.toggleMenu} />
           </div>
-          <div className='nav-right' style={{height: toggle ? '0px' : 'auto'}}>
+          <div
+            className='nav-right'
+            style={{ height: toggle ? '0px' : 'auto' }}
+          >
             <ul className='navbar'>
               <li>
-                <a href='https://at-ui.github.io/at-ui/#/zh/guide/color' target='_blank'>指南</a>
+                <a
+                  onClick={this.goToGuide}
+                  href='https://at-ui.github.io/at-ui/#/zh/guide/color'
+                  target='_blank'
+                >
+                  指南
+                </a>
               </li>
               <li>
                 <NavLink activeClassName='router-link-active' to='/docs'>
@@ -50,7 +81,13 @@ class HeaderS extends Nerv.Component<HeaderProps, any> {
                 </NavLink>
               </li>
               <li>
-                <a href='https://at-ui.github.io/at-ui/#/zh/resource/design' target='_blank'>资源</a>
+                <a
+                  onClick={this.goToSource}
+                  href='https://at-ui.github.io/at-ui/#/zh/resource/design'
+                  target='_blank'
+                >
+                  资源
+                </a>
               </li>
             </ul>
           </div>

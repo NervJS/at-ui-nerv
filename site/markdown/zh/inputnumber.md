@@ -88,6 +88,10 @@ imports:
 | disabled | 是否禁用输入框 | Boolean | - | false |
 | readonly | 是否设置成只读 | Boolean | - | false |
 | autofocus | 是否自动聚焦到输入框 | Boolean | - | false |
-| onFocus | 获得焦点时触发 | Function | event | - |
-| onBlur | 失去焦点时触发 | Function | event | - |
-| onChange | 绑定的值有变化时触发 | Function,参数：输入值 | - | - |
+
+## InputNumber 事件
+| 事件名称  | 说明               | 返回参数 |
+| --------- | ------------------ | -------- |
+| onFocus | 获得焦点时触发 |  - |
+| onBlur | 失去焦点时触发 |  - |
+| onChange | 绑定的值有变化时触发 | - |

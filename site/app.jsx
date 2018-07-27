@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
-import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Index from './pages/index'
+import Index from './pages/index.jsx'
 import Docs from './pages/docs.jsx'
 
 import 'at-ui-style'
@@ -27,7 +27,7 @@ class App extends Nerv.Component {
         <Switch>
           <Route path='/' exact component={Index} />
           <Route path='/docs' component={Docs} />
-          <Redirect to='/' />
+          {/* <Redirect to='/' /> */}
         </Switch>
       </div>
     )

@@ -56,7 +56,7 @@
 
 ## 分隔布局
 
-`col` 块之间增加间隔，默认添加间隔，如不需要间隔，可添加 `class="no-gutter"`
+`col` 块之间增加间隔，默认添加间隔，如不需要间隔，可添加 `className="no-gutter"`
 
 :::demo
 
@@ -114,45 +114,45 @@
 
 ## Flex 布局
 
-`AT-UI` 的 `Grid System` 就是使用 `Flexbox` 实现的，如果要针对某些元素设置 `Flex` 布局，可使用 `class="flex"`。子元素通过添加不同的值 `flex-start`，`flex-center`，`flex-end`，`flex-top`，`flex-middle`，`flex-around`，`flex-between` ，分别定义其在父元素中的排列方式。
+`AT-UI` 的 `Grid System` 就是使用 `Flexbox` 实现的，如果要针对某些元素设置 `Flex` 布局，可使用 `className="flex"`。子元素通过添加不同的值 `flex-start`，`flex-center`，`flex-end`，`flex-top`，`flex-middle`，`flex-around`，`flex-between` ，分别定义其在父元素中的排列方式。
 
 :::demo
 
 ```html
-<p class="demo-desc">flex-start</p>
-<div class="row at-row no-gutter">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-start</p>
+<div className="row at-row no-gutter">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
-<p class="demo-desc">flex-center</p>
-<div class="row at-row no-gutter flex-center">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-center</p>
+<div className="row at-row no-gutter flex-center">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
-<p class="demo-desc">flex-end</p>
-<div class="row at-row no-gutter flex-end">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-end</p>
+<div className="row at-row no-gutter flex-end">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
-<p class="demo-desc">flex-around</p>
-<div class="row at-row no-gutter flex-around">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-around</p>
+<div className="row at-row no-gutter flex-around">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
-<p class="demo-desc">flex-between</p>
-<div class="row at-row no-gutter flex-between">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-between</p>
+<div className="row at-row no-gutter flex-between">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
 ```
 
@@ -165,26 +165,26 @@
 :::demo
 
 ```html
-<p class="demo-desc">flex-top</p>
-<div class="row at-row flex-center">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
+<p className="demo-desc">flex-top</p>
+<div className="row at-row flex-center">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
 </div>
-<p class="demo-desc">flex-middle</p>
-<div class="row at-row flex-center flex-middle">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
+<p className="demo-desc">flex-middle</p>
+<div className="row at-row flex-center flex-middle">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
 </div>
-<p class="demo-desc">flex-bottom</p>
-<div class="row at-row flex-center flex-bottom">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
+<p className="demo-desc">flex-bottom</p>
+<div className="row at-row flex-center flex-bottom">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
 </div>
 ```
 

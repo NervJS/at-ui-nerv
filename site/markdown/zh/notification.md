@@ -160,5 +160,9 @@ onClick={
 | duration  | 自动关闭的延时，单位为毫秒 | Number   | -                                     | 4000   |
 | showClose | 是否显示关闭按钮           | Boolean  | -                                     | true   |
 | icon      | 自定义消息提醒的 ICON      | String   | -                                     | -      |
-| onClose   | 关闭通知提醒框时的回调函数 | Function | -                                     | -      |
 
+
+## Notification 事件
+
+| 事件名称  | 说明               | 返回参数 |
+| onClose   | 关闭通知提醒框时的回调函数 |  - |

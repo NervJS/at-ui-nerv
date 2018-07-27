@@ -88,10 +88,10 @@ imports:
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | count | star 总数 | Number | - | 5 |
 | value | 当前值 | String | - | 0 |
-| allow-half | 是否允许选择半颗星 | Boolean | - | `false` |
+| allowHalf | 是否允许选择半颗星 | Boolean | - | `false` |
 | disabled | 只读，无法进行交互 | Boolean | - | `false` |
 | icon | 指定图标 | String | - | `icon-star` |
-| show-text | 实现显示辅助文案 | Boolean | - | `false` |
+| showText | 实现显示辅助文案 | Boolean | - | `false` |
 
 ## Rate 事件
 

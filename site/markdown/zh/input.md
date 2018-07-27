@@ -103,7 +103,7 @@ imports:
 
 | 事件名称 | 说明          | 返回参数  |
 |---------- |-------------- |---------- |
-| focus | 获得焦点时触发 | event |
-| blur | 失去焦点时触发 | event |
-| Input | 更新内容时触发 | value,event  |
+| onFocus | 获得焦点时触发 | event |
+| onBlur | 失去焦点时触发 | event |
+| onInput | 更新内容时触发 | value,event  |
 

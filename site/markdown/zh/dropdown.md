@@ -16,7 +16,6 @@ imports:
 :::demo
 
 ```jsx
-<div style={{position: 'relative'}}>
 <Dropdown>
   <span>下拉菜单 <i class="icon icon-chevron-down"></i></span>
   <Dropdown.Menu  >
@@ -37,7 +36,6 @@ imports:
     <Dropdown.Item>杭州</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
-</div>
 ```
 
 :::
@@ -134,7 +132,7 @@ imports:
 
 | 事件名称            | 说明                 | 返回值                 |
 | ------------------- | -------------------- | ---------------------- |
-| on-dropdown-command | 菜单项点击的时候触发 | 点击的菜单的 `name` 值 |
+| dropdownChange | 菜单项点击的时候触发 | 点击的菜单的 `name` 值 |
 
 ## DropdownItem 参数
 
