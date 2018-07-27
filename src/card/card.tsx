@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 interface CardProps {
   bordered?: boolean
@@ -8,7 +8,7 @@ interface CardProps {
   loading?: boolean
 }
 
-class CardL extends Nerv.Component<CardProps, any> {
+class CardL extends Component<CardProps, any> {
   static defaultProps = {
     bordered: true,
     noHover: false,
@@ -43,7 +43,7 @@ class CardL extends Nerv.Component<CardProps, any> {
     )
     return (
       <div
-        className={classnames('at-card', {
+        className={this.className('at-card', {
           'at-card--bordered': bordered,
           'at-card--no-hover': noHover
         }) }

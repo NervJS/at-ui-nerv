@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import Component from '@lib/component'
 import CollapseTransition from '../animations/collapse-transition.jsx'
 import '../animations/collapseanimations.scss'
 
@@ -15,7 +15,7 @@ interface CollapseItemState {
   isActive: boolean | undefined
 }
 
-class CollapseItem extends Nerv.Component<
+class CollapseItem extends Component<
   CollapseItemProps,
   CollapseItemState
 > {
@@ -74,7 +74,7 @@ class CollapseItem extends Nerv.Component<
     )
     return (
       <div
-        className={classnames('at-collapse__item', {
+        className={this.className('at-collapse__item', {
           'at-collapse__item--active': isActive,
           'at-collapse__item--disabled': disabled
         })}

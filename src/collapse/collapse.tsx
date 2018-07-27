@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import * as classnames from 'classnames'
+import Component from '@lib/component'
 import CollapseItem from './collapseItem'
 
 interface CollapseProps {
@@ -13,7 +13,7 @@ interface CollapseState {
   currentValue: any
 }
 
-class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
+class Collapse extends Component<CollapseProps, CollapseState> {
   static Item: typeof CollapseItem
   static defaultProps = {
     accordion: false,
@@ -103,7 +103,7 @@ class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
     const { simple } = this.props
     return (
       <div
-        className={classnames('at-collapse', { 'at-collapse--simple': simple })}
+        className={this.className('at-collapse', { 'at-collapse--simple': simple })}
       >
         {this.setActive()}
       </div>

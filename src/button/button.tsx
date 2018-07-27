@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 import ButtonGroup from './button-group'
 
@@ -18,7 +18,7 @@ export interface ButtonProps {
   disabled?: boolean
 }
 
-class Button extends Nerv.Component<ButtonProps, any> {
+class Button extends Component<ButtonProps, any> {
   static Group: typeof ButtonGroup
 
   static defaultProps = {
@@ -28,7 +28,7 @@ class Button extends Nerv.Component<ButtonProps, any> {
   }
 
   renderButtonClassNames (props: ButtonProps, hasChildren) {
-    return classnames(
+    return this.classnames(
       'at-btn',
       [
         props.type ? `at-btn--${props.type}` : '',
@@ -60,7 +60,7 @@ class Button extends Nerv.Component<ButtonProps, any> {
         type={nativeType || 'button'}
         onClick={this.handleClick}>
         {loading && <i className='at-btn__loading icon icon-loader' />}
-        {icon && <i className={classnames('at-btn__icon icon', icon)} />}
+        {icon && <i className={this.classnames('at-btn__icon icon', icon)} />}
         {children && <span className='at-btn__text'>{children}</span>}
       </button>
     )

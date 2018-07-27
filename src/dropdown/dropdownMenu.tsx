@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 import { CSSTransition } from 'react-transition-group'
 
 interface DropdownMenuProps {
@@ -18,7 +18,7 @@ interface DropdownMenuProps {
     | 'bottom-right'
 }
 
-class DropdownMenu extends Nerv.Component<DropdownMenuProps, any> {
+class DropdownMenu extends Component<DropdownMenuProps, any> {
   static elementName = 'AtDropdownMenu'
   static defaultProps = {
     placement: 'bottom'
@@ -30,7 +30,7 @@ class DropdownMenu extends Nerv.Component<DropdownMenuProps, any> {
     return (
       <CSSTransition classNames='slide-up' in={show} timeout={300}>
         <ul
-          className={classnames('at-dropdown-menu')}
+          className={this.className('at-dropdown-menu')}
           ref={(elem) => {
             this.popper = elem as never
           }}>

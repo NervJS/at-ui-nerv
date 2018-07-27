@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 interface InputProps {
   type?: string
@@ -22,7 +22,7 @@ interface InputState {
   currentValue?: string | number
 }
 
-class Input extends Nerv.Component<InputProps, InputState> {
+class Input extends Component<InputProps, InputState> {
   static defaultProps = {
     type: 'text',
     prependButton: false,
@@ -98,7 +98,7 @@ class Input extends Nerv.Component<InputProps, InputState> {
     const { currentValue } = this.state
     return (
       <div
-        className={classnames('at-input', {
+        className={this.className('at-input', {
           [`at-input--${size}`]: size ? true : false,
           [`at-input--${status}`]: status ? true : false,
           'at-input-group': prepend || append,
@@ -110,7 +110,7 @@ class Input extends Nerv.Component<InputProps, InputState> {
       >
         {prepend ? (
           <div
-            className={classnames('at-input-group__prepend', {
+            className={this.classnames('at-input-group__prepend', {
               'at-input-group--button': prependButton
             })}
           >
@@ -136,10 +136,10 @@ class Input extends Nerv.Component<InputProps, InputState> {
           onBlur={this.onBlurHandle}
           onInput={this.onInputHandle}
         />
-        {icon ? <i className={classnames('at-input__icon icon', iconClass)} /> : ''}
+        {icon ? <i className={this.classnames('at-input__icon icon', iconClass)} /> : ''}
         {append ? (
           <div
-            className={classnames('at-input-group__append', {
+            className={this.classnames('at-input-group__append', {
               'at-input-group--button': appendButton
             })}
           >

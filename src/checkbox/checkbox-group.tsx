@@ -1,4 +1,5 @@
 import * as Nerv from 'nervjs'
+import Component from '@lib/component'
 
 interface CheckboxGroupProps {
   onChange?: (e) => void
@@ -8,7 +9,7 @@ interface CheckboxGroupState {
   valueList: any[]
 }
 
-class CheckboxGroup extends Nerv.Component<CheckboxGroupProps, CheckboxGroupState> {
+class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   static elementName = 'AtCheckboxGroup'
   vList: any[]
   alpha: number
@@ -58,15 +59,12 @@ class CheckboxGroup extends Nerv.Component<CheckboxGroupProps, CheckboxGroupStat
     return { AtCheckboxGroup: this }
   }
   onChangeHandle (value, checked) {
-    // const { valueList } = this.state
     const index = this.vList.indexOf(value as never)
     if (checked) {
       if (index === -1) {
-        // this.state.valueList.push(value)
         this.vList.push(value as never)
       }
     } else {
-      // this.state.valueList.splice(index, 1)
       this.vList.splice(index, 1)
     }
 

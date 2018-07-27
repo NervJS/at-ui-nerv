@@ -1,14 +1,14 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 
 export interface IconProps {
   className?: string,
   type?: string,
 }
 
-class Icon extends Nerv.Component<IconProps, any> {
+class Icon extends Component<IconProps, any> {
   renderIconClassNames (props: IconProps) {
-    return classnames('icon', [
+    return this.classnames('icon', [
       props.type ? `${props.type}` : ''
     ], props.className)
   }

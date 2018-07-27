@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import classnames from 'classnames'
+import Component from '@lib/component'
 import { CSSTransition } from 'react-transition-group'
 import CollapseTransition from '../animations/collapse-transition'
 import { CSSProperties } from 'react'
@@ -15,7 +15,7 @@ interface MenuSubProps {
   _onOpened?: (e: any) => void
 }
 
-class MenuSub extends Nerv.Component<MenuSubProps, any> {
+class MenuSub extends Component<MenuSubProps, any> {
   $popover: any
   $trigger: any
   $reference: any
@@ -145,11 +145,12 @@ class MenuSub extends Nerv.Component<MenuSubProps, any> {
     const { disabled, title, mode, active } = this.props
     const { isOpen } = this.state
     const dropStyle: CSSProperties = {
-      minWidth: getStyle(Nerv.findDOMNode(this), 'width')
+      minWidth: getStyle(Nerv.findDOMNode(this), 'width'),
+      marginLeft: mode === 'vertical' ? '20px' : '0px'
     }
     return (
       <li
-        className={classnames('at-menu__submenu', {
+        className={this.className('at-menu__submenu', {
           'at-menu__submenu--active': active,
           'at-menu__submenu--opened': isOpen,
           'at-menu__submenu--disabled': disabled
