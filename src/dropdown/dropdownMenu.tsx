@@ -33,8 +33,19 @@ class DropdownMenu extends Component<DropdownMenuProps, any> {
           className={this.className('at-dropdown-menu')}
           ref={(elem) => {
             this.popper = elem as never
-          }}>
-          {children}
+          }}
+        >
+          {Nerv.Children.map(
+            children as any,
+            (child, idx) => {
+              return Nerv.cloneElement(child, {
+                ...child.props,
+                rootElem: this.props.rootElem
+              })
+            },
+            this
+          )}
+          {/* {children} */}
         </ul>
       </CSSTransition>
     )
