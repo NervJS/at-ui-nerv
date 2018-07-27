@@ -10,6 +10,18 @@ imports:
 选项卡切换组件，默认选中第一项。
 
 :::demo
+```state
+{
+  activeIndex: 0
+  activeIndex1:0,
+  activeIndex2:0,
+  activeIndex3:0,
+  activeIndex4:0,
+  activeIndex5:0,
+  activeIndex6:0,
+  activeIndex7:0,
+  activeIndex8:0}
+```
 ```html
 <Tabs activeIndex={this.state.activeIndex} onChange={(index)=>{
   this.setState({

@@ -12,7 +12,7 @@ imports:
 
 :::demo
 ```jsx
-<Select   style="width:100px">
+<Select style="width:100px">
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州广州广州广州广州广州广州广州广州广州</Select.Option>
   <Select.Option value="3">上海</Select.Option>
@@ -25,7 +25,7 @@ imports:
   <Select.Option value="2">广州</Select.Option>
 </Select>
 
-<Select   disabled style="width:100px">
+<Select disabled style="width:100px">
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州</Select.Option>
 </Select>
@@ -86,20 +86,20 @@ imports:
 选项可通过使用 `AtOptionGroup` 组件进行分组，分组的名称可使用属性 `label` 设置
 
 :::demo
- ```
-<Select   style="width: 100px">
-  <Select.Option-group label="广东省">
+ ```html
+<Select style="width: 100px" option='1'>
+  <Select.OptionGroup label="广东省">
     <Select.Option value="1">深圳</Select.Option>
     <Select.Option value="2">广州</Select.Option>
     <Select.Option value="3">珠海</Select.Option>
-  </Select.Option-group>
-  <Select.Option-group label="其他">
+  </Select.OptionGroup>
+  <Select.OptionGroup label="其他">
     <Select.Option value="4">上海</Select.Option>
     <Select.Option value="5">北京</Select.Option>
     <Select.Option value="6" disabled>成都</Select.Option>
     <Select.Option value="7">昆明</Select.Option>
     <Select.Option value="8">杭州</Select.Option>
-  </Select.Option-group>
+  </Select.OptionGroup>
 </Select>
 ```
 :::

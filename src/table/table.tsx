@@ -2,6 +2,7 @@ import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import Checkbox from '../checkbox'
 import Pagination from '../pagination'
+import {getStyle} from '../utils/util'
 export type SortType = 'normal' | 'desc' | 'asc'
 export interface TableProps {
   className?: string
@@ -26,6 +27,7 @@ class Table extends Nerv.Component<TableProps, any> {
   private sortBy: string
   private sortType: string
   private renderArr: any[] = []
+  private columnsWidth:any = {}
   constructor (props) {
     super(props)
     this.state = {
@@ -44,6 +46,7 @@ class Table extends Nerv.Component<TableProps, any> {
     this.sortAscHandler = this.sortAscHandler.bind(this)
     this.sortDescHandler = this.sortDescHandler.bind(this)
     this.createSortedData = this.createSortedData.bind(this)
+    this.handleResize = this.handleResize.bind(this)
   }
   renderTableClassNames (props: TableProps) {
     return classnames(
@@ -62,7 +65,8 @@ class Table extends Nerv.Component<TableProps, any> {
     data.forEach((item, index) => {
       this.state.valueArr.push(false)
     })
-    columns.forEach((item) => {
+    columns.forEach((item,index) => {
+      item._index = index
       if (item.sortType) {
         (this.sortType = item.sortType), (this.sortBy = item.key)
       }
@@ -163,7 +167,7 @@ class Table extends Nerv.Component<TableProps, any> {
       })
       dataElement.push(<tr>{tdElement}</tr>)
     })
-    return <tbody className='at-table__tbody'>{dataElement}</tbody>
+    return <tbody ref='tablebody' className='at-table__tbody'>{dataElement}</tbody>
   }
   renderColumns () {
     const columns = this.props.columns || []
@@ -179,19 +183,20 @@ class Table extends Nerv.Component<TableProps, any> {
       )
     }
     columns.forEach((item) => {
-      let sortBtn
-      if (item.sortType) {
-        sortBtn = this.renderSortBtn()
+      if(!item.checkbox== true) {
+        let sortBtn
+        if (item.sortType) {
+          sortBtn = this.renderSortBtn()
+        }
+        columnsElement.push(
+          <th
+            className='at-table__cell at-table__column'
+            style={{ cursor: 'text' }}
+          >
+            {item.title}
+            {sortBtn}
+        </th>)
       }
-      columnsElement.push(
-        <th
-          className='at-table__cell at-table__column'
-          style={{ cursor: 'text' }}
-        >
-          {item.title}
-          {sortBtn}
-        </th>
-      )
     })
     return (<thead className='at-table__thead'>
               <tr>
@@ -219,6 +224,37 @@ class Table extends Nerv.Component<TableProps, any> {
       currPage: 1
     })
   }
+  handleResize () {
+      const columnsWidth = {}
+      if ((this.props.data || []).length) {
+        const $td = this.refs.tablebody.querySelectorAll('tr')[0].querySelectorAll('td')
+        for (let i = 0; i < $td.length; i++) {
+          const column = (this.props.columns || [] )[i]
+          let width = parseInt(getStyle($td[i],'width'))
+          if (column) {
+            if (column.width) {
+              width = column.width
+            }
+            columnsWidth[column._index] = { width }
+          }
+        }
+      }
+      this.columnsWidth = columnsWidth
+      this.setState({
+        columnsWidth: this.columnsWidth
+      })
+  }
+  setCellWidth (column,index) {
+    let width = ''
+    if (column.width) {
+      width = column.width
+    } else if ((this.state.columnsWidth || {} )[column._index]) {
+      width = this.state.columnsWidth[column._index].width
+    }
+
+    width = width === '0' ? '' : width
+    return width
+  }
   render () {
     const props = this.props
     let {
@@ -244,15 +280,19 @@ class Table extends Nerv.Component<TableProps, any> {
       height: this.state.resizeHeight + 'px',
       marginTop: this.state.resizeMarginTop + 'px'
     }
+    let col:any[] = []
+    let columns = this.props.columns || []
+    columns.forEach((column,index)=>{
+        col.push(<col width={this.setCellWidth(column,index)}/>)
+    })
     if (!props.height) {
       body = (
         <div className='at-table__content'>
           <div className='at-table__body'>
             <table>
               <colgroup>
-                <col width='240'/>
-                <col width='157'/>
-                <col width='383'/>
+                {}
+                {col}
               </colgroup>
               {this.renderColumns()}
               {this.renderData()}
@@ -265,9 +305,8 @@ class Table extends Nerv.Component<TableProps, any> {
           <div className='at-table__header' ref='header'>
             <table>
               <colgroup>
-                <col width='241'/>
-                <col width='149'/>
-                <col width='373'/>
+                {}
+                {col}
               </colgroup>
               {this.renderColumns()}
             </table>
@@ -275,9 +314,8 @@ class Table extends Nerv.Component<TableProps, any> {
           <div className='at-table__body' style={resizeStyle}>
             <table>
               <colgroup>
-                <col width='241'/>
-                <col width='149'/>
-                <col width='373'/>
+                {}
+                {col}
               </colgroup>
               {this.renderData()}
             </table>
@@ -349,12 +387,22 @@ class Table extends Nerv.Component<TableProps, any> {
     })
   }
   componentDidMount () {
+    this.handleResize()
     if (this.props.height) {
       this.resizeHeightHandler()
     }
+    window.addEventListener('resize', this.handleResize)
   }
   componentWillReceiveProps (nextProps) {
   }
-}
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.handleResize)
+  }
+  componentWillUpdate (nextProps,nextState) {
+    if(this.props.columns != nextProps.columns) {
+      this.handleResize()
+    }
+  }
+ }
 
 export default Table

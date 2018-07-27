@@ -8,22 +8,27 @@ imports:
 
 ## 基本用法
 
-简单的数据展示表格
+简单的数据展示表格。
+设置`columns`数组每一项属性 `width`，可改变表格列的宽度
+
 
 :::demo
 ```jsx
 <Table columns={[
       {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width:'300'
       },
       {
         title: '年龄',
         key: 'age',
+        width:'300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'800'
       }]} data={[
           {
             name: '库里',
@@ -83,15 +88,18 @@ imports:
 <Table stripe columns={[
       {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width: '300'
       },
       {
         title: '年龄',
         key: 'age',
+        width: '300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'800'
       }]} data={[
           {
             name: '库里',
@@ -151,15 +159,18 @@ imports:
 <Table border columns={[
       {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width:'300'
       },
       {
         title: '年龄',
         key: 'age',
+        width:'300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'800'
       }]} data={[
           {
             name: '库里',
@@ -217,18 +228,21 @@ imports:
 
 :::demo
 ```jsx
-<Table height={100} columns={[
+<Table height={200} columns={[
       {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width:'300'
       },
       {
         title: '年龄',
         key: 'age',
+        width:'300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'800'
       }]} data={[
           {
             name: '库里',
@@ -285,20 +299,27 @@ imports:
 
 :::demo
 ```jsx
-<Table optional onSelectionChange={(sth,test)=>{
-  console.log('selectionChange',sth,test)
+<Table optional onSelectAll={(data)=>{console.log(data)}} onSelectionChange={(isSelect,data)=>{
+  console.log('selectionChange',isSelect,data)
 }} columns={[
       {
+        width:'200',
+        checkbox: true
+      },
+      {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width:'300'
       },
       {
         title: '年龄',
         key: 'age',
+        width:'300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'500'
       }]} data={[
           {
             name: '库里',
@@ -360,16 +381,19 @@ imports:
 <Table columns={[
       {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width:'300'
       },
       {
         title: '年龄',
         key: 'age',
-        sortType:'asc'
+        sortType:'asc',
+        width:'300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'800'
       }]} data={[
           {
             name: '库里',
@@ -480,23 +504,28 @@ imports:
 <Table  data={this.state.data} columns={[
       {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width:'300'
       },
       {
         title: '年龄',
         key: 'age',
+        width:'300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'300'
       },
       {
         title: '操作',
+        width:'300',
         action: 'onMouseOver',
         component:<div onMouseOver={(index,event)=>{console.log('xx');alert(this.state.data[index].address)}}>查看地址</div>
       },
       {
         title: '操作',
+        width:'300',
         action: 'onClick',
         component:<Button onClick={(index,event)=>{alert(this.state.data[index].name)}}>查看名字</Button>
       }
@@ -514,15 +543,18 @@ imports:
 <Table size='small' columns={[
       {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width:'300'
       },
       {
         title: '年龄',
         key: 'age',
+        width:'300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'800'
       }]} data={[
           {
             name: '库里',
@@ -582,15 +614,18 @@ imports:
 <Table pagination columns={[
       {
         title: '姓名',
-        key: 'name'
+        key: 'name',
+        width:'300'
       },
       {
         title: '年龄',
         key: 'age',
+        width:'300'
       },
       {
         title: '地址',
-        key: 'address'
+        key: 'address',
+        width:'800'
       }]} data={[
           {
             name: '库里',

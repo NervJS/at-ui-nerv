@@ -192,10 +192,10 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
           <SelectOption key={i} onPageSizeChange={this.pageSizeSelectHandler.bind(i, i)} value={i}>{}{pageTemp}</SelectOption>)
       }
     }
-    const tempPageSize = `${this.state.pageSize} 条/页`
+    // const tempPageSize = `${this.state.pageSize} 条/页`
     return props.showSizer ?
       <div className='at-pagination__sizer'>
-        <Select optionChosen={tempPageSize}>
+        <Select optionChosen={Math.abs(this.state.pageSize / 10) -1 }>
             {selectOption}
         </Select>
       </div> : null

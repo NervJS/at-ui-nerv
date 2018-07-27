@@ -24,13 +24,14 @@ class Select extends Nerv.Component<SelectProps, any> {
     constructor (props) {
       super(props)
       let optionChosen: any = []
-      if (this.props.value) {
-        optionChosen = optionChosen.concat(this.props.value)
+      if (props.optionChosen>=0 || (props.optionChosen || []).length>0) {
+        optionChosen = optionChosen.concat(props.optionChosen)
       }
+      
       let chosenSpan
       if (optionChosen.length > 0) {
         const chosenIndex = optionChosen[0]
-        const propsChildren = this.props.children || []
+        const propsChildren = props.children || []
         const chosenChild = propsChildren[chosenIndex] || {label: ''}
         chosenSpan = chosenChild.label || (chosenChild.props || {}).children || ''
       }
@@ -73,7 +74,7 @@ class Select extends Nerv.Component<SelectProps, any> {
         style += ' at-select--show-clear'
       }
       style += this.state.isDropDown ? ' at-select--visible' : ''
-      style += ' at-select--single at-select--normal'
+      style += ` at-select--single at-select--${this.props.size ||'normal'}`
       return style
     }
     renderSingleSelect () {
@@ -124,6 +125,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     render () {
       const dropDownStyle = this.prepareDropDownStyle()
       const {style} = this.props
+      
       let placeholderStyle = {}
       if (this.state.selected || this.props.filterable) {
         placeholderStyle = this.DISPLAY_NONE
@@ -145,6 +147,7 @@ class Select extends Nerv.Component<SelectProps, any> {
       //   dropDownClass += ' slide-up-leave slide-up-leave-active'
       // }
       // dropDownClass += ' slide-up-leave slide-up-leave-active'
+
       return (
       <div className={this.renderToggleArrowClass()} data-v-a01f69b8='' style={style}>
         <div className='at-select__selection' ref='trigger' onClick={this.handleClick}>
@@ -185,9 +188,7 @@ class Select extends Nerv.Component<SelectProps, any> {
       } else {
         this.searchOption.forEach((item, index) => {
           const arr = ((inputValue) || '').split(/\\/g)
-          if (arr.length > 0) {
-            // console.log(arr)
-          }
+          
           let newInputValue = ''
           arr.forEach((item, index) => {
             if (index === arr.length - 1) {
@@ -391,6 +392,20 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     componentDidMount () {
       this.calculatePopoverStyle()
+      let propsvalue = this.props.value
+      let optionChosen:any[]= []
+      Nerv.Children.forEach(this.propsSelectOption as any, (child, index) => {
+        
+        if(child.props.value == propsvalue){
+          optionChosen.push(index)
+        }
+      }, null)
+      if(optionChosen.length>0) {
+        this.setState({
+          optionChosen,
+          selected: true
+        })
+      }
       window.addEventListener('click', this.windowClickHideAll)
     }
     componentWillUnmount () {

@@ -31,6 +31,11 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     this.left = 0
     this.enter = false
   }
+  renderPopoverClassNames (props: PopoverProps) {
+    return classnames('at-popover', [
+    ]
+    , props.className)
+  }
   clickHandler (e: MouseEvent) {
     e.stopPropagation()
     if (this.enter) {
@@ -145,7 +150,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       )
     }
     return (
-      <div className='at-popover' ref='wrapper' style={style} {...needProps}>
+      <div className={this.renderPopoverClassNames(this.props)} ref='wrapper' style={style} {...needProps}>
         <span className='at-popover__trigger' style={props.style} ref='trigger'>
           {props.children}
         </span>

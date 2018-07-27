@@ -19,7 +19,8 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
     super(props)
     this.inputHandler = this.inputHandler.bind(this)
     this.state = {
-      height: ''
+      height: '',
+      value: ''
     }
   }
   renderTextareaClassNames (props: TextareaProps) {
@@ -79,7 +80,7 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
       <div className={classNames}>
         <textarea
           ref='textarea'
-          value={props.value}
+          value={this.state.value}
           placeholder={placeholder}
           autoFocus={autofocus}
           name={props.name}
@@ -100,6 +101,9 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
       propsHandler.onInput(e)
     }
     this.resizeTextarea()
+    this.setState({
+      value: e.target.value
+    })
   }
   resizeTextarea () {
     const props = this.props
@@ -117,7 +121,7 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
       )
     }
     this.setState({
-      height: calculateStyle.height
+      height: calculateStyle.height,
     })
   }
   componentDidMount () {

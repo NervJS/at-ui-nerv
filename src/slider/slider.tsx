@@ -17,8 +17,7 @@ class Slider extends Nerv.Component<SliderProps, any> {
   private min: number
   private step: number
   renderSliderClassNames (props: SliderProps) {
-    return classnames('icon', [
-      props.type ? `${props.type}` : ''
+    return classnames('at-slider', [
     ], props.className)
   }
   constructor (props) {
@@ -76,7 +75,7 @@ class Slider extends Nerv.Component<SliderProps, any> {
     let trackClass = 'at-slider__track'
     if (props.disabled) { trackClass += ' at-slider--disabled'}
     return (
-      <div className='at-slider' {...needProps} style={style}>
+      <div className={this.renderSliderClassNames(this.props)} {...needProps} style={style}>
         <div className='at-input-number at-slider__input at-input-number--normal' style={{ display: 'none' }}>
           <div className='at-input-number__input'>
             <input type='number' max='100' min='0' className='at-input-number__original' />

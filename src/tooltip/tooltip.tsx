@@ -24,8 +24,7 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
     this.left = 0
   }
   renderTooltipClassNames (props: ToolProps) {
-    return classnames('icon', [
-      props.type ? `${props.type}` : ''
+    return classnames('at-tooltip', [
     ], props.className)
   }
   onMouseEnter (e: React.MouseEvent<HTMLDivElement>) {
@@ -80,7 +79,7 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
       tipstyle = {...tipstyle, ...props.tipstyle}
     }
     return (
-    <div className='at-tooltip' {...needProps} style={props.style} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
+    <div className={this.renderTooltipClassNames(props)} {...needProps} style={props.style} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
         <span className='at-tooltip__trigger' ref='trigger'>
           {this.props.children}
         </span>

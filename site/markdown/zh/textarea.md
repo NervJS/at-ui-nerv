@@ -35,7 +35,7 @@ imports:
 :::demo
 ```jsx
 <p class="demo-desc">minRows=2, maxRows=4</p>
-<Textarea   min-rows="2" max-rows="4" placeholder="这里输入内容，请输入多行"></Textarea>
+<Textarea minRows="2" maxRows="4" placeholder="这里输入内容，请输入多行"></Textarea>
 ```
 :::
 
@@ -45,7 +45,7 @@ imports:
 
 :::demo
 ```jsx
-<Textarea   autosize placeholder="这里输入内容，请输入多行"></Textarea>
+<Textarea autosize minRows="2" maxRows="4" placeholder="这里输入内容，请输入多行"></Textarea>
 ```
 :::
 
