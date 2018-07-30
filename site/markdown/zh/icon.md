@@ -10,14 +10,14 @@ imports:
 
 ## 如何使用
 
-使用 `class="icon"` 来声明图标，具体图标的名称请 `copy` 相应的标签
+使用 `className="icon"` 来声明图标，具体图标的名称请 `copy` 相应的标签
 
 :::demo
 ```html
-<i class="icon icon-zoom-in"></i>
-<i class="icon icon-zoom-out"></i>
-<i class="icon icon-check"></i>
-<i class="icon icon-x"></i>
+<i className="icon icon-zoom-in"></i>
+<i className="icon icon-zoom-out"></i>
+<i className="icon icon-check"></i>
+<i className="icon icon-x"></i>
 ```
 :::
 

@@ -32,7 +32,7 @@ imports:
 :::demo
 
 ```jsx
-<p class="demo-desc">Modal.alert()</p>
+<p className="demo-desc">Modal.alert()</p>
 <Button onClick={()=>{
 Modal.alert({
       title: '这里是标题名称',
@@ -54,7 +54,7 @@ Modal.alert({
 :::demo
 
 ```jsx
-<p class="demo-desc">Modal.confirm()</p>
+<p className="demo-desc">Modal.confirm()</p>
 <Button onClick={
   ()=>{
     Modal.confirm({
@@ -76,7 +76,7 @@ Modal.alert({
 :::demo
 
 ```jsx
-<p class="demo-desc">Modal.prompt( title: '提示', content: '请输入邮件地址：' )</p>
+<p className="demo-desc">Modal.prompt( title: '提示', content: '请输入邮件地址：' )</p>
 <Button onClick={()=>{
  Modal.prompt({
           title: '提示',
@@ -109,7 +109,7 @@ Modal.alert({
 :::demo
 
 ```jsx
-<p class="demo-desc">Modal.success()</p>
+<p className="demo-desc">Modal.success()</p>
 <Button onClick={
   ()=>{
     Modal.success({

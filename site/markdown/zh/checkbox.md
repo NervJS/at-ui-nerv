@@ -19,7 +19,7 @@ onChange={(checked,label)=>{this.setState({val1: checked ? true:false})}} checke
 label="深圳">
 深圳
 </Checkbox>
-<p class="demo-desc">{ this.state.val1 ? 'true':'false' }</p>
+<p className="demo-desc">{ this.state.val1 ? 'true':'false' }</p>
 ```
 
 :::
@@ -70,7 +70,7 @@ onChange={(e)=>{this.setState({val4: e})
   <Checkbox label="广州" disabled>广州</Checkbox>
   <Checkbox label="凹凸实验室" disabled>凹凸实验室</Checkbox>
 </Checkbox.Group>
-<p class="demo-desc">{ `[${(this.state.val4 || ['深圳', '北京']).join(',')}]` }</p>
+<p className="demo-desc">{ `[${(this.state.val4 || ['深圳', '北京']).join(',')}]` }</p>
 ```
 
 :::

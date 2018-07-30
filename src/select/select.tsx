@@ -167,7 +167,7 @@ class Select extends Nerv.Component<SelectProps, any> {
       </div>)
     }
     renderSearchInput () {
-      if (this.props.filterable) {
+      if (this.props.filterable && !this.props.multiple) {
         return (<input type='text' placeholder={this.props.placeholder || '请选择'}  value={this.state.inputValue} onChange={this.handleInput} className='at-select__input' />)
       }
     }
@@ -215,7 +215,6 @@ class Select extends Nerv.Component<SelectProps, any> {
       }
     }
     renderClearBtn () {
-      // let style = this.DISPLAY_NONE
       if (!this.props.multiple && this.props.clearable && this.state.selected) {
         return (<i className='icon icon-x at-select__clear' onClick={this.handleClear}></i>)
       }

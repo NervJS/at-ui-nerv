@@ -45,7 +45,7 @@ imports:
 :::demo
 
 ```jsx
-<div class="row">
+<div className="row">
   <Button hollow>默认按钮</Button>
   <Button type="primary" hollow>主要按钮</Button>
   <Button type="success" hollow>成功按钮</Button>
@@ -53,7 +53,7 @@ imports:
   <Button type="warning" hollow>警告按钮</Button>
   <Button type="info" hollow>信息按钮</Button>
 </div>
-<div class="row">
+<div className="row">
   <Button>默认按钮</Button>
   <Button type="primary">主要按钮</Button>
   <Button type="success">成功按钮</Button>
@@ -72,13 +72,13 @@ imports:
 :::demo
 
 ```jsx
-<div class="row">
+<div className="row">
   <Button icon="icon-download">下载资源</Button>
   <Button icon="icon-user-plus">添加用户</Button>
   <Button icon="icon-edit"></Button>
   <Button type="primary" icon="icon-search"></Button>
 </div>
-<div class="row">
+<div className="row">
   <Button icon="icon-edit" circle></Button>
   <Button type="primary" icon="icon-search" circle></Button>
 </div>
@@ -120,8 +120,8 @@ imports:
 </Button.Group>
 <br>
 <Button.Group>
-  <Button><i class="icon icon-chevron-left"></i>后退</Button>
-  <Button>往前<i class="icon icon-chevron-right"></i></Button>
+  <Button><i className="icon icon-chevron-left"></i>后退</Button>
+  <Button>往前<i className="icon icon-chevron-right"></i></Button>
 </Button.Group>
 ```
 
@@ -177,7 +177,7 @@ imports:
 | nativeType | 原生按钮的类型                         | String  | -                                                                   | `button` |
 | size       | 按钮的大小                             | String  | `large`, `small`, `smaller`                                         | -        |
 | hollow     | 是否为空心按钮                         | Boolean | -                                                                   | false    |
-| icon       | 按钮的图标类名，填入图标的 `classname` | String  | 见文档 `Icon 图标`                                                  | -        |
+| icon       | 按钮的图标类名，填入图标的 `className` | String  | 见文档 `Icon 图标`                                                  | -        |
 | loading    | 设置按钮的载入状态                     | Boolean | -                                                                   | false    |
 | circle     | 设置圆形图标按钮                       | Boolean | -                                                                   | false    |
 

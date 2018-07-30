@@ -18,7 +18,7 @@ imports:
 ```jsx
 <div style={{position: 'relative'}}>
 <Dropdown>
-  <span>下拉菜单 <i class="icon icon-chevron-down"></i></span>
+  <span>下拉菜单 <i className="icon icon-chevron-down"></i></span>
   <Dropdown.Menu  >
     <Dropdown.Item>深圳</Dropdown.Item>
     <Dropdown.Item>广州</Dropdown.Item>
@@ -28,7 +28,7 @@ imports:
   </Dropdown.Menu>
 </Dropdown>
 <Dropdown>
-  <Button size="small">下拉菜单 <i class="icon icon-chevron-down"></i></Button>
+  <Button size="small">下拉菜单 <i className="icon icon-chevron-down"></i></Button>
   <Dropdown.Menu  >
     <Dropdown.Item>深圳</Dropdown.Item>
     <Dropdown.Item>广州</Dropdown.Item>
@@ -50,7 +50,7 @@ imports:
 
 ```jsx
 <Dropdown>
-  <Button size="small">Hover 菜单 <i class="icon icon-chevron-down"/></Button>
+  <Button size="small">Hover 菜单 <i className="icon icon-chevron-down"/></Button>
   <Dropdown.Menu  >
     <Dropdown.Item name="shenzhen">深圳</Dropdown.Item>
     <Dropdown.Item name="guangzhou">广州</Dropdown.Item>
@@ -59,7 +59,7 @@ imports:
   </Dropdown.Menu>
 </Dropdown>
 <Dropdown trigger="click">
-  <Button size="small">Click 菜单 <i class="icon icon-chevron-down"/></Button>
+  <Button size="small">Click 菜单 <i className="icon icon-chevron-down"/></Button>
   <Dropdown.Menu  >
     <Dropdown.Item name="shenzhen">深圳</Dropdown.Item>
     <Dropdown.Item name="guangzhou">广州</Dropdown.Item>
@@ -80,7 +80,7 @@ imports:
 ```jsx
 <Dropdown placement="bottom-right">
   <Button size="small">
-    Hover 菜单 <i class="icon icon-chevron-down" />
+    Hover 菜单 <i className="icon icon-chevron-down" />
   </Button>
   <Dropdown.Menu  >
     <Dropdown.Item name="shenzhen">深圳</Dropdown.Item>
@@ -109,7 +109,7 @@ imports:
     console.log(name)
   }}>
   <Button size="small">
-    Hover 菜单 <i class="icon icon-chevron-down" />
+    Hover 菜单 <i className="icon icon-chevron-down" />
   </Button>
   <Dropdown.Menu  >
     <Dropdown.Item name="shenzhen">深圳</Dropdown.Item>

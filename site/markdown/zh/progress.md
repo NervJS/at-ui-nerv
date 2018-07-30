@@ -28,8 +28,8 @@ imports:
 
 :::demo
 ```html
-<div class="row no-gutter">
-  <div class="col-sm-24 col-md-12">
+<div className="row no-gutter">
+  <div className="col-sm-24 col-md-12">
     <Progress percent="0" strokeWidth="4"></Progress>
     <Progress percent="60" strokeWidth="4"></Progress>
     <Progress percent="100" strokeWidth="4"></Progress>
@@ -53,14 +53,14 @@ imports:
     this.setState({
       percent
     })
-    }}><i class="icon icon-minus"></i></Button>
+    }}><i className="icon icon-minus"></i></Button>
   <Button onClick={()=>{
     let percent = this.state.percent || 0
     percent = percent +10 > 100 ? 100: percent+10
     this.setState({
       percent
     })
-    }}><i class="icon icon-plus"></i></Button>
+    }}><i className="icon icon-plus"></i></Button>
 </Button.Group>
 
 ```

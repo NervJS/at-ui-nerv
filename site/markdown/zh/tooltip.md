@@ -43,28 +43,28 @@ imports:
 
 :::demo
 ```jsx
-<div class="show-box">
-  <div class="top row col-md-16 flex-center">
-    <Tooltip class="item" content="Top Left 提示文字" placement="top-left"><Button>上左</Button></Tooltip>
-    <Tooltip class="item" content="Top 提示文字" placement="top"><Button>上边</Button></Tooltip>
-    <Tooltip class="item" content="Top Right 提示文字" placement="top-right"><Button>上右</Button></Tooltip>
+<div className="show-box">
+  <div className="top row col-md-16 flex-center">
+    <Tooltip className="item" content="Top Left 提示文字" placement="top-left"><Button>上左</Button></Tooltip>
+    <Tooltip className="item" content="Top 提示文字" placement="top"><Button>上边</Button></Tooltip>
+    <Tooltip className="item" content="Top Right 提示文字" placement="top-right"><Button>上右</Button></Tooltip>
   </div>
-  <div class="center row col-md-16 flex-between">
-    <div class="left col-md-4">
-      <Tooltip class="item" content="Left Top 提示文字" placement="left-top"><Button>左上</Button></Tooltip>
-      <Tooltip class="item" content="Left 提示文字" placement="left"><Button>左边</Button></Tooltip>
-      <Tooltip class="item" content="Left Bottom 提示文字" placement="left-bottom"><Button>左下</Button></Tooltip>
+  <div className="center row col-md-16 flex-between">
+    <div className="left col-md-4">
+      <Tooltip className="item" content="Left Top 提示文字" placement="left-top"><Button>左上</Button></Tooltip>
+      <Tooltip className="item" content="Left 提示文字" placement="left"><Button>左边</Button></Tooltip>
+      <Tooltip className="item" content="Left Bottom 提示文字" placement="left-bottom"><Button>左下</Button></Tooltip>
     </div>
-    <div class="right col-md-4">
-      <Tooltip class="item" content="Right Top 提示文字" placement="right-top"><Button>右上</Button></Tooltip>
-      <Tooltip class="item" content="Right 提示文字" placement="right"><Button>右边</Button></Tooltip>
-      <Tooltip class="item" content="Right Bottom 提示文字" placement="right-bottom"><Button>右下</Button></Tooltip>
+    <div className="right col-md-4">
+      <Tooltip className="item" content="Right Top 提示文字" placement="right-top"><Button>右上</Button></Tooltip>
+      <Tooltip className="item" content="Right 提示文字" placement="right"><Button>右边</Button></Tooltip>
+      <Tooltip className="item" content="Right Bottom 提示文字" placement="right-bottom"><Button>右下</Button></Tooltip>
     </div>
   </div>
-  <div class="bottom row col-md-16 flex-center">
-    <Tooltip class="item" content="Bottom Left 提示文字" placement="bottom-left"><Button>下左</Button></Tooltip>
-    <Tooltip class="item" content="Bottom 提示文字" placement="bottom"><Button>下边</Button></Tooltip>
-    <Tooltip class="item" content="Bottom Right 提示文字" placement="bottom-right"><Button>下右</Button></Tooltip>
+  <div className="bottom row col-md-16 flex-center">
+    <Tooltip className="item" content="Bottom Left 提示文字" placement="bottom-left"><Button>下左</Button></Tooltip>
+    <Tooltip className="item" content="Bottom 提示文字" placement="bottom"><Button>下边</Button></Tooltip>
+    <Tooltip className="item" content="Bottom Right 提示文字" placement="bottom-right"><Button>下右</Button></Tooltip>
   </div>
 </div>
 ```

@@ -32,8 +32,8 @@ imports:
   <span slot="unCheckedText">关</span>
 </Switch>
 <Switch>
-  <span slot="checkedText"><i class="icon icon-left-arrow"></i></span>
-  <span slot="unCheckedText"><i class="icon icon-right-arrow"></i></span>
+  <span slot="checkedText"><i className="icon icon-left-arrow"></i></span>
+  <span slot="unCheckedText"><i className="icon icon-right-arrow"></i></span>
 </Switch>
 ```
 :::

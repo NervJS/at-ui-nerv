@@ -12,15 +12,15 @@ imports:
 
 :::demo
 ```jsx
-<p class="demo-desc">基本输入框</p>
-<div class="row no-gutter">
-  <div class="col-md-4">
+<p className="demo-desc">基本输入框</p>
+<div className="row no-gutter">
+  <div className="col-md-4">
     <InputNumber onChange={(n)=>{console.log(n)}}></InputNumber><br>
   </div>
 </div>
-<p class="demo-desc">有取值范围的输入框，min=0, max=5</p>
-<div class="row no-gutter">
-  <div class="col-md-4">
+<p className="demo-desc">有取值范围的输入框，min=0, max=5</p>
+<div className="row no-gutter">
+  <div className="col-md-4">
     <InputNumber min="0" max="5"></InputNumber>
   </div>
 </div>
@@ -33,8 +33,8 @@ imports:
 
 :::demo
 ```jsx
-<div class="row no-gutter">
-  <div class="col-md-4">
+<div className="row no-gutter">
+  <div className="col-md-4">
     <InputNumber disabled></InputNumber>
   </div>
 </div>
@@ -47,9 +47,9 @@ imports:
 
 :::demo
 ```jsx
-<p class="demo-desc">step=0.3, min=1</p>
-<div class="row no-gutter">
-  <div class="col-md-4">
+<p className="demo-desc">step=0.3, min=1</p>
+<div className="row no-gutter">
+  <div className="col-md-4">
     <InputNumber onChange={(n)=>{console.log(n)}} step="0.3" min="1"></InputNumber>
   </div>
 </div>
@@ -62,14 +62,14 @@ imports:
 
 :::demo
 ```jsx
-<div class="row">
-  <div class="col-sm-12 col-md-4">
+<div className="row">
+  <div className="col-sm-12 col-md-4">
     <InputNumber size="small"></InputNumber>
   </div>
-  <div class="col-sm-12 col-md-4">
+  <div className="col-sm-12 col-md-4">
     <InputNumber></InputNumber>
   </div>
-  <div class="col-sm-12 col-md-4">
+  <div className="col-sm-12 col-md-4">
     <InputNumber size="large"></InputNumber>
   </div>
 </div>

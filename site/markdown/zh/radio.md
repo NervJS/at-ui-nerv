@@ -88,8 +88,8 @@ imports:
 :::demo
 
 ```html
-<p class="demo-desc">更换背景色</p>
-<div class="row">
+<p className="demo-desc">更换背景色</p>
+<div className="row">
   <Radio.Group  
   value={this.state.groupVal3} 
   onRadioGroupChange={(label)=>{this.setState({
@@ -102,8 +102,8 @@ imports:
     <Radio.Button label="凹凸实验室">凹凸实验室</Radio.Button>
   </Radio.Group>
 </div>
-<p class="demo-desc">更换字体颜色</p>
-<div class="row">
+<p className="demo-desc">更换字体颜色</p>
+<div className="row">
   <Radio.Group  
   value={this.state.groupVal4} 
   onRadioGroupChange={(label)=>{this.setState({
@@ -127,7 +127,7 @@ imports:
 :::demo
 
 ```html
-<div class="row">
+<div className="row">
   <Radio.Group 
   value={this.state.groupVal5} 
   onRadioGroupChange={(label)=>{this.setState({
@@ -140,7 +140,7 @@ imports:
     <Radio.Button label="凹凸实验室">凹凸实验室</Radio.Button>
   </Radio.Group>
 </div>
-<div class="row">
+<div className="row">
   <Radio.Group
   value={this.state.groupVal6} 
   onRadioGroupChange={(label)=>{this.setState({
@@ -153,7 +153,7 @@ imports:
     <Radio.Button label="凹凸实验室">凹凸实验室</Radio.Button>
   </Radio.Group>
 </div>
-<div class="row">
+<div className="row">
   <Radio.Group 
   value={this.state.groupVal7} 
   onRadioGroupChange={(label)=>{this.setState({

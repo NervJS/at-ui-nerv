@@ -59,19 +59,19 @@ imports:
 ```jsx
 <Timeline>
   <Timeline.Item color="blue">
-    <i slot="dot" class="icon icon-github"></i>
+    <i slot="dot" className="icon icon-github"></i>
     <p>刷牙洗脸</p>
   </Timeline.Item>
   <Timeline.Item color="green">
-    <i slot="dot" class="icon icon-zap"></i>
+    <i slot="dot" className="icon icon-zap"></i>
     <p>吃早餐</p>
   </Timeline.Item>
   <Timeline.Item color="red">
-    <i slot="dot" class="icon icon-award"></i>
+    <i slot="dot" className="icon icon-award"></i>
     <p>上班</p>
   </Timeline.Item>
   <Timeline.Item color="yellow">
-    <i slot="dot" class="icon icon-watch"></i>
+    <i slot="dot" className="icon icon-watch"></i>
     <p>睡觉</p>
   </Timeline.Item>
 </Timeline>

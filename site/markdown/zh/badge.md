@@ -93,7 +93,7 @@ Info <Badge value={123} status="info"></Badge>
   <Button>回复</Button>
 </Badge>
 <Badge value="12" dot>
-  <i class="icon icon-inbox"></i>
+  <i className="icon icon-inbox"></i>
 </Badge>
 <Badge value="12" dot>
   <span>消息</span>
@@ -110,10 +110,10 @@ Info <Badge value={123} status="info"></Badge>
 
 ```html
 <Badge value={ this.state.num || 1} maxNum="12">
-  <span class="badge-example"></span>
+  <span className="badge-example"></span>
 </Badge>
 <Badge value={ this.state.num || 1} show={this.state.show} dot>
-  <span class="badge-example"></span>
+  <span className="badge-example"></span>
 </Badge>
 <br>
 <Button.Group size="small">

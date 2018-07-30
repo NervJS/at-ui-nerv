@@ -130,19 +130,19 @@ imports:
 <Collapse accordion value="value">
 	<Collapse.Item name="collapse1">
 		<div slot="title">
-			标题一 <i class="icon icon-info" />
+			标题一 <i className="icon icon-info" />
 		</div>
 		<div>内容一</div>
 	</Collapse.Item>
 	<Collapse.Item name="collapse2">
 		<div slot="title">
-			标题一 <i class="icon icon-box" />
+			标题一 <i className="icon icon-box" />
 		</div>
 		<div>内容一</div>
 	</Collapse.Item>
 	<Collapse.Item>
 		<div slot="title">
-			标题一 <i class="icon icon-calendar" />
+			标题一 <i className="icon icon-calendar" />
 		</div>
 		<div>内容一</div>
 	</Collapse.Item>

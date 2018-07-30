@@ -33,7 +33,8 @@ class Table extends Nerv.Component<TableProps, any> {
     this.state = {
       resizeHeight: 0,
       resizeMarginTop: 0,
-      valueArr: [],
+      // valueArr: [],
+      valueBinArr:new Uint8Array(new ArrayBuffer(10)),
       selectAll: false,
       currPage: 1,
       currPageSize: 10,
@@ -60,10 +61,38 @@ class Table extends Nerv.Component<TableProps, any> {
       props.className
     )
   }
+  add (num) {
+    let arrayIndex = num >> 3;
+    let position = num & 7;
+    let bits = this.state.valueBinArr
+    bits[arrayIndex] |= 1 << position
+    this.setState({
+      valueBinArr: bits
+    },()=>{
+      console.log(this.state.valueBinArr)
+    })
+  }
+  contain (num) {
+    let arrayIndex = num >> 3
+    let position = num & 7;
+    let bits = this.state.valueBinArr
+    console.log('是否包含',bits,(bits[arrayIndex] & (1<<position)))
+    return (bits[arrayIndex] & (1<<position)) != 0
+  }
+  clear (num) {
+    let arrayIndex = num >> 3;
+    let position = num & 0x07;
+    let bits = this.state.valueBinArr
+    bits[arrayIndex] &= ~(1<<position)
+    this.setState({
+      valueBinArr: bits
+    })
+  }
   componentWillMount () {
     const { data = [], columns = [] } = this.props
     data.forEach((item, index) => {
-      this.state.valueArr.push(false)
+      // this.state.valueArr.push(false)
+      this.clear(index)
     })
     columns.forEach((item,index) => {
       item._index = index
@@ -146,10 +175,10 @@ class Table extends Nerv.Component<TableProps, any> {
         tdElement.push(
           <th
             className='at-table__cell at-table__column-selection'
-            data-value={this.state.valueArr[index]}
+            data-value={this.contain(index)}
           >
             <Checkbox
-              checked={this.state.valueArr[index]}
+              checked={this.contain(index)}
               onChange={this.onSelectionChange.bind(this, item, index)}
             />
           </th>
@@ -340,39 +369,32 @@ class Table extends Nerv.Component<TableProps, any> {
     const propsOnSelectionChange = this.props.onSelectionChange
     if (value) {
       // 如果选中了，则返回值
-      const arrTemp = this.state.valueArr
-      arrTemp[index] = true
-      this.setState({
-        valueArr: arrTemp.concat()
-      })
+      // const arrTemp = this.state.valueArr
+      // arrTemp[index] = true
+      this.add(index)
       propsOnSelectionChange && propsOnSelectionChange(value, item)
       return item
     } else {
       // 如果取消选中，则返回false
-      const arrTemp = this.state.valueArr
-      arrTemp[index] = false
-      this.setState({
-        valueArr: arrTemp.concat()
-      })
+      this.clear(index)
       propsOnSelectionChange && propsOnSelectionChange(value, item)
       return value
     }
   }
   onSelectAll () {
-    const arrTemp = this.state.valueArr
+    const arrTemp = this.state.valueBinArr
     const selectAll = !this.state.selectAll
     let dataSelected
     for (let i = 0; i < arrTemp.length; i++) {
       if (selectAll) {
-        arrTemp[i] = true
+        this.add(i)
         dataSelected = this.props.data
       } else {
-        arrTemp[i] = false
+        this.clear(i)
         dataSelected = []
       }
     }
     this.setState({
-      valueArr: arrTemp.concat(),
       selectAll
     })
     this.props.onSelectAll && this.props.onSelectAll(dataSelected)
@@ -392,6 +414,7 @@ class Table extends Nerv.Component<TableProps, any> {
       this.resizeHeightHandler()
     }
     window.addEventListener('resize', this.handleResize)
+    console.log('valueBinArr',this.state.valueBinArr)
   }
   componentWillReceiveProps (nextProps) {
   }
