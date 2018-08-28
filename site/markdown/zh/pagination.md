@@ -109,5 +109,3 @@ imports:
 | pageChange | 页码改变时触发的回调 | 页码 |
 | pagesizeChange | 切换每页显示的条数时触发的回调 | 每页的条目数 |
 
-```
-```

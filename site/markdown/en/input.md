@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Input} from '@src';
+---
 # Input
 
 ----
@@ -9,9 +12,9 @@ Basic Input Box, default width is `100%`.
 
 :::demo
 ```html
-<at-input v-model="inputValue" placeholder="Please input"></at-input>
-<at-input v-model="inputValue" placeholder="Disabled" disabled></at-input>
-<at-input v-model="password" type="password" placeholder="Password"></at-input>
+<Input onInput={(n)=>{console.log(n)}} placeholder="Please input"></Input>
+<Input onInput={()=>{}} placeholder="Disabled" disabled></Input>
+<Input onInput={()=>{}} type="password" placeholder="Password"></Input>
 ```
 :::
 
@@ -21,10 +24,10 @@ Add the property `status`, which represents the input box with different meaning
 
 :::demo
 ```html
-<at-input v-model="inputValue2" placeholder="success" status="success" icon="check-circle"></at-input>
-<at-input v-model="inputValue2" placeholder="error" status="error" icon="x-circle"></at-input>
-<at-input v-model="inputValue2" placeholder="warning" status="warning" icon="alert-circle"></at-input>
-<at-input v-model="inputValue2" placeholder="info" status="info" icon="info"></at-input>
+<Input onInput={()=>{}} placeholder="success" status="success" icon="check-circle"></Input>
+<Input onInput={()=>{}} placeholder="error" status="error" icon="x-circle"></Input>
+<Input onInput={()=>{}} placeholder="warning" status="warning" icon="alert-circle"></Input>
+<Input onInput={()=>{}} placeholder="info" status="info" icon="info"></Input>
 ```
 :::
 
@@ -34,7 +37,7 @@ To display the tooltip icon after the input box, add `icon` property to Input. I
 
 :::demo
 ```html
-<at-input v-model="inputValue3" placeholder="Please input url" icon="link"></at-input>
+<Input onInput={()=>{}} placeholder="Please input url" icon="link"></Input>
 ```
 :::
 
@@ -44,41 +47,20 @@ Set `slot="prepend"` or `slot="append"` to customize the input box.
 
 :::demo
 ```html
-<at-input v-model="inputValue4" placeholder="Please input">
-  <template slot="prepend">
-    <span>Https://</span>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="Please input" size="small">
-  <template slot="append">
-    <span>@aotu.io</span>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="Please input">
-  <template slot="prepend">
-    <i class="icon icon-link"></i>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="Please input" prepend-button>
-  <template slot="prepend">
-    <span>Search</span>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="Please input" append-button>
-  <template slot="append">
-    <span>Search</span>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="Please input" prepend-button>
-  <template slot="prepend">
-    <i class="icon icon-search"></i>
-  </template>
-</at-input>
-<at-input v-model="inputValue4" placeholder="Please input" append-button>
-  <template slot="append">
-    <i class="icon icon-search"></i>
-  </template>
-</at-input>
+<Input onInput={()=>{}} placeholder="please input" prepend={<span>Https://</span>}>
+</Input>
+<Input onInput={()=>{}} placeholder="please input" size="small" append={<span>@aotu.io</span>}>
+</Input>
+<Input onInput={()=>{}} placeholder="please input"  prepend={<i className='icon icon-search'/>}>
+</Input>
+<Input onInput={()=>{}} placeholder="please input" prependButton prepend={<span>search</span>}>
+</Input>
+<Input onInput={()=>{}} placeholder="please input" appendButton append={<span>search</span>}>
+</Input>
+<Input onInput={()=>{}} placeholder="please input" prependButton prepend={<i className='icon icon-search'/>}>
+</Input>
+<Input onInput={()=>{}} placeholder="please input" appendButton append={<i className='icon icon-search'/>}>
+</Input>
 ```
 :::
 
@@ -88,9 +70,9 @@ There are three sizes of an Input box: `large`，`normal`，`small`.
 
 :::demo
 ```html
-<at-input v-model="inputValue" size="large" placeholder="Large Size"></at-input>
-<at-input v-model="inputValue" placeholder="Normal Size"></at-input>
-<at-input v-model="inputValue" size="small" placeholder="Small Size"></at-input>
+<Input onInput={()=>{}} size="large" placeholder="Large Size"></Input>
+<Input onInput={()=>{}} placeholder="Normal Size"></Input>
+<Input onInput={()=>{}} size="small" placeholder="Small Size"></Input>
 ```
 :::
 
@@ -114,40 +96,11 @@ There are three sizes of an Input box: `large`，`normal`，`small`.
 | prependButton | whether has prepend button or not | Boolean | - | false |
 | appendButton | whether has append button or not | Boolean | - | false |
 
-## Input slot
-
-| Name | Description          |
-|------ |------------ |
-| prepend | Preposed content, only works in text type |
-| append | Append content, only works in text type |
-
 ## Input Events
 
 | Event Name | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| focus | Emitted when focus | event |
-| blur | Emitted when blur | event |
+| onFocus  | Emitted when focus | event |
+| onBlur | Emitted when blur | event |
+| onInput | Emitted when input | value,event  |
 
-<script>
-export default {
-  data() {
-    return {
-      inputValue: '',
-      inputValue2: '',
-      inputValue3: '',
-      inputValue4: '',
-      password: ''
-    }
-  }
-}
-</script>
-
-<style lang="scss" scoped>
-.at-input {
-  width: 200px;
-
-  & + .at-input {
-    margin-top: 15px;
-  }
-}
-</style>

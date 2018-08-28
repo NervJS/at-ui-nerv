@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Alert} from '@src';
+---
 # Alert
 
 ----
@@ -14,10 +17,10 @@ The contents of Alert are passed through `message` property.
 
 :::demo
 ```html
-<at-alert message="Here is the information~Here is the information~Here is the information~" type="success"></at-alert>
-<at-alert message="Here is the information~" type="error"></at-alert>
-<at-alert message="Here is the information~" type="warning"></at-alert>
-<at-alert message="Here is the information~" type="info"></at-alert>
+<Alert message="Here is the information~Here is the information~Here is the information~" type="success"></Alert>
+<Alert message="Here is the information~" type="error"></Alert>
+<Alert message="Here is the information~" type="warning"></Alert>
+<Alert message="Here is the information~" type="info"></Alert>
 ```
 :::
 
@@ -28,7 +31,7 @@ To make a alert component closable, add `closable` property to the Alert.
 
 :::demo
 ```html
-<at-alert message="Here is the alert that can be closed." closable></at-alert>
+<Alert message="Here is the alert that can be closed." closable></Alert>
 ```
 :::
 
@@ -39,18 +42,18 @@ Customize the text or icon of close button by `close-text` property.
 
 :::demo
 ```html
-<at-alert message="Here is the information~" close-text="Close"></at-alert>
+<Alert message="Here is the information~" closeText="Close"></Alert>
 ```
 :::
 
 
 ## With Icon
 
-Append Icon before text by `show-icon` property, that can improve readability.
+Append Icon before text by `showIcon` property, that can improve readability.
 
 :::demo
 ```html
-<at-alert message="Here is the information with ICON" show-icon></at-alert>
+<Alert message="Here is the information with ICON" showIcon></Alert>
 ```
 :::
 
@@ -60,11 +63,11 @@ Append Icon before text by `show-icon` property, that can improve readability.
 The text of alert component can contain title and content, which are configured by `message` and `description` properties.
 
 :::demo
-```html
-<at-alert message="Title of Success" description="Here is the information" type="success" closable></at-alert>
-<at-alert message="Title of Error" description="Here is the information" type="error" closable></at-alert>
-<at-alert message="Title of Warning" description="Here is the information" type="warning" closable></at-alert>
-<at-alert message="Title of Info" description="Here is the information" type="info" closable></at-alert>
+```jsx
+<Alert message="Title of Success" description="Here is the information" type="success" closable></Alert>
+<Alert message="Title of Error" description="Here is the information" type="error" closable></Alert>
+<Alert message="Title of Warning" description="Here is the information" type="warning" closable></Alert>
+<Alert message="Title of Info" description="Here is the information" type="info" closable></Alert>
 ```
 :::
 
@@ -74,11 +77,11 @@ The text of alert component can contain title and content, which are configured 
 Multiple properties are used in combination.
 
 :::demo
-```html
-<at-alert message="Title of Success" description="Here is the information~Here is the information~Here is the information~Here is the information~Here is the information~Here is the information~Here is the information~" type="success" show-icon closable></at-alert>
-<at-alert message="Title of Error" description="Here is the information" type="error" show-icon closable></at-alert>
-<at-alert message="Title of Warning" description="Here is the information" type="warning" show-icon closable></at-alert>
-<at-alert message="Title of Info" description="Here is the information" type="info" show-icon closable></at-alert>
+```jsx
+<Alert message="Title of Success" description="Here is the information~Here is the information~Here is the information~Here is the information~Here is the information~Here is the information~Here is the information~" type="success" showIcon closable></Alert>
+<Alert message="Title of Error" description="Here is the information" type="error" showIcon closable></Alert>
+<Alert message="Title of Warning" description="Here is the information" type="warning" showIcon closable></Alert>
+<Alert message="Title of Info" description="Here is the information" type="info" showIcon closable></Alert>
 ```
 :::
 
@@ -100,11 +103,6 @@ Multiple properties are used in combination.
 
 | Event Name      | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| on-close | Emitted when close button clicked | - |
+| onClose | Emitted when close button clicked | - |
 
 
-<style lang="scss" scoped>
-.at-alert + .at-alert {
-  margin-top: 8px;
-}
-</style>

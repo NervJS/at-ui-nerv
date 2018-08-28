@@ -31,23 +31,51 @@ Refer to [Bootstrap](http://getbootstrap.com/css/#grid-media-queries) and [Seman
 Create a basic grid layout using a single `row` and multiple `col` combinations.
 
 :::demo
-```html
-<div class="row at-row no-gutter" v-for="n in 24/2">
-  <div :class="`col-md-${n}`"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div :class="`col-md-${24 - n}`"><div class="at-box-row bg-c-brand-light"></div></div>
+```jsx
+<div>
+  {(n => {
+    const result = []
+    for (let i = 0; i < n; i++) {
+      result.push(
+        <div className="row at-row no-gutter">
+          <div className={`col-md-${i}`}>
+            <div className="at-box-row bg-c-brand-dark" />
+          </div>
+          <div className={`col-md-${24 - i}`}>
+            <div className="at-box-row bg-c-brand-light" />
+          </div>
+        </div>
+      )
+    }
+    return result
+  })(12)}
 </div>
 ```
 :::
 
 ## Grid Gutter
 
-Add gaps between `col` by default. Set property `class="no-gutter"` to remove the gap.
+Add gaps between `col` by default. Set property `className="no-gutter"` to remove the gap.
 
 :::demo
-```html
-<div class="row at-row" v-for="n in 24/2">
-  <div :class="`col-md-${n}`"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div :class="`col-md-${24 - n}`"><div class="at-box-row bg-c-brand-light"></div></div>
+```jsx
+<div>
+  {(n => {
+    const result = []
+    for (let i = 0; i < n; i++) {
+      result.push(
+        <div className="row at-row no-gutter">
+          <div className={`col-md-${i}`}>
+            <div className="at-box-row bg-c-brand-dark" />
+          </div>
+          <div className={`col-md-${24 - i}`}>
+            <div className="at-box-row bg-c-brand-light" />
+          </div>
+        </div>
+      )
+    }
+    return result
+  })(12)}
 </div>
 ```
 :::
@@ -57,54 +85,68 @@ Add gaps between `col` by default. Set property `class="no-gutter"` to remove th
 To make some offset between column, add classname `col-md-offset-3` and so on.
 
 :::demo
-```html
-<div class="row at-row" v-for="n in 6">
-  <div class="col-md-2"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div :class="`col-md-2 col-md-offset-${n}`"><div class="at-box-row bg-c-brand-dark"></div></div>
+```jsx
+<div>
+  {(n => {
+    const result = []
+    for (let i = 0; i < n; i++) {
+      result.push(
+        <div className="row at-row">
+          <div className="col-md-2">
+            <div className="at-box-row bg-c-brand-dark" />
+          </div>
+          <div className={`col-md-2 col-md-offset-${i}`}>
+            <div className="at-box-row bg-c-brand-dark" />
+          </div>
+        </div>
+      )
+    }
+    return result
+  })(6)}
 </div>
 ```
 :::
 
 ## Flex
 
-The grid system of `AT-UI` use `Flexbox` implementation to support `Flex`. If you want to set `Flex` layout for some elements, use `class="flex"`. Child elements defines its arrangement in the parent element by adding different class `flex-start`，`flex-center`，`flex-end`，`flex-top`，`flex-middle`，`flex-around`，`flex-between`.
+The grid system of `AT-UI` use `Flexbox` implementation to support `Flex`. If you want to set `Flex` layout for some elements, use `className="flex"`. Child elements defines its arrangement in the parent element by adding different class `flex-start`，`flex-center`，`flex-end`，`flex-top`，`flex-middle`，`flex-around`，`flex-between`.
 
 :::demo
-```html
-<p class="demo-desc">flex-start</p>
-<div class="row at-row no-gutter">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+```jsx
+<p className="demo-desc">flex-start</p>
+<div className="row at-row no-gutter">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
-<p class="demo-desc">flex-center</p>
-<div class="row at-row no-gutter flex-center">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-center</p>
+<div className="row at-row no-gutter flex-center">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
-<p class="demo-desc">flex-end</p>
-<div class="row at-row no-gutter flex-end">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-end</p>
+<div className="row at-row no-gutter flex-end">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
-<p class="demo-desc">flex-around</p>
-<div class="row at-row no-gutter flex-around">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-around</p>
+<div className="row at-row no-gutter flex-around">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
-<p class="demo-desc">flex-between</p>
-<div class="row at-row no-gutter flex-between">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light"></div></div>
+<p className="demo-desc">flex-between</p>
+<div className="row at-row no-gutter flex-between">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light"></div></div>
 </div>
 ```
 :::
@@ -114,27 +156,27 @@ The grid system of `AT-UI` use `Flexbox` implementation to support `Flex`. If yo
 support three types of alignment: `flex-top`，`flex-middle`，`flex-bottom`
 
 :::demo
-```html
-<p class="demo-desc">flex-top</p>
-<div class="row at-row flex-center">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
+```jsx
+<p className="demo-desc">flex-top</p>
+<div className="row at-row flex-center">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
 </div>
-<p class="demo-desc">flex-middle</p>
-<div class="row at-row flex-center flex-middle">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
+<p className="demo-desc">flex-middle</p>
+<div className="row at-row flex-center flex-middle">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
 </div>
-<p class="demo-desc">flex-bottom</p>
-<div class="row at-row flex-center flex-bottom">
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
-  <div class="col-md-4"><div class="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
+<p className="demo-desc">flex-bottom</p>
+<div className="row at-row flex-center flex-bottom">
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 100px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-dark" style="height: 70px"></div></div>
+  <div className="col-md-4"><div className="at-box-row bg-c-brand-light" style="height: 120px"></div></div>
 </div>
 ```
 :::
@@ -145,24 +187,8 @@ support three types of alignment: `flex-top`，`flex-middle`，`flex-bottom`
 | :------- | :--- |
 | .container | Grid container，children align center in parent node |
 | .container-fluid | The container has a gap of `24px` between the left and right sides |
-| .no-gutter | set the gap of `8px` by default, set property `class="no-gutter"` to remove the gap. |
+| .no-gutter | set the gap of `8px` by default, set property `className="no-gutter"` to remove the gap. |
 | .row | container that wraps `col` |
 | .row.reverse | reverse the order of child elements |
 | .flex | use `flexbox` |
 
-<style lang="scss" scoped>
-  .row {
-    background-color: #f2f8fe;
-  }
-  .at-row {
-    margin-bottom: 12px;
-
-    &:last-of-type {
-      margin-bottom: 0;
-    }
-  }
-  .at-box-row {
-    height: 36px;
-    border-radius: 8px;
-  }
-</style>

@@ -1,4 +1,7 @@
-
+---
+imports:
+  import {Table,Button} from '@src';
+---
 # Table
 
 ----
@@ -8,78 +11,70 @@
 Basic Usage
 
 :::demo
-```html
-<at-table :columns="columns1" :data="data1"></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns1: [
+```jsx
+<Table columns={[
+      {
+        title: '姓名',
+        key: 'name',
+        width:'300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        width:'300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'800'
+      }]} data={[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        data1: [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
           },
           {
-            name: 'Russell Westbrook',
+            name: '威斯布鲁克',
             age: 21,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           },
           {
-            name: 'Tim Duncan',
+            name: '邓肯',
             age: 26,
-            address: 'The Mixc of Shenzhen City '
+            address: '深圳市罗湖区万象城'
           },
           {
-            name: 'Tony Parker',
+            name: '帕克',
             age: 25,
-            address: 'Shenzhen Book City'
+            address: '深圳市福田区中心书城'
           },
           {
-            name: 'Kyrie Irving',
+            name: '欧文',
             age: 20,
-            address: 'Guangzhou Higher Education Mega Center'
+            address: '广州市番禺区大学城'
           },
           {
-            name: 'Isaiah Thomas',
+            name: '托马斯',
             age: 19,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           }
-        ]
-      }
-    }
-  }
-</script>
+        ]} />
+
 ```
 :::
 
@@ -88,78 +83,69 @@ Basic Usage
 Set `stripe` property to apply stripe style. Used to distinguish between different rows.
 
 :::demo
-```html
-<at-table :columns="columns1" :data="data1" stripe></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns1: [
+```jsx
+<Table stripe columns={[
+      {
+        title: '姓名',
+        key: 'name',
+        width: '300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        width: '300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'800'
+      }]} data={[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        data1: [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
           },
           {
-            name: 'Russell Westbrook',
+            name: '威斯布鲁克',
             age: 21,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           },
           {
-            name: 'Tim Duncan',
+            name: '邓肯',
             age: 26,
-            address: 'The Mixc of Shenzhen City '
+            address: '深圳市罗湖区万象城'
           },
           {
-            name: 'Tony Parker',
+            name: '帕克',
             age: 25,
-            address: 'Shenzhen Book City'
+            address: '深圳市福田区中心书城'
           },
           {
-            name: 'Kyrie Irving',
+            name: '欧文',
             age: 20,
-            address: 'Guangzhou Higher Education Mega Center'
+            address: '广州市番禺区大学城'
           },
           {
-            name: 'Isaiah Thomas',
+            name: '托马斯',
             age: 19,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           }
-        ]
-      }
-    }
-  }
-</script>
+        ]} />
 ```
 :::
 
@@ -168,78 +154,69 @@ Set `stripe` property to apply stripe style. Used to distinguish between differe
 Defaults to no column borders, set `border` property to add borders.
 
 :::demo
-```html
-<at-table :columns="columns1" :data="data1" border></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns1: [
+```jsx
+<Table border columns={[
+      {
+        title: '姓名',
+        key: 'name',
+        width:'300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        width:'300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'800'
+      }]} data={[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        data1: [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
           },
           {
-            name: 'Russell Westbrook',
+            name: '威斯布鲁克',
             age: 21,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           },
           {
-            name: 'Tim Duncan',
+            name: '邓肯',
             age: 26,
-            address: 'The Mixc of Shenzhen City '
+            address: '深圳市罗湖区万象城'
           },
           {
-            name: 'Tony Parker',
+            name: '帕克',
             age: 25,
-            address: 'Shenzhen Book City'
+            address: '深圳市福田区中心书城'
           },
           {
-            name: 'Kyrie Irving',
+            name: '欧文',
             age: 20,
-            address: 'Guangzhou Higher Education Mega Center'
+            address: '广州市番禺区大学城'
           },
           {
-            name: 'Isaiah Thomas',
+            name: '托马斯',
             age: 19,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           }
-        ]
-      }
-    }
-  }
-</script>
+        ]} />
 ```
 :::
 
@@ -248,78 +225,69 @@ Defaults to no column borders, set `border` property to add borders.
 Set `height` property to fix the height of Table. It'll make the header fixed on the top of Table.
 
 :::demo
-```html
-<at-table :columns="columns1" :data="data1" height="220"></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns1: [
+```jsx
+<Table height={200} columns={[
+      {
+        title: '姓名',
+        key: 'name',
+        width:'300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        width:'300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'800'
+      }]} data={[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        data1: [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
           },
           {
-            name: 'Russell Westbrook',
+            name: '威斯布鲁克',
             age: 21,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           },
           {
-            name: 'Tim Duncan',
+            name: '邓肯',
             age: 26,
-            address: 'The Mixc of Shenzhen City '
+            address: '深圳市罗湖区万象城'
           },
           {
-            name: 'Tony Parker',
+            name: '帕克',
             age: 25,
-            address: 'Shenzhen Book City'
+            address: '深圳市福田区中心书城'
           },
           {
-            name: 'Kyrie Irving',
+            name: '欧文',
             age: 20,
-            address: 'Guangzhou Higher Education Mega Center'
+            address: '广州市番禺区大学城'
           },
           {
-            name: 'Isaiah Thomas',
+            name: '托马斯',
             age: 19,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           }
-        ]
-      }
-    }
-  }
-</script>
+        ]} />
 ```
 :::
 
@@ -328,53 +296,75 @@ Set `height` property to fix the height of Table. It'll make the header fixed on
 Set `optional` property to apply multi-choices function. `on-selection-change` event will be emitted when a row is selected. `on-select-all` event will be emitted when click `select-all` checkbox.
 
 :::demo
-```html
-<at-table :columns="columns1" :data="data2" optional></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns1: [
+```jsx
+<Table optional onSelectAll={(data)=>{console.log(data)}} onSelectionChange={(isSelect,data)=>{
+  console.log('selectionChange',isSelect,data)
+}} columns={[
+      {
+        width:'200',
+        checkbox: true
+      },
+      {
+        title: '姓名',
+        key: 'name',
+        width:'300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        width:'300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'500'
+      }]} data={[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        data2: [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
           }
-        ]
-      }
-    }
-  }
-</script>
+        ]} />
 ```
 :::
 
@@ -385,54 +375,70 @@ You can sort the data by seeting `sortType: normal` to a `columns` prop's item.
 There are three type of `sortType`: `normal (No sort)`, `desc (Descending)`, `asc (Ascending)`
 
 :::demo
-```html
-<at-table :columns="columns2" :data="data2"></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns1: [
+```jsx
+<Table columns={[
+      {
+        title: '姓名',
+        key: 'name',
+        width:'300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        sortType:'asc',
+        width:'300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'800'
+      }]} data={[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age',
-            sortType: 'normal'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        data2: [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
           }
-        ]
-      }
-    }
-  }
-</script>
+        ]} />
 ```
 :::
 
@@ -443,86 +449,88 @@ You can render the column by setting `render` to certain columns prop's items. I
 `render` accepts two arguments: the first is `h`, the second is an object including `row`, `column` and `index` (current cell's data, current column's data, current index).
 
 :::demo
-```html
-<at-table :columns="columns3" :data="data2" sort></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns3: [
+```state
+{
+  data:[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age',
-            sortType: 'normal'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          },
-          {
-            title: 'Operation',
-            render: (h, params) => {
-              return h('div', [
-                h('AtButton', {
-                  props: {
-                    size: 'small',
-                    hollow: true
-                  },
-                  style: {
-                    marginRight: '8px'
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.name)
-                    }
-                  }
-                }, 'View Name'),
-                h('AtButton', {
-                  props: {
-                    size: 'small',
-                    hollow: true
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.address)
-                    }
-                  }
-                }, 'View Address')
-              ])
-            }
-          }
-        ],
-        data2: [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
           }
         ]
+}
+```
+```html
+<Table  data={this.state.data} columns={[
+      {
+        title: '姓名',
+        key: 'name',
+        width:'300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        width:'300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'300'
+      },
+      {
+        title: '操作',
+        width:'300',
+        action: 'onMouseOver',
+        component:<div onMouseOver={(index,event)=>{console.log('xx');alert(this.state.data[index].address)}}>查看地址</div>
+      },
+      {
+        title: '操作',
+        width:'300',
+        action: 'onClick',
+        component:<Button onClick={(index,event)=>{alert(this.state.data[index].name)}}>查看名字</Button>
       }
-    }
-  }
-</script>
+      ]}
+      />
 ```
 :::
 
@@ -531,135 +539,69 @@ You can render the column by setting `render` to certain columns prop's items. I
 There are three type of size: `small`, `normal`, `large`. Default is `normal`.
 
 :::demo
-```html
-<at-table :columns="columns3" :data="data2" size="large" sort></at-table>
-
-<at-table style="margin-top: 24px;" :columns="columns4" :data="data2" size="small" sort></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns3: [
+```jsx
+<Table size='small' columns={[
+      {
+        title: '姓名',
+        key: 'name',
+        width:'300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        width:'300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'800'
+      }]} data={[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age',
-            sortType: 'normal'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          },
-          {
-            title: 'Operation',
-            render: (h, params) => {
-              return h('div', [
-                h('AtButton', {
-                  props: {
-                    size: 'small',
-                    hollow: true
-                  },
-                  style: {
-                    marginRight: '8px'
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.name)
-                    }
-                  }
-                }, 'View Name'),
-                h('AtButton', {
-                  props: {
-                    size: 'small',
-                    hollow: true
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.address)
-                    }
-                  }
-                }, 'View Address')
-              ])
-            }
-          }
-        ],
-        columns4: [
-          {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age',
-            sortType: 'normal'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          },
-          {
-            title: 'Operation',
-            render: (h, params) => {
-              return h('div', [
-                h('AtButton', {
-                  props: {
-                    size: 'smaller',
-                    hollow: true
-                  },
-                  style: {
-                    marginRight: '8px'
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.name)
-                    }
-                  }
-                }, 'View Name'),
-                h('AtButton', {
-                  props: {
-                    size: 'smaller',
-                    hollow: true
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.address)
-                    }
-                  }
-                }, 'View Address')
-              ])
-            }
-          }
-        ],
-        data2: [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
           }
-        ]
-      }
-    }
-  }
-</script>
+        ]} />
 ```
 :::
 
@@ -668,91 +610,474 @@ There are three type of size: `small`, `normal`, `large`. Default is `normal`.
 Set `pagination` to apply pagination function.
 
 :::demo
-```html
-<at-table :columns="columns2" :data="data3" pagination></at-table>
-
-<script>
-  export default {
-    data () {
-      return {
-        columns1: [
+```jsx
+<Table pagination columns={[
+      {
+        title: '姓名',
+        key: 'name',
+        width:'300'
+      },
+      {
+        title: '年龄',
+        key: 'age',
+        width:'300'
+      },
+      {
+        title: '地址',
+        key: 'address',
+        width:'800'
+      }]} data={[
           {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age',
-            sortType: 'normal'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        data3: this.makePageData()
-      }
-    },
-    methods: {
-      makePageData () {
-        const data = [
-          {
-            name: 'Stephen Curry',
+            name: '库里',
             age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
+            address: '深圳市宝安区创业一路'
           },
           {
-            name: 'Lebron James',
+            name: '詹姆斯',
             age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
+            address: '广州市天河区岗顶'
           },
           {
-            name: 'Kobe Bryant',
+            name: '科比',
             age: 24,
-            address: 'Pudong, Shanghai'
+            address: '上海市浦东新区'
           },
           {
-            name: 'Kevin Durant',
+            name: '杜兰特',
             age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
+            address: '深圳市南山区深南大道'
           },
           {
-            name: 'Russell Westbrook',
+            name: '威斯布鲁克',
             age: 21,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
           },
           {
-            name: 'Tim Duncan',
+            name: '邓肯',
             age: 26,
-            address: 'The Mixc of Shenzhen City '
+            address: '深圳市罗湖区万象城'
           },
           {
-            name: 'Tony Parker',
+            name: '帕克',
             age: 25,
-            address: 'Shenzhen Book City'
+            address: '深圳市福田区中心书城'
           },
           {
-            name: 'Kyrie Irving',
+            name: '欧文',
             age: 20,
-            address: 'Guangzhou Higher Education Mega Center'
+            address: '广州市番禺区大学城'
           },
           {
-            name: 'Isaiah Thomas',
+            name: '托马斯',
             age: 19,
-            address: 'Chaoyang District, Beijing'
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '库里',
+            age: 18,
+            address: '深圳市宝安区创业一路'
+          },
+          {
+            name: '詹姆斯',
+            age: 25,
+            address: '广州市天河区岗顶'
+          },
+          {
+            name: '科比',
+            age: 24,
+            address: '上海市浦东新区'
+          },
+          {
+            name: '杜兰特',
+            age: 22,
+            address: '深圳市南山区深南大道'
+          },
+          {
+            name: '威斯布鲁克',
+            age: 21,
+            address: '北京市朝阳区'
+          },
+          {
+            name: '邓肯',
+            age: 26,
+            address: '深圳市罗湖区万象城'
+          },
+          {
+            name: '帕克',
+            age: 25,
+            address: '深圳市福田区中心书城'
+          },
+          {
+            name: '欧文',
+            age: 20,
+            address: '广州市番禺区大学城'
+          },
+          {
+            name: '托马斯',
+            age: 19,
+            address: '北京市朝阳区'
           }
-        ]
-        let pageData = []
-
-        for (let i = 0; i < 5; i++) {
-          pageData = pageData.concat(data)
-        }
-
-        return pageData
-      }
-    }
-  }
-</script>
+        ]} />
 ```
 :::
 
@@ -767,277 +1092,17 @@ Set `pagination` to apply pagination function.
 | columns | the title of table | Array | - | [] |
 | optional | determine whether the rows are multi-choices | Boolean | - | false |
 | pagination | determine whether the pagination is displayed | Boolean | - | false |
-| page-size | amount shown in each page | Number | - | 10 |
-| show-page-total | to display the total number and range | Boolean | - | true |
-| show-page-sizer | determine whether `page-size` can be changed | Boolean | - | false |
-| show-page-quickjump | determine whether you can jump to a page directly | Boolean | - | false |
+| pageSize | amount shown in each page | Number | - | 10 |
+| showPageTotal | to display the total number and range | Boolean | - | true |
+| showPageSizer | determine whether `page-size` can be changed | Boolean | - | false |
+| showPageQuickjump | determine whether you can jump to a page directly | Boolean | - | false |
 | height | the height of table | Number / String | - | - |
 
 ## Table Events
 
 | Event Name      | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| on-selection-change | Emitted when the row was selected | rows of selected |
-| on-select-all | Emitted when all rows was selected | rows of selected |
-| on-page-change | Emitted when the page was changed | page number |
-| on-page-size-change | Emitted when the page sizer was changed | page size |
-
-<script>
-  export default {
-    data () {
-      return {
-        columns1: [
-          {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        columns2: [
-          {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age',
-            sortType: 'normal'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          }
-        ],
-        columns3: [
-          {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age',
-            sortType: 'normal'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          },
-          {
-            title: 'Operation',
-            render: (h, params) => {
-              return h('div', [
-                h('AtButton', {
-                  props: {
-                    size: 'small',
-                    hollow: true
-                  },
-                  style: {
-                    marginRight: '8px'
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.name)
-                    }
-                  }
-                }, 'View Name'),
-                h('AtButton', {
-                  props: {
-                    size: 'small',
-                    hollow: true
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.address)
-                    }
-                  }
-                }, 'View Address')
-              ])
-            }
-          }
-        ],
-        columns4: [
-          {
-            title: 'Name',
-            key: 'name'
-          },
-          {
-            title: 'Age',
-            key: 'age',
-            sortType: 'normal'
-          },
-          {
-            title: 'Address',
-            key: 'address'
-          },
-          {
-            title: 'Operation',
-            render: (h, params) => {
-              return h('div', [
-                h('AtButton', {
-                  props: {
-                    size: 'smaller',
-                    hollow: true
-                  },
-                  style: {
-                    marginRight: '8px'
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.name)
-                    }
-                  }
-                }, 'View Name'),
-                h('AtButton', {
-                  props: {
-                    size: 'smaller',
-                    hollow: true
-                  },
-                  on: {
-                    click: () => {
-                      this.$Message(params.item.address)
-                    }
-                  }
-                }, 'View Address')
-              ])
-            }
-          }
-        ],
-        data1: [
-          {
-            name: 'Stephen Curry',
-            age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
-          },
-          {
-            name: 'Lebron James',
-            age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
-          },
-          {
-            name: 'Kobe Bryant',
-            age: 24,
-            address: 'Pudong, Shanghai'
-          },
-          {
-            name: 'Kevin Durant',
-            age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
-          },
-          {
-            name: 'Russell Westbrook',
-            age: 21,
-            address: 'Chaoyang District, Beijing'
-          },
-          {
-            name: 'Tim Duncan',
-            age: 26,
-            address: 'The Mixc of Shenzhen City '
-          },
-          {
-            name: 'Tony Parker',
-            age: 25,
-            address: 'Shenzhen Book City'
-          },
-          {
-            name: 'Kyrie Irving',
-            age: 20,
-            address: 'Guangzhou Higher Education Mega Center'
-          },
-          {
-            name: 'Isaiah Thomas',
-            age: 19,
-            address: 'Chaoyang District, Beijing'
-          }
-        ],
-        data2: [
-          {
-            name: 'Stephen Curry',
-            age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
-          },
-          {
-            name: 'Lebron James',
-            age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
-          },
-          {
-            name: 'Kobe Bryant',
-            age: 24,
-            address: 'Pudong, Shanghai'
-          },
-          {
-            name: 'Kevin Durant',
-            age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
-          }
-        ],
-        data3: this.makePageData()
-      }
-    },
-    methods: {
-      makePageData () {
-        const data = [
-          {
-            name: 'Stephen Curry',
-            age: 18,
-            address: 'Shenzhen Shi, Baoan Qu'
-          },
-          {
-            name: 'Lebron James',
-            age: 25,
-            address: 'Gangding, Tianhe, Guangzhou'
-          },
-          {
-            name: 'Kobe Bryant',
-            age: 24,
-            address: 'Pudong, Shanghai'
-          },
-          {
-            name: 'Kevin Durant',
-            age: 22,
-            address: 'Shen Nan Da Dao, Nanshan Qu, Shenzhen Shi'
-          },
-          {
-            name: 'Russell Westbrook',
-            age: 21,
-            address: 'Chaoyang District, Beijing'
-          },
-          {
-            name: 'Tim Duncan',
-            age: 26,
-            address: 'The Mixc of Shenzhen City '
-          },
-          {
-            name: 'Tony Parker',
-            age: 25,
-            address: 'Shenzhen Book City'
-          },
-          {
-            name: 'Kyrie Irving',
-            age: 20,
-            address: 'Guangzhou Higher Education Mega Center'
-          },
-          {
-            name: 'Isaiah Thomas',
-            age: 19,
-            address: 'Chaoyang District, Beijing'
-          }
-        ]
-        let pageData = []
-
-        for (let i = 0; i < 5; i++) {
-          pageData = pageData.concat(data)
-        }
-
-        return pageData
-      }
-    }
-  }
-</script>
+| onSelectionChange | Emitted when the row was selected | rows of selected |
+| onSelectAll | Emitted when all rows was selected | rows of selected |
+| onPageChange | Emitted when the page was changed | page number |
+| onPageSizeChange | Emitted when the page sizer was changed | page size |

@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Dropdown,Button} from '@src';
+---
 # Dropdown
 
 ----
@@ -7,30 +10,30 @@ Show a folded-styled dropdown menu.
 
 ## Basic
 
-The most basic dropdown combines with `AtDropdown`，`AtDropdownMenu` and `AtDropdownItem`.
+The most basic dropdown combines with `Dropdown`，`Dropdown.Menu` and `Dropdown.Item`.
 
 :::demo
-```html
-<at-dropdown>
+```jsx
+<Dropdown>
   <span>Dropdown <i class="icon icon-chevron-down"></i></span>
-  <at-dropdown-menu slot="menu">
-    <at-dropdown-item>Shenzhen</at-dropdown-item>
-    <at-dropdown-item>Guangzhou</at-dropdown-item>
-    <at-dropdown-item disabled>Shanghai</at-dropdown-item>
-    <at-dropdown-item divided>Beijing</at-dropdown-item>
-    <at-dropdown-item>hangzhou</at-dropdown-item>
-  </at-dropdown-menu>
-</at-dropdown>
-<at-dropdown>
-  <at-button size="small">Dropdown <i class="icon icon-chevron-down"></i></at-button>
-  <at-dropdown-menu slot="menu">
-    <at-dropdown-item>Shenzhen</at-dropdown-item>
-    <at-dropdown-item>Guangzhou</at-dropdown-item>
-    <at-dropdown-item disabled>Shanghai</at-dropdown-item>
-    <at-dropdown-item divided>Beijing</at-dropdown-item>
-    <at-dropdown-item>hangzhou</at-dropdown-item>
-  </at-dropdown-menu>
-</at-dropdown>
+  <Dropdown.Menu slot="menu">
+    <Dropdown.Item>Shenzhen</Dropdown.Item>
+    <Dropdown.Item>Guangzhou</Dropdown.Item>
+    <Dropdown.Item disabled>Shanghai</Dropdown.Item>
+    <Dropdown.Item divided>Beijing</Dropdown.Item>
+    <Dropdown.Item>hangzhou</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+<Dropdown>
+  <Button size="small">Dropdown <i class="icon icon-chevron-down"></i></Button>
+  <Dropdown.Menu >
+    <Dropdown.Item>Shenzhen</Dropdown.Item>
+    <Dropdown.Item>Guangzhou</Dropdown.Item>
+    <Dropdown.Item disabled>Shanghai</Dropdown.Item>
+    <Dropdown.Item divided>Beijing</Dropdown.Item>
+    <Dropdown.Item>hangzhou</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
 ```
 :::
 
@@ -39,25 +42,25 @@ The most basic dropdown combines with `AtDropdown`，`AtDropdownMenu` and `AtDro
 Use `trigger` property to change the way of trigger. Default is `hover`.
 
 :::demo
-```html
-<at-dropdown>
-  <at-button size="small">Hover Menu <i class="icon icon-chevron-down"></at-button>
-  <at-dropdown-menu slot="menu">
-    <at-dropdown-item name="shenzhen">Shenzhen</at-dropdown-item>
-    <at-dropdown-item name="guangzhou">Guangzhou</at-dropdown-item>
-    <at-dropdown-item name="shanghai" disabled>Shanghai</at-dropdown-item>
-    <at-dropdown-item name="beijin" divided>Beijing</at-dropdown-item>
-  </at-dropdown-menu>
-</at-dropdown>
-<at-dropdown trigger="click">
-  <at-button size="small">Click Menu <i class="icon icon-chevron-down"></at-button>
-  <at-dropdown-menu slot="menu">
-    <at-dropdown-item name="shenzhen">Shenzhen</at-dropdown-item>
-    <at-dropdown-item name="guangzhou">Guangzhou</at-dropdown-item>
-    <at-dropdown-item name="shanghai" disabled>Shanghai</at-dropdown-item>
-    <at-dropdown-item name="beijin" divided>Beijing</at-dropdown-item>
-  </at-dropdown-menu>
-</at-dropdown>
+```jsx
+<Dropdown>
+  <Button size="small">Hover Menu <i class="icon icon-chevron-down"></Button>
+  <Dropdown.Menu slot="menu">
+    <Dropdown.Item name="shenzhen">Shenzhen</Dropdown.Item>
+    <Dropdown.Item name="guangzhou">Guangzhou</Dropdown.Item>
+    <Dropdown.Item name="shanghai" disabled>Shanghai</Dropdown.Item>
+    <Dropdown.Item name="beijin" divided>Beijing</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+<Dropdown trigger="click">
+  <Button size="small">Click Menu <i class="icon icon-chevron-down"></Button>
+  <Dropdown.Menu slot="menu">
+    <Dropdown.Item name="shenzhen">Shenzhen</Dropdown.Item>
+    <Dropdown.Item name="guangzhou">Guangzhou</Dropdown.Item>
+    <Dropdown.Item name="shanghai" disabled>Shanghai</Dropdown.Item>
+    <Dropdown.Item name="beijin" divided>Beijing</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
 ```
 :::
 
@@ -66,33 +69,40 @@ Use `trigger` property to change the way of trigger. Default is `hover`.
 To change the alignment of Dropdown, add `placement` property to the Dropdown.
 
 :::demo
-```html
-<at-dropdown placement="bottom-right">
-  <at-button size="small">Hover Menu <i class="icon icon-chevron-down"></at-button>
-  <at-dropdown-menu slot="menu">
-    <at-dropdown-item name="shenzhen">Shenzhen</at-dropdown-item>
-    <at-dropdown-item name="guangzhou">Guangzhou</at-dropdown-item>
-    <at-dropdown-item name="shanghai" disabled>Shanghai</at-dropdown-item>
-    <at-dropdown-item name="beijin" divided>Beijing</at-dropdown-item>
-  </at-dropdown-menu>
-</at-dropdown>
+```jsx
+<Dropdown placement="bottom-right">
+  <Button size="small">Hover Menu <i class="icon icon-chevron-down"></Button>
+  <Dropdown.Menu slot="menu">
+    <Dropdown.Item name="shenzhen">Shenzhen</Dropdown.Item>
+    <Dropdown.Item name="guangzhou">Guangzhou</Dropdown.Item>
+    <Dropdown.Item name="shanghai" disabled>Shanghai</Dropdown.Item>
+    <Dropdown.Item name="beijin" divided>Beijing</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
 ```
 :::
 
 ## Events
 
-Event `on-dropdown-command` emitted when the dropdown item was clicked, return the name of `DropdownItem`.
+Event `dropdownChange` emitted when the dropdown item was clicked, return the name of `Dropdown.Item`.
 
 :::demo
-```html
-<at-dropdown placement="bottom-right" @on-dropdown-command="handleCommand">
-  <at-button size="small">Hover Menu <i class="icon icon-chevron-down"></at-button>
-  <at-dropdown-menu slot="menu">
-    <at-dropdown-item name="shenzhen">Shenzhen</at-dropdown-item>
-    <at-dropdown-item name="guangzhou">Guangzhou</at-dropdown-item>
-    <at-dropdown-item name="shanghai" disabled>Shanghai</at-dropdown-item>
-  </at-dropdown-menu>
-</at-dropdown>
+```jsx
+<Dropdown
+  dropdownChange={name => {
+    console.log(name)
+  }}>
+  <Button size="small">
+    Hover menu <i class="icon icon-chevron-down" />
+  </Button>
+  <Dropdown.Menu  >
+    <Dropdown.Item name="shenzhen">shenzhen</Dropdown.Item>
+    <Dropdown.Item name="guangzhou">guangzhou</Dropdown.Item>
+    <Dropdown.Item name="shanghai" disabled>
+      shanghai
+    </Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
 ```
 :::
 
@@ -107,7 +117,7 @@ Event `on-dropdown-command` emitted when the dropdown item was clicked, return t
 
 | Event Name      | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| on-dropdown-command | Emitted when the dropdown item was clicked  | the name of item |
+| dropdownChange | Emitted when the dropdown item was clicked  | the name of item |
 
 ## DropdownItem Props
 
@@ -117,23 +127,4 @@ Event `on-dropdown-command` emitted when the dropdown item was clicked, return t
 | disabled | whether the Dropdown Item is disabled | Boolean | - | false |
 | divided | whether to show split line | Boolean | - | false |
 
-<style lang="scss" scoped>
-  .at-dropdown + .at-dropdown {
-    margin-left: 8px;
-  }
-  .at-dropdown__trigger {
-    > span {
-      font-size: 12px;
-    }
-  }
-</style>
 
-<script>
-  export default {
-    methods: {
-      handleCommand (name) {
-        this.$Message(`点击菜单：${name}`)
-      }
-    }
-  }
-</script>

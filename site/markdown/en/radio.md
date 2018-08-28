@@ -1,3 +1,7 @@
+---
+imports:
+    import {Radio} from '@src';
+---
 # Radio
 
 ----
@@ -7,9 +11,17 @@
 Each button required a single `model` binding.
 
 :::demo
-```html
-<at-radio v-model="radio" label="1">Option One</at-radio>
-<at-radio v-model="radio" label="2">Option Two</at-radio>
+```jsx
+<Radio
+  onChange={(label)=>{ this.setState({radio1:label})}}
+  value={ this.state.radio1} label="1" >
+  选项一
+</Radio>
+<Radio 
+  onChange={(label)=>{this.setState({radio1:label})}} 
+  value={this.state.radio1} label="2" >
+  选项二
+</Radio>
 ```
 :::
 
@@ -18,9 +30,9 @@ Each button required a single `model` binding.
 To make a radio button as disabled, add `disabled` property to the `Radio`.
 
 :::demo
-```html
-<at-radio v-model="radio2" label="3" disabled>Disabled and not selected</at-radio>
-<at-radio v-model="radio2" label="4" disabled>Disabled and selected</at-radio>
+```jsx
+<Radio onChange={(label)=>{this.setState({radio2:label})}} value={this.state.radio1} label="3" disabled>Disabled and not selected</Radio>
+<Radio onChange={(label)=>{this.setState({radio2:label})}} value={this.state.radio1} label="4" disabled>Disabled and selected</Radio>
 ```
 :::
 
@@ -29,12 +41,16 @@ To make a radio button as disabled, add `disabled` property to the `Radio`.
 A group of radio components. Combined `AtRadioGroup` with `AtRadio`
 
 ::: demo
-```html
-<at-radio-group v-model="radio3">
-  <at-radio label="1">Option One</at-radio>
-  <at-radio label="2">Option Two</at-radio>
-  <at-radio label="3">Option Three</at-radio>
-</at-radio-group>
+```jsx
+<Radio.Group 
+  value={this.state.groupVal} 
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal: label
+  })}}>
+  <Radio label="1">Option One</Radio>
+  <Radio label="2">Option Two</Radio>
+  <Radio label="3">Option Three</Radio>
+</Radio.Group>
 ```
 :::
 
@@ -44,13 +60,16 @@ A group of radio components. Combined `AtRadioGroup` with `AtRadio`
 Button style of Radio Group. Combined `AtRadioGroup` with `AtRadioButton`
 
 :::demo
-```html
-<at-radio-group v-model="radio4">
-  <at-radio-button label="Beijing">Beijing</at-radio-button>
-  <at-radio-button label="Shanghai" disabled>Shanghai</at-radio-button>
-  <at-radio-button label="Shenzhen">Shenzhen</at-radio-button>
-  <at-radio-button label="O2Team">O2Team</at-radio-button>
-</at-radio-group>
+```jsx
+<Radio.Group  value={this.state.groupVal2} 
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal2:label
+  })}}>
+  <Radio.Button label="Beijing">Beijing</Radio.Button>
+  <Radio.Button label="Shanghai" disabled>Shanghai</Radio.Button>
+  <Radio.Button label="Shenzhen">Shenzhen</Radio.Button>
+  <Radio.Button label="O2Team">O2Team</Radio.Button>
+</Radio.Group>
 ```
 :::
 
@@ -59,24 +78,34 @@ Button style of Radio Group. Combined `AtRadioGroup` with `AtRadioButton`
 Use `fill` property to change the background color of button. Use `text-color` property to change the text color of button.
 
 :::demo
-```html
+```jsx
 <p class="demo-desc">Customize Background Color</p>
 <div class="row">
-  <at-radio-group v-model="radio5" fill="#FF6464">
-    <at-radio-button label="Beijing">Beijing</at-radio-button>
-    <at-radio-button label="Shanghai" disabled>Shanghai</at-radio-button>
-    <at-radio-button label="Shenzhen">Shenzhen</at-radio-button>
-    <at-radio-button label="O2Team">O2Team</at-radio-button>
-  </at-radio-group>
+  <Radio.Group  
+  value={this.state.groupVal3} 
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal3:label
+  })}} 
+  fill="#FF6464">
+    <Radio.Button label="Beijing">Beijing</Radio.Button>
+    <Radio.Button label="ShangHai" disabled>ShangHai</Radio.Button>
+    <Radio.Button label="Shenzhen">Shenzhen</Radio.Button>
+    <Radio.Button label="O2Team">O2Team</Radio.Button>
+  </Radio.Group>
 </div>
 <p class="demo-desc">Customize Text Color</p>
 <div class="row">
-  <at-radio-group v-model="radio5" text-color="#4C5D73">
-    <at-radio-button label="Beijing">Beijing</at-radio-button>
-    <at-radio-button label="Shanghai" disabled>Shanghai</at-radio-button>
-    <at-radio-button label="Shenzhen">Shenzhen</at-radio-button>
-    <at-radio-button label="O2Team">O2Team</at-radio-button>
-  </at-radio-group>
+  <Radio.Group  
+  value={this.state.groupVal4} 
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal4:label
+  })}} 
+  textColor="#4C5D73">
+   <Radio.Button label="Beijing">Beijing</Radio.Button>
+    <Radio.Button label="Shanghai" disabled>Shanghai</Radio.Button>
+    <Radio.Button label="Shenzhen">Shenzhen</Radio.Button>
+    <Radio.Button label="O2Team">O2Team</Radio.Button>
+  </Radio.Group>
 </div>
 ```
 :::
@@ -86,30 +115,44 @@ Use `fill` property to change the background color of button. Use `text-color` p
 There are three sizes of a radio grouop: `large`，`normal`，`small`.
 
 :::demo
-```html
+```jsx
 <div class="row">
-  <at-radio-group v-model="radio6" size="large">
-    <at-radio-button label="Beijing">Beijing</at-radio-button>
-    <at-radio-button label="Shanghai" disabled>Shanghai</at-radio-button>
-    <at-radio-button label="Shenzhen">Shenzhen</at-radio-button>
-    <at-radio-button label="O2Team">O2Team</at-radio-button>
-  </at-radio-group>
+  <Radio.Group 
+  value={this.state.groupVal5} 
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal5:label
+  })}}  
+  size="large">
+    <Radio.Button label="Beijing">Beijing</Radio.Button>
+    <Radio.Button label="Shanghai" disabled>Shanghai</Radio.Button>
+    <Radio.Button label="Shenzhen">Shenzhen</Radio.Button>
+    <Radio.Button label="O2Team">O2Team</Radio.Button>
+  </Radio.Group>
 </div>
 <div class="row">
-  <at-radio-group v-model="radio6" size="normal">
-    <at-radio-button label="Beijing">Beijing</at-radio-button>
-    <at-radio-button label="Shanghai" disabled>Shanghai</at-radio-button>
-    <at-radio-button label="Shenzhen">Shenzhen</at-radio-button>
-    <at-radio-button label="O2Team">O2Team</at-radio-button>
-  </at-radio-group>
+  <Radio.Group
+  value={this.state.groupVal6} 
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal6:label
+  })}} 
+   size="normal">
+    <Radio.Button label="Beijing">Beijing</Radio.Button>
+    <Radio.Button label="Shanghai" disabled>Shanghai</Radio.Button>
+    <Radio.Button label="Shenzhen">Shenzhen</Radio.Button>
+    <Radio.Button label="O2Team">O2Team</Radio.Button>
+  </Radio.Group>
 </div>
 <div class="row">
-  <at-radio-group v-model="radio6" size="small">
-    <at-radio-button label="Beijing">Beijing</at-radio-button>
-    <at-radio-button label="Shanghai" disabled>Shanghai</at-radio-button>
-    <at-radio-button label="Shenzhen">Shenzhen</at-radio-button>
-    <at-radio-button label="O2Team">O2Team</at-radio-button>
-  </at-radio-group>
+  <Radio.Group 
+  value={this.state.groupVal7} 
+  onRadioGroupChange={(label)=>{this.setState({
+    groupVal7:label
+  })}}  size="small">
+    <Radio.Button label="Beijing">Beijing</Radio.Button>
+    <Radio.Button label="Shanghai" disabled>Shanghai</Radio.Button>
+    <Radio.Button label="Shenzhen">Shenzhen</Radio.Button>
+    <Radio.Button label="O2Team">O2Team</Radio.Button>
+  </Radio.Group>
 </div>
 ```
 :::
@@ -142,25 +185,4 @@ There are three sizes of a radio grouop: `large`，`normal`，`small`.
 
 | Event Name      | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| radio-group-change | Emitted when the value of Radio is changed | the value of radio |
-
-<style lang="scss" scoped>
-  .row + .row {
-    margin-top: 8px;
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        radio: '2',
-        radio2: '4',
-        radio3: '1',
-        radio4: 'Shenzhen',
-        radio5: 'Shenzhen',
-        radio6: 'Shenzhen'
-      }
-    }
-  }
-</script>
+| radioGroupChange | Emitted when the value of Radio is changed | the value of radio |

@@ -6,11 +6,15 @@
 
 Recommended use `npm` to development, enjoy the ecosystem of `node` and the chain tool of `webpack`, which brings convenience of development. With the package modules installed by `NPM`, we can easily refer to it in `import` or `require`.
 
+
 ```bash
-npm install at-ui
+npm install at-ui-nerv
 
 npm install at-ui-style
 ```
+
+
+
 
 ## CDN
 

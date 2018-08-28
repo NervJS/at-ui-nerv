@@ -51,7 +51,7 @@ Info <Badge value={123} status="info"></Badge>
 
 ## 设定最大值
 
-设置属性 `max-num` 可自定义徽标的最大值，超过最大值则显示 `+`
+设置属性 `maxNum` 可自定义徽标的最大值，超过最大值则显示 `+`
 
 :::demo
 

@@ -59,9 +59,6 @@ imports:
   </Rate>
 </div>
 ```
-```method
-
-```
 :::
 
 ## 只读

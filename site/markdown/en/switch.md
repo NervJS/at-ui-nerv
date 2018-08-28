@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Switch} from '@src';
+---
 # Switch
 
 ----
@@ -10,9 +13,11 @@ Switch is used for switching between two states, it's similar with the singleton
 Basic usage, trigger events when status changed.
 
 :::demo
-```html
-<at-switch v-model="check" @change="changeStatus"></at-switch>
-<span>{{check}}</span>
+```jsx
+<Switch    onChange={(val)=>{this.setState({
+  check: val
+})}}></Switch>
+<span>{this.state.check}</span>
 ```
 :::
 
@@ -21,15 +26,15 @@ Basic usage, trigger events when status changed.
 The contents of switch button can be customized, such as inserting text or icons to enhance visual effects. Complete by `slot="checkedText"` and `slot="unCheckedText"`
 
 :::demo
-```html
-<at-switch>
-  <span slot="checkedText">Open</span>
-  <span slot="unCheckedText">Close</span>
-</at-switch>
-<at-switch>
+```jsx
+<Switch>
+  <span slot="checkedText">开</span>
+  <span slot="unCheckedText">关</span>
+</Switch>
+<Switch>
   <span slot="checkedText"><i class="icon icon-left-arrow"></i></span>
   <span slot="unCheckedText"><i class="icon icon-right-arrow"></i></span>
-</at-switch>
+</Switch>
 ```
 :::
 
@@ -38,16 +43,16 @@ The contents of switch button can be customized, such as inserting text or icons
 To make a switch button as disabled, add `disabled` property to the Switch Button.
 
 :::demo
-```html
-<at-switch disabled :value="true">
-  <span slot="checkedText">Open</span>
-  <span slot="unCheckedText">Close</span>
-</at-switch>
-<at-switch disabled>
-  <span slot="checkedText">Open</span>
-  <span slot="unCheckedText">Close</span>
-</at-switch>
-<at-switch disabled></at-switch>
+```jsx
+<Switch disabled value="true">
+  <span slot="checkedText">开</span>
+  <span slot="unCheckedText">关</span>
+</Switch>
+<Switch disabled>
+  <span slot="checkedText">开</span>
+  <span slot="unCheckedText">关</span>
+</Switch>
+<Switch disabled></Switch>
 ```
 :::
 
@@ -56,30 +61,30 @@ To make a switch button as disabled, add `disabled` property to the Switch Butto
 There are three sizes of a Switch Button: `large`，`normal`，`small`.
 
 :::demo
-```html
+```jsx
 <div>
-  <at-switch size="small"></at-switch>
-  <at-switch size="small">
-    <span slot="checkedText">Open</span>
-    <span slot="unCheckedText">Close</span>
-  </at-switch>
-  <at-switch size="small" disabled></at-switch>
+  <Switch size="small"></Switch>
+  <Switch size="small">
+    <span slot="checkedText">开</span>
+    <span slot="unCheckedText">关</span>
+  </Switch>
+  <Switch size="small" disabled></Switch>
 </div>
 <div style="margin-top: 8px;">
-  <at-switch></at-switch>
-  <at-switch>
-    <span slot="checkedText">Open</span>
-    <span slot="unCheckedText">Close</span>
-  </at-switch>
-  <at-switch disabled></at-switch>
+  <Switch></Switch>
+  <Switch>
+    <span slot="checkedText">开</span>
+    <span slot="unCheckedText">关</span>
+  </Switch>
+  <Switch disabled></Switch>
 </div>
 <div style="margin-top: 8px;">
-  <at-switch size="large"></at-switch>
-  <at-switch size="large">
-    <span slot="checkedText">Open</span>
-    <span slot="unCheckedText">Close</span>
-  </at-switch size="large">
-  <at-switch size="large" disabled></at-switch>
+  <Switch size="large"></Switch>
+  <Switch size="large">
+    <span slot="checkedText">开</span>
+    <span slot="unCheckedText">关</span>
+  </Switch >
+  <Switch size="large" disabled></Switch>
 </div>
 ```
 :::
@@ -103,25 +108,5 @@ There are three sizes of a Switch Button: `large`，`normal`，`small`.
 
 | Event Name      | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| change | Emitted when the state of the switch changed | true or false |
+| onChange | Emitted when the state of the switch changed | true or false |
 
-<script>
-export default {
-  data() {
-    return {
-      check: true
-    }
-  },
-  methods: {
-    changeStatus(status) {
-      this.check = status
-    }
-  }
-}
-</script>
-
-<style lang="scss" scoped>
-.at-switch + .at-switch {
-  margin-left: 20px;
-}
-</style>

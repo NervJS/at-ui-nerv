@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Textarea} from '@src';
+---
 # Textarea
 
 ----
@@ -11,7 +14,7 @@ The textarea is fixed as two lines default, similear to the `AtInput` component.
 
 :::demo
 ```html
-<at-textarea v-model="inputValue" placeholder="Please input..."></at-textarea>
+<Textarea   placeholder="Please input..."></Textarea>
 ```
 :::
 
@@ -21,7 +24,7 @@ To make textarea as disabled, add `disabled` property to the Textarea.
 
 :::demo
 ```html
-<at-textarea v-model="inputValue" placeholder="Please input..." disabled></at-textarea>
+<Textarea   placeholder="Please input..." disabled></Textarea>
 ```
 :::
 
@@ -32,7 +35,8 @@ Automatically adjusted the height of textarea according to the number of lines. 
 :::demo
 ```html
 <p class="demo-desc">minRows=2, maxRows=4</p>
-<at-textarea v-model="inputValue2" min-rows="2" max-rows="4" placeholder="Please input multiline text..."></at-textarea>
+<Textarea minRows="2" maxRows="4" placeholder="Please input multiline text..."></Textarea>
+
 ```
 :::
 
@@ -42,7 +46,7 @@ Automatically adjusted the height of textarea according to the number of lines w
 
 :::demo
 ```html
-<at-textarea v-model="inputValue3" autosize placeholder="Please input multiline text..."></at-textarea>
+<Textarea autosize minRows="2" maxRows="4" placeholder="Please input multiline text..."></Textarea>
 ```
 :::
 
@@ -57,23 +61,3 @@ Automatically adjusted the height of textarea according to the number of lines w
 | disabled | whether the textarea is disabled | Boolean | - | false |
 | autofocus | same as native textarea | Boolean | - | false |
 | resize | whether to be resize by the user | String | `none`, `both`, `horizontal`, `vertical`  | `vertical` |
-
-<script>
-export default {
-  data() {
-    return {
-      inputValue: '',
-      inputValue2: '',
-      inputValue3: ''
-    }
-  }
-}
-</script>
-
-<style lang="scss" scoped>
-  .at-textarea {
-    & + .at-textarea {
-      margin-top: 15px;
-    }
-  }
-</style>

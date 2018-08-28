@@ -1,17 +1,23 @@
+---
+imports:
+    import {Tag} from '@src';
+---
 # Tag
 
 ----
 
 ## Basic Tag
 
-To make a tag get close button, add `closable` property to `Tag`. Trigger `on-close` event when the button clicked.
+To make a tag get close button, add `closable` property to `Tag`. Trigger `onClose` event when the button clicked.
 
 :::demo
 ```html
-<at-tag>Tag One</at-tag>
-<at-tag>Tag Two</at-tag>
-<at-tag>Tag Three</at-tag>
-<at-tag name="Tag Four" closable v-if="show" @on-close="handleClose">Tag Four</at-tag>
+<Tag>Tag One</Tag>
+<Tag>Tag Two</Tag>
+<Tag>Tag Three</Tag>
+<Tag name="Tag Four" closable onClose={()=>{
+  alert('close')
+}}>Tag Four</Tag>
 ```
 :::
 
@@ -21,13 +27,13 @@ Tag with color tendency gives different types. Set property `color`. It also pro
 
 :::demo
 ```html
-<at-tag color="default">Tag One</at-tag>
-<at-tag color="primary">Tag Two</at-tag>
-<at-tag color="success">Tag Three</at-tag>
-<at-tag color="error">Tag Four</at-tag>
-<at-tag color="warning">Tag Five</at-tag>
-<at-tag color="info">Tag Six</at-tag>
-<at-tag color="#ecefce">#ecefce</at-tag>
+<Tag color="default">Tag One</Tag>
+<Tag color="primary">Tag Two</Tag>
+<Tag color="success">Tag Three</Tag>
+<Tag color="error">Tag Four</Tag>
+<Tag color="warning">Tag Five</Tag>
+<Tag color="info">Tag Six</Tag>
+<Tag color="#ecefce">#ecefce</Tag>
 ```
 :::
 
@@ -43,20 +49,5 @@ Tag with color tendency gives different types. Set property `color`. It also pro
 
 | Event Name      | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| on-close | Emitted when closed | event |
+| onClose | Emitted when closed | event |
 
-<script>
-  export default {
-    data () {
-      return {
-        show: true
-      }
-    },
-    methods: {
-      handleClose (evt, name) {
-        this.$Message.info(`Close Tag - ${name}`)
-        this.show = false
-      }
-    }
-  }
-</script>

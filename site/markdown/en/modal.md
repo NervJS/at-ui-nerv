@@ -1,22 +1,25 @@
-
+---
+imports:
+    import {Modal,Button,Message} from '@src';
+---
 # Modal
 
 ----
 
 Use `Modal` when you need to ask the user to process transactions, and do not want to jump the page.
 
-You can also use the default lite modal box when you need to popup a concise confirmation box. `AT-UI` adds the global object `$Modal` to `Vue.prototype`. You can use the `$Modal` instance directly.
+You can also use the default lite modal box when you need to popup a concise confirmation box. `AT-UI-Nerv` adds the global object `$Modal` to `Vue.prototype`. You can use the `$Modal` instance directly.
 
 ## Modal Methods
 
 Usage methods below:
-- `this.$Modal.alert(config)`
-- `this.$Modal.confirm(config)`
-- `this.$Modal.prompt(config)`
-- `this.$Modal.info(config)`
-- `this.$Modal.success(config)`
-- `this.$Modal.warning(config)`
-- `this.$Modal.error(config)`
+- `Modal.alert(config)`
+- `Modal.confirm(config)`
+- `Modal.prompt(config)`
+- `Modal.info(config)`
+- `Modal.success(config)`
+- `Modal.warning(config)`
+- `Modal.error(config)`
 
 ## Alert
 
@@ -25,25 +28,19 @@ The Alert dialog will interrupt the user until user knows the information and cl
 You can capture operational feedback in `Promise`, or you can pass the `callback` parameter.
 
 :::demo
-```html
-<p class="demo-desc">this.$Modal.alert()</p>
-<at-button @click="modalAlert">Alert</at-button>
-
-<script>
-  export default {
-    methods: {
-      modalAlert () {
-        this.$Modal.alert({
-          title: 'Here is Title',
-          content: 'Here is Content',
-          callback: function (action) {
-            this.$Message(action)
-          }
-        })
+```jsx
+<p class="demo-desc">Modal.alert()</p>
+<Button onClick={()=>{
+Modal.alert({
+      title: 'Here is Title',
+      content: 'Here is Content',
+      callback: function (action) {
+        // this.$Message(action)
       }
-    }
-  }
-</script>
+    })
+
+}}>Alert</Button>
+
 ```
 :::
 
@@ -52,26 +49,18 @@ You can capture operational feedback in `Promise`, or you can pass the `callback
 Confirm the user whether to continue the operation. (similar to `window.confirm`)
 
 :::demo
-```html
-<p class="demo-desc">this.$Modal.confirm()</p>
-<at-button @click="modalConfirm">Confirm</at-button>
+```jsx
+<p class="demo-desc">Modal.confirm()</p>
+<Button onClick={
+  ()=>{
+    Modal.confirm({
+      title: 'Tips',
+      content: 'This operation needs to be very careful. Are you sure you want to do this?',
 
-<script>
-  export default {
-    methods: {
-      modalConfirm () {
-        this.$Modal.confirm({
-          title: 'Tips',
-          content: 'This operation needs to be very careful. Are you sure you want to do this?'
-        }).then(() => {
-          this.$Message('Click \'Confirm\' Button')
-        }).catch(() => {
-          this.$Message('Click \'Cancel\' Button')
-        })
-      }
-    }
+    })
+
   }
-</script>
+}>Confirm</Button>
 ```
 :::
 
@@ -80,91 +69,101 @@ Confirm the user whether to continue the operation. (similar to `window.confirm`
 Pop up the input dialog to remind user to enter appropriate content. (similar to `window.prompt`)
 
 :::demo
-```html
-<p class="demo-desc">this.$Modal.prompt({ title: 'Tips', content: 'Please input your email:' })</p>
-<at-button @click="modalPrompt">Prompt</at-button>
+```jsx
+<p class="demo-desc">Modal.prompt( title: 'Tips', content: 'Please input your email:' )</p>
+<Button onClick={()=>{
+ Modal.prompt({
+          title: 'Tips',
+          content: (
+            <div>
+              <p>'Please input your email:'</p>
+              <input onChange={(e)=>{
 
-<script>
-  export default {
-    methods: {
-      this.$Modal.prompt({
-        title: 'Tips',
-        content: 'Please input your email:'
-      }).then((data) => {
-        this.$Message(`Click 'Confirm' Button, input value is ${data.value}`)
-      }).catch(() => {
-        this.$Message('Click \'Cancel\' Button')
-      })
-    }
-  }
-</script>
+                this.setState({
+                  value: e.target.value
+                })
+              }}/>
+            </div>
+            )
+        }).then(() => {
+          Message.info({message:`Click 'Confirm' Button, input value is ${this.state.value}`,duration:1000})
+        })
+        .catch((e) => {
+          Message.info({message:'Click \'Cancel\' Button',duration:1000})
+        })
+}}>Prompt</Button>
 ```
 :::
 
 ## Message Type
 
-In addition to the `window` dialog above, `AT-UI` also provides four message types of Modal that are used to display important information. These message modal only allows click the OK button to close.
+In addition to the `window` dialog above, `AT-UI-Nerv` also provides four message types of Modal that are used to display important information. These message modal only allows click the OK button to close.
 
 :::demo
-```html
-<p class="demo-desc">this.$Modal.success()</p>
-<at-button @click="handleClick('success')">Success</at-button>
-<at-button @click="handleClick('error')">Error</at-button>
-<at-button @click="handleClick('warning')">Warning</at-button>
-<at-button @click="handleClick('info')">Info</at-button>
-
-<script>
-  export default {
-    methods: {
-      handleClick (type) {
-        if (type === 'info') {
-          this.$Modal.info({
-            content: 'Here is the message of Info'
-          })
-        } else if (type === 'success') {
-          this.$Modal.success({
+```jsx
+<p class="demo-desc">Modal.success()</p>
+<Button onClick={
+  ()=>{
+    Modal.success({
             content: 'Here is the message of Success'
           })
-        } else if (type === 'warning') {
-          this.$Modal.warning({
-            content: 'Here is the message of Warning'
-          })
-        } else if (type === 'error') {
-          this.$Modal.error({
+  }
+}>Success</Button>
+<Button onClick={()=>{
+ Modal.error({
             content: 'Here is the message of Error'
           })
-        }
-      }
-    }
+}}>Error</Button>
+<Button onClick={
+  ()=>{
+Modal.warning({
+            content: 'Here is the message of Warning'
+          })
   }
-</script>
+}>Warning</Button>
+<Button onClick={
+
+  ()=>{
+Modal.info({
+            content: 'Here is the message of Info'
+          })
+  }
+}>Info</Button>
 ```
 :::
 
 ## Component Mode
 
-As mentioned earlier, you use the `this.$Modal` methods. If you want to customize the Modal, you can use a component-based approach.
+As mentioned earlier, you use the `Modal` methods. If you want to customize the Modal, you can use a component-based approach.
 
 :::demo
-```html
-<at-button @click="modal1=true">Show Customize Modal</at-button>
-<at-modal v-model="modal1" title="Here is title" @on-confirm="handleConfirm" @on-cancel="handleCancel">
-  <p>Here is the content!</p>
-  <p>Here is the content!</p>
-</at-modal>
-
-<script>
-  export default {
-    methods: {
-      handleConfirm () {
-        this.$Message('Confirm')
-      },
-      handleCancel () {
-        this.$Message('Cancel')
-      }
-    }
+```jsx
+<Button onClick={()=>{
+    this.setState({
+      modal1: true
+    },()=>{
+      console.log(this.state)
+    })
   }
-</script>
+}>Show Customize Modal</Button>
+<Modal value={this.state.modal1}
+title="Here is title"
+onConfirm={()=>{
+  this.setState({
+    modal1: false
+  })
+ alert('Confirm')
+}} onCancel={()=>{
+   this.setState({
+    modal1: false
+  })
+ alert('Cancel')
+}}>
+<Modal.body>
+  <p>Here is the content!</p>
+  <p>Here is the content!</p>
+</Modal.body>
+</Modal>
 ```
 :::
 
@@ -173,47 +172,115 @@ As mentioned earlier, you use the `this.$Modal` methods. If you want to customiz
 Customize the header and footer of `Modal` by `slot` property.
 
 :::demo
-```html
-<at-button @click="modal2=true">Customize header and footer</at-button>
-<at-button @click="modal3=true">Without Header</at-button>
-<at-modal v-model="modal2">
-  <div slot="header" style="text-align:center;">
-    <span>Here is Title</span>
-  </div>
-  <div style="text-align:center;">
-    <p>Can you see the contents here?</p>
-  </div>
-  <div slot="footer">
-    <at-button style="width:100%;" type="error" @click="closeModal2">Here is Button</at-button>
-  </div>
-</at-modal>
-<at-modal v-model="modal3">
-  <p>Here is Content!</p>
-</at-modal>
-
-<script>
-  export default {
-    methods: {
-      closeModal2 () {
-        this.modal2 = false
-      }
-    }
+```jsx
+<Button onClick={()=>{
+    this.setState({
+      modal2:true
+    })
   }
-</script>
+}>Customize header and footer</Button>
+<Button onClick={()=>{this.setState({
+modal3:true
+})}}>Without Header</Button>
+<Modal value={this.state.modal2} title={'Here is Title'} onCancel={()=>{
+  this.setState({
+    modal2: false
+  })
+}} >
+  <Modal.body style="text-align:center;">
+    <p>Can you see the contents here?</p>
+  </Modal.body>
+  <Modal.footer>
+    <Button style="width:100%;" type="error" onClick={()=>{
+      this.setState({
+        modal2: false
+      })
+    }}>Here is Button</Button>
+  </Modal.footer>
+</ Modal>
+<Modal
+value={this.state.modal3}
+onConfirm={
+  () =>{
+    this.setState({
+      modal3: false
+    })
+  }
+}
+onCancel={()=>{
+  this.setState({
+    modal3: false
+  })
+}}
+>
+<Modal.body>
+  <p>Here is Content!</p>
+</Modal.body>
+<Modal.footer>
+</Modal.footer>
+</Modal>
 ```
 :::
 
 ## Disable Closable
 
-- set property `show-close` to `false` can disable the close button and `ESC` key;
-- set property `mask-closable` to `false` can disable the close event of mask;
+- set property `showClose` to `false` can disable the close button and `ESC` key;
+- set property `maskClosable` to `false` can disable the close event of mask;
 
 :::demo
-```html
-<at-button @click="modal4=true">Disabled Close Button and ESC</at-button>
-<at-button @click="modal5=true">Disabled Mask Close</at-button>
-<at-modal v-model="modal4" title="Title" :show-close="false">Here is content</at-modal>
-<at-modal v-model="modal5" title="Title" :show-close="false" :mask-closable="false">Here is content</at-modal>
+```jsx
+<Button onClick={()=>{
+  this.setState({
+        modal4:true
+  })
+}}>Disabled Close Button and ESC</Button>
+<Button onClick={()=>{
+  this.setState({
+        modal5:true
+  })
+}}>Disabled Mask Close</Button>
+<Modal
+value={this.state.modal4}
+showClose={false}
+onConfirm={()=>{
+ this.setState({
+    modal4: false
+  })
+}}
+onCancel={()=>{
+  this.setState({
+    modal4: false
+  })
+}}
+>
+<Modal.body>
+  <p>Here is content!(Disabled Close Button)</p>
+</Modal.body>
+<Modal.footer>
+</Modal.footer>
+</Modal>
+<Modal
+value={this.state.modal5}
+onConfirm={
+  ()=>{
+   this.setState({
+    modal5: false
+    })
+  }
+}
+onCancel={()=>{
+  this.setState({
+    modal5: false
+  })
+}}
+maskClosable={false}
+>
+<Modal.body>
+  <p>Here is content!(Disabled Mask Close)</p>
+</Modal.body>
+<Modal.footer>
+</Modal.footer>
+</Modal>
 ```
 :::
 
@@ -222,9 +289,32 @@ Customize the header and footer of `Modal` by `slot` property.
 To customize the style of Modal, add `styles` property.
 
 :::demo
-```html
-<at-button @click="modal6=true">Only change the position</at-button>
-<at-modal v-model="modal6" title="Title" :styles="{top: '20px'}">Here is Content</at-modal>
+```jsx
+<Button
+  onClick={() => {
+    this.setState({
+      modal6: true
+    })
+  }}>
+  Only change the position
+</Button>
+<Modal
+value={this.state.modal6}
+onCancel={()=>{
+  this.setState({
+    modal5: false
+  })
+}}
+modalStyle={
+  {top: '20px'}
+}
+>
+<Modal.body>
+  <p>Here is Content!</p>
+</Modal.body>
+<Modal.footer>
+</Modal.footer>
+</Modal>
 ```
 :::
 
@@ -250,87 +340,13 @@ To customize the style of Modal, add `styles` property.
 
 | Event Name | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| on-cancel | Emitted when cancel button clicked | - |
-| on-confirm | Emitted when confirm button clicked | - |
+| onCancel | Emitted when cancel button clicked | - |
+| onConfirm | Emitted when confirm button clicked | - |
 
-## Modal Slots
+## Modal Children
 
 | Name     | Description          |
 |-------- |------------------- |
-| header | customize the header of modal |
 | footer | customize the footer of modal |
-| - | customize the main content of modal |
+| body  | customize the main content of modal |
 
-<script>
-  export default {
-    data () {
-      return {
-        modal1: false,
-        modal2: false,
-        modal3: false,
-        modal4: false,
-        modal5: false,
-        modal6: false
-      }
-    },
-    methods: {
-      handleClick (type) {
-        if (type === 'info') {
-          this.$Modal.info({
-            content: 'Here is the message of Info'
-          })
-        } else if (type === 'success') {
-          this.$Modal.success({
-            content: 'Here is the message of Success'
-          })
-        } else if (type === 'warning') {
-          this.$Modal.warning({
-            content: 'Here is the message of Warning'
-          })
-        } else if (type === 'error') {
-          this.$Modal.error({
-            content: 'Here is the message of Error'
-          })
-        }
-      },
-      modalAlert () {
-        this.$Modal.alert({
-          title: 'Here is Title',
-          content: 'Here is Content',
-          callback: action => {
-            this.$Message(action)
-          }
-        })
-      },
-      modalConfirm () {
-        this.$Modal.confirm({
-          title: 'Tips',
-          content: 'This operation needs to be very careful. Are you sure you want to do this?'
-        }).then(() => {
-          this.$Message('Click \'Confirm\' Button')
-        }).catch(() => {
-          this.$Message('Click \'Cancel\' Button')
-        })
-      },
-      modalPrompt () {
-        this.$Modal.prompt({
-          title: 'Tips',
-          content: 'Please input your email:'
-        }).then((data) => {
-          this.$Message(`Click 'Confirm' Button, input value is ${data.value}`)
-        }).catch(() => {
-          this.$Message('Click \'Cancel\' Button')
-        })
-      },
-      handleConfirm () {
-        this.$Message('Confirm')
-      },
-      handleCancel () {
-        this.$Message('Cancel')
-      },
-      closeModal2 () {
-        this.modal2 = false
-      }
-    }
-  }
-</script>

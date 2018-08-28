@@ -1,4 +1,8 @@
+---
+imports:
+  import {Popover,Button} from '@src'
 
+---
 # Popover
 
 ----
@@ -8,13 +12,13 @@
 Display in the middle and activated in `click` event by default, similar to `Tooltip` component.
 
 :::demo
-```html
-<at-popover placement="top" title="Title" content="Top Placement">
-  <at-button size="small">Click</at-button>
-</at-popover>
-<at-popover content="Top Placement" title="Title">
-  Please click on me!
-</at-popover>
+```jsx
+<Popover placement="top" title="Title" content="Top Placement">
+  <Button size="small">Click</Button>
+</Popover>
+<Popover content="Top Placement" title="Title">
+   Please click on me!
+</Popover>
 ```
 :::
 
@@ -23,13 +27,13 @@ Display in the middle and activated in `click` event by default, similar to `Too
 Use `trigger` property to change the way of trigger. Default is `click`.
 
 :::demo
-```html
-<at-popover trigger="click" content="Top Placement">
-  <at-button size="small">Click</at-button>
-</at-popover>
-<at-popover trigger="hover" title="Title" content="Top Placement">
-  <at-button size="small">Hover</at-button>
-</at-popover>
+```jsx
+<Popover trigger="click" content="Top Placement">
+  <Button size="small">Click</Button>
+</Popover>
+<Popover trigger="hover" title="Title" content="Top Placement">
+  <Button size="small">Hover</Button>
+</Popover>
 ```
 :::
 
@@ -38,19 +42,19 @@ Use `trigger` property to change the way of trigger. Default is `click`.
 Specify the position of Popover by `placement` property. Default is `top`.
 
 :::demo
-```html
-<at-popover trigger="hover" content="Top Placement">
-  <at-button size="small">Top</at-button>
-</at-popover>
-<at-popover trigger="hover" content="Top Placement" placement="bottom">
-  <at-button size="small">Bottom</at-button>
-</at-popover>
-<at-popover trigger="hover" content="Top Placement" placement="left">
-  <at-button size="small">Left</at-button>
-</at-popover>
-<at-popover trigger="hover" content="Top Placement" placement="right">
-  <at-button size="small">Right</at-button>
-</at-popover>
+```jsx
+<Popover trigger="hover" content="Top Placement">
+  <Button size="small">Top</Button >
+</Popover>
+<Popover trigger="hover" content="Top Placement" placement="bottom">
+  <Button size="small">Bottom</Button >
+</Popover>
+<Popover trigger="hover" content="Top Placement" placement="left">
+  <Button size="small">Left</Button >
+</Popover>
+<Popover trigger="hover" content="Top Placement" placement="right">
+  <Button size="small">Right</Button >
+</Popover>
 ```
 :::
 
@@ -59,17 +63,17 @@ Specify the position of Popover by `placement` property. Default is `top`.
 In addition to using the properties `title` and `content`, you can also use `slot="title"` and `slot="content"` to set the nested content of popover.
 
 :::demo
-```html
-<at-popover placement="top" v-model="show" @toggle="toggleShow">
-  <at-button size="small">Delete</at-button>
+```jsx
+<Popover placement="top"   onToggle="toggleShow">
+  <Button size="small">Delete</Button>
   <template slot="content">
     <p>This is part of the content, sure to delete it?</p>
-    <div style="text-align: right; margin-top: 8px;">
-      <at-button size="smaller" @click="show = false">Cancel</at-button>
-      <at-button type="primary" size="smaller" @click="show = false">Sure</at-button>
+    <div style={{textAlign: "right",marginTop: '8px'}}>
+      <Button size="smaller" onClick="show = false">Cancel</Button>
+      <Button type="primary" size="smaller" onClick="show = false">Sure</Button>
     </div>
   </template>
-</at-popover>
+</Popover>
 ```
 :::
 
@@ -82,23 +86,3 @@ In addition to using the properties `title` and `content`, you can also use `slo
 | trigger | the way to trigger | String | `hover`, `focus`, `click` | `click` |
 | placement | the position of popover | String | `top`, `top-left`, `top-right`, `left`, `left-top`, `left-bottom`, `right`, `right-top`, `right-bottom`, `bottom`, `bottom-left`, `bottom-right` | `top` |
 
-<style lang="scss" scoped>
-.at-popover + .at-popover {
-  margin-left: 16px;
-}
-</style>
-
-<script>
-export default {
-  data() {
-    return {
-      show: false
-    }
-  },
-  methods: {
-    toggleShow(status) {
-      this.show = status
-    }
-  }
-}
-</script>

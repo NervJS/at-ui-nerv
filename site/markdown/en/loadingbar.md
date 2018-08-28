@@ -1,4 +1,7 @@
-
+---
+imports:
+  import {Loadingbar,Button} from '@src'
+---
 # LoadingBar
 
 ----
@@ -12,30 +15,23 @@ Because of reusability, `LoadingBar` creates only one instance globally. You can
 Invoke `$Loading` by thress methods: `start()`、`finish()`、`error()`
 
 :::demo
-```html
-<at-button @click="start">Start</at-button>
-<at-button @click="finish">Finish</at-button>
-<at-button @click="error">Error</at-button>
-<at-button @click="update">Update</at-button>
-
-<script>
-  export default {
-    methods: {
-      start () {
-        this.$Loading.start()
-      },
-      finish () {
-        this.$Loading.finish()
-      },
-      error () {
-        this.$Loading.error()
-      },
-      update () {
-        this.$Loading.update(50)
-      }
-    }
-  }
-</script>
+```jsx
+<Button
+onClick={()=>{
+  Loadingbar.start()
+  }}>Start</Button>
+<Button onClick={()=>{
+  Loadingbar.finish()
+  }}>Finish</Button>
+<Button onClick={()=>{
+  Loadingbar.error()
+  }}>Error</Button>
+<Button onClick={()=>{
+   Loadingbar.update(50)
+  }}>Update</Button>
+<Button onClick={()=>{
+  Loadingbar.finish()
+  }}>Finish</Button>
 ```
 :::
 
@@ -53,14 +49,20 @@ Invoke `$Loading` by thress methods: `start()`、`finish()`、`error()`
 Provides the global configuration of `LoadingBar`, usage methods below:
 
 ```js
-this.$Loading.config({
-  width: 4
-})
+Loadingbar.config({ width: 4 })
 ```
 
 :::demo
-```html
-<at-button @click="setWidth">{{ btnText }}</at-button>
+```jsx
+<Button onClick={()=>{
+ Loadingbar.config({ width: 4 })
+}}>set line width 4px</Button>
+<Button onClick={()=>{
+ Loadingbar.config({ width: 2 })
+}}>set line width  2px</Button>
+<Button onClick={()=>{
+  Loadingbar.finish()
+  }}>test</Button>
 ```
 :::
 
@@ -69,43 +71,3 @@ this.$Loading.config({
 | Property      | Description          | Type      | Accepted Values                           | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | width | the width of line | Number | - | 2 |
-
-<script>
-export default {
-  data () {
-    return {
-      isSetWidth: false,
-      btnText: 'Set line width to 4px'
-    }
-  },
-  methods: {
-    start () {
-      this.$Loading.start()
-    },
-    finish () {
-      this.$Loading.finish()
-    },
-    error () {
-      this.$Loading.error()
-    },
-    update () {
-      this.$Loading.update(50)
-    },
-    setWidth () {
-      if (this.isSetWidth) {
-        this.isSetWidth = false
-        this.btnText = 'Set line width to 4px'
-        this.$Loading.config({
-          width: 2
-        })
-      } else {
-        this.isSetWidth = true
-        this.btnText = 'Cancel the line width to 4px'
-        this.$Loading.config({
-          width: 4
-        })
-      }
-    }
-  }
-}
-</script>

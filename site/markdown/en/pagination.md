@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Pagination} from '@src';
+---
 # Pagination
 
 ----
@@ -10,8 +13,8 @@ A long list can be divided into several pages by Pagination, and only one page w
 Less than 8 pages.
 
 :::demo
-```html
-<at-pagination :total="60"></at-pagination>
+```jsx
+<Pagination total="60" />
 ```
 :::
 
@@ -20,28 +23,28 @@ Less than 8 pages.
 More than 8 pages.
 
 :::demo
-```html
-<at-pagination :total="100"></at-pagination>
+```jsx
+<Pagination total="100" />
 ```
 :::
 
 ## Show Total Number
 
-To display the amount of data, add `show-total` property to the Pagination.
+To display the amount of data, add `showTotal` property to the Pagination.
 
 :::demo
-```html
-<at-pagination :total="80" show-total></at-pagination>
+```jsx
+<Pagination total="80" showTotal />
 ```
 :::
 
 ## Quick Jumper
 
-To display the quick-jump button, add `show-quickjump` property to the Pagination.
+To display the quick-jump button, add `showQuickJump` property to the Pagination.
 
 :::demo
-```html
-<at-pagination :total="100" show-quickjump></at-pagination>
+```jsx
+<Pagination total="100" showQuickJump></Pagination>
 ```
 :::
 
@@ -50,8 +53,8 @@ To display the quick-jump button, add `show-quickjump` property to the Paginatio
 You can set items amount shown in each page.
 
 :::demo
-```html
-<at-pagination :total="100" show-sizer></at-pagination>
+```jsx
+<Pagination total="100" showSizer onPageSizeChange={(event,pageSize)=>{console.log('pageSize',pageSize)}}/>
 ```
 :::
 
@@ -60,8 +63,8 @@ You can set items amount shown in each page.
 Full Feature Pagination.
 
 :::demo
-```html
-<at-pagination :total="100" show-total show-sizer show-quickjump></at-pagination>
+```jsx
+<Pagination total="100" showTotal showSizer showQuickJump />
 ```
 :::
 
@@ -70,8 +73,8 @@ Full Feature Pagination.
 To use mini size pagination, set `size` property to `small`.
 
 :::demo
-```html
-<at-pagination size="small" :total="100" show-total show-sizer show-quickjump></at-pagination>
+```jsx
+<Pagination size="small" total="100" showTotal showSizer showQuickjump />
 ```
 :::
 
@@ -80,9 +83,9 @@ To use mini size pagination, set `size` property to `small`.
 Set `simple` property to use a simple pagination.
 
 :::demo
-```html
-<at-pagination :total="100" simple></at-pagination>
-<at-pagination :total="100" size="small" simple></at-pagination>
+```jsx
+<Pagination total="100" simple />
+<Pagination total="100" size="small" simple />
 ```
 :::
 
@@ -92,11 +95,11 @@ Set `simple` property to use a simple pagination.
 |---------- |-------------- |---------- |-----------------------------  |-------- |
 | current | current page number | Number | - | 1 |
 | total | total number of data | Number | - | 0 |
-| page-size | amount shown in each page | Number | - | 10 |
-| page-size-opts | The configuration of switching the amount of data shown in each page | Array | - | [10, 20, 30, 40] |
-| show-total | to display the total number and range | Boolean | - | false |
-| show-sizer | determine whether `page-size` can be changed | Boolean | - | false |
-| show-quickjump | determine whether you can jump to a page directly | Boolean | - | false |
+| pageSize | amount shown in each page | Number | - | 10 |
+| pageSizeOpts | The configuration of switching the amount of data shown in each page | Array | - | [10, 20, 30, 40] |
+| showTotal | to display the total number and range | Boolean | - | false |
+| showSizer | determine whether `pageSize` can be changed | Boolean | - | false |
+| showQuickjump | determine whether you can jump to a page directly | Boolean | - | false |
 | size | specify the size of Pagination | String | `small` | - |
 | simple | determine whether to use simple mode | Boolean | - | false |
 
@@ -104,11 +107,6 @@ Set `simple` property to use a simple pagination.
 
 | Event Name      | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| page-change | Emitted when the page was changed | page number |
-| pagesize-change | Emitted when the page sizer was changed | page size |
+| pageChange | Emitted when the page was changed | page number |
+| pagesizeChange | Emitted when the page sizer was changed | page size |
 
-<style lang="scss" scoped>
-  .at-pagination + .at-pagination {
-    margin-top: 16px;
-  }
-</style>
