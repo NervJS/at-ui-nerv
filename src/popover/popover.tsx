@@ -61,7 +61,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     }
   }
   onMouseEnter (e: MouseEvent) {
-    if(this.state.display == 'block') {return}
+    if (this.state.display === 'block') {return}
     this.setState({
       display: 'block',
       top: this.top,
@@ -119,10 +119,10 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       props.children as any,
       (child) => {
         if (child.props && child.props.slot) {
-          if (child.props.slot == 'content') {
+          if (child.props.slot === 'content') {
             content = child.children
           }
-          if (child.props.slot == 'title') {
+          if (child.props.slot === 'title') {
             title = child.children
           }
         }
@@ -150,8 +150,8 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       )
     }
     return (
-      <div className={this.renderPopoverClassNames(this.props)} ref='wrapper' style={style} {...needProps}>
-        <span className='at-popover__trigger' style={props.style} ref='trigger'>
+      <div className={this.renderPopoverClassNames(this.props)} ref={(node) => { this.refs['wrapper'] = node }} style={style} {...needProps}>
+        <span className='at-popover__trigger' style={props.style} ref={(node) => { this.refs['trigger'] = node }}>
           {props.children}
         </span>
         <div className={classname} style={tipstyle} ref='popper'>
