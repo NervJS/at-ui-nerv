@@ -21,6 +21,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     private mulOptionChosen: any[]
     private searchOption: any[]
     private clickTarget: any
+    private $trigger: any
     constructor (props) {
       super(props)
       let optionChosen: any = []
@@ -43,6 +44,7 @@ class Select extends Nerv.Component<SelectProps, any> {
         calcBottom: 0,
         inputValue: chosenSpan
       }
+      this.$trigger = null
       this.mulOptionChosen = []
       this.propsSelectOption = []
       this.searchOption = []
@@ -107,7 +109,7 @@ class Select extends Nerv.Component<SelectProps, any> {
       return this.propsSelectOption // 特别针对OptionGroup
     }
     calculatePopoverStyle () {
-      const bottom = this.refs.trigger.offsetHeight
+      const bottom = this.$trigger.offsetHeight
       this.setState({
         calcBottom: bottom
       })
@@ -150,7 +152,7 @@ class Select extends Nerv.Component<SelectProps, any> {
 
       return (
       <div className={this.renderToggleArrowClass()} data-v-a01f69b8='' style={style}>
-        <div className='at-select__selection' ref='trigger' onClick={this.handleClick}>
+        <div className='at-select__selection' ref={(trigger)=>{this.$trigger = trigger}} onClick={this.handleClick}>
           {this.renderMultipleSelect()}
           <span className='at-select__placeholder' style={placeholderStyle}>{this.props.placeholder || '请选择'}</span>
           {this.renderSingleSelect()}

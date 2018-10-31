@@ -27,14 +27,16 @@ class Table extends Nerv.Component<TableProps, any> {
   private sortBy: string
   private sortType: string
   private renderArr: any[] = []
-  private columnsWidth:any = {}
+  private columnsWidth: any = {}
+  private $tablebody: any
+  private $header: any
   constructor (props) {
     super(props)
     this.state = {
       resizeHeight: 0,
       resizeMarginTop: 0,
       valueArr: [],
-      selectAll: false,
+      selectAll: [],
       currPage: 1,
       currPageSize: 10,
       sortedData: []
@@ -64,6 +66,7 @@ class Table extends Nerv.Component<TableProps, any> {
     const { data = [], columns = [] } = this.props
     data.forEach((item, index) => {
       this.state.valueArr.push(false)
+      this.state.selectAll.push(false)
     })
     columns.forEach((item,index) => {
       item._index = index
@@ -143,14 +146,17 @@ class Table extends Nerv.Component<TableProps, any> {
       const tdElement: any[] = []
       // 处理多选框
       if (this.props.optional) {
+        const pageSize = this.state.currPageSize
+        const currPage = this.state.currPage
+        let indexTemp = (currPage - 1) * pageSize + index
         tdElement.push(
           <th
             className='at-table__cell at-table__column-selection'
-            data-value={this.state.valueArr[index]}
+            data-value={this.state.valueArr[indexTemp]}
           >
             <Checkbox
-              checked={this.state.valueArr[index]}
-              onChange={this.onSelectionChange.bind(this, item, index)}
+              checked={this.state.valueArr[indexTemp]}
+              onChange={this.onSelectionChange.bind(this, item, indexTemp)}
             />
           </th>
         )
@@ -162,12 +168,16 @@ class Table extends Nerv.Component<TableProps, any> {
         const {action,render} = item
         const {type, props, children} = render
         let element = Nerv.createElement(type, props, children)
-        element.props[action] = element.props[action].bind(element,index)
+        let propsAction = element.props[action] || this.noop
+        element.props[action] = propsAction.bind(element,index)
         tdElement.push(<td className='at-table__cell'>{element}</td>)
       })
       dataElement.push(<tr>{tdElement}</tr>)
     })
-    return <tbody ref='tablebody' className='at-table__tbody'>{dataElement}</tbody>
+    return <tbody ref={(tablebody)=>{this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
+  }
+  noop () {
+
   }
   renderColumns () {
     const columns = this.props.columns || []
@@ -176,7 +186,7 @@ class Table extends Nerv.Component<TableProps, any> {
       columnsElement.push(
         <th className='at-table__cell at-table__column-selection'>
           <Checkbox
-            checked={this.state.selectAll}
+            checked={this.state.selectAll[this.state.currPage]}
             onChange={this.onSelectAll}
           />
         </th>
@@ -227,7 +237,7 @@ class Table extends Nerv.Component<TableProps, any> {
   handleResize () {
       const columnsWidth = {}
       if ((this.props.data || []).length) {
-        const $td = this.refs.tablebody.querySelectorAll('tr')[0].querySelectorAll('td')
+        const $td = this.$tablebody.querySelectorAll('tr')[0].querySelectorAll('td')
         for (let i = 0; i < $td.length; i++) {
           const column = (this.props.columns || [] )[i]
           let width = parseInt(getStyle($td[i],'width'))
@@ -302,7 +312,7 @@ class Table extends Nerv.Component<TableProps, any> {
       )} else {
         body = (
         <div className='at-table__content' >
-          <div className='at-table__header' ref='header'>
+          <div className='at-table__header' ref={(header)=>{this.$header = header}}>
             <table>
               <colgroup>
                 {}
@@ -360,9 +370,15 @@ class Table extends Nerv.Component<TableProps, any> {
   }
   onSelectAll () {
     const arrTemp = this.state.valueArr
-    const selectAll = !this.state.selectAll
+    const selectAll = this.state.selectAll
+    selectAll[this.state.currPage] = !selectAll[this.state.currPage]
+    const pageSize = this.state.currPageSize
+    const currPage = this.state.currPage
+    const start = (currPage - 1) * pageSize
+    const end = currPage * pageSize
     let dataSelected
-    for (let i = 0; i < arrTemp.length; i++) {
+    
+    for (let i = start; i < end; i++) {
       if (selectAll) {
         arrTemp[i] = true
         dataSelected = this.props.data
@@ -379,7 +395,7 @@ class Table extends Nerv.Component<TableProps, any> {
     return dataSelected
   }
   resizeHeightHandler () {
-    const resizeMarginTop = this.refs.header.offsetHeight
+    const resizeMarginTop = this.$header.offsetHeight
     const headerHeight = Number(this.props.height) - resizeMarginTop
     this.setState({
       resizeHeight: headerHeight,
@@ -392,8 +408,6 @@ class Table extends Nerv.Component<TableProps, any> {
       this.resizeHeightHandler()
     }
     window.addEventListener('resize', this.handleResize)
-  }
-  componentWillReceiveProps (nextProps) {
   }
   componentWillUnmount () {
     window.removeEventListener('resize', this.handleResize)
