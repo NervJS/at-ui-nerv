@@ -12,12 +12,13 @@ export interface SelectOptionProps {
 }
 
 class SelectOption extends Nerv.Component<SelectOptionProps, any> {
-
+  private $li: any
   constructor (props: SelectOptionProps) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.state = {
     }
+    this.$li = null
   }
   componentWillReceiveProps (nextProps) {
     // console.log('nextProps', nextProps.style, 'this.props', this.props.style)
@@ -47,7 +48,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
     }
       // <SelectOption>{i}  xxx</SelectOption>  最好放进一个变量中，否则children会分成2个数组 {i} 和xxx
     return (
-        <li ref='li' className={classname} onClick={this.handleClick as any}>{children}</li>
+        <li ref={(li)=>{this.$li = li}} className={classname} onClick={this.handleClick as any}>{children}</li>
     )
   }
   componentDidMount () {
@@ -55,7 +56,7 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   }
   componentDidUpdate () {
     for (const item in this.props.style) {
-      this.refs.li.style[item] = this.props.style[item]
+      this.$li.style[item] = this.props.style[item]
     }
   }
 }
