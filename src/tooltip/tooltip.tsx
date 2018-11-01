@@ -11,6 +11,8 @@ export interface ToolProps {
 class Tooltip extends Nerv.Component<ToolProps, any> {
   private top: number
   private left: number
+  private $trigger: any
+  private $tip:any
   constructor (props) {
     super(props)
     this.state = {
@@ -22,6 +24,8 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
     this.onMouseLeave = this.onMouseLeave.bind(this)
     this.top = 0
     this.left = 0
+    this.$trigger = null
+    this.$tip = null
   }
   renderTooltipClassNames (props: ToolProps) {
     return classnames('at-tooltip', [
@@ -80,10 +84,10 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
     }
     return (
     <div className={this.renderTooltipClassNames(props)} {...needProps} style={props.style} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-        <span className='at-tooltip__trigger' ref='trigger'>
+        <span className='at-tooltip__trigger' ref={(trigger)=>{this.$trigger = trigger}}>
           {this.props.children}
         </span>
-        <div className={classname} ref='tip' style={tipstyle}>
+        <div className={classname} ref={(tip)=> {this.$tip = tip}} style={tipstyle}>
           <div className='at-tooltip__arrow'></div>
           <div className='at-tooltip__content'>
             <div>{contentSlot}</div>
@@ -93,8 +97,8 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
     )
   }
   componentDidMount () {
-    const trigger = this.refs.trigger
-    const popover = this.refs.tip
+    const trigger = this.$trigger
+    const popover = this.$tip
     const position = this.calculatePosition(this.props.placement, trigger, popover)
     this.top = position.top
     this.left = position.left

@@ -63,12 +63,11 @@
   },
   "homepage": "https://github.com/NervJS/at-ui-nerv#readme",
   "dependencies": {
+    "at-ui-style": "^1.5.0",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",
-    "nervjs": "^1.3.1",
     "popper.js": "^1.14.3",
-    "react-transition-group": "~2.3.1",
-    "at-ui-style": "^1.5.0"
+    "react-transition-group": "~2.3.1"
   },
   "peerDependencies": {
     "nervjs": "^1.2.8"
@@ -133,6 +132,7 @@
     "lint-staged": "^6.0.0",
     "markdown-it-react-loader": "0.0.9",
     "nerv-test-utils": "^1.2.5-beta.3",
+    "nervjs": "^1.3.8",
     "node-sass": "^4.9.1",
     "ora": "^2.1.0",
     "postcss": "^6.0.16",

@@ -76,6 +76,8 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
     } else if (!props.minRows) {
       minRows = 2
     }
+    let className = classnames('at-textarea__original', [
+    ], props.className)
     return (
       <div className={classNames}>
         <textarea
@@ -90,7 +92,7 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
           rows={minRows}
           style={styleComputed}
           {...needProps}
-          className='at-textarea__original'
+          className={className}
         />
       </div>
     )
