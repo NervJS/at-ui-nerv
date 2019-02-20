@@ -24,10 +24,12 @@ class MenuSub extends Component<MenuSubProps, any> {
   parentName = null
   constructor (...args) {
     super(...args)
+    const { isOpen } = this.props
     this.state = {
       active: false,
-      isOpen: false
+      isOpen
     }
+
     this.menuToggle = debounce(this.menuToggle.bind(this), 200)
   }
   handleClick = (evt: React.MouseEvent<HTMLDivElement>) => {
@@ -51,7 +53,7 @@ class MenuSub extends Component<MenuSubProps, any> {
     }
   }
   handleMouseEnter = (evt) => {
-   this.menuToggle('open')
+    this.menuToggle('open')
   }
   handleMouseLeave = (evt) => {
     this.menuToggle('close')
@@ -92,7 +94,7 @@ class MenuSub extends Component<MenuSubProps, any> {
         const { name, mode } = child.props
         return Nerv.cloneElement(child, {
           ...child.props,
-          opened: name === currentOpenedChildName,
+          isOpen: name === currentOpenedChildName,
           active: name === currentActiveChildName,
           _onSelect: this.onSelect,
           _onOpened: this.onOpened,
@@ -165,7 +167,7 @@ class MenuSub extends Component<MenuSubProps, any> {
           ref={(elem) => (this.$reference = elem)}
           onClick={this.handleClick}
         >
-           {title.children}
+          {title.children}
           <i className='icon icon-chevron-down at-menu__submenu-icon' />
         </div>
 

@@ -16,6 +16,7 @@ class Slider extends Nerv.Component<SliderProps, any> {
   private max: number
   private min: number
   private step: number
+  private $bar: any
   renderSliderClassNames (props: SliderProps) {
     return classnames('at-slider', [
     ], props.className)
@@ -89,7 +90,7 @@ class Slider extends Nerv.Component<SliderProps, any> {
             </span>
           </div>
         </div>
-        <div className={trackClass} style={{ width: '80%', marginLeft: '10%' }} ref='bar'>
+        <div className={trackClass} style={{ width: '80%', marginLeft: '10%' }} ref={(bar) => { this.$bar = bar}}>
           <div className='at-slider__bar' style={currentWidth}></div>
           <div className='at-slider__dot-wrapper at-slider__dot-wrapper--hover' style={currentLeft} onMouseDown={this.onMouseDownHandler} onMouseLeave={this.onMouseLeaveHandler} onMouseEnter={this.onMouseEnterHandler}>
             <Tooltip content={this.state.value} placement='top' tipstyle={this.state.tipStyle}>
@@ -102,7 +103,7 @@ class Slider extends Nerv.Component<SliderProps, any> {
     )
   }
   componentDidMount () {
-    this.sliderWidth = this.refs.bar.offsetWidth
+    this.sliderWidth = this.$bar.offsetWidth
   }
   onMouseLeaveHandler () {
   }

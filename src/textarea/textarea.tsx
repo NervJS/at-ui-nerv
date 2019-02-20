@@ -15,6 +15,7 @@ export interface TextareaProps {
 }
 
 class Textarea extends Nerv.Component<TextareaProps, any> {
+  private $textarea: any
   constructor (props) {
     super(props)
     this.inputHandler = this.inputHandler.bind(this)
@@ -76,12 +77,12 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
     } else if (!props.minRows) {
       minRows = 2
     }
-    let className = classnames('at-textarea__original', [
+    const className = classnames('at-textarea__original', [
     ], props.className)
     return (
       <div className={classNames}>
         <textarea
-          ref='textarea'
+          ref={(textarea) => {this.$textarea = textarea}}
           value={this.state.value}
           placeholder={placeholder}
           autoFocus={autofocus}
@@ -114,16 +115,16 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
     }
     let calculateStyle: any = null
     if (props.autosize) {
-      calculateStyle = calcTextareaHeight(this.refs.textarea)
+      calculateStyle = calcTextareaHeight(this.$textarea)
     } else {
       calculateStyle = calcTextareaHeight(
-        this.refs.textarea,
+        this.$textarea,
         props.minRows || 2,
         props.maxRows
       )
     }
     this.setState({
-      height: calculateStyle.height,
+      height: calculateStyle.height
     })
   }
   componentDidMount () {
