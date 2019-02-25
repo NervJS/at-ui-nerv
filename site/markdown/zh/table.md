@@ -611,7 +611,7 @@ imports:
 
 :::demo
 ```jsx
-<Table pagination columns={[
+<Table pagination optional columns={[
       {
         title: '姓名',
         key: 'name',

@@ -17,6 +17,9 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   private lastActiveLeft: number
   private launchByActive: boolean
   private tabLength: number
+  private $navScroll: any
+  private $nav: any
+  private $activeTab: any
   // private activeRight:number
   // private scrollRight:number
   constructor (props) {
@@ -38,9 +41,9 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     this.onTabRemove = this.onTabRemove.bind(this)
   }
   updateHandle () {
-    if(this.refs.navScroll) {
-      const containerWidth = this.refs.navScroll.offsetWidth
-      const navWidth = this.refs.nav.offsetWidth
+    if(this.$navScroll) {
+      const containerWidth = this.$navScroll.offsetWidth
+      const navWidth = this.$nav.offsetWidth
       const currentOffset = this.state.navOffset
       if (containerWidth >= navWidth) {
         this.nextable = false
@@ -87,7 +90,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   handlePrev () {
     if (!this.prevable) { return }
     this.launchByActive = true
-    const containerWidth = this.refs.navScroll.offsetWidth
+    const containerWidth = this.$navScroll.offsetWidth
     const currentOffset = this.state.navOffset
 
     if (currentOffset === 0) { return }
@@ -101,9 +104,9 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   handleNext () {
     if (!this.nextable) { return }
     this.launchByActive = true
-    const containerWidth = this.refs.navScroll.offsetWidth
+    const containerWidth = this.$navScroll.offsetWidth
     const currentOffset = this.state.navOffset
-    const navWidth = this.refs.nav.offsetWidth
+    const navWidth = this.$nav.offsetWidth
 
     if (navWidth - currentOffset <= containerWidth) { return }
 
@@ -129,12 +132,12 @@ class Tabs extends Nerv.Component<TabsProps, any> {
         let classname = 'at-tabs-nav__item'
         let closeBtn: any
         let renderIcon: any
-        let refTab: string = ''
+        // let refTab: string = ''
         if (disabledFlag) {
           classname += ' at-tabs-nav__item--disabled'
         } else if (this.state.activeIndex === index) {
           classname += ' at-tabs-nav__item--active'
-          refTab = 'activeTab'
+          // refTab = 'activeTab'
         }
         if (closableFlag && !props.unclosable) {
           classname += ' at-tabs-nav__item--closable'
@@ -143,7 +146,11 @@ class Tabs extends Nerv.Component<TabsProps, any> {
         if (icon) {
           renderIcon = this.renderIconNav(icon)
         }
-        navArr.push(<div className={classname} ref={refTab} onClick={this.tabChangeHandler.bind(this, index, disabledFlag)}>
+        navArr.push(<div className={classname} ref={(activeTab)=>{
+          if (this.state.activeIndex === index) {
+            this.$activeTab = activeTab
+          }
+        }} onClick={this.tabChangeHandler.bind(this, index, disabledFlag)}>
         {renderIcon}{label}{closeBtn}
         </div>)
       }
@@ -220,8 +227,8 @@ class Tabs extends Nerv.Component<TabsProps, any> {
             {prevBtn}
             {nextBtn}
             <div className='at-tabs__nav-wrap'>
-              <div className='at-tabs__nav-scroll' ref='navScroll'>
-                <div className='at-tabs-nav' ref='nav' style={offsetNavStyle}>
+              <div className='at-tabs__nav-scroll' ref={(navScroll)=>{this.$navScroll = navScroll}}>
+                <div className='at-tabs-nav' ref={(nav)=>{this.$nav = nav}} style={offsetNavStyle}>
                   {tabsNav.navArr}
                 </div>
               </div>
@@ -312,8 +319,8 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   }
   scrollToActiveTab () {
     if (!this.state.scrollable && !(this.prevable || this.nextable) || this.launchByActive) { return }
-    const activeTab = this.refs.activeTab
-    const navScroll = this.refs.navScroll
+    const activeTab = this.$activeTab
+    const navScroll = this.$navScroll
     const activeTabBounds = activeTab.getBoundingClientRect()
     const navScrollBounds = navScroll.getBoundingClientRect()
     const currentOffset = this.state.navOffset

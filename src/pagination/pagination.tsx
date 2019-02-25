@@ -11,6 +11,8 @@ export interface PaginationProps {
 class Pagination extends Nerv.Component<PaginationProps, any> {
   private page: number
   private total: number
+  private $pageInput:any
+  private $pageInputSimple: any
   constructor (props) {
     super(props)
     this.state = {
@@ -152,7 +154,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
           <i className='icon icon-chevron-left'></i>
         </li>
         <div className='at-pagination__simple-paging'>
-          <input ref='pageInputSimple' type='text' className='at-input__original' value={this.state.currPage} onKeyPress={this.keyPressSimpleHandler} />
+          <input ref={(pageInputSimple)=>{this.$pageInputSimple = pageInputSimple}} type='text' className='at-input__original' value={this.state.currPage} onKeyPress={this.keyPressSimpleHandler} />
           <span>/</span>
           <span className='at-pagination__paging-total'>{this.page}</span>
         </div>
@@ -178,7 +180,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     return this.props.showQuickJump ?
       <div className='at-pagination__quickjump'>
         <span>前往</span>
-        <input type='text' className='at-input__original' ref='pageInput' onKeyPress={this.keyPressHandler} value={this.state.currPage} />
+        <input type='text' className='at-input__original' ref={(pageInput)=> {this.$pageInput = pageInput}} onKeyPress={this.keyPressHandler} value={this.state.currPage} />
         <span>页</span>
       </div> : null
   }
@@ -258,7 +260,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   keyPressHandler (event) {
     const props = this.props
     if (event.keyCode === 13) {
-      let newPage = this.refs.pageInput.value
+      let newPage = this.$pageInput.value
       if (newPage < 1) {newPage = 1}
       if (newPage > this.page) {newPage = this.page}
       this.setState({
@@ -270,7 +272,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   keyPressSimpleHandler (event) {
     const props = this.props
     if (event.keyCode === 13) {
-      let newPage = this.refs.pageInputSimple.value
+      let newPage = this.$pageInputSimple.value
       if (newPage < 1) {newPage = 1}
       if (newPage > this.page) {newPage = this.page}
       this.setState({

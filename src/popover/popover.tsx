@@ -16,6 +16,9 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   private top: number
   private left: number
   private enter: boolean
+  private $wrapper: any
+  private $trigger: any
+  private $popper: any
   constructor (props) {
     super(props)
     this.state = {
@@ -150,11 +153,11 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       )
     }
     return (
-      <div className={this.renderPopoverClassNames(this.props)} ref='wrapper' style={style} {...needProps}>
-        <span className='at-popover__trigger' style={props.style} ref='trigger'>
+      <div className={this.renderPopoverClassNames(this.props)} ref={(wrapper)=>{this.$wrapper = wrapper}} style={style} {...needProps}>
+        <span className='at-popover__trigger' style={props.style} ref={(trigger)=>{this.$trigger = trigger}}>
           {props.children}
         </span>
-        <div className={classname} style={tipstyle} ref='popper'>
+        <div className={classname} style={tipstyle} ref={(popper)=>{this.$popper = popper}}>
           <div className='at-popover__arrow' />
           {title}
           {content}
@@ -163,9 +166,10 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     )
   }
   componentDidMount () {
-    const trigger = this.refs.trigger
-    const popover = this.refs.popper
-    const position = calculatePosition(this.props.placement, trigger, popover)
+    const trigger = this.$trigger
+    const popover = this.$popper
+    console.log('trigger', trigger, popover)
+    const position = calculatePosition(this.props.placement, trigger, popover) || {top:0, left: 0}
     this.top = position.top
     this.left = position.left
     this.setState({
@@ -173,19 +177,19 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     })
     switch (this.props.trigger) {
       case 'hover':
-        this.refs.wrapper.addEventListener('mouseenter', this.onMouseEnter)
-        this.refs.wrapper.addEventListener('mouseleave', this.onMouseLeave)
+        this.$wrapper.addEventListener('mouseenter', this.onMouseEnter)
+        this.$wrapper.addEventListener('mouseleave', this.onMouseLeave)
         break
       case 'click':
         window.addEventListener('click', this.clickCancelHandler)
-        this.refs.wrapper.addEventListener('click', this.clickHandler)
+        this.$wrapper.addEventListener('click', this.clickHandler)
         break
       case 'focus':
-        this.refs.wrapper.addEventListener('focus', this.onMouseEnter)
-        this.refs.wrapper.addEventListener('blur', this.onMouseLeave)
+        this.$wrapper.addEventListener('focus', this.onMouseEnter)
+        this.$wrapper.addEventListener('blur', this.onMouseLeave)
         break
       default:
-        this.refs.wrapper.addEventListener('click', this.clickHandler)
+        this.$wrapper.addEventListener('click', this.clickHandler)
         window.addEventListener('click', this.clickCancelHandler)
         break
     }
@@ -193,19 +197,19 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   componentWillUnMount () {
     switch (this.props.trigger) {
       case 'hover':
-        this.refs.wrapper.removeEventListener('mouseenter', this.onMouseEnter)
-        this.refs.wrapper.removeEventListener('mouseleave', this.onMouseLeave)
+        this.$wrapper.removeEventListener('mouseenter', this.onMouseEnter)
+        this.$wrapper.removeEventListener('mouseleave', this.onMouseLeave)
         break
       case 'click':
         window.removeEventListener('click', this.clickCancelHandler)
-        this.refs.wrapper.removeEventListener('click', this.clickHandler)
+        this.$wrapper.removeEventListener('click', this.clickHandler)
         break
       case 'focus':
-        this.refs.wrapper.removeEventListener('focus', this.onMouseEnter)
-        this.refs.wrapper.removeEventListener('blur', this.onMouseLeave)
+        this.$wrapper.removeEventListener('focus', this.onMouseEnter)
+        this.$wrapper.removeEventListener('blur', this.onMouseLeave)
         break
       default:
-        this.refs.wrapper.removeEventListener('click', this.clickHandler)
+        this.$wrapper.removeEventListener('click', this.clickHandler)
         window.removeEventListener('click', this.clickCancelHandler)
         break
     }
