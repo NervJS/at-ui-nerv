@@ -14,7 +14,11 @@ export function styleStr2Obj (str) {
   }
   return obj
 }
-export function calculatePosition (placement, trigger, popover) {
+export function calculatePosition (placement = 'top', trigger, popover) {
+  console.log('trigger', trigger, popover)
+  if (!(trigger && popover)) {
+    return
+  }
   let position = {
     left: 0,
     top: 0
