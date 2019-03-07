@@ -193,15 +193,15 @@ describe('menu test', () => {
       .find('.at-menu__submenu')
       .eq(0)
       .trigger('mouseenter')
-    Nerv.nextTick(() => {
-      expect(
-        $(Nerv.findDOMNode(component))
-          .find('.at-menu__submenu')
-          .eq(0)
-          .hasClass('at-menu__submenu--opened')
-      ).toBeTruthy()
-      done()
-    })
+    setTimeout(() => {
+        expect(
+          $(Nerv.findDOMNode(component))
+            .find('.at-menu__submenu')
+            .eq(0)
+            .hasClass('at-menu__submenu--opened')
+        ).toBeTruthy()
+        done()
+      }, 1000)
   })
   it('mouse leave control', (done) => {
     const onSelect = sinon.spy()
