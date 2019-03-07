@@ -1,4 +1,7 @@
-
+---
+imports:
+  import {Menu,Switch,Radio} from '@src'
+---
 # Menu
 
 ----
@@ -10,47 +13,89 @@ Menus typically have `Top Navigator` or `Side Navigator`, a menu list that provi
 Set `mode` to `horizontal`.
 
 :::demo
-```html
-<at-menu mode="horizontal" active-name="1">
-  <at-menu-item name="1"><i class="icon icon-home"></i>Navigation One</at-menu-item>
-  <at-menu-item name="2" disabled><i class="icon icon-layers"></i>Navigation Two</at-menu-item>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Three - Submenu</template>
-    <at-menu-item-group title="Group One">
-      <at-menu-item name="3-1">Submenu One</at-menu-item>
-      <at-menu-item name="3-2" disabled>Submenu Two</at-menu-item>
-    </at-menu-item-group>
-    <at-menu-item-group title="Group Two">
-      <at-menu-item name="3-3">Submenu Three</at-menu-item>
-      <at-menu-item name="3-4">Submenu Four</at-menu-item>
-    </at-menu-item-group>
-  </at-submenu>
-  <at-menu-item name="4"><i class="icon icon-settings"></i>Navigation Four</at-menu-item>
-</at-menu>
+```jsx
+<Menu mode="horizontal" activeName={this.state.activeName99} >
+  <Menu.Item name="1">
+    <i className="icon icon-home" />Navigation One
+  </Menu.Item>
+  <Menu.Item name="2" disabled>
+    <i className="icon icon-layers" />Navigation Two
+  </Menu.Item>
+  <Menu.Sub name="3"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation Three - Submenu
+      </span>
+    }
+  >
+    <Menu.Group title="Group one">
+      <Menu.Item name="3-1">Submenu One</Menu.Item>
+      <Menu.Item name="3-2" disabled>
+        Submenu Two
+      </Menu.Item>
+    </Menu.Group>
+    <Menu.Group title="Group two">
+      <Menu.Item name="3-3">Submenu Three</Menu.Item>
+      <Menu.Item name="3-4">Submenu Four</Menu.Item>
+    </Menu.Group>
+  </Menu.Sub>
+  <Menu.Item name="4">
+    <i className="icon icon-settings" />Navigation Four
+  </Menu.Item>
+</Menu>
 ```
 :::
 
 ## Top Navigator (Multi-Level)
 
-Nested `Submenu` in `Submenu` can bi combined into multilevel menus.
+Nested `Submenu` in `Submenu` can be combined into multilevel menus.
 
 :::demo
-```html
-<at-menu mode="horizontal" active-name="1">
-  <at-menu-item name="1"><i class="icon icon-home"></i>Navigation One</at-menu-item>
-  <at-menu-item name="2"><i class="icon icon-layers"></i>Navigation Two</at-menu-item>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Three</template>
-    <at-menu-item name="3-1"><i class="icon icon-settings"></i>Submenu One</at-menu-item>
-    <at-menu-item name="3-2"><i class="icon icon-settings"></i>Submenu Two</at-menu-item>
-    <at-submenu>
-      <template slot="title"><i class="icon icon-life-buoy"></i>Submenu Three</template>
-      <at-menu-item name="3-3-1"><i class="icon icon-settings"></i>Submenu Four</at-menu-item>
-      <at-menu-item name="3-3-2"><i class="icon icon-settings"></i>Submenu Five</at-menu-item>
-    </at-submenu>
-  </at-submenu>
-  <at-menu-item name="4"><i class="icon icon-settings"></i>Navigation Four</at-menu-item>
-</at-menu>
+```jsx
+<Menu mode="horizontal" activeName={this.state.activeName1} onSelect={(name)=>{
+  console.log(this.state)
+  this.setState({
+    activeName1: name
+  })
+}}>
+  <Menu.Item name="1">
+    <i className="icon icon-home" />Navigation one
+  </Menu.Item>
+  <Menu.Item name="2">
+    <i className="icon icon-layers" />Navigation two
+  </Menu.Item>
+  <Menu.Sub name="3"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation three
+      </span>
+    }
+  >
+    <Menu.Item name="3-1">
+      <i className="icon icon-settings" />Navigation four
+    </Menu.Item>
+    <Menu.Item name="3-2">
+      <i className="icon icon-settings" />Navigation five
+    </Menu.Item>
+    <Menu.Sub
+      title={
+        <span>
+          <i className="icon icon-life-buoy" />Navigation six
+        </span>
+      }
+    >
+      <Menu.Item name="3-3-1">
+        <i className="icon icon-settings" />Navigation seven
+      </Menu.Item>
+      <Menu.Item name="3-3-2">
+        <i className="icon icon-settings" />Navigation eight
+      </Menu.Item>
+    </Menu.Sub>
+  </Menu.Sub>
+  <Menu.Item name="4">
+    <i className="icon icon-settings" />Navigation four
+  </Menu.Item>
+</Menu>
 ```
 :::
 
@@ -59,55 +104,103 @@ Nested `Submenu` in `Submenu` can bi combined into multilevel menus.
 Set `mode` to `vertical`.
 
 :::demo
-```html
-<at-menu mode="vertical" active-name="1">
-  <at-menu-item name="1"><i class="icon icon-home"></i>Navigation One</at-menu-item>
-  <at-menu-item name="2" disabled><i class="icon icon-layers"></i>Navigation Two</at-menu-item>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Three</template>
-    <at-menu-item-group title="Group One">
-      <at-menu-item name="3-1">Submenu One</at-menu-item>
-      <at-menu-item name="3-2" disabled>Submenu Two</at-menu-item>
-    </at-menu-item-group>
-    <at-menu-item-group title="Group Two">
-      <at-menu-item name="3-3">Submenu Three</at-menu-item>
-      <at-menu-item name="3-4">Submenu Four</at-menu-item>
-    </at-menu-item-group>
-  </at-submenu>
-  <at-menu-item name="4"><i class="icon icon-settings"></i>Navigation Four</at-menu-item>
-</at-menu>
+```jsx
+<Menu mode="vertical" activeName={this.state.activeName2} onSelect={(val)=>{
+  this.setState({
+    activeName2: val
+  })
+}}>
+  <Menu.Item name="1">
+    <i className="icon icon-home" />Navigation one
+  </Menu.Item>
+  <Menu.Item name="2" disabled>
+    <i className="icon icon-layers" />Navigation two
+  </Menu.Item>
+  <Menu.Sub name="3"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation three - Submenu 
+      </span>
+    }
+  >
+    <Menu.Group title="Groupone">
+      <Menu.Item name="3-1">Submenu one</Menu.Item>
+      <Menu.Item name="3-2" disabled>
+        Submenu two
+      </Menu.Item>
+    </Menu.Group>
+    <Menu.Group title="Grouptwo">
+      <Menu.Item name="3-3">Submenu three</Menu.Item>
+      <Menu.Item name="3-4">Submenu four</Menu.Item>
+    </Menu.Group>
+  </Menu.Sub>
+  <Menu.Item name="4">
+    <i className="icon icon-settings" />Navigation four
+  </Menu.Item>
+</Menu>
 ```
 :::
 
 ## Side Navigator (Multi-Level)
 
 :::demo
-```html
-<at-menu mode="vertical" active-name="1">
-  <at-menu-item name="1"><i class="icon icon-home"></i>Navigation One</at-menu-item>
-  <at-menu-item name="2"><i class="icon icon-layers"></i>Navigation Two</at-menu-item>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Three</template>
-    <at-menu-item-group title="Group One">
-      <at-menu-item name="3-1">Submenu One</at-menu-item>
-      <at-menu-item name="3-2">Submenu Two</at-menu-item>
-    </at-menu-item-group>
-    <at-menu-item-group title="Group Two">
-      <at-menu-item name="3-3">Submenu Three</at-menu-item>
-      <at-menu-item name="3-4">Submenu Four</at-menu-item>
-    </at-menu-item-group>
-  </at-submenu>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Four</template>
-    <at-menu-item name="4-1"><i class="icon icon-settings"></i>Submenu Five</at-menu-item>
-    <at-menu-item name="4-2"><i class="icon icon-settings"></i>Submenu Six</at-menu-item>
-    <at-submenu>
-      <template slot="title"><i class="icon icon-life-buoy"></i>Submenu Seven</template>
-      <at-menu-item name="4-3-1"><i class="icon icon-settings"></i>Submenu Eight</at-menu-item>
-      <at-menu-item name="4-3-2"><i class="icon icon-settings"></i>Submenu Night</at-menu-item>
-    </at-submenu>
-  </at-submenu>
-</at-menu>
+```jsx
+<Menu mode="vertical" activeName={this.state.activeName3 } onSelect={(name)=>{
+  console.log('name' + name);
+  this.setState({
+  activeName3: name
+})}}>
+  <Menu.Item name="1">
+    <i className="icon icon-home" />Navigation one
+  </Menu.Item>
+  <Menu.Item name="2">
+    <i className="icon icon-layers" />Navigation two
+  </Menu.Item>
+  <Menu.Sub name="3"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation three  - submenu 
+      </span>
+    }
+  >
+    <Menu.Group title="group one">
+      <Menu.Item name="3-1">submenu one</Menu.Item>
+      <Menu.Item name="3-2">submenu two</Menu.Item>
+    </Menu.Group>
+    <Menu.Group title="group two">
+      <Menu.Item name="3-3">submenu three </Menu.Item>
+      <Menu.Item name="3-4">submenu four</Menu.Item>
+    </Menu.Group>
+  </Menu.Sub>
+  <Menu.Sub name="4"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation four
+      </span>
+    }
+  >
+    <Menu.Item name="4-1">
+      <i className="icon icon-settings" />Navigation five
+    </Menu.Item>
+    <Menu.Item name="4-2">
+      <i className="icon icon-settings" />Navigation six
+    </Menu.Item>
+    <Menu.Sub
+      title={
+        <span>
+          <i className="icon icon-life-buoy" />Navigation seven
+        </span>
+      }
+    >
+      <Menu.Item name="4-3-1">
+        <i className="icon icon-settings" />Navigation eight
+      </Menu.Item>
+      <Menu.Item name="4-3-2">
+        <i className="icon icon-settings" />Navigation nine
+      </Menu.Item>
+    </Menu.Sub>
+  </Menu.Sub>
+</Menu>
 ```
 :::
 
@@ -116,69 +209,148 @@ Set `mode` to `vertical`.
 Set `mode` to `inline`.
 
 :::demo
-```html
-<at-menu active-name="1">
-  <at-menu-item name="1"><i class="icon icon-home"></i>Navigation One</at-menu-item>
-  <at-menu-item name="2" disabled><i class="icon icon-layers"></i>Navigation Two</at-menu-item>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Three</template>
-    <at-menu-item-group title="Group One">
-      <at-menu-item name="3-1">Submenu One</at-menu-item>
-      <at-menu-item name="3-2">Submenu Two</at-menu-item>
-    </at-menu-item-group>
-    <at-menu-item-group title="Group Two">
-      <at-menu-item name="3-3">Submenu Three</at-menu-item>
-      <at-menu-item name="3-4" disabled>Submenu Four</at-menu-item>
-    </at-menu-item-group>
-  </at-submenu>
-  <at-menu-item name="4"><i class="icon icon-settings"></i>Navigation Four</at-menu-item>
-  <at-submenu disabled>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Submenu Five</template>
-    <at-menu-item name="5-1">Submenu Six</at-menu-item>
-    <at-menu-item name="5-2">Submenu Seven</at-menu-item>
-  </at-submenu>
-</at-menu>
+```jsx
+<Menu activeName={this.state.activeName4} onSelect={(name)=>{
+  this.setState({
+    activeName4: name
+  })
+}}>
+  <Menu.Item name="1">
+    <i className="icon icon-home" />Navigation one
+  </Menu.Item>
+  <Menu.Item name="2" disabled>
+    <i className="icon icon-layers" />Navigation two
+  </Menu.Item>
+  <Menu.Sub name="3"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation three - Submenu 
+      </span>
+    }
+  >
+    <Menu.Group title="group one">
+      <Menu.Item name="3-1">Submenu one</Menu.Item>
+      <Menu.Item name="3-2">Submenu two</Menu.Item>
+    </Menu.Group>
+    <Menu.Group title="group two">
+      <Menu.Item name="3-3">Submenu three</Menu.Item>
+      <Menu.Item name="3-4" disabled>
+        Submenu four 
+      </Menu.Item>
+    </Menu.Group>
+  </Menu.Sub>
+  <Menu.Item name="4">
+    <i className="icon icon-settings" />Navigation four 
+  </Menu.Item>
+  <Menu.Sub name="5"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation three - Submenu 
+      </span>
+    }
+  >
+    <Menu.Item name="5-1">Submenu one</Menu.Item>
+    <Menu.Item name="5-2">Submenu two</Menu.Item>
+  </Menu.Sub>
+</Menu>
 ```
 :::
 
 ## Collapsed Inline Navigator
 
-Set `inline-collapsed` property to open collapsed mode. Which means only one submenu can be expanded at the same time.
+Set `inlineCollapsed` property to open collapsed mode. Which means only one submenu can be expanded at the same time.
 
 :::demo
-```html
-<at-menu active-name="1-1" inline-collapsed>
+```jsx
+<Menu activeName={this.state.activeName5} onSelect={(name)=>{
+  this.setState({
+    activeName5: name
+  })
+}} inlineCollapsed>
+  <Menu.Sub name="1"
+    opened
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation one
+      </span>
+    }
+  >
+    <Menu.Group title="group one">
+      <Menu.Item name="1-1">submenu one</Menu.Item>
+      <Menu.Item name="1-2">submenu two</Menu.Item>
+    </Menu.Group>
+    <Menu.Group title="group two">
+      <Menu.Item name="1-3">submenu three</Menu.Item>
+      <Menu.Item name="1-4">submenu four</Menu.Item>
+    </Menu.Group>
+  </Menu.Sub>
+  <Menu.Sub name="2"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation two
+      </span>
+    }
+  >
+    <Menu.Item name="2-1">submenu one</Menu.Item>
+    <Menu.Item name="2-2">submenu two</Menu.Item>
+    <Menu.Item name="2-3">submenu three</Menu.Item>
+    <Menu.Item name="2-4">submenu four</Menu.Item>
+  </Menu.Sub>
+  <Menu.Sub name="3"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation three
+      </span>
+    }
+  >
+    <Menu.Item name="3-1">submenu one</Menu.Item>
+    <Menu.Item name="3-2">submenu two</Menu.Item>
+    <Menu.Item name="3-3">submenu three</Menu.Item>
+    <Menu.Item name="3-4">submenu four</Menu.Item>
+  </Menu.Sub>
+  <Menu.Sub name="4"
+    title={
+      <span>
+        <i className="icon icon-life-buoy" />Navigation four
+      </span>
+    }
+  >
+    <Menu.Item name="4-1">submenu one</Menu.Item>
+    <Menu.Item name="4-2">submenu two</Menu.Item>
+  </Menu.Sub>
+</Menu>
+<Menu activeName="1-1" inlineCollapsed>
   <at-submenu opened>
-    <template slot="title"><i class="icon icon-home"></i>Navigation One</template>
-    <at-menu-item-group title="Group One">
-      <at-menu-item name="1-1">Submenu One</at-menu-item>
-      <at-menu-item name="1-2">Submenu Two</at-menu-item>
-    </at-menu-item-group>
-    <at-menu-item-group title="Group Two">
-      <at-menu-item name="1-3">Submenu Three</at-menu-item>
-      <at-menu-item name="1-4">Submenu Four</at-menu-item>
-    </at-menu-item-group>
+    <template slot="title"><i className="icon icon-home"></i>Navigation One</template>
+    <Menu.Item-group title="Group One">
+      <Menu.Item name="1-1">Submenu One</Menu.Item>
+      <Menu.Item name="1-2">Submenu Two</Menu.Item>
+    </Menu.Item-group>
+    <Menu.Item-group title="Group Two">
+      <Menu.Item name="1-3">Submenu Three</Menu.Item>
+      <Menu.Item name="1-4">Submenu Four</Menu.Item>
+    </Menu.Item-group>
   </at-submenu>
   <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Two</template>
-    <at-menu-item name="2-1">Submenu One</at-menu-item>
-    <at-menu-item name="2-2">Submenu Two</at-menu-item>
-    <at-menu-item name="2-3">Submenu Three</at-menu-item>
-    <at-menu-item name="2-4">Submenu Four</at-menu-item>
+    <template slot="title"><i className="icon icon-life-buoy"></i>Navigation Two</template>
+    <Menu.Item name="2-1">Submenu One</Menu.Item>
+    <Menu.Item name="2-2">Submenu Two</Menu.Item>
+    <Menu.Item name="2-3">Submenu Three</Menu.Item>
+    <Menu.Item name="2-4">Submenu Four</Menu.Item>
   </at-submenu>
   <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Three</template>
-    <at-menu-item name="3-1">Submenu One</at-menu-item>
-    <at-menu-item name="3-2">Submenu Two</at-menu-item>
-    <at-menu-item name="3-3">Submenu Three</at-menu-item>
-    <at-menu-item name="3-4">Submenu Four</at-menu-item>
+    <template slot="title"><i className="icon icon-life-buoy"></i>Navigation Three</template>
+    <Menu.Item name="3-1">Submenu One</Menu.Item>
+    <Menu.Item name="3-2">Submenu Two</Menu.Item>
+    <Menu.Item name="3-3">Submenu Three</Menu.Item>
+    <Menu.Item name="3-4">Submenu Four</Menu.Item>
   </at-submenu>
   <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Four</template>
-    <at-menu-item name="4-1">Submenu One</at-menu-item>
-    <at-menu-item name="4-2">Submenu Two</at-menu-item>
+    <template slot="title"><i className="icon icon-life-buoy"></i>Navigation Four</template>
+    <Menu.Item name="4-1">Submenu One</Menu.Item>
+    <Menu.Item name="4-2">Submenu Two</Menu.Item>
   </at-submenu>
-</at-menu>
+</Menu>
 ```
 :::
 
@@ -187,68 +359,61 @@ Set `inline-collapsed` property to open collapsed mode. Which means only one sub
 There are two built-in themes: `light` and `dark`. The default value is `light`.
 
 :::demo
-```html
-<div class="row" style="margin-bottom: 24px;">
-  <at-switch :value="true" @change="changeTheme">
+```jsx
+<div className="row" style={{marginBottom: '24px'}}>
+  <Switch value={true} onChange={(val)=>{this.setState({
+    theme: val.target.innerText.toLowerCase()
+  })}}>
     <span slot="checkedText">Dark</span>
     <span slot="unCheckedText">Light</span>
-  </at-switch>
-  <at-radio-group v-model="mode" style="margin-left: 40px;">
-    <at-radio label="inline">Inline</at-radio>
-    <at-radio label="horizontal">Horizontal</at-radio>
-    <at-radio label="vertical">Vertical</at-radio>
-  </at-radio-group>
+  </Switch>
+  <Radio.Group value={this.state.mode || 'inline'} onRadioGroupChange={(val)=>{this.setState({
+    mode: val
+  })}} style={{marginLeft: '40px'}}>
+    <Radio label="inline">Inline</Radio>
+    <Radio label="horizontal">Horizontal</Radio>
+    <Radio label="vertical">Vertical</Radio>
+  </Radio.Group>
 </div>
-<at-menu :theme="theme" :mode="mode" active-name="0" >
-  <at-menu-item name="0" disabled><i class="icon icon-box"></i>Submenu</at-menu-item>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-home"></i>Navigation One</template>
-    <at-menu-item-group title="Group One">
-      <at-menu-item name="1-1">Submenu One</at-menu-item>
-      <at-menu-item name="1-2">Submenu Two</at-menu-item>
-    </at-menu-item-group>
-    <at-menu-item-group title="Group Two">
-      <at-menu-item name="1-3">Submenu Three</at-menu-item>
-      <at-menu-item name="1-4">Submenu Four</at-menu-item>
-    </at-menu-item-group>
-  </at-submenu>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-life-buoy"></i>Navigation Two</template>
-    <at-menu-item name="2-1">Submenu One</at-menu-item>
-    <at-menu-item name="2-2">Submenu Two</at-menu-item>
-    <at-menu-item name="2-3" disabled>Submenu Three</at-menu-item>
-    <at-menu-item name="2-4">Submenu Four</at-menu-item>
-  </at-submenu>
-  <at-submenu>
-    <template slot="title"><i class="icon icon-command"></i>Navigation Three</template>
-    <at-menu-item name="3-1">Submenu One</at-menu-item>
-    <at-menu-item name="3-2">Submenu Two</at-menu-item>
-    <at-menu-item name="3-3">Submenu Three</at-menu-item>
-    <at-menu-item name="3-4">Submenu Four</at-menu-item>
-  </at-submenu>
-  <at-submenu disabled>
-    <template slot="title"><i class="icon icon-inbox"></i>Navigation Four</template>
-    <at-menu-item name="4-1">Submenu One</at-menu-item>
-    <at-menu-item name="4-2">Submenu Two</at-menu-item>
-  </at-submenu>
-</at-menu>
+<Menu theme={this.state.theme || 'dark'} mode={this.state.mode || 'inline'} activeName="0" >
+  <Menu.Item name="0" disabled><i className="icon icon-box"></i>submenu </Menu.Item>
+  <Menu.Sub title={<span>
+  <i className="icon icon-home"></i>Navigation one 
+  </span>}>
+    <Menu.Group title="group one ">
+      <Menu.Item name="1-1">submenu one </Menu.Item>
+      <Menu.Item name="1-2">submenu  two</Menu.Item>
+    </Menu.Group>
+    <Menu.Group title="group  two">
+      <Menu.Item name="1-3">submenu  three</Menu.Item>
+      <Menu.Item name="1-4">submenu four</Menu.Item>
+    </Menu.Group>
+  </Menu.Sub>
+  <Menu.Sub title={
+    <span><i className="icon icon-life-buoy"></i>Navigation  two</span>
+  }>
+    <Menu.Item name="2-1">submenu one </Menu.Item>
+    <Menu.Item name="2-2">submenu  two</Menu.Item>
+    <Menu.Item name="2-3" disabled>submenu  three</Menu.Item>
+    <Menu.Item name="2-4">submenu four</Menu.Item>
+  </Menu.Sub>
+  <Menu.Sub title={<span><i className="icon icon-command"></i>Navigation  three</span>}>
+    <Menu.Item name="3-1">submenu one </Menu.Item>
+    <Menu.Item name="3-2">submenu  two</Menu.Item>
+    <Menu.Item name="3-3">submenu  three</Menu.Item>
+    <Menu.Item name="3-4">submenu four</Menu.Item>
+  </Menu.Sub>
+  <Menu.Sub disabled title={
+    <span><i className="icon icon-inbox"></i>Navigation four</span>
+  }>
+    <Menu.Item name="4-1">submenu one </Menu.Item>
+    <Menu.Item name="4-2">submenu  two</Menu.Item>
+  </Menu.Sub>
+</Menu>
+
 ```
 :::
 
-## Vue Router Integration
-
-Used together with `vue-router`. Set `router` property to `at-menu`, and Passed an `object` to `to` property. If you don't need a new history, add the `replace` property to `Menu Item`.
-
-:::demo
-```html
-<at-menu router>
-  <at-menu-item :to="{ name: 'Breadcrumb-en' }">Breadcrumb</at-menu-item>
-  <at-menu-item :to="{ name: 'Dropdown-en' }">Dropdown</at-menu-item>
-  <at-menu-item :to="{ name: 'Menu-en' }">Menu</at-menu-item>
-  <at-menu-item :to="{ name: 'Pagination-en' }">Pagination</at-menu-item>
-</at-menu>
-```
-:::
 
 ## Menu Props
 
@@ -265,7 +430,7 @@ Used together with `vue-router`. Set `router` property to `at-menu`, and Passed 
 
 | Event Name | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| on-select | Emitted when the menu item was clicked | name |
+| onSelect | Emitted when the menu item was clicked | name |
 
 ## MenuGroup Props
 
@@ -285,27 +450,5 @@ Used together with `vue-router`. Set `router` property to `at-menu`, and Passed 
 | Property      | Description          | Type      | Accepted Values                           | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | name | the name of Menu Item | String / Number | - | - |
-| to | the object of `vue-router`, same as the `to` property in `vue-router` | String / Object | - | - |
-| replace | whether to add new history when using `to` | Boolean | - | false |
 | disabled | whether the MenuItem is disabled | Boolean | - | false |
 
-<script>
-  export default {
-    data () {
-      return {
-        theme: 'dark',
-        mode: 'inline',
-      }
-    },
-    watch: {
-      mode (value) {
-        if (value !== 'inline') {}
-      }
-    },
-    methods: {
-      changeTheme (value) {
-        this.theme = value ? 'dark' : 'light'
-      }
-    }
-  }
-</script>

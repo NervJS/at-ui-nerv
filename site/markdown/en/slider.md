@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Slider} from '@src';
+---
 # Slider
 
 ----
@@ -10,8 +13,15 @@ Slider is used to control the value within specified numerical range.
 Basic slider, use `v-model` to binding value, the range is `0~100` default.
 
 :::demo
-```html
-<at-slider v-model="value"></at-slider>
+```jsx
+< Slider  value={this.state.val1} onChange={(val)=>{this.setState({
+  val1:val
+})}} ></ Slider>
+```
+```state
+{
+  val1:1
+}
 ```
 :::
 
@@ -20,8 +30,8 @@ Basic slider, use `v-model` to binding value, the range is `0~100` default.
 To make a slider as disabled, add `disabled` property to the Slider.
 
 :::demo
-```html
-<at-slider v-model="value2" disabled></at-slider>
+```jsx
+< Slider   disabled></ Slider>
 ```
 :::
 
@@ -30,8 +40,8 @@ To make a slider as disabled, add `disabled` property to the Slider.
 The minimum and maximum values are set by `min` and `max` properties.
 
 :::demo
-```html
-<at-slider v-model="value3" :min="20" :max="80"></at-slider>
+```jsx
+< Slider   min={20} max={80}></ Slider>
 ```
 :::
 
@@ -40,8 +50,8 @@ The minimum and maximum values are set by `min` and `max` properties.
 Control the interval of slider through the `step` property, the value of interval is `1` by default.
 
 :::demo
-```html
-<at-slider v-model="value4" :step="10"></at-slider>
+```jsx
+< Slider step="10"></ Slider>
 ```
 :::
 
@@ -49,7 +59,7 @@ Control the interval of slider through the `step` property, the value of interva
 
 | Property      | Description          | Type      | Accepted Values                           | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | the value of slider, use `v-model` to enable a two-way binding | Number | - | - |
+| value | the value of slider | Number | - | - |
 | step | the granularity that slider can step through values | Number | - | 1 |
 | min | minimum | Number | - | 0 |
 | max | maximum | Number | - | 100 |
@@ -59,17 +69,5 @@ Control the interval of slider through the `step` property, the value of interva
 
 | Event Name      | Description          | Return Value  |
 |---------- |-------------- |---------- |
-| change | Emitted when the value of slider changed | value |
+| onChange | Emitted when the value of slider changed | value |
 
-<script>
-export default {
-  data() {
-    return {
-      value: 0,
-      value2: 20,
-      value3: 30,
-      value4: 50
-    }
-  }
-}
-</script>

@@ -1,4 +1,7 @@
-
+---
+imports:
+  import {Message,Button} from '@src'
+---
 # Message
 
 ----
@@ -8,43 +11,52 @@ Compared to `Notification`, `Message` is lighter,, centered at the top of the pa
 - Provide four type of Message: `success`, `Error`, `Warning`, `Info`
 - Showing and disappearing at the center of the top is a lightweight cue that does not interrupt user operations.
 
-`AT-UI` adds the global object `$Message` to `Vue.prototype`. You can use the `$Message` instance directly.
 
-- `this.$Message(config)`
-- `this.$Message.info(config)`
-- `this.$Message.success(config)`
-- `this.$Message.warning(config)`
-- `this.$Message.error(config)`
-- `this.$Message.loading(config)`
+- `Message(config)`
+- `Message.info(config)`
+- `Message.success(config)`
+- `Message.warning(config)`
+- `Message.error(config)`
+- `Message.loading(config)`
 
 ## Basic
 
 There are four type of Message: `success`, `error`, `warning`, `info`.
 
 :::demo
-```html
-<at-button @click="handleClick('info')">Info</at-button>
-<at-button @click="handleClick('success')">Success</at-button>
-<at-button @click="handleClick('warning')">Warning</at-button>
-<at-button @click="handleClick('error')">Error</at-button>
-
-<script>
-  export default {
-    methods: {
-      handleClick (type) {
-        if (type === 'info') {
-          this.$Message.info('This is a info message!')
-        } else if (type === 'success') {
-          this.$Message.success('This is a success message!')
-        } else if (type === 'warning') {
-          this.$Message.warning('This is a warning message!')
-        } else if (type === 'error') {
-          this.$Message.error('This is a error message!')
-        }
-      }
+```jsx
+<Button onClick={()=>{
+  Message.info(
+    {
+      message: 'isInfo',
+      duration: 3000
     }
-  }
-</script>
+  )
+}}>Info</Button>
+<Button onClick={()=>{
+  Message.success(
+    {
+      message: 'isError',
+      duration: 3000
+    }
+  )
+}}>Success</Button>
+<Button onClick={()=>{
+  Message.warning(
+    {
+      message: 'isWarning',
+      duration: 3000
+    }
+  )
+}}>Warning</Button>
+<Button onClick={()=>{
+  Message.error(
+    {
+      message: 'isError',
+      duration: 3000
+    }
+  )
+}}>Error</Button>
 ```
 :::
 
@@ -53,45 +65,35 @@ There are four type of Message: `success`, `error`, `warning`, `info`.
 Customize message display duration by `duration` property default `3s`.
 
 :::demo
-```html
-<at-button @click="changeDuration">Customize Duration</at-button>
-
-<script>
-  export default {
-    methods: {
-      changeDuration () {
-        this.$Message.info({
-          message: 'This is a tooltip that will be closed after 10s automatically.',
-          duration: 10000
-        })
-      }
-    }
-  }
-</script>
+```jsx
+<Button
+  onClick={() => {
+    Message.info({
+      message: 'This is a tooltip that will be closed after 10s automatically.',
+      duration: 10000
+    })
+  }}>
+  Customize Duration
+</Button>
 ```
 :::
 
 ## Message of Loading
 
-`this.$Message.loading` return the method of close, which can be used to close manually.
+`Message.loading` return the method of close, which can be used to close manually.
 
 :::demo
-```html
-<at-button @click="showLoading">Loading...</at-button>
-
-<script>
-  export default {
-    methods: {
-      showLoading () {
-        const loading = this.$Message.loading({
-          message: 'Loading...',
-          duration: 0
-        })
-        setTimeout(loading, 3000)
-      }
-    }
-  }
-</script>
+```jsx
+<Button
+  onClick={() => {
+    const loading = Message.loading({
+      message: 'Loading...',
+      duration: 0
+    })
+    setTimeout(loading.close, 3000)
+  }}>
+ show Loading...
+</Button>
 ```
 :::
 
@@ -104,36 +106,5 @@ Customize message display duration by `duration` property default `3s`.
 | duration | time before auto-dismiss, in seconds, default `3000` | Number | - | 3000 |
 | icon | customize the icon of Message | String | - | `info` |
 | onClose | specify a function that will be called after the message closed | Function | - | - |
-
-<script>
-  export default {
-    methods: {
-      handleClick (type) {
-        if (type === 'info') {
-          this.$Message.info('This is a info message!')
-        } else if (type === 'success') {
-          this.$Message.success('This is a success message!')
-        } else if (type === 'warning') {
-          this.$Message.warning('This is a warning message!')
-        } else if (type === 'error') {
-          this.$Message.error('This is a error message!')
-        }
-      },
-      changeDuration () {
-        this.$Message.info({
-          message: 'This is a tooltip that will be closed after 10s automatically.',
-          duration: 10000
-        })
-      },
-      showLoading () {
-        const loading = this.$Message.loading({
-          message: 'Loading...',
-          duration: 0
-        })
-        setTimeout(loading, 3000)
-      }
-    }
-  }
-</script>
 
 

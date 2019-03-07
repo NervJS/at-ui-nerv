@@ -1,3 +1,7 @@
+---
+imports:
+    import IconList from '../../components/iconList/index.jsx';
+---
 # Icon
 
 ----

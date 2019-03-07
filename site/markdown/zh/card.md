@@ -39,7 +39,7 @@ imports:
 :::
 
 ## 无阴影
-通过设置属性 `no-hover: true` 来禁用鼠标悬停时显示的阴影效果。
+通过设置属性 `noHover: true` 来禁用鼠标悬停时显示的阴影效果。
 
 :::demo
 ```jsx

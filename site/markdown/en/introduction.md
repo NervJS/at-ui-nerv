@@ -2,7 +2,7 @@
 
 ----
 
-`AT-UI` is a modular front-end UI framework for developing fast and powerful web interfaces based on Vue.js.
+`AT-UI-Nerv` is a modular front-end UI framework for developing fast and powerful web interfaces based on Vue.js.
 
 ## Features
 

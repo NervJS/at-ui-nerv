@@ -51,7 +51,7 @@ imports:
 
 ## 顶部导航（多级菜单）
 
-可以在 `AtSubmenu` 中嵌套 `AtSubmenu` 组合成多级菜单
+可以在 `Menu.Sub` 中嵌套 `Menu.Sub` 组合成多级菜单
 
 :::demo
 

@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Timeline} from '@src';
+---
 # Timeline
 
 ---
@@ -8,13 +11,13 @@
 Basic timeline.
 
 :::demo
-```html
-<at-timeline>
-  <at-timeline-item><p>Brush teeth and wash face</p></at-timeline-item>
-  <at-timeline-item><p>Have breakfast</p></at-timeline-item>
-  <at-timeline-item><p>Work</p></at-timeline-item>
-  <at-timeline-item><p>Sleep</p></at-timeline-item>
-</at-timeline>
+```jsx
+<Timeline>
+  <Timeline.Item><p>Brush teeth and wash face</p></Timeline.Item>
+  <Timeline.Item><p>Have breakfast</p></Timeline.Item>
+  <Timeline.Item><p>Work</p></Timeline.Item>
+  <Timeline.Item><p>Sleep</p></Timeline.Item>
+</Timeline>
 ```
 :::
 
@@ -23,13 +26,13 @@ Basic timeline.
 Set the color of circles. green means completed or success status, red means error, yellow means warning, and blue means ongoing or other default status.
 
 :::demo
-```html
-<at-timeline>
-  <at-timeline-item color="blue"><p>Brush teeth and wash face</p></at-timeline-item>
-  <at-timeline-item color="green"><p>Have breakfast</p></at-timeline-item>
-  <at-timeline-item color="red"><p>Work</p></at-timeline-item>
-  <at-timeline-item color="yellow"><p>Sleep</p></at-timeline-item>
-</at-timeline>
+```jsx
+<Timeline>
+  <Timeline.Item><p>Brush teeth and wash face</p></Timeline.Item>
+  <Timeline.Item><p>Have breakfast</p></Timeline.Item>
+  <Timeline.Item><p>Work</p></Timeline.Item>
+  <Timeline.Item><p>Sleep</p></Timeline.Item>
+</Timeline>
 ```
 :::
 
@@ -38,13 +41,13 @@ Set the color of circles. green means completed or success status, red means err
 When the timeline is incomplete and ongoing, put a ghost item at last.
 
 :::demo
-```html
-<at-timeline pending>
-  <at-timeline-item><p>Brush teeth and wash face</p></at-timeline-item>
-  <at-timeline-item><p>Have breakfast</p></at-timeline-item>
-  <at-timeline-item><p>Work</p></at-timeline-item>
-  <at-timeline-item><p>Sleep</p></at-timeline-item>
-</at-timeline>
+```jsx
+<Timeline pending>
+   <Timeline.Item><p>Brush teeth and wash face</p></Timeline.Item>
+  <Timeline.Item><p>Have breakfast</p></Timeline.Item>
+  <Timeline.Item><p>Work</p></Timeline.Item>
+  <Timeline.Item><p>Sleep</p></Timeline.Item>
+</Timeline>
 ```
 :::
 
@@ -53,25 +56,25 @@ When the timeline is incomplete and ongoing, put a ghost item at last.
 Accepts a `slot` to customize the timeline item's content, such as the icon.
 
 :::demo
-```html
-<at-timeline>
-  <at-timeline-item color="blue">
+```jsx
+<Timeline>
+  <Timeline.Item color="blue">
     <i slot="dot" class="icon icon-github"></i>
     <p>Brush teeth and wash face</p>
-  </at-timeline-item>
-  <at-timeline-item color="green">
+  </Timeline.Item>
+  <Timeline.Item color="green">
     <i slot="dot" class="icon icon-zap"></i>
-    <p>Have breakfast</p>
-  </at-timeline-item>
-  <at-timeline-item color="red">
+   <p>Have breakfast</p>
+  </Timeline.Item>
+  <Timeline.Item color="red">
     <i slot="dot" class="icon icon-award"></i>
     <p>Work</p>
-  </at-timeline-item>
-  <at-timeline-item color="yellow">
+  </Timeline.Item>
+  <Timeline.Item color="yellow">
     <i slot="dot" class="icon icon-watch"></i>
-    <p>Sleep</p>
-  </at-timeline-item>
-</at-timeline>
+   <p>Sleep</p>
+  </Timeline.Item>
+</Timeline>
 ```
 :::
 

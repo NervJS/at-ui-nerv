@@ -1,4 +1,7 @@
-
+---
+imports:
+    import {Notification,Button} from '@src';
+---
 # Notification
 
 ----
@@ -9,13 +12,13 @@ The notification will display in the upper right corner of the page, similar to 
 - Interactive notification
 - Systematic push
 
-`AT-UI` adds the global object `$Notify` to `Vue.prototype`. You can use the `$Notify` instance directly.
+You can use the `Notification` instance directly.
 
-- `this.$Notify(config)`
-- `this.$Notify.success(config)`
-- `this.$Notify.error(config)`
-- `this.$Notify.warning(config)`
-- `this.$Notify.info(config)`
+* `Notification(config)`
+* `Notification.success(config)`
+* `Notification.error(config)`
+* `Notification.warning(config)`
+* `Notification.info(config)`
 
 The `$Notify` instance receives the following parameters:
 
@@ -33,29 +36,20 @@ The `$Notify` instance receives the following parameters:
 Only display the title, or title and content, will be closed after `4s`.
 
 :::demo
-```html
-<p class="demo-desc">this.$Notify({ title: 'Here is Title' })</p>
-<at-button @click="open">Open Notification (Title)</at-button>
-<p class="demo-desc">this.$Notify({ title: 'Here is Title', message: 'Here is Content~~~' })</p>
-<at-button @click="open2">Open Notification (Title and Content)</at-button>
-
-<script>
-  export default {
-    methods: {
-      open () {
-        this.$Notify({
+```jsx
+<p class="demo-desc">{`Notification({ title: 'Here is Title' })`}</p>
+<Button onClick={()=>{
+   Notification({
           title: 'Here is Title'
         })
-      },
-      open2 () {
-        this.$Notify({
+}}>open Notification (Title)</Button>
+<p className="demo-desc">{`Notification({ title: 'Here is Title', message: 'Here is Content~~~' })`}</p>
+<Button onClick={()=>{
+   Notification({
           title: 'Here is Title',
           message: 'Here is Content~~~'
         })
-      }
-    }
-  }
-</script>
+}}>打开通知（标题和内容）</Button>
 ```
 :::
 
@@ -65,32 +59,24 @@ Only display the title, or title and content, will be closed after `4s`.
 Customize message display duration by `duration` property default `4000`. You can close the notification manually by setting `duration` to `0`.
 
 :::demo
-```html
-<p class="demo-desc">this.$Notify({ title: 'Here is Title', message: 'Here is Content~~~', duration: 2000 })</p>
-<at-button @click="open3">Dismiss After 2s</at-button>
-<p class="demo-desc">this.$Notify({ title: 'Here is Title', message: 'Here is Content~~~', duration: 0 })</p>
-<at-button @click="open4">Dismiss Manually</at-button>
-
-<script>
-  export default {
-    methods: {
-      open3 () {
-        this.$Notify({
-          title: 'Here is Title',
-          message: 'Here is Content~~~',
-          duration: 2000
-        })
-      },
-      open4 () {
-        this.$Notify({
-          title: 'Here is Title',
-          message: 'Here is Content~~~',
-          duration: 0
-        })
-      }
-    }
-  }
-</script>
+```jsx
+<p className="demo-desc">{`Notification({title: 'Here is Title', message: 'Here is Content~~~', duration: 2000 })`}</p>
+<Button
+onClick={
+  ()=>{Notification({
+        title: 'Here is Title',
+        message: 'Here is Content~~~',
+        duration: 2000
+      })}}
+      >
+      Dismiss After 2s</Button>
+<p class="demo-desc">{`Notification({ title: 'Here is Title', message: 'Here is Content~~~', duration: 0 })`}</p>
+<Button onClick={()=>{Notification({
+        title: 'Here is Title',
+        message: 'Here is Content~~~',
+        duration: 0
+      })}}
+      >Dismiss Manually</Button>
 ```
 :::
 
@@ -100,48 +86,45 @@ Customize message display duration by `duration` property default `4000`. You ca
 There are four type of Notification: `success`，`Error`，`Warning`，`Info`
 
 :::demo
-```html
-<at-button @click="open5('success')">Success</at-button>
-<at-button @click="open5('error')">Error</at-button>
-<at-button @click="open5('warning')">Warning</at-button>
-<at-button @click="open5('info')">Info</at-button>
+```jsx
+<Button onClick={()=>{Notification({
+        title: 'Here is Title',
+        message: 'Here is Content~~~',
+        duration: 2000,
+        type: 'success'
+      })}}>Success</Button>
+<Button onClick={()=>{Notification({
+        title: 'Here is Title',
+        message: 'Here is Content~~~',
+        duration: 2000,
+        type: 'error'
+      })}}>Error</Button>
+<Button onClick={()=>{Notification({
+        title: 'Here is Title',
+        message: 'Here is Content~~~',
+        duration: 2000,
+        type: 'warning'
+      })}}>Warning</Button>
+<Button onClick={()=>{Notification({
+        title: 'Here is Title',
+        message: 'Here is Content~~~',
+        duration: 2000,
+        type: 'info'
+      })}}>Info</Button>
 
-<script>
-  export default {
-    methods: {
-      open5 (type) {
-        this.$Notify({
-          title: 'Here is Title',
-          message: 'Here is Content~~~',
-          type: type
-        })
-      }
-    }
-  }
-</script>
 ```
 :::
 
 
-## Use `this.$Notify.success`
+## Use `Notification.success`
 
 :::demo
-```html
-<p class="demo-desc">this.$Notify.success({ title: 'Here is Title', message: 'Here is Content~~~' })</p>
-<at-button @click="open6">Success</at-button>
-
-<script>
-  export default {
-    methods: {
-      open6 () {
-        this.$Notify.success({
-          title: 'Here is Title',
-          message: 'Here is Content~~~'
-        })
-      }
-    }
-  }
-</script>
+```jsx
+<p class="demo-desc">{`Notification.success({ title: 'Here is Title', message: 'Here is Content~~~' })`}</p>
+<Button onClick={()=>{Notification.success({
+        title: 'Here is Title',
+        message: 'Here is Content~~~'
+      })}}>Success</Button>
 ```
 :::
 
@@ -151,22 +134,14 @@ There are four type of Notification: `success`，`Error`，`Warning`，`Info`
 By default, click the close button to dismiss the notification, or you can use global click mode. The method is to pass `showClose: false`.
 
 :::demo
-```html
-<at-button @click="open7">Global Click to Close</at-button>
-
-<script>
-  export default {
-    methods: {
-      open7 () {
-        this.$Notify({
-          title: 'Here is Title',
-          message: 'Here is Content~~~',
-          showClose: false
-        })
-      }
-    }
-  }
-</script>
+```jsx
+<Button onClick={()=>{Notification({
+        title: 'Here is Title',
+        message: 'Here is Content~~~',
+        showClose: false,
+        duration: 0
+      })
+    }}>Global Click to Close</Button>
 ```
 :::
 
@@ -182,54 +157,3 @@ By default, click the close button to dismiss the notification, or you can use g
 | icon | customize the icon of Notification | String | - | - |
 | onClose | specify a function that will be called after the notification closed | Function | - | - |
 
-<script>
-export default {
-  methods: {
-    open () {
-      this.$Notify({
-        title: 'Here is Title'
-      })
-    },
-    open2 () {
-      this.$Notify({
-        title: 'Here is Title',
-        message: 'Here is Content~~~'
-      })
-    },
-    open3 () {
-      this.$Notify({
-        title: 'Here is Title',
-        message: 'Here is Content~~~',
-        duration: 2000
-      })
-    },
-    open4 () {
-      this.$Notify({
-        title: 'Here is Title',
-        message: 'Here is Content~~~',
-        duration: 0
-      })
-    },
-    open5 (type) {
-      this.$Notify({
-        title: 'Here is Title',
-        message: 'Here is Content~~~',
-        type: type
-      })
-    },
-    open6 (type) {
-      this.$Notify.success({
-        title: 'Here is Title',
-        message: 'Here is Content~~~'
-      })
-    },
-    open7 () {
-      this.$Notify({
-        title: 'Here is Title',
-        message: 'Here is Content~~~',
-        showClose: false
-      })
-    }
-  }
-}
-</script>

@@ -1,4 +1,7 @@
-
+---
+imports:
+  import {Tabs,Button} from '@src';
+---
 # Tabs
 
 ----
@@ -8,18 +11,34 @@
 Tabs make it easy to switch between different views. Default activate first tab.
 
 :::demo
+```state
+{
+  activeIndex: 0
+  activeIndex1:0,
+  activeIndex2:0,
+  activeIndex3:0,
+  activeIndex4:0,
+  activeIndex5:0,
+  activeIndex6:0,
+  activeIndex7:0,
+  activeIndex8:0}
+```
 ```html
-<at-tabs>
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs activeIndex={this.state.activeIndex} onChange={(index)=>{
+  this.setState({
+    activeIndex:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-</at-tabs>
+  </Tabs.Pane>
+</Tabs>
 ```
 :::
 
@@ -30,17 +49,21 @@ Disabled a tab.
 
 :::demo
 ```html
-<at-tabs>
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs activeIndex={this.state.activeIndex1} onChange={(index)=>{
+  this.setState({
+    activeIndex1:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3" :disabled="true">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3" disabled='true'>
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-</at-tabs>
+  </Tabs.Pane>
+</Tabs>
 ```
 :::
 
@@ -50,17 +73,21 @@ The Tab with Icon.
 
 :::demo
 ```html
-<at-tabs>
-  <at-tab-pane label="Tab1" name="name1" icon="icon-github">
+<Tabs activeIndex={this.state.activeIndex2} onChange={(index)=>{
+  this.setState({
+    activeIndex2:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1" icon="icon-github">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2" icon="icon-twitter">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2" icon="icon-twitter">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3" icon="icon-pocket">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3" icon="icon-pocket">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-</at-tabs>
+  </Tabs.Pane>
+</Tabs>
 ```
 :::
 
@@ -70,20 +97,24 @@ You can add extra actions to the right of Tabs by adding the slot extra.
 
 :::demo
 ```html
-<at-tabs>
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs activeIndex={this.state.activeIndex3} onChange={(index)=>{
+  this.setState({
+    activeIndex3:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1" icon="icon-github">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2" icon="icon-twitter">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3" icon="icon-pocket">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
+  </Tabs.Pane>
   <div slot="extra">
-    <at-button size="small">Extra Content</at-button>
+    <Button size="small">Extra Content</Button>
   </div>
-</at-tabs>
+</Tabs>
 ```
 :::
 
@@ -93,20 +124,21 @@ Set the property `size` to `small` can be displayed as a mini-type.
 
 :::demo
 ```html
-<at-tabs size="small">
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs activeIndex={this.state.activeIndex4} size='small' onChange={(index)=>{
+  this.setState({
+    activeIndex4:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-  <div slot="extra">
-    <at-button size="small">Extra Content</at-button>
-  </div>
-</at-tabs>
+  </Tabs.Pane>
+</Tabs>
 ```
 :::
 
@@ -116,20 +148,21 @@ Set the property `type` to `card` can display the card style.
 
 :::demo
 ```html
-<at-tabs type="card" v-model="activeKey">
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs type='card' activeIndex={this.state.activeIndex5} onChange={(index)=>{
+  this.setState({
+    activeIndex5:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-  <div slot="extra">
-    <at-button size="small">Extra Content</at-button>
-  </div>
-</at-tabs>
+  </Tabs.Pane>
+</Tabs>
 ```
 :::
 
@@ -139,20 +172,21 @@ Mini card tab.
 
 :::demo
 ```html
-<at-tabs type="card" v-model="activeKey" size="small">
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs type='card' size='small' activeIndex={this.state.activeIndex6} onChange={(index)=>{
+  this.setState({
+    activeIndex6:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-  <div slot="extra">
-    <at-button size="small">Extra Content</at-button>
-  </div>
-</at-tabs>
+  </Tabs.Pane>
+</Tabs>
 ```
 :::
 
@@ -162,42 +196,33 @@ Animating can be disabled by setting the property `animated` to `false`.
 
 :::demo
 ```html
-<at-tabs :animated="false" v-model="activeKey">
-  <at-tab-pane label="Tab1" name="name1">
+<Tabs animated='false' activeIndex={this.state.activeIndex7} onChange={(index)=>{
+  this.setState({
+    activeIndex7:index
+  })
+}}>
+  <Tabs.Pane label="Tab1" name="name1">
     <p>Content of Tab Pane 1</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab2" name="name2">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab2" name="name2">
     <p>Content of Tab Pane 2</p>
-  </at-tab-pane>
-  <at-tab-pane label="Tab3" name="name3">
+  </Tabs.Pane>
+  <Tabs.Pane label="Tab3" name="name3">
     <p>Content of Tab Pane 3</p>
-  </at-tab-pane>
-</at-tabs>
+  </Tabs.Pane>
+</Tabs>
 ```
 :::
 
 ## Add & close tab
 
-Set the property `closable` to `false` can disable close. But you should delete `at-tab-pane` manually by listen to `on-tab-remove` event.
+Set the property `closable` to `false` can disable close. But you should delete `Tabs.Pane` manually by listen to `onTabRemove` event.
 
 :::demo
-```html
-<at-tabs :animated="false" value="tab6" closable @on-tab-remove="removeHandle">
-  <at-tab-pane
-    v-for="(item, index) in tabList" :key="index"
-    :label="item.label" :name="item.name" :unclosable="index === 0 ? true : false">
-    <p>{{ item.content }}</p>
-  </at-tab-pane>
-  <div slot="extra">
-    <at-button size="small" @click="addHandle">Add</at-button>
-  </div>
-</at-tabs>
-
-<script>
-  export default {
-    data () {
-      return {
-        tabList: [{
+```state
+{
+  activeIndex8:0,
+  data: [{
           label: 'Tab1',
           name: 'tab1',
           content: 'tab1 content'
@@ -221,25 +246,43 @@ Set the property `closable` to `false` can disable close. But you should delete 
           label: 'Tab6',
           name: 'tab6',
           content: 'tab6 content'
-        }],
-        count: 7
-      }
-    },
-    methods: {
-      addHandle () {
-        const count = this.count++
-        this.tabList.push({
-          label: `Tab${count}`,
-          name: `tab${count}`,
-          content: `Tab${count} content`,
-        })
-      },
-      removeHandle (data) {
-        this.tabList.splice(data.index, 1)
-      }
-    }
+        }]
+}
+```
+```html
+<Tabs animation='false' activeIndex={this.state.activeIndex8} onChange={(index)=>{
+  this.setState({
+    activeIndex8:index
+  })
+}} closable onTabRemove={(index,event) =>{
+    event.stopPropagation()
+    let data= this.state.data.concat()
+    data.splice(index,1)
+    this.setState({
+      data
+    })
   }
-</script>
+}>
+  {this.state.data.map((item)=>{
+    return (<Tabs.Pane label={item.label} name={item.name}>
+              <p>{item.content}</p>
+            </Tabs.Pane>)
+  })}
+  <div slot='extra'>
+    <Button onClick={()=>{
+      let data= this.state.data.concat()
+      let length = data.length
+      data.push({
+        label: `Tab${length+1}`,
+          name: `Tab${length+1}`,
+          content: `tab${length+1} content`
+      })
+      this.setState({
+        data
+      })
+    }}>add</Button>
+  </div>
+</Tabs>
 ```
 :::
 
@@ -257,8 +300,8 @@ Set the property `closable` to `false` can disable close. But you should delete 
 
 | Event Name   | Description     | 	Return Value  |
 |---------- |-------------- |---------- |
-| on-change | triggers when switching tab | the current tab `{index, name}` |
-| on-tab-remove | triggers when deleting tab | the deleted tab `{index, name}` |
+| onChange | triggers when switching tab | the current tab `{index, name}` |
+| onTabRemove | triggers when deleting tab | the deleted tab `{index, name}` |
 
 ## Tabs slot
 
@@ -277,58 +320,10 @@ Set the property `closable` to `false` can disable close. But you should delete 
 | disabled | whether to disable the tab | Boolean | - | false |
 | closable | whether the tab can be closed, the priority is higher than the Tabs `closable` | Boolean | - | true |
 
-## TabPane slot
+## Tab.Pane slot
 
 | Name     | Description |
 |----------|-------- |
 | - | content of the tab |
 
 
-<script>
-export default {
-  data () {
-    return {
-      activeKey: 'name3',
-      tabList: [{
-        label: 'Tab1',
-        name: 'tab1',
-        content: 'tab1 content'
-      }, {
-        label: 'Tab2',
-        name: 'tab2',
-        content: 'tab2 content'
-      }, {
-        label: 'Tab3',
-        name: 'tab3',
-        content: 'tab3 content'
-      }, {
-        label: 'Tab4',
-        name: 'tab4',
-        content: 'tab4 content'
-      }, {
-        label: 'Tab5',
-        name: 'tab5',
-        content: 'tab5 content'
-      }, {
-        label: 'Tab6',
-        name: 'tab6',
-        content: 'tab6 content'
-      }],
-      count: 7
-    }
-  },
-  methods: {
-    addHandle () {
-      const count = this.count++
-      this.tabList.push({
-        label: `Tab${count}`,
-        name: `tab${count}`,
-        content: `Tab${count} content`,
-      })
-    },
-    removeHandle (data) {
-      this.tabList.splice(data.index, 1)
-    }
-  }
-}
-</script>

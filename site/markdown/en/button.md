@@ -1,3 +1,7 @@
+---
+imports:
+    import {Button} from '@src';
+---
 # Button
 
 ----
@@ -9,10 +13,10 @@ Clicking a button will trigger an operation.
 There are three basic buttons: `Primary` 、 `Default` 、 `Text`.
 
 :::demo
-```html
-<at-button type="primary">Primary Button</at-button>
-<at-button>Default Button</at-button>
-<at-button type="text">Text Button</at-button>
+```jsx
+<Button type="primary">Primary Button</Button>
+<Button>Default Button</Button>
+<Button type="text">Text Button</Button>
 ```
 :::
 
@@ -21,10 +25,10 @@ There are three basic buttons: `Primary` 、 `Default` 、 `Text`.
 To make a button as disabled, add `disabled` property to the `Button`.
 
 :::demo
-```html
-<at-button type="primary" disabled>Primary Button</at-button>
-<at-button hollow disabled>Default Button</at-button>
-<at-button type="text" disabled>Text Button</at-button>
+```jsx
+<Button type="primary" disabled>Primary Button</Button>
+<Button hollow disabled>Default Button</Button>
+<Button type="text" disabled>Text Button</Button>
 ```
 :::
 
@@ -33,22 +37,22 @@ To make a button as disabled, add `disabled` property to the `Button`.
 Button with color tendency gives user an operating hint.
 
 :::demo
-```html
+```jsx
 <div class="row">
-  <at-button hollow>Default</at-button>
-  <at-button type="primary" hollow>Primary</at-button>
-  <at-button type="success" hollow>Success</at-button>
-  <at-button type="error" hollow>Error</at-button>
-  <at-button type="warning" hollow>Warning</at-button>
-  <at-button type="info" hollow>Info</at-button>
+  <Button hollow>Default</Button>
+  <Button type="primary" hollow>Primary</Button>
+  <Button type="success" hollow>Success</Button>
+  <Button type="error" hollow>Error</Button>
+  <Button type="warning" hollow>Warning</Button>
+  <Button type="info" hollow>Info</Button>
 </div>
 <div class="row">
-  <at-button>Default</at-button>
-  <at-button type="primary">Primary</at-button>
-  <at-button type="success">Success</at-button>
-  <at-button type="error">Error</at-button>
-  <at-button type="warning">Warning</at-button>
-  <at-button type="info">Info</at-button>
+  <Button>Default</Button>
+  <Button type="primary">Primary</Button>
+  <Button type="success">Success</Button>
+  <Button type="error">Error</Button>
+  <Button type="warning">Warning</Button>
+  <Button type="info">Info</Button>
 </div>
 ```
 :::
@@ -58,16 +62,16 @@ Button with color tendency gives user an operating hint.
 `Button` components can contain an `Icon`. This is done by setting the `Icon` property or placing an `Icon` within the `Button`. The `Icon` is fixed in front of the text that setted by `icon` property.
 
 :::demo
-```html
+```jsx
 <div class="row">
-  <at-button icon="icon-download">Download</at-button>
-  <at-button icon="icon-user-plus">Add User</at-button>
-  <at-button icon="icon-edit"></at-button>
-  <at-button type="primary" icon="icon-search"></at-button>
+  <Button icon="icon-download">Download</Button>
+  <Button icon="icon-user-plus">Add User</Button>
+  <Button icon="icon-edit"></Button>
+  <Button type="primary" icon="icon-search"></Button>
 </div>
 <div class="row">
-  <at-button icon="icon-edit" circle></at-button>
-  <at-button type="primary" icon="icon-search" circle></at-button>
+  <Button icon="icon-edit" circle></Button>
+  <Button type="primary" icon="icon-search" circle></Button>
 </div>
 ```
 :::
@@ -77,10 +81,10 @@ Button with color tendency gives user an operating hint.
 A loading indicator can be added to button by setting the `loading` property.
 
 :::demo
-```html
-<at-button loading>Loading</at-button>
-<at-button loading></at-button>
-<at-button loading circle></at-button>
+```jsx
+<Button loading>Loading</Button>
+<Button loading></Button>
+<Button loading circle></Button>
 ```
 :::
 
@@ -89,23 +93,23 @@ A loading indicator can be added to button by setting the `loading` property.
 Buttons can be grouped by placing multiple `Button` components into a `ButtonGroup` component.
 
 :::demo
-```html
-<at-button-group>
-  <at-button>Left</at-button>
-  <at-button>Center</at-button>
-  <at-button>Right</at-button>
-</at-button-group>
+```jsx
+<Button-group>
+  <Button>Left</Button>
+  <Button>Center</Button>
+  <Button>Right</Button>
+</Button-group>
 <br>
-<at-button-group>
-  <at-button icon="icon-edit" title="Edit"></at-button>
-  <at-button icon="icon-copy" title="Copy"></at-button>
-  <at-button icon="icon-download" title="Download"></at-button>
-</at-button-group>
+<Button-group>
+  <Button icon="icon-edit" title="Edit"></Button>
+  <Button icon="icon-copy" title="Copy"></Button>
+  <Button icon="icon-download" title="Download"></Button>
+</Button-group>
 <br>
-<at-button-group>
-  <at-button><i class="icon icon-chevron-left"></i>Go back</at-button>
-  <at-button>Go forward<i class="icon icon-chevron-right"></i></at-button>
-</at-button-group>
+<Button-group>
+  <Button><i class="icon icon-chevron-left"></i>Go back</Button>
+  <Button>Go forward<i class="icon icon-chevron-right"></i></Button>
+</Button-group>
 ```
 :::
 
@@ -116,35 +120,35 @@ Size of GroupButton: `large`, `normal`, `small`.<br>
 Set the `size` property to use different size of button, it's `normal` size by default.
 
 :::demo
-```html
+```jsx
 <div>
-  <at-button type="primary" size="large">Large Button</at-button>
-  <at-button type="primary">Normal Button</at-button>
-  <at-button type="primary" size="small">Small Button</at-button>
-  <at-button type="primary" size="smaller">Smaller Button</at-button>
+  <Button type="primary" size="large">Large Button</Button>
+  <Button type="primary">Normal Button</Button>
+  <Button type="primary" size="small">Small Button</Button>
+  <Button type="primary" size="smaller">Smaller Button</Button>
 </div>
 <div style="margin-top: 8px;">
-  <at-button type="primary" size="large" icon="icon-search" circle></at-button>
-  <at-button type="primary" icon="icon-search" circle></at-button>
-  <at-button type="primary" size="small" icon="icon-search" circle></at-button>
-  <at-button type="primary" size="smaller" icon="icon-search" circle></at-button>
+  <Button type="primary" size="large" icon="icon-search" circle></Button>
+  <Button type="primary" icon="icon-search" circle></Button>
+  <Button type="primary" size="small" icon="icon-search" circle></Button>
+  <Button type="primary" size="smaller" icon="icon-search" circle></Button>
 </div>
 <div style="margin-top: 8px;">
-  <at-button-group size="large">
-    <at-button>Left</at-button>
-    <at-button>Center</at-button>
-    <at-button>Right</at-button>
-  </at-button-group>
-  <at-button-group>
-    <at-button>Left</at-button>
-    <at-button>Center</at-button>
-    <at-button>Right</at-button>
-  </at-button-group>
-  <at-button-group size="small">
-    <at-button>Left</at-button>
-    <at-button>Center</at-button>
-    <at-button>Right</at-button>
-  </at-button-group>
+  <Button-group size="large">
+    <Button>Left</Button>
+    <Button>Center</Button>
+    <Button>Right</Button>
+  </Button-group>
+  <Button-group>
+    <Button>Left</Button>
+    <Button>Center</Button>
+    <Button>Right</Button>
+  </Button-group>
+  <Button-group size="small">
+    <Button>Left</Button>
+    <Button>Center</Button>
+    <Button>Right</Button>
+  </Button-group>
 </div>
 ```
 :::
@@ -168,21 +172,3 @@ Set the `size` property to use different size of button, it's `normal` size by d
 | size | size of button | String | `large`, `small` | normal |
 | gap | gap of the buttons | Number | - | -1 |
 
-<style lang="scss" scoped>
-  .row {
-    .at-btn + .at-btn {
-      margin-left: 8px;
-    }
-
-    & + .row {
-      margin-top: 8px;
-    }
-    .at-btn-group .at-btn {
-      margin-left: 0;
-    }
-  }
-  .at-btn-group {
-    margin-left: 8px;
-    margin-top: 16px;
-  }
-</style>
