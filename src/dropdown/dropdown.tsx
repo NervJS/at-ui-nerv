@@ -87,7 +87,6 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
   initEvent = () => {
     const { trigger } = this.props
     const triggerElm = this.trigger
-    console.log(triggerElm, trigger)
     switch (trigger) {
       case 'click':
         triggerElm.addEventListener('click', this.onClickHandle)

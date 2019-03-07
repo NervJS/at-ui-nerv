@@ -10,10 +10,10 @@ class SelectExample extends Nerv.Component<any, any> {
     }
   }
   onChange (e, value) {
-    console.log('child', value)
+    // console.log('child', value)
   }
   render () {
-    console.log(TimelineItem)
+    // console.log(TimelineItem)
     return (
       <div className='timeline_example'>
         <Timeline>
