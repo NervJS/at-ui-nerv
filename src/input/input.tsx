@@ -93,8 +93,8 @@ class Input extends Component<InputProps, InputState> {
       readonly,
       autofocus
     } = this.props
-    const name = icon || status
-    const iconClass = name ? `icon-${name}` : ''
+    const iconName = icon || status
+    const iconClass = iconName ? `icon-${iconName}` : ''
     const { currentValue } = this.state
     return (
       <div
