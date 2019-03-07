@@ -168,7 +168,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   componentDidMount () {
     const trigger = this.$trigger
     const popover = this.$popper
-    console.log('trigger', trigger, popover)
+    // console.log('trigger', trigger, popover)
     const position = calculatePosition(this.props.placement, trigger, popover) || {top:0, left: 0}
     this.top = position.top
     this.left = position.left

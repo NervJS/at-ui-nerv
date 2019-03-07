@@ -27,8 +27,8 @@ class Table extends Nerv.Component<TableProps, any> {
   private sortBy: string
   private sortType: string
   private renderArr: any[] = []
-  private columnsWidth: any = {}
   private $tablebody: any
+  private columnsWidth = {}
   private $header: any
   constructor (props) {
     super(props)
@@ -235,7 +235,7 @@ class Table extends Nerv.Component<TableProps, any> {
     })
   }
   handleResize () {
-      const columnsWidth = {}
+      let columnsWidth = {}
       if ((this.props.data || []).length) {
         const $td = this.$tablebody.querySelectorAll('tr')[0].querySelectorAll('td')
         for (let i = 0; i < $td.length; i++) {
@@ -254,7 +254,7 @@ class Table extends Nerv.Component<TableProps, any> {
         columnsWidth: this.columnsWidth
       })
   }
-  setCellWidth (column,index) {
+  setCellWidth (column) {
     let width = ''
     if (column.width) {
       width = column.width
@@ -270,7 +270,8 @@ class Table extends Nerv.Component<TableProps, any> {
     let {
       style,
       onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
-      children
+      children,
+      optional
       } = props
     const needProps = {
       children,
@@ -292,9 +293,15 @@ class Table extends Nerv.Component<TableProps, any> {
     }
     let col:any[] = []
     let columns = this.props.columns || []
+    let hasCheckBox = false
     columns.forEach((column,index)=>{
-        col.push(<col width={this.setCellWidth(column,index)}/>)
+        if(column.checkbox) { hasCheckBox = true } // 用户使用optional,且自己定义了column
+        col.push(<col width={this.setCellWidth(column)}/>)
     })
+    if(optional &&!hasCheckBox) {
+      // 用户使用optional,但是自己木有定义column
+      col.splice(0, 0, <col width="100"/>)
+    }
     if (!props.height) {
       body = (
         <div className='at-table__content'>
@@ -407,10 +414,10 @@ class Table extends Nerv.Component<TableProps, any> {
     if (this.props.height) {
       this.resizeHeightHandler()
     }
-    window.addEventListener('resize', this.handleResize)
+    // window.addEventListener('resize', this.handleResize)
   }
   componentWillUnmount () {
-    window.removeEventListener('resize', this.handleResize)
+    // window.removeEventListener('resize', this.handleResize)
   }
   componentWillUpdate (nextProps,nextState) {
     if(this.props.columns != nextProps.columns) {
