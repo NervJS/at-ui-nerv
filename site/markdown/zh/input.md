@@ -11,8 +11,11 @@ imports:
 基本输出框，默认宽度 `100%`
 
 :::demo
-```html
-<Input onInput={(n)=>{console.log(n)}} placeholder="输入提示"></Input>
+```jsx
+<Input name='test' value={this.state.val} onInput={(n)=>{console.log(n) ;this.setState({
+    val:n
+})}} placeholder="输入提示"></Input>
+{this.state.val}
 <Input onInput={()=>{}} placeholder="禁用状态" disabled></Input>
 <Input onInput={()=>{}} type="password" placeholder="密码"></Input>
 ```

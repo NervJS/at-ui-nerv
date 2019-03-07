@@ -11,13 +11,16 @@ class InputExample extends Nerv.Component {
       .bind(this)
   }
   onInputHandle (e) {
-    console.log(e)
+    this.setState({
+      val: e
+    })
   }
 
   render () {
     return (
       <div className='input-example'>
         <InputE />
+
       </div>
     )
   }

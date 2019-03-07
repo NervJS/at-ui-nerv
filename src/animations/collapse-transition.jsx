@@ -2,6 +2,13 @@ import * as Nerv from 'nervjs'
 const ANIMATION_DURATION = 300
 
 export default class CollapseTransition extends Nerv.Component {
+  constructor (...args) {
+    super(...args)
+    const { isShow } = this.props
+    this.state = {
+      initShow: isShow
+    }
+  }
   componentDidMount () {
     this.beforeEnter()
     if (this.props.isShow) {
@@ -102,11 +109,13 @@ export default class CollapseTransition extends Nerv.Component {
   }
 
   render () {
+    const {initShow} = this.state
     return (
       <div
         className='collapse-transition'
         style={{
-          overflow: 'hidden'
+          overflow: 'hidden',
+          display: initShow ? 'block' : 'none'
         }}
         ref={e => { this.selfRef = e }}>
         {this.props.children}

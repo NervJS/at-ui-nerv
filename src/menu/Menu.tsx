@@ -6,7 +6,7 @@ import MenuItem from './MenuItem'
 import MenuSub from './MenuSub'
 
 interface MenuProps {
-  mode?: 'inline' | 'horizontal' | 'vertical'
+  mode?: 'inline' | 'horizontal' | 'vertical' | 'inlineCollapse'
   theme?: string
   activeName?: string | number
   inlineCollapsed?: boolean

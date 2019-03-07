@@ -68,7 +68,7 @@ class Table extends Nerv.Component<TableProps, any> {
       this.state.valueArr.push(false)
       this.state.selectAll.push(false)
     })
-    columns.forEach((item,index) => {
+    columns.forEach((item, index) => {
       item._index = index
       if (item.sortType) {
         (this.sortType = item.sortType), (this.sortBy = item.key)
@@ -76,9 +76,9 @@ class Table extends Nerv.Component<TableProps, any> {
       if (item.key) {
         this.keyArr.push(item.key)
       }
-      if(item.component) {
+      if (item.component) {
         this.renderArr.push({
-          render:item.component,
+          render: item.component,
           action: item.action || ''
         })
       }
@@ -148,7 +148,7 @@ class Table extends Nerv.Component<TableProps, any> {
       if (this.props.optional) {
         const pageSize = this.state.currPageSize
         const currPage = this.state.currPage
-        let indexTemp = (currPage - 1) * pageSize + index
+        const indexTemp = (currPage - 1) * pageSize + index
         tdElement.push(
           <th
             className='at-table__cell at-table__column-selection'
@@ -165,16 +165,16 @@ class Table extends Nerv.Component<TableProps, any> {
         tdElement.push(<td className='at-table__cell'>{item[key]}</td>)
       })
       this.renderArr.forEach((item) => {
-        const {action,render} = item
+        const {action, render} = item
         const {type, props, children} = render
-        let element = Nerv.createElement(type, props, children)
-        let propsAction = element.props[action] || this.noop
-        element.props[action] = propsAction.bind(element,index)
+        const element = Nerv.createElement(type, props, children)
+        const propsAction = element.props[action] || this.noop
+        element.props[action] = propsAction.bind(element, index)
         tdElement.push(<td className='at-table__cell'>{element}</td>)
       })
       dataElement.push(<tr>{tdElement}</tr>)
     })
-    return <tbody ref={(tablebody)=>{this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
+    return <tbody ref={(tablebody) => {this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
   }
   noop () {
 
@@ -193,7 +193,7 @@ class Table extends Nerv.Component<TableProps, any> {
       )
     }
     columns.forEach((item) => {
-      if(!item.checkbox== true) {
+      if (!item.checkbox == true) {
         let sortBtn
         if (item.sortType) {
           sortBtn = this.renderSortBtn()
@@ -235,12 +235,12 @@ class Table extends Nerv.Component<TableProps, any> {
     })
   }
   handleResize () {
-      let columnsWidth = {}
+      const columnsWidth = {}
       if ((this.props.data || []).length) {
         const $td = this.$tablebody.querySelectorAll('tr')[0].querySelectorAll('td')
         for (let i = 0; i < $td.length; i++) {
-          const column = (this.props.columns || [] )[i]
-          let width = parseInt(getStyle($td[i],'width'))
+          const column = (this.props.columns || [])[i]
+          let width = parseInt(getStyle($td[i], 'width'))
           if (column) {
             if (column.width) {
               width = column.width
@@ -258,7 +258,7 @@ class Table extends Nerv.Component<TableProps, any> {
     let width = ''
     if (column.width) {
       width = column.width
-    } else if ((this.state.columnsWidth || {} )[column._index]) {
+    } else if ((this.state.columnsWidth || {})[column._index]) {
       width = this.state.columnsWidth[column._index].width
     }
 
@@ -291,16 +291,16 @@ class Table extends Nerv.Component<TableProps, any> {
       height: this.state.resizeHeight + 'px',
       marginTop: this.state.resizeMarginTop + 'px'
     }
-    let col:any[] = []
-    let columns = this.props.columns || []
+    const col: any[] = []
+    const columns = this.props.columns || []
     let hasCheckBox = false
-    columns.forEach((column,index)=>{
-        if(column.checkbox) { hasCheckBox = true } // 用户使用optional,且自己定义了column
+    columns.forEach((column, index) => {
+        if (column.checkbox) { hasCheckBox = true } // 用户使用optional,且自己定义了column
         col.push(<col width={this.setCellWidth(column)}/>)
     })
-    if(optional &&!hasCheckBox) {
+    if (optional && !hasCheckBox) {
       // 用户使用optional,但是自己木有定义column
-      col.splice(0, 0, <col width="100"/>)
+      col.splice(0, 0, <col width='100'/>)
     }
     if (!props.height) {
       body = (
@@ -319,7 +319,7 @@ class Table extends Nerv.Component<TableProps, any> {
       )} else {
         body = (
         <div className='at-table__content' >
-          <div className='at-table__header' ref={(header)=>{this.$header = header}}>
+          <div className='at-table__header' ref={(header) => {this.$header = header}}>
             <table>
               <colgroup>
                 {}
@@ -384,7 +384,7 @@ class Table extends Nerv.Component<TableProps, any> {
     const start = (currPage - 1) * pageSize
     const end = currPage * pageSize
     let dataSelected
-    
+
     for (let i = start; i < end; i++) {
       if (selectAll) {
         arrTemp[i] = true
@@ -419,8 +419,8 @@ class Table extends Nerv.Component<TableProps, any> {
   componentWillUnmount () {
     // window.removeEventListener('resize', this.handleResize)
   }
-  componentWillUpdate (nextProps,nextState) {
-    if(this.props.columns != nextProps.columns) {
+  componentWillUpdate (nextProps, nextState) {
+    if (this.props.columns != nextProps.columns) {
       this.handleResize()
     }
   }

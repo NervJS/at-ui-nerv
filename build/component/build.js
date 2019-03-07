@@ -45,7 +45,7 @@ function getConfig (options) {
         hide_modules: true
       }),
       new webpack.BannerPlugin({
-        banner: `/*!AT-UI*/`,
+        banner: `/*!AT-UI-Nerv*/`,
         raw: true
       })
 

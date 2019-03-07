@@ -64,7 +64,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     }
   }
   onMouseEnter (e: MouseEvent) {
-    if(this.state.display == 'block') {return}
+    if (this.state.display === 'block') {return}
     this.setState({
       display: 'block',
       top: this.top,
@@ -122,10 +122,10 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       props.children as any,
       (child) => {
         if (child.props && child.props.slot) {
-          if (child.props.slot == 'content') {
+          if (child.props.slot === 'content') {
             content = child.children
           }
-          if (child.props.slot == 'title') {
+          if (child.props.slot === 'title') {
             title = child.children
           }
         }
@@ -153,11 +153,11 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       )
     }
     return (
-      <div className={this.renderPopoverClassNames(this.props)} ref={(wrapper)=>{this.$wrapper = wrapper}} style={style} {...needProps}>
-        <span className='at-popover__trigger' style={props.style} ref={(trigger)=>{this.$trigger = trigger}}>
+      <div className={this.renderPopoverClassNames(this.props)} ref={(wrapper) => {this.$wrapper = wrapper}} style={style} {...needProps}>
+        <span className='at-popover__trigger' style={props.style} ref={(trigger) => {this.$trigger = trigger}}>
           {props.children}
         </span>
-        <div className={classname} style={tipstyle} ref={(popper)=>{this.$popper = popper}}>
+        <div className={classname} style={tipstyle} ref={(popper) => {this.$popper = popper}}>
           <div className='at-popover__arrow' />
           {title}
           {content}
@@ -169,7 +169,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     const trigger = this.$trigger
     const popover = this.$popper
     // console.log('trigger', trigger, popover)
-    const position = calculatePosition(this.props.placement, trigger, popover) || {top:0, left: 0}
+    const position = calculatePosition(this.props.placement, trigger, popover) || {top: 0, left: 0}
     this.top = position.top
     this.left = position.left
     this.setState({
