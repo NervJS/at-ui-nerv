@@ -81,7 +81,7 @@ imports:
     <Menu.Item name="3-2">
       <i className="icon icon-settings" />导航菜单五
     </Menu.Item>
-    <Menu.Sub
+    <Menu.Sub name="3-3"
       title={
         <span>
           <i className="icon icon-life-buoy" />导航菜单六
@@ -194,6 +194,7 @@ imports:
       <i className="icon icon-settings" />导航菜单六
     </Menu.Item>
     <Menu.Sub
+      name="4-3"
       title={
         <span>
           <i className="icon icon-life-buoy" />导航菜单七
