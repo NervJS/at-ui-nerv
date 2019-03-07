@@ -12,7 +12,7 @@ imports:
 
 :::demo
 ```jsx
-<Input value={this.state.val} onInput={(n)=>{console.log(n) ;this.setState({
+<Input name='test' value={this.state.val} onInput={(n)=>{console.log(n) ;this.setState({
     val:n
 })}} placeholder="输入提示"></Input>
 {this.state.val}

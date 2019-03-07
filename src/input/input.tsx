@@ -91,7 +91,8 @@ class Input extends Component<InputProps, InputState> {
       minlength,
       maxlength,
       readonly,
-      autofocus
+      autofocus,
+      name
     } = this.props
     const iconName = icon || status
     const iconClass = iconName ? `icon-${iconName}` : ''
