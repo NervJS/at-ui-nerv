@@ -272,7 +272,6 @@ class Select extends Nerv.Component<SelectProps, any> {
           optionChosen.forEach((item) => {
             const child = this.propsSelectOption[item] || {}
             const value = child.props.value
-            console.log(child, '123')
             const label = child.props.label || ''
             returnValue = this.prepareReturnValue(returnValue, value, label, child)
           })
