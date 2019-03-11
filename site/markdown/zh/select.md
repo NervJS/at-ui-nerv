@@ -12,7 +12,7 @@ imports:
 
 :::demo
 ```jsx
-<Select style="width:100px">
+<Select style="width:100px" onChange={(value, event)=>{ console.log(value)}}>
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州广州广州广州广州广州广州广州广州广州</Select.Option>
   <Select.Option value="3">上海</Select.Option>
@@ -20,7 +20,7 @@ imports:
   <Select.Option value="5">成都</Select.Option>
 </Select>
 
-<Select value="1"  style="width:100px">
+<Select value="1" style="width:100px">
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州</Select.Option>
 </Select>
@@ -87,7 +87,7 @@ imports:
 
 :::demo
  ```html
-<Select style="width: 100px" option='1'>
+<Select valueWithLabel style="width: 100px" option='1' onChange={(value, event)=>{ console.log(value)}}>
   <Select.OptionGroup label="广东省">
     <Select.Option value="1">深圳</Select.Option>
     <Select.Option value="2">广州</Select.Option>

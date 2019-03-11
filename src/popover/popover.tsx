@@ -15,6 +15,8 @@ export interface PopoverProps {
 class Popover extends Nerv.Component<PopoverProps, any> {
   private top: number
   private left: number
+  private popperWidth: number
+  private popperHeight: number
   private enter: boolean
   private $wrapper: any
   private $trigger: any
@@ -41,16 +43,21 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   }
   clickHandler (e: MouseEvent) {
     e.stopPropagation()
+
     if (this.enter) {
       this.setState({
         display: 'none'
       })
       this.enter = false
     } else {
+      const position = calculatePosition(this.props.placement, this.$trigger, {
+        offsetWidth: this.popperWidth,
+        offsetHeight: this.popperHeight
+      })
       this.setState({
         display: 'block',
-        top: this.top,
-        left: this.left
+        top: position && position.top || this.top,
+        left: position && position.left ||  this.left
       })
       this.enter = true
     }
@@ -65,10 +72,16 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   }
   onMouseEnter (e: MouseEvent) {
     if (this.state.display === 'block') {return}
+    // 每次hover的时候都需要重新计算popper的位置
+    // display:none 的 元素offsetWith 都为0 所以要在初始化的时候保存popper宽高值
+    const position = calculatePosition(this.props.placement, this.$trigger, {
+      offsetWidth: this.popperWidth,
+      offsetHeight: this.popperHeight
+    })
     this.setState({
       display: 'block',
-      top: this.top,
-      left: this.left
+      top: position && position.top || this.top,
+      left: position && position.left ||  this.left
     })
   }
   onMouseLeave (e: MouseEvent) {
@@ -172,6 +185,9 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     const position = calculatePosition(this.props.placement, trigger, popover) || {top: 0, left: 0}
     this.top = position.top
     this.left = position.left
+    this.popperWidth = popover.offsetWidth
+    this.popperHeight = popover.offsetHeight
+
     this.setState({
       display: 'none'
     })
@@ -194,7 +210,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
         break
     }
   }
-  componentWillUnMount () {
+  componentWillUnmount () {
     switch (this.props.trigger) {
       case 'hover':
         this.$wrapper.removeEventListener('mouseenter', this.onMouseEnter)

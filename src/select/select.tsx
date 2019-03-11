@@ -25,10 +25,10 @@ class Select extends Nerv.Component<SelectProps, any> {
     constructor (props) {
       super(props)
       let optionChosen: any = []
-      if (props.optionChosen>=0 || (props.optionChosen || []).length>0) {
+      if (props.optionChosen >= 0 || (props.optionChosen || []).length > 0) {
         optionChosen = optionChosen.concat(props.optionChosen)
       }
-      
+
       let chosenSpan
       if (optionChosen.length > 0) {
         const chosenIndex = optionChosen[0]
@@ -76,29 +76,29 @@ class Select extends Nerv.Component<SelectProps, any> {
         style += ' at-select--show-clear'
       }
       style += this.state.isDropDown ? ' at-select--visible' : ''
-      style += ` at-select--single at-select--${this.props.size ||'normal'}`
+      style += ` at-select--single at-select--${this.props.size || 'normal'}`
       return style
     }
     renderSingleSelect () {
-      let propsChildren = this.getPropsSelectOption()
+      const propsChildren = this.getPropsSelectOption()
       let style = this.state.selected ? this.DISPLAY_BLOCK : this.DISPLAY_NONE
-      if(this.props.multiple || this.props.filterable) {style = this.DISPLAY_NONE}
-      let chosen = this.state.optionChosen[0]
-      let chosenChildren = propsChildren[chosen] || {props:{label:'',children:[]}}
-      let chosenSpan = chosenChildren.props.label || chosenChildren.props.children//没有label会选择标签结构本身
+      if (this.props.multiple || this.props.filterable) {style = this.DISPLAY_NONE}
+      const chosen = this.state.optionChosen[0]
+      const chosenChildren = propsChildren[chosen] || {props: {label: '', children: []}}
+      const chosenSpan = chosenChildren.props.label || chosenChildren.props.children// 没有label会选择标签结构本身
       return <span className='at-select__selected' style={style}>{chosenSpan}</span>
     }
     renderMultipleSelect () {
-      if(!this.props.multiple) {return}
-      let chosen = this.state.optionChosen
-      let result:any[] = []
-      chosen.forEach((item,index)=>{
-        let chosenChildren = (this.getPropsSelectOption() || [])[item]
-        let key = chosenChildren.props.key
-        let chosenSpan = chosenChildren.props.label || chosenChildren.props.children
-        let option = (<span className="at-tag">
-                        <span className="at-tag__text">{chosenSpan}</span> 
-                        <i className="icon icon-x at-tag__close" onClick={this.removeMultipleChoice.bind(this,key)}></i>
+      if (!this.props.multiple) {return}
+      const chosen = this.state.optionChosen
+      const result: any[] = []
+      chosen.forEach((item, index) => {
+        const chosenChildren = (this.getPropsSelectOption() || [])[item]
+        const key = chosenChildren.props.key
+        const chosenSpan = chosenChildren.props.label || chosenChildren.props.children
+        const option = (<span className='at-tag'>
+                        <span className='at-tag__text'>{chosenSpan}</span>
+                        <i className='icon icon-x at-tag__close' onClick={this.removeMultipleChoice.bind(this, key)}></i>
                       </span>)
         option.key = index
         result.push(option)
@@ -127,7 +127,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     render () {
       const dropDownStyle = this.prepareDropDownStyle()
       const {style} = this.props
-      
+
       let placeholderStyle = {}
       if (this.state.selected || this.props.filterable) {
         placeholderStyle = this.DISPLAY_NONE
@@ -142,9 +142,9 @@ class Select extends Nerv.Component<SelectProps, any> {
           listStyle = this.DISPLAY_NONE
       }
       let dropDownClass = 'at-select__dropdown at-select__dropdown--bottom'
-      if(this.state.isDropDown) {
+      if (this.state.isDropDown) {
         dropDownClass += ' slide-up-enter slide-up-enter-active'
-      } 
+      }
       // else {
       //   dropDownClass += ' slide-up-leave slide-up-leave-active'
       // }
@@ -152,7 +152,7 @@ class Select extends Nerv.Component<SelectProps, any> {
 
       return (
       <div className={this.renderToggleArrowClass()} data-v-a01f69b8='' style={style}>
-        <div className='at-select__selection' ref={(trigger)=>{this.$trigger = trigger}} onClick={this.handleClick}>
+        <div className='at-select__selection' ref={(trigger) => {this.$trigger = trigger}} onClick={this.handleClick}>
           {this.renderMultipleSelect()}
           <span className='at-select__placeholder' style={placeholderStyle}>{this.props.placeholder || '请选择'}</span>
           {this.renderSingleSelect()}
@@ -190,7 +190,7 @@ class Select extends Nerv.Component<SelectProps, any> {
       } else {
         this.searchOption.forEach((item, index) => {
           const arr = ((inputValue) || '').split(/\\/g)
-          
+
           let newInputValue = ''
           arr.forEach((item, index) => {
             if (index === arr.length - 1) {
@@ -271,20 +271,28 @@ class Select extends Nerv.Component<SelectProps, any> {
           }
           optionChosen.forEach((item) => {
             const child = this.propsSelectOption[item] || {}
-            const value = child.value
-            const label = child.label
-            returnValue = this.prepareReturnValue(returnValue, value, label)
+            const value = child.props.value
+            console.log(child, '123')
+            const label = child.props.label || ''
+            returnValue = this.prepareReturnValue(returnValue, value, label, child)
           })
       }
       this.props.onChange && this.props.onChange(returnValue)
       return returnValue
     }
-    prepareReturnValue (returnValue, value, label) {
-      if (this.props.valueWithLabel) {
+    prepareReturnValue (returnValue, value, label, child?) {
+      if (!this.props.valueWithLabel) {
         returnValue.push({
           value
         })
       } else {
+        if (!label) {
+          try {
+            label = child['component']['_parentComponent'].props.label || ''
+          } catch (err) { console.log('err', err)} finally {
+            label = ''
+          }
+        }
         returnValue.push({
           value,
           label
@@ -324,7 +332,7 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     preparePropsSelection (props) {
       let count = 0
-      //目前只会处理一次select选项处理。一旦SelectOption有变化,将得不到变化。
+      // 目前只会处理一次select选项处理。一旦SelectOption有变化,将得不到变化。
       Nerv.Children.forEach(props.children as any, (child, index) => {
         if (child.name != 'SelectOptionGroup') {
           child.props.onClick = this.handleChose
@@ -394,15 +402,15 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     componentDidMount () {
       this.calculatePopoverStyle()
-      let propsvalue = this.props.value
-      let optionChosen:any[]= []
+      const propsvalue = this.props.value
+      const optionChosen: any[] = []
       Nerv.Children.forEach(this.propsSelectOption as any, (child, index) => {
-        
-        if(child.props.value == propsvalue){
+
+        if (child.props.value == propsvalue) {
           optionChosen.push(index)
         }
       }, null)
-      if(optionChosen.length>0) {
+      if (optionChosen.length > 0) {
         this.setState({
           optionChosen,
           selected: true
