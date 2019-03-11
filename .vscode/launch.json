@@ -4,7 +4,13 @@
   // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "启动 Chrome 并打开 localhost",
+      "url": "http://localhost:8000/#/docs/table",
+      "webRoot": "${workspaceFolder}"
+  },
     {
       "type": "node",
       "request": "launch",
