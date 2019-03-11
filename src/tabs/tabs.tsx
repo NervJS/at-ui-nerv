@@ -41,7 +41,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     this.onTabRemove = this.onTabRemove.bind(this)
   }
   updateHandle () {
-    if(this.$navScroll) {
+    if (this.$navScroll) {
       const containerWidth = this.$navScroll.offsetWidth
       const navWidth = this.$nav.offsetWidth
       const currentOffset = this.state.navOffset
@@ -146,7 +146,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
         if (icon) {
           renderIcon = this.renderIconNav(icon)
         }
-        navArr.push(<div className={classname} ref={(activeTab)=>{
+        navArr.push(<div className={classname} ref={(activeTab) => {
           if (this.state.activeIndex === index) {
             this.$activeTab = activeTab
           }
@@ -160,19 +160,19 @@ class Tabs extends Nerv.Component<TabsProps, any> {
                 {extra}
               </div>
             </div>
-    this.tabLength = navArr.length        
+    this.tabLength = navArr.length
     return {
       navArr,
       extra
     }
   }
-  onTabRemove (index,event) {
-    if(index == this.state.activeIndex && this.state.activeIndex ==  this.tabLength-1) {
+  onTabRemove (index, event) {
+    if (index == this.state.activeIndex && this.state.activeIndex ==  this.tabLength - 1) {
       this.setState({
-        activeIndex: this.tabLength-2 < 0 ? 0 :this.tabLength-2
+        activeIndex: this.tabLength - 2 < 0 ? 0 : this.tabLength - 2
       })
     }
-    this.props.onTabRemove && this.props.onTabRemove(index,event)
+    this.props.onTabRemove && this.props.onTabRemove(index, event)
   }
   tabChangeHandler (index, disabledFlag, event) {
     if (disabledFlag) {return}
@@ -227,8 +227,8 @@ class Tabs extends Nerv.Component<TabsProps, any> {
             {prevBtn}
             {nextBtn}
             <div className='at-tabs__nav-wrap'>
-              <div className='at-tabs__nav-scroll' ref={(navScroll)=>{this.$navScroll = navScroll}}>
-                <div className='at-tabs-nav' ref={(nav)=>{this.$nav = nav}} style={offsetNavStyle}>
+              <div className='at-tabs__nav-scroll' ref={(navScroll) => {this.$navScroll = navScroll}}>
+                <div className='at-tabs-nav' ref={(nav) => {this.$nav = nav}} style={offsetNavStyle}>
                   {tabsNav.navArr}
                 </div>
               </div>

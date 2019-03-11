@@ -216,3 +216,143 @@ export function findComponentsDownward (context, componentName, components = [])
 
   return components
 }
+
+export function debounce (func, wait, immediate) {
+  let timeout
+  let args
+  let context
+  let timestamp
+  let result
+  const later = function later () {
+    const last = +new Date() - timestamp
+    if (last < wait && last >= 0) {
+      timeout = setTimeout(later, wait - last)
+    } else {
+      timeout = null
+      if (!immediate) {
+        result = func.apply(context, args)
+        if (!timeout) {
+          context = null
+          args = null
+        }
+      }
+    }
+  }
+  return function debounced () {
+    context = this
+    args = arguments
+    timestamp = +new Date()
+
+    const callNow = immediate && !timeout
+    if (!timeout) {
+      timeout = setTimeout(later, wait)
+    }
+
+    if (callNow) {
+      result = func.apply(context, args)
+      context = null
+      args = null
+    }
+
+    return result
+  }
+}
+
+export function throttle (fn, threshhold, scope) {
+  threshhold || (threshhold = 250)
+  let last = +new Date()
+  let deferTimer
+  return function () {
+    let context = scope || this
+    let now = +new Date()
+    let args = arguments
+    if (last && now < last + threshhold) {
+      clearTimeout(deferTimer)
+      deferTimer = setTimeout(() => {
+        last = now
+        fn.apply(context, args)
+      }, threshhold)
+    } else {
+      last = now
+      fn.apply(context, args)
+    }
+  }
+}
+
+export function styleStr2Obj (str) {
+  let obj = {}
+  if (typeof str === 'string') {
+    let arr = str.split(';')
+    arr.forEach((item) => {
+      if (item.length > 0) {
+        let arrTemp = item.split(':')
+        let key = arrTemp[0]
+        let value = arrTemp[1]
+        obj[key] = value
+      }
+    })
+  }
+  return obj
+}
+export function calculatePosition (placement, trigger, popover) {
+  let position = {
+    left: 0,
+    top: 0
+  }
+  switch (placement) {
+    case 'top' :
+      position.left = trigger.offsetLeft - (popover.offsetWidth / 2) + (trigger.offsetWidth / 2)
+      position.top = trigger.offsetTop - popover.offsetHeight
+      break
+    case 'top-left':
+      position.left = trigger.offsetLeft
+      position.top = trigger.offsetTop - popover.offsetHeight
+      break
+    case 'top-right':
+      position.left = trigger.offsetLeft + trigger.offsetWidth - popover.offsetWidth
+      position.top = trigger.offsetTop - popover.offsetHeight
+      break
+    case 'left':
+      position.left = trigger.offsetLeft - popover.offsetWidth
+      position.top = trigger.offsetTop + (trigger.offsetHeight / 2) - (popover.offsetHeight / 2)
+      break
+    case 'left-top':
+      position.left = trigger.offsetLeft - popover.offsetWidth
+      position.top = trigger.offsetTop
+      break
+    case 'left-bottom':
+      position.left = trigger.offsetLeft - popover.offsetWidth
+      position.top = trigger.offsetTop + trigger.offsetHeight - popover.offsetHeight
+      break
+    case 'right':
+      position.left = trigger.offsetLeft + trigger.offsetWidth
+      position.top = trigger.offsetTop + (trigger.offsetHeight / 2) - (popover.offsetHeight / 2)
+      break
+    case 'right-top':
+      position.left = trigger.offsetLeft + trigger.offsetWidth
+      position.top = trigger.offsetTop
+      break
+    case 'right-bottom':
+      position.left = trigger.offsetLeft + trigger.offsetWidth
+      position.top = trigger.offsetTop + trigger.offsetHeight - popover.offsetHeight
+      break
+    case 'bottom':
+      position.left = trigger.offsetLeft - (popover.offsetWidth / 2) + (trigger.offsetWidth / 2)
+      position.top = trigger.offsetTop + trigger.offsetHeight
+      break
+    case 'bottom-left':
+      position.left = trigger.offsetLeft
+      position.top = trigger.offsetTop + trigger.offsetHeight
+      break
+    case 'bottom-right':
+      position.left = trigger.offsetLeft + trigger.offsetWidth - popover.offsetWidth
+      position.top = trigger.offsetTop + trigger.offsetHeight
+      break
+    default:
+      // if user set wrong placement, then use default 'top'
+      position.left = trigger.offsetLeft - (popover.offsetWidth / 2) + (trigger.offsetWidth / 2)
+      position.top = trigger.offsetTop - popover.offsetHeight
+      break
+  }
+  return position
+}

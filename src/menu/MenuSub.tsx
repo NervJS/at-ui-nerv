@@ -3,7 +3,7 @@ import Component from '@lib/component'
 import { CSSTransition } from 'react-transition-group'
 import CollapseTransition from '../animations/collapse-transition'
 import { CSSProperties } from 'react'
-import { getStyle } from '../utils/util'
+import { getStyle, throttle, debounce } from '../utils/util'
 
 interface MenuSubProps {
   title?: any
@@ -24,10 +24,13 @@ class MenuSub extends Component<MenuSubProps, any> {
   parentName = null
   constructor (...args) {
     super(...args)
+    const { isOpen } = this.props
     this.state = {
       active: false,
-      isOpen: false
+      isOpen
     }
+
+    this.menuToggle = debounce(this.menuToggle.bind(this), 200)
   }
   handleClick = (evt: React.MouseEvent<HTMLDivElement>) => {
     evt.stopPropagation()
@@ -50,6 +53,13 @@ class MenuSub extends Component<MenuSubProps, any> {
     }
   }
   handleMouseEnter = (evt) => {
+    this.menuToggle('open')
+  }
+  handleMouseLeave = (evt) => {
+    this.menuToggle('close')
+  }
+
+  menuToggle = (status) => {
     const { disabled, mode } = this.props
     if (mode === 'inline' || mode === 'inlineCollapsed') {
       return
@@ -57,19 +67,11 @@ class MenuSub extends Component<MenuSubProps, any> {
     this.resetDropdownPosition()
     if (!disabled) {
       this.setState({
-        isOpen: true
+        isOpen: status === 'open' ? true : false
       })
     }
   }
-  handleMouseLeave = (evt) => {
-    const { mode } = this.props
-    if (mode === 'inline' || mode === 'inlineCollapsed') {
-      return
-    }
-    this.setState({
-      isOpen: false
-    })
-  }
+
   onSelect = (e) => {
     const { _onSelect, name } = this.props
     this.setState({
@@ -84,20 +86,21 @@ class MenuSub extends Component<MenuSubProps, any> {
     })
   }
   enhanceChildren = () => {
-    const { children = [], rootElem } = this.props
+    const { children = [], rootElem, mode: parentMode } = this.props
     const { currentOpenedChildName, currentActiveChildName } = this.state
     return Nerv.Children.map(
       children as never,
       (child, idx) => {
-        const { name } = child.props
+        const { name, mode } = child.props
         return Nerv.cloneElement(child, {
           ...child.props,
-          opened: name === currentOpenedChildName,
+          isOpen: name === currentOpenedChildName,
           active: name === currentActiveChildName,
           _onSelect: this.onSelect,
           _onOpened: this.onOpened,
           parentElem: this,
-          rootElem
+          rootElem,
+          mode: mode ? mode : parentMode
         })
       },
       this
@@ -155,8 +158,8 @@ class MenuSub extends Component<MenuSubProps, any> {
           'at-menu__submenu--opened': isOpen,
           'at-menu__submenu--disabled': disabled
         })}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
+        onMouseEnter={throttle(this.handleMouseEnter, 200)}
+        onMouseLeave={throttle(this.handleMouseLeave, 200)}
         ref={(node) => (this.$trigger = node)}
       >
         <div
