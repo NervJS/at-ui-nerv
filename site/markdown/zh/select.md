@@ -145,7 +145,7 @@ imports:
 
 :::demo
 ```jsx
-<Select   filterable size="large" style="width: 240px">
+<Select value='1'  filterable size="large" style="width: 240px">
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州</Select.Option>
   <Select.Option value="3">上海</Select.Option>

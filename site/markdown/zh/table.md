@@ -486,16 +486,19 @@ imports:
         title: '操作',
         width:'300',
         action: 'onClick',
-        component: <div>
-          <Button onClick={(index,event)=>{console.log('index1', index, event);alert(this.state.data[index].address)}}>查看地址</Button>
-          <Button onClick={(index,event)=>{console.log('index2', index, event);alert(this.state.data[index].name)}}>查看姓名</Button>
-        </div>
+        component: (item)=>{
+          return (<div>
+          <Button onClick={(event,index)=>{console.log('index1', index, event);alert(item.address)}}>查看地址</Button>
+          <Button onClick={(event, index)=>{console.log('index2', index, event);alert(item.name)}}>
+            {item.name}
+          </Button>
+        </div>)}
       },
       {
         title: '操作',
         width:'300',
         action: 'onClick',
-        component:<Button onClick={(index,event)=>{alert(this.state.data[index].name)}}>查看名字</Button>
+        component:(item)=>{return (<Button onClick={(index,event)=>{alert(item.name)}}>查看名字</Button>)}
       }
       ]}
       />

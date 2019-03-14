@@ -350,6 +350,7 @@ class Select extends Nerv.Component<SelectProps, any> {
           }, null)
         }
       }, null)
+
     }
     componentWillUpdate (nextProps, nextState) {
       if (nextProps.children != this.props.children) {

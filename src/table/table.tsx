@@ -142,14 +142,14 @@ class Table extends Nerv.Component<TableProps, any> {
 
     const dataElement: any[] = []
 
-    for(let i=0;i<data.length;i++) {
+    for (let i = 0; i < data.length; i++) {
       const tdElement: any[] = []
-      let dataTemp = data[i]
+      const dataTemp = data[i]
       // 处理多选框
       if (this.props.optional) {
         const pageSize = this.state.currPageSize
         const currPage = this.state.currPage
-        let indexTemp = (currPage - 1) * pageSize + i
+        const indexTemp = (currPage - 1) * pageSize + i
         tdElement.push(
           <th
             className='at-table__cell at-table__column-selection'
@@ -166,39 +166,36 @@ class Table extends Nerv.Component<TableProps, any> {
         tdElement.push(<td className='at-table__cell'>{dataTemp[key]}</td>)
       })
       for (let index = 0; index < this.renderArr.length; index++) {
-        const item = this.renderArr[index];
-        const {action,render} = item;
-        const {type, props, children: myChildren} = render;
-        let element = Nerv.cloneElement(Nerv.createElement(type, props, myChildren))
-        let childrenTemp = myChildren
-        if(myChildren) {
-          if(typeof myChildren === 'object' && !(myChildren instanceof Array) ) { childrenTemp = [myChildren] }
-          for(let j = 0;j<childrenTemp.length;j++) {
-            let itemInner = childrenTemp[j]
-            let childPropsAction = itemInner.props[action] || this.noop;
-            if(!(element['children'] instanceof Array)) {
-              element['children'].props[action] = childPropsAction.bind(element, i)
-            } else {
-              element['children'][j].props[action] = childPropsAction.bind(element, i)
+        const item = this.renderArr[index]
+        const {action, render} = item
+        const element = Nerv.cloneElement(render(dataTemp))
+        let childrenTemp = element.props.children
+        if (childrenTemp) {
+          if (typeof childrenTemp === 'object' && !(childrenTemp instanceof Array)) { childrenTemp = [childrenTemp] }
+          for (let j = 0; j < childrenTemp.length; j++) {
+            const itemInner = childrenTemp[j]
+            if (itemInner.props && itemInner.props[action]) {
+              const childAction = itemInner.props[action]
+              if (childAction) {
+                itemInner.props[action] = childAction.bind(element, i)
+              }
             }
-           
           }
         }
-
-        let propsAction = element.props[action] || this.noop
-        element.props[action] = propsAction.bind(element,i)
+        const propsAction = element.props[action] || this.noop
+        element.props[action] = propsAction.bind(element, i)
         tdElement.push(<td className='at-table__cell'>{element}</td>)
       }
-       
+
       // })
       dataElement.push(<tr>{tdElement}</tr>)
     }
-    return <tbody ref={(tablebody)=>{this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
+    return <tbody ref={(tablebody) => {this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
   }
-  coplyChildren(children) {
+  coplyChildren (children) {
     Nerv.cloneElement
   }
-  log(key){
+  log (key) {
 
   }
   noop () {
