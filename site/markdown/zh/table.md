@@ -478,24 +478,24 @@ imports:
         width:'300'
       },
       {
+        title: '操作一',
+        width:'300',
+        action: 'onClick',
+        component: (item)=>{
+          return (<div>
+          <span>
+            {item.name}
+          </span>
+           <Button onClick={(event,index)=>{console.log('index1', index, event);alert(item.address)}}>查看地址</Button>
+        </div>)}
+      },
+      {
         title: '地址',
         key: 'address',
         width:'300'
       },
       {
-        title: '操作',
-        width:'300',
-        action: 'onClick',
-        component: (item)=>{
-          return (<div>
-          <Button onClick={(event,index)=>{console.log('index1', index, event);alert(item.address)}}>查看地址</Button>
-          <Button onClick={(event, index)=>{console.log('index2', index, event);alert(item.name)}}>
-            {item.name}
-          </Button>
-        </div>)}
-      },
-      {
-        title: '操作',
+        title: '操作二',
         width:'300',
         action: 'onClick',
         component:(item)=>{return (<Button onClick={(index,event)=>{alert(item.name)}}>查看名字</Button>)}

@@ -79,7 +79,8 @@ class Table extends Nerv.Component<TableProps, any> {
       if (item.component) {
         this.renderArr.push({
           render: item.component,
-          action: item.action || ''
+          action: item.action || '',
+          index
         })
       }
     })
@@ -184,9 +185,9 @@ class Table extends Nerv.Component<TableProps, any> {
         }
         const propsAction = element.props[action] || this.noop
         element.props[action] = propsAction.bind(element, i)
-        tdElement.push(<td className='at-table__cell'>{element}</td>)
+        // tdElement.push()
+        tdElement.splice(item.index, 0, <td className='at-table__cell'>{element}</td>)
       }
-
       // })
       dataElement.push(<tr>{tdElement}</tr>)
     }
