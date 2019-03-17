@@ -402,14 +402,30 @@ class Select extends Nerv.Component<SelectProps, any> {
     }
     componentDidMount () {
       this.calculatePopoverStyle()
-      const propsvalue = this.props.value
+      const propsvalue: any = this.props.value
       const optionChosen: any[] = []
-      Nerv.Children.forEach(this.propsSelectOption as any, (child, index) => {
-
-        if (child.props.value == propsvalue) {
-          optionChosen.push(index)
-        }
-      }, null)
+      if (propsvalue) {
+        Nerv.Children.forEach(this.propsSelectOption as any, (child, index) => {
+          const childValue = child.props.value
+          if ((propsvalue as any) instanceof Array) {
+            if (!this.props.multiple) { console.warn('WARNING: you assign an array to the value of Select Component without using the `MULTIPLE` property ')}
+            propsvalue.forEach((item: string | number) => {
+              if (item == childValue) {
+                optionChosen.push(index)
+              }
+            })
+          } else {
+            if (childValue == propsvalue) {
+              optionChosen.push(index)
+              if (this.props.filterable) {
+                this.setState({
+                  inputValue: child.props.children
+                })
+              }
+            }
+          }
+        }, null)
+      }
       if (optionChosen.length > 0) {
         this.setState({
           optionChosen,

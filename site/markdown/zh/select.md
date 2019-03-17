@@ -70,7 +70,7 @@ imports:
 
 :::demo
  ```jsx
-<Select   clearable size="large" style="width: 100px">
+<Select value="2" clearable size="large" style="width: 100px">
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州</Select.Option>
   <Select.Option value="3">上海</Select.Option>
@@ -87,7 +87,7 @@ imports:
 
 :::demo
  ```html
-<Select valueWithLabel style="width: 100px" option='1' onChange={(value, event)=>{ console.log(value)}}>
+<Select valueWithLabel value="7" style="width: 100px" option='1' onChange={(value, event)=>{ console.log(value)}}>
   <Select.OptionGroup label="广东省">
     <Select.Option value="1">深圳</Select.Option>
     <Select.Option value="2">广州</Select.Option>
@@ -111,7 +111,7 @@ imports:
 
 :::demo
  ```jsx
-<Select   style="width: 140px">
+<Select  value="4" style="width: 140px">
   <Select.Option value="1" label="深圳"><span>深圳</span><span style="float: right;opacity: .6;font-size: 0.8em;">Shenzhen</span></Select.Option>
   <Select.Option value="2" label="广州"><span>广州</span><span style="float: right;opacity: .6;font-size: 0.8em;">Guangzhou</span></Select.Option>
   <Select.Option value="3" label="上海"><span>上海</span><span style="float: right;opacity: .6;font-size: 0.8em;">Shanghai</span></Select.Option>
@@ -128,7 +128,7 @@ imports:
 
 :::demo
  ```jsx
-<Select   multiple style="width: 240px">
+<Select  value={["1","2"]} multiple style="width: 240px">
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州</Select.Option>
   <Select.Option value="3">上海</Select.Option>
@@ -145,7 +145,7 @@ imports:
 
 :::demo
 ```jsx
-<Select value='1'  filterable size="large" style="width: 240px">
+<Select value='5'  filterable size="large" style="width: 240px">
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州</Select.Option>
   <Select.Option value="3">上海</Select.Option>
