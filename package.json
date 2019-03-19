@@ -1,8 +1,8 @@
 {
   "name": "@o2team/at-ui-nerv",
-  "version": "0.4.4",
+  "version": "0.4.6",
   "description": "AT-UI for Nerv",
-  "main": "dist/at.nerv.min.js",
+  "main": "dist/at.nerv.js",
   "scripts": {
     "precommit": "lint-staged",
     "commitmsg": "validate-commit-msg",
@@ -14,6 +14,7 @@
     "dev": "node ./build/site/dev.js",
     "dist": "npm run build:component&npm run build:site",
     "build:component": "node ./build/component/build.js",
+    "build:lan": "node ./build/component/build.js  lan",
     "build:site": "node ./build/site/build.js"
   },
   "lint-staged": {

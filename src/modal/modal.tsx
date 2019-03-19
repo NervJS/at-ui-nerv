@@ -195,9 +195,9 @@ class Modal extends Component<ModalProps, ModalState> {
     const isIconType = (() => {
       return ['success', 'error', 'warning', 'info'].indexOf(type as never) > -1
     })()
-    return (
-      Nerv.createPortal(
-        (
+    return Nerv.createPortal(
+      (
+        <div>
           <CSSTransition
             classNames={{
               enter: 'fade-enter',
@@ -212,7 +212,7 @@ class Modal extends Component<ModalProps, ModalState> {
             mountOnEnter
             unmountOnExit
           >
-            <div className={this.className('at-modal__container')} >
+            <div className={this.className('at-modal__container')}>
               <div className={'at-modal__mask'} onClick={this.close} />
               <div
                 className={this.classnames('at-modal__wrapper', {
@@ -232,7 +232,12 @@ class Modal extends Component<ModalProps, ModalState> {
                     </div>
                   ) : null}
                   {this.enhanceChildren()}
-                  <i className={this.classnames('icon at-modal__icon', iconClass)} />
+                  <i
+                    className={this.classnames(
+                      'icon at-modal__icon',
+                      iconClass
+                    )}
+                  />
                   {showClose ? (
                     <span
                       className='at-modal__close'
@@ -245,11 +250,10 @@ class Modal extends Component<ModalProps, ModalState> {
               </div>
             </div>
           </CSSTransition>
-        ) as any,
-        document.body
-      )
+        </div>
+      ) as any,
+      document.body
     )
-
   }
 }
 
