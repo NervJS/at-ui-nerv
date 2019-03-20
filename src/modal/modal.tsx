@@ -88,16 +88,7 @@ class Modal extends Component<ModalProps, ModalState> {
       })
     }
   }
-  shouldComponentUpdate (nextProps, nextState) {
-    const { visible } = this.state
-    if (nextState.visible !== visible) {
-      return true
-    }
-    if (nextProps.value === visible) {
-      return false
-    }
-    return true
-  }
+
   handleMaskClick = (evt) => {
     const { maskClosable } = this.props
     const target = evt.target
@@ -182,6 +173,7 @@ class Modal extends Component<ModalProps, ModalState> {
       this
     )
   }
+
   render () {
     const { modalClass, type, modalStyle, title, showClose, width } = this.props
     const { visible } = this.state
@@ -208,7 +200,7 @@ class Modal extends Component<ModalProps, ModalState> {
             in={visible}
             timeout={300}
             // onEntered={this.enter}
-            // onExit={this.afterclose}
+            // onExited={this.afterclose}
             mountOnEnter
             unmountOnExit
           >
