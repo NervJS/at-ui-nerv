@@ -167,7 +167,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     }
   }
   onTabRemove (index, event) {
-    if (index == this.state.activeIndex && this.state.activeIndex ==  this.tabLength - 1) {
+    if (index === this.state.activeIndex && this.state.activeIndex ===  this.tabLength - 1) {
       this.setState({
         activeIndex: this.tabLength - 2 < 0 ? 0 : this.tabLength - 2
       })
@@ -184,9 +184,9 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   }
   renderTransitionStyle () {
     // 这个是tabbody的动画移动
-    const animated = this.props.animated || true
+    const animated = this.props.animated
     let offset = - (this.state.activeIndex * 100)
-    if (!animated || animated === 'false') {
+    if (animated === false || animated === 'false') {
       offset = 0
     }
     return {transform: `translate3d(${offset}%, 0px, 0px)`}
@@ -250,7 +250,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
   renderBody () {
     const {children, animated= true} = this.props
     const childrenResult: any[] = []
-    if (!animated || animated === 'false') {
+    if (animated === false || animated === 'false') {
       Nerv.Children.forEach(children as any, (child, index) => {
         if (!(child.props.slot && child.props.slot === 'extra')) {
           child.props.animated = false
@@ -262,7 +262,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
       return childrenResult
     } else {
       Nerv.Children.forEach(children as any, (child, index) => {
-        if (!(child.props.slot && child.props.slot == 'extra')) {
+        if (!(child.props.slot && child.props.slot === 'extra')) {
           child.props.activeIndex = this.state.activeIndex
           child.props.index = index
           childrenResult.push(child)

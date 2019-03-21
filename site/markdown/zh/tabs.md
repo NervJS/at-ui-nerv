@@ -250,7 +250,7 @@ imports:
 }
 ```
 ```html
-<Tabs animation='false' activeIndex={this.state.activeIndex8} onChange={(index)=>{
+<Tabs animation={false} activeIndex={this.state.activeIndex8} onChange={(index)=>{
   this.setState({
     activeIndex8:index
   })
