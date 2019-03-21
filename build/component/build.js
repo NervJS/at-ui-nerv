@@ -9,6 +9,7 @@ spinner.start()
 
 baseWebpackConfig.entry = {}
 
+const status = process.argv[process.argv.length - 1]
 const buildsConfig = {
   dev: {
     filename: 'at.nerv.js',
@@ -22,6 +23,7 @@ const buildsConfig = {
     libraryTarget: 'umd',
     env: 'production'
   }
+
 }
 
 function getConfig (options) {
@@ -38,6 +40,7 @@ function getConfig (options) {
     externals: {
 
     },
+    devtool: status === 'lan' ? 'source-map' : false,
     plugins: [
       new webpack.LoaderOptionsPlugin({
         minimize: true,
@@ -56,7 +59,8 @@ function getConfig (options) {
       new webpack.optimize.UglifyJsPlugin({
         compress: {
           warnings: false
-        }
+        },
+        sourceMap: true
       })
     )
   }

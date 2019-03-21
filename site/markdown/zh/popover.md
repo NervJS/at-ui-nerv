@@ -69,8 +69,8 @@ imports:
   <template slot="content">
     <p>这是一段内容，确定删除吗？</p>
     <div style={{textAlign: "right",marginTop: '8px'}}>
-      <Button size="smaller" onClick="show = false">取消</Button>
-      <Button type="primary" size="smaller" onClick="show = false">确定</Button>
+      <Button size="smaller" onClick={()=>{console.log('cancel')}} >取消</Button>
+      <Button type="primary" size="smaller" >确定</Button>
     </div>
   </template>
 </Popover>
