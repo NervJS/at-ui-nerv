@@ -73,7 +73,7 @@ class Table extends Nerv.Component<TableProps, any> {
       if (item.sortType) {
         (this.sortType = item.sortType), (this.sortBy = item.key)
       }
-      if (item.key) {
+      if (item.key && !item.component) {
         this.keyArr.push(item.key)
       }
       if (item.component) {
@@ -163,6 +163,7 @@ class Table extends Nerv.Component<TableProps, any> {
           </th>
         )
       }
+      console.log('this.keyArr', this.keyArr)
       this.keyArr.forEach((key, index) => {
         tdElement.push(<td className='at-table__cell'>{dataTemp[key]}</td>)
       })

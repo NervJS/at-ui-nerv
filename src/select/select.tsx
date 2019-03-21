@@ -1,6 +1,7 @@
 import * as Nerv from 'nervjs'
 import SelectOption from './select-option'
 import SelectOptionGroup from './select-optiongroup'
+// import { VirtualChildren } from 'nerv-shared';
 export interface SelectProps {
     className?: string,
     icon?: string
@@ -12,7 +13,7 @@ export interface SelectProps {
     value?: string | number
 }
 
-class Select extends Nerv.Component<SelectProps, any> {
+class Select extends Nerv.Component<any, any> {
     static Option: typeof SelectOption
     static OptionGroup: typeof SelectOptionGroup
     private DISPLAY_BLOCK = { display: 'block'}
@@ -243,13 +244,13 @@ class Select extends Nerv.Component<SelectProps, any> {
             optionChosen: this.mulOptionChosen,
             selected : true
           })
-          this.mulOptionChosen.forEach((item) => {
-            const child = this.propsSelectOption[item] || {}
-            const value = child.props.value
-            const label = child.props.label
-            returnValue = this.prepareReturnValue(returnValue, value, label)
-          })
         }
+        this.mulOptionChosen.forEach((item) => {
+          const child = this.propsSelectOption[item] || {}
+          const value = child.props.value
+          const label = child.props.label
+          returnValue = this.prepareReturnValue(returnValue, value, label)
+        })
       } else {
           const optionChosen: any[] = []
           optionChosen.push(index)
@@ -274,6 +275,7 @@ class Select extends Nerv.Component<SelectProps, any> {
             const value = child.props.value
             const label = child.props.label || ''
             returnValue = this.prepareReturnValue(returnValue, value, label, child)
+            returnValue = returnValue[0].value
           })
       }
       this.props.onChange && this.props.onChange(returnValue)
@@ -400,9 +402,8 @@ class Select extends Nerv.Component<SelectProps, any> {
         }
       }
     }
-    componentDidMount () {
-      this.calculatePopoverStyle()
-      const propsvalue: any = this.props.value
+    addressDefaultValue (props) {
+      const propsvalue: any = props.value
       const optionChosen: any[] = []
       if (propsvalue) {
         Nerv.Children.forEach(this.propsSelectOption as any, (child, index) => {
@@ -412,6 +413,7 @@ class Select extends Nerv.Component<SelectProps, any> {
             propsvalue.forEach((item: string | number) => {
               if (item == childValue) {
                 optionChosen.push(index)
+                this.mulOptionChosen.push(index)
               }
             })
           } else {
@@ -432,6 +434,13 @@ class Select extends Nerv.Component<SelectProps, any> {
           selected: true
         })
       }
+    }
+    componentWillReceiveProps(nextProps) {
+      this.addressDefaultValue(nextProps)
+    }
+    componentDidMount () {
+      this.calculatePopoverStyle()
+      this.addressDefaultValue(this.props)
       window.addEventListener('click', this.windowClickHideAll)
     }
     componentWillUnmount () {

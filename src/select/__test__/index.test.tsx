@@ -4,7 +4,6 @@ import * as $ from 'webpack-zepto'
 import {VNode} from 'nerv-shared'
 import Select from '../index'
 import sinon from 'sinon'
-
 describe('select test', () => {
   let scratch
   beforeAll(() => {
@@ -17,18 +16,56 @@ describe('select test', () => {
     document.body.appendChild(scratch)
   })
 
-  afterEach(() => {
-    scratch.parentNode.removeChild(scratch)
-    scratch = null
-  })
+  // afterEach(() => {
+  //   scratch.parentNode.removeChild(scratch)
+  //   scratch = null
+  // })
 
   it('basic render', () => {
-    const select = <Select>
+    class Test extends Nerv.Component<any, any> {
+      constructor(props) {
+        super(props)
+        this.state = {
+          list: [
+            {
+              id: '1', 
+              name: '广州'
+            }, 
+            {
+              id: '2',
+              name: '深圳'
+            }
+          ]
+        }
+      }
+      render() {
+        let select = this.renderSelectItem()
+        return  <Select value='2'>
                       {}
-                      <Select.Option>{}'深圳'</Select.Option>
-                      <Select.Option>{}'广州'</Select.Option>
+                      {select}
                   </Select>
-    const component = Nerv.render(select as VNode, scratch)
+      }
+      renderSelectItem() {
+        return this.state.list.map(item=>(
+              <Select.Option value={item.id}>{}{item.name}</Select.Option>
+          ))
+      }
+      componentDidMount() {
+        this.setState({
+          list: [
+            {
+              id: '1', 
+              name: '广州'
+            }, 
+            {
+              id: '2',
+              name: '深圳'
+            }
+          ]
+        });
+      }
+    }
+    const component = Nerv.render(<Test /> as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))
     expect(dom.find('.at-select__option').length).toBe(2)
   })

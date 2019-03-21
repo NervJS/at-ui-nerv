@@ -20,9 +20,9 @@ imports:
   <Select.Option value="5">成都</Select.Option>
 </Select>
 
-<Select value="1" style="width:100px">
-  <Select.Option value="1">深圳</Select.Option>
-  <Select.Option value="2">广州</Select.Option>
+<Select value="1" style="width:100px" onChange={(value, event)=>{ console.log(value)}}>
+  <Select.Option value="shenzhen">深圳</Select.Option>
+  <Select.Option value="guangzhou">广州</Select.Option>
 </Select>
 
 <Select disabled style="width:100px">
@@ -128,7 +128,7 @@ imports:
 
 :::demo
  ```jsx
-<Select  value={["1","2"]} multiple style="width: 240px">
+<Select  value={["1","2"]} multiple style="width: 240px" onChange={(value, event)=>{ console.log(value)}}>
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州</Select.Option>
   <Select.Option value="3">上海</Select.Option>
