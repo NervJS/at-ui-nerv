@@ -1,6 +1,6 @@
 {
   "name": "@o2team/at-ui-nerv",
-  "version": "0.4.16",
+  "version": "0.4.17",
   "description": "AT-UI for Nerv",
   "main": "dist/at.nerv.js",
   "scripts": {
