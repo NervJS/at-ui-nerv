@@ -275,7 +275,7 @@ class Select extends Nerv.Component<any, any> {
             const value = child.props.value
             const label = child.props.label || ''
             returnValue = this.prepareReturnValue(returnValue, value, label, child)
-            returnValue = returnValue[0].value
+            returnValue = returnValue[0]
           })
       }
       this.props.onChange && this.props.onChange(returnValue)
@@ -283,9 +283,7 @@ class Select extends Nerv.Component<any, any> {
     }
     prepareReturnValue (returnValue, value, label, child?) {
       if (!this.props.valueWithLabel) {
-        returnValue.push({
-          value
-        })
+        returnValue.push(value)
       } else {
         if (!label) {
           try {
