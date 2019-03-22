@@ -163,7 +163,6 @@ class Table extends Nerv.Component<TableProps, any> {
           </th>
         )
       }
-      console.log('this.keyArr', this.keyArr)
       this.keyArr.forEach((key, index) => {
         tdElement.push(<td className='at-table__cell'>{dataTemp[key]}</td>)
       })
