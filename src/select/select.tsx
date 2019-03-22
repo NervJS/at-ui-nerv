@@ -313,7 +313,8 @@ class Select extends Nerv.Component<any, any> {
         })
         optionChosen.splice(indexInArr, 1)
         // this.mulOptionChosen.splice(indexInArr,1)
-        const selected = optionChosen.length <= 0 ? false : true
+        this.mulOptionChosen = optionChosen
+        const selected = optionChosen.length > 0
         this.setState({
             optionChosen,
             selected
@@ -328,12 +329,9 @@ class Select extends Nerv.Component<any, any> {
         this.props.onChange && this.props.onChange(returnValue)
       }
     }
-    componentWillMount () {
-      this.preparePropsSelection(this.props)
-    }
+
     preparePropsSelection (props) {
       let count = 0
-      // 目前只会处理一次select选项处理。一旦SelectOption有变化,将得不到变化。
       Nerv.Children.forEach(props.children as any, (child, index) => {
         if (child.name != 'SelectOptionGroup') {
           child.props.onClick = this.handleChose
@@ -354,25 +352,7 @@ class Select extends Nerv.Component<any, any> {
       }, null)
 
     }
-    componentWillUpdate (nextProps, nextState) {
-      if (nextProps.children != this.props.children) {
-        this.propsSelectOption = []
-        this.searchOption = []
-        this.preparePropsSelection(nextProps)
-      }
-      Nerv.Children.forEach(this.props.children as any, (child, index) => {
-        if (child.name !== 'SelectOptionGroup') {
-          // 单选选择，通知每个选项，是否要变黑加粗
-          child.props.chosenIndex = nextState.optionChosen
-        } else  {
-          Nerv.Children.forEach(child.props.children as any, (child) => {
-            // 单选选择，通知每个选项，是否要变黑加粗
-            child.props.chosenIndex = nextState.optionChosen
-          }, null)
-        }
-      }, null)
-      this.addressDefaultValue(nextProps)
-    }
+
     handleClick (event) {
       if (this.props.disabled) { return }
       // event.stopPropagation()
@@ -402,6 +382,57 @@ class Select extends Nerv.Component<any, any> {
           })
         }
       }
+    }
+    componentWillUpdate (nextProps, nextState) {
+      const optionChosen = nextState.optionChosen
+      this.preparePropsSelection(nextProps)
+      Nerv.Children.forEach(this.props.children as any, (child, index) => {
+        if (child.name !== 'SelectOptionGroup') {
+          // 单选选择，通知每个选项，是否要变黑加粗
+          child.props.chosenIndex = optionChosen
+        } else  {
+          Nerv.Children.forEach(child.props.children as any, (child) => {
+            // 单选选择，通知每个选项，是否要变黑加粗
+            child.props.chosenIndex = optionChosen
+
+          }, null)
+        }
+      }, null)
+    }
+    componentWillMount () {
+      this.preparePropsSelection(this.props)
+      const optionChosen = this.addressDefaultValue(this.props)
+      Nerv.Children.forEach(this.props.children as any, (child, index) => {
+        if (child.name !== 'SelectOptionGroup') {
+          // 单选选择，通知每个选项，是否要变黑加粗
+          child.props.chosenIndex = optionChosen
+        } else  {
+          Nerv.Children.forEach(child.props.children as any, (child) => {
+            // 单选选择，通知每个选项，是否要变黑加粗
+            child.props.chosenIndex = optionChosen
+
+          }, null)
+        }
+      }, null)
+    }
+    componentWillReceiveProps (nextProps, nextState) {
+      if (nextProps.children != this.props.children) {
+        this.propsSelectOption = []
+        this.searchOption = []
+        this.preparePropsSelection(nextProps)
+      }
+      const optionChosen = this.addressDefaultValue(nextProps)
+      Nerv.Children.forEach(nextProps.children as any, (child, index) => {
+        if (child.name !== 'SelectOptionGroup') {
+          // 单选选择，通知每个选项，是否要变黑加粗
+          child.props.chosenIndex = optionChosen
+        } else  {
+          Nerv.Children.forEach(child.props.children as any, (child) => {
+            // 单选选择，通知每个选项，是否要变黑加粗
+            child.props.chosenIndex = optionChosen
+          }, null)
+        }
+      }, null)
     }
     addressDefaultValue (props) {
       const propsvalue: any = props.value
@@ -435,12 +466,11 @@ class Select extends Nerv.Component<any, any> {
           selected: true
         })
       }
-    }
-    componentWillReceiveProps (nextProps) {
+      return optionChosen
     }
     componentDidMount () {
       this.calculatePopoverStyle()
-      this.addressDefaultValue(this.props)
+
       window.addEventListener('click', this.windowClickHideAll)
     }
     componentWillUnmount () {
