@@ -371,6 +371,7 @@ class Select extends Nerv.Component<any, any> {
           }, null)
         }
       }, null)
+      this.addressDefaultValue(nextProps)
     }
     handleClick (event) {
       if (this.props.disabled) { return }
@@ -435,8 +436,7 @@ class Select extends Nerv.Component<any, any> {
         })
       }
     }
-    componentWillReceiveProps(nextProps) {
-      this.addressDefaultValue(nextProps)
+    componentWillReceiveProps (nextProps) {
     }
     componentDidMount () {
       this.calculatePopoverStyle()
