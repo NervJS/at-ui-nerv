@@ -36,38 +36,41 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     this.enter = false
   }
   renderPopoverClassNames (props: PopoverProps) {
-    return classnames('at-popover', [
-    ]
-    , props.className)
+    return classnames('at-popover', [], props.className)
   }
   clickHandler (e: MouseEvent) {
     // e.stopPropagation()
     if (this.enter) {
-
       this.setState({
         display: 'none'
       })
       this.enter = false
     } else {
-
-      this.setState({
-        display: 'block'
-
-      }, () => {
-        const trigger = this.$trigger
-        const popover = this.$popper
-        const position = calculatePosition(this.props.placement, trigger, popover) || {top: 0, left: 0}
-        this.top = position.top
-        this.left = position.left
-        this.setState({
-          top: this.top,
-          left: this.left
-        })
-      })
+      this.setState(
+        {
+          display: 'block'
+        },
+        () => {
+          const trigger = this.$trigger
+          const popover = this.$popper
+          const position = calculatePosition(
+            this.props.placement,
+            trigger,
+            popover
+          ) || { top: 0, left: 0 }
+          this.top = position.top
+          this.left = position.left
+          this.setState({
+            top: this.top,
+            left: this.left
+          })
+        }
+      )
       this.enter = true
     }
   }
   clickCancelHandler (e: MouseEvent) {
+
     if (this.enter) {
       this.setState({
         display: 'none'
@@ -76,16 +79,22 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     }
   }
   onMouseEnter (e: MouseEvent) {
-    if (this.state.display === 'block') {return}
+    if (this.state.display === 'block') {
+      return
+    }
 
-    this.setState({
-      display: 'block'
-
-    }, () => {
-
+    this.setState(
+      {
+        display: 'block'
+      },
+      () => {
         const trigger = this.$trigger
         const popover = this.$popper
-        const position = calculatePosition(this.props.placement, trigger, popover) || {top: 0, left: 0}
+        const position = calculatePosition(
+          this.props.placement,
+          trigger,
+          popover
+        ) || { top: 0, left: 0 }
         this.top = position.top
         this.left = position.left
         this.setState({
@@ -104,7 +113,11 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   onWindowResize () {
     const trigger = this.$trigger
     const popover = this.$popper
-    const position = calculatePosition(this.props.placement, trigger, popover) || {top: 0, left: 0}
+    const position = calculatePosition(
+      this.props.placement,
+      trigger,
+      popover
+    ) || { top: 0, left: 0 }
     this.top = position.top
     this.left = position.left
     this.setState({
@@ -163,7 +176,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
             content = Nerv.cloneElement(child.children)
           }
           if (child.props.slot === 'title') {
-            title =  Nerv.cloneElement(child.children)
+            title = Nerv.cloneElement(child.children)
           }
         }
       },
@@ -190,11 +203,30 @@ class Popover extends Nerv.Component<PopoverProps, any> {
       )
     }
     return (
-      <div className={this.renderPopoverClassNames(this.props)} ref={(wrapper) => {this.$wrapper = wrapper}} style={style} {...needProps}>
-        <span className='at-popover__trigger' style={props.style} ref={(trigger) => {this.$trigger = trigger}}>
+      <div
+        className={this.renderPopoverClassNames(this.props)}
+        ref={(wrapper) => {
+          this.$wrapper = wrapper
+        }}
+        style={style}
+        {...needProps}
+      >
+        <span
+          className='at-popover__trigger'
+          style={props.style}
+          ref={(trigger) => {
+            this.$trigger = trigger
+          }}
+        >
           {props.children}
         </span>
-        <div className={classname} style={tipstyle} ref={(popper) => {this.$popper = popper}}>
+        <div
+          className={classname}
+          style={tipstyle}
+          ref={(popper) => {
+            this.$popper = popper
+          }}
+        >
           <div className='at-popover__arrow' />
           {title}
           {content}
@@ -205,8 +237,11 @@ class Popover extends Nerv.Component<PopoverProps, any> {
   componentDidMount () {
     const trigger = this.$trigger
     const popover = this.$popper
-    // console.log('trigger', trigger, popover)
-    const position = calculatePosition(this.props.placement, trigger, popover) || {top: 0, left: 0}
+    const position = calculatePosition(
+      this.props.placement,
+      trigger,
+      popover
+    ) || { top: 0, left: 0 }
     this.top = position.top
     this.left = position.left
     this.setState({
@@ -218,7 +253,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
         this.$wrapper.addEventListener('mouseleave', this.onMouseLeave)
         break
       case 'click':
-        window.addEventListener('click', this.clickCancelHandler)
+        // window.addEventListener('click', this.clickCancelHandler)
         this.$wrapper.addEventListener('click', this.clickHandler)
         break
       case 'focus':
@@ -227,11 +262,11 @@ class Popover extends Nerv.Component<PopoverProps, any> {
         break
       default:
         this.$wrapper.addEventListener('click', this.clickHandler)
-        window.addEventListener('click', this.clickCancelHandler)
+        // window.addEventListener('click', this.clickCancelHandler)
         break
     }
 
-      // 增加resize监听
+    // 增加resize监听
     window.addEventListener('resize', this.onWindowResize)
   }
   componentWillUnMount () {
@@ -253,7 +288,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
         window.removeEventListener('click', this.clickCancelHandler)
         break
     }
-  // 增加resize监听
+    // 增加resize监听
     window.removeEventListener('resize', this.onWindowResize)
   }
 }
