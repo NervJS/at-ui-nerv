@@ -44,6 +44,9 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
       onMouseEnter,
       onMouseOut,
       onMouseLeave,
+      onKeyDown,
+      onKeyUp,
+      onKeyPress,
       onClick,
       children
     } = props
@@ -56,6 +59,9 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
       onMouseOut,
       onMouseEnter,
       onMouseLeave,
+      onKeyDown,
+      onKeyUp,
+      onKeyPress,
       onClick
     }
     const classNames = this.renderTextareaClassNames(props)
@@ -66,10 +72,15 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
     let styleComputed: any = {}
     if (typeof style === 'string' || style instanceof String) {
       styleComputed = Object.assign(styleStr2Obj(style), {
-        height: this.state.height
+        height: this.state.height,
+        resize: props.resize || 'vertical'
       })
     } else {
-      styleComputed = { ...style, height: this.state.height }
+      styleComputed = {
+         ...style,
+         height: this.state.height,
+         resize: props.resize || 'vertical'
+      }
     }
     let minRows = props.minRows
     if (props.autosize) {
@@ -82,13 +93,13 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
     return (
       <div className={classNames}>
         <textarea
+
           ref={(textarea) => {this.$textarea = textarea}}
           value={this.state.value}
           placeholder={placeholder}
           autoFocus={autofocus}
           name={props.name}
           disabled={disabled}
-          // resize={props.resize || 'vertical'}
           onInput={this.inputHandler}
           rows={minRows}
           style={styleComputed}
@@ -100,8 +111,9 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
   }
   inputHandler (e: any) {
     const propsHandler = this.props.onInput
+    if (propsHandler && typeof propsHandler !== 'function') { console.warn('WARNING: onInput Handler should be a function') }
     if (propsHandler) {
-      propsHandler.onInput(e)
+      propsHandler(e)
     }
     this.resizeTextarea()
     this.setState({
