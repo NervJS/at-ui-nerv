@@ -24,7 +24,7 @@ imports:
 
 :::demo
 ```jsx
-<Textarea   placeholder="这里是输入框..." disabled></Textarea>
+<Textarea placeholder="这里是输入框..." disabled></Textarea>
 ```
 :::
 
