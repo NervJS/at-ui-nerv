@@ -28,10 +28,7 @@ imports:
 ```jsx
 <Button onClick={()=>{
   Message.info(
-    {
-      message: 'isInfo',
-      duration: 3000
-    }
+    'isInfo'
   )
 }}>Info</Button>
 <Button onClick={()=>{
