@@ -21,7 +21,7 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
     this.inputHandler = this.inputHandler.bind(this)
     this.state = {
       height: '',
-      value: ''
+      value: props.value || ''
     }
   }
   renderTextareaClassNames (props: TextareaProps) {
@@ -108,6 +108,13 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
         />
       </div>
     )
+  }
+  componentWillReceiveProps (nextProps, nextState) {
+    if (nextProps.value !== this.props.value) {
+      this.setState({
+        value: nextProps.value
+      })
+    }
   }
   inputHandler (e: any) {
     const propsHandler = this.props.onInput

@@ -14,7 +14,7 @@ imports:
 
 :::demo
 ```jsx
-<Textarea onInput={(e)=>{console.log(e.target.value)}}  resize="none" placeholder="这里是输入框..."></Textarea>
+<Textarea onInput={(e)=>{console.log(e.target.value)}}  value="默认内容" resize="none" placeholder="这里是输入框..."></Textarea>
 ```
 :::
 
