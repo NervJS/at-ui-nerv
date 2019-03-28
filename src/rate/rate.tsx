@@ -44,6 +44,13 @@ class Rate extends Component<RateProps, RateState> {
       isHalf: this.props.allowHalf as boolean
     }
   }
+  componentWillReceiveProps (nextProps) {
+    const { value, count } = nextProps
+
+    this.setState({
+      currentValue: Math.min(value, count)
+    })
+  }
   leaveRateHandle = () => {
     const { disabled, allowHalf } = this.props
     const { currentValue } = this.state
@@ -68,22 +75,35 @@ class Rate extends Component<RateProps, RateState> {
     })
   }
   clacClass (index: number) {
-    const { isHalf, hoverIndex, currentValue } = this.state
+    const { lastHoverIndex, currentValue } = this.state
+    const { allowHalf } = this.props
     const STAR_ON_CLASS_NAME = 'at-rate__item--on'
     const STAR_OFF_CLASS_NAME = 'at-rate__item--off'
     const STAR_HALF_CLASS_NAME = 'at-rate__item--half'
-    const isHoverStar = hoverIndex !== -1
-    const currentIndex = isHoverStar ? hoverIndex : currentValue
-    const lastItemIndex = Math.ceil(currentIndex)
-    return {
-      [STAR_ON_CLASS_NAME]: isHalf ? index < lastItemIndex : index <= lastItemIndex,
-      [STAR_HALF_CLASS_NAME]: index === lastItemIndex && isHalf,
-      [STAR_OFF_CLASS_NAME]: index > lastItemIndex
+    const isHoverStar = lastHoverIndex !== -1
+    const currentIndex = isHoverStar ? lastHoverIndex : currentValue
+    const lastItemIndex = Math.floor(currentIndex)
+    const nextItemIndex = Math.ceil(currentIndex)
+
+    if (allowHalf) {
+      return {
+        [STAR_ON_CLASS_NAME]: index <= Math.min(nextItemIndex, lastItemIndex),
+        [STAR_HALF_CLASS_NAME]:
+          index === Math.max(nextItemIndex, lastItemIndex) &&
+          nextItemIndex !== lastItemIndex,
+        [STAR_OFF_CLASS_NAME]: index > Math.max(nextItemIndex, lastItemIndex)
+      }
+    } else {
+      return {
+        [STAR_ON_CLASS_NAME]: index <= currentIndex,
+        [STAR_HALF_CLASS_NAME]: false,
+        [STAR_OFF_CLASS_NAME]: index > currentIndex
+      }
     }
   }
   moveStarHandle = (index: number, evt) => {
     const { disabled, allowHalf, onHoverChange } = this.props
-    const {isHalf, lastHoverIndex} = this.state
+    const { isHalf, lastHoverIndex } = this.state
     if (disabled) {
       return
     }
@@ -118,23 +138,22 @@ class Rate extends Component<RateProps, RateState> {
     }
     const currentValue = isHalf ? index - 0.5 : index
     if (allowClear && oldVal === currentValue) {
-
-        this.setState(
-          {
-            currentValue: 0,
-            hoverIndex: -1
-          },
-          () => {
-            if (onChange) {
-              onChange(0)
-            }
-          }
-        )
-
-    } else {
       this.setState(
         {
-          currentValue
+          currentValue: 0,
+          hoverIndex: -1
+        },
+        () => {
+          if (onChange) {
+            onChange(0)
+          }
+        }
+      )
+    } else {
+      const {count} = this.props
+      this.setState(
+        {
+          currentValue: Math.min(currentValue, count as number)
         },
         () => {
           if (onChange) {
@@ -143,7 +162,6 @@ class Rate extends Component<RateProps, RateState> {
         }
       )
     }
-
   }
 
   render () {
@@ -159,7 +177,10 @@ class Rate extends Component<RateProps, RateState> {
               onMouseMove={this.moveStarHandle.bind(this, i)}
               onClick={this.confirmValue.bind(this, i)}
             >
-              <span className={this.classnames('icon at-rate__left', icon)} data-type='half' />
+              <span
+                className={this.classnames('icon at-rate__left', icon)}
+                data-type='half'
+              />
             </i>
           </li>
         ) as never)
@@ -177,9 +198,13 @@ class Rate extends Component<RateProps, RateState> {
         >
           {buildItem(count as number)}
         </ul>
-        { showText ?
-          <div className='at-rate__text'>{Nerv.Children.count(children as never) ? children : currentValue}</div>
-          : '' }
+        {showText ? (
+          <div className='at-rate__text'>
+            {Nerv.Children.count(children as never) ? children : currentValue}
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     )
   }
