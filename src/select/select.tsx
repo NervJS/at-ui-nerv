@@ -442,8 +442,10 @@ class Select extends Nerv.Component<any, any> {
             if (!this.props.multiple) { console.warn('WARNING: you assign an array to the value of Select Component without using the `MULTIPLE` property ')}
             propsvalue.forEach((item: string | number) => {
               if (item == childValue) {
-                optionChosen.push(index)
-                this.mulOptionChosen.push(index)
+                if (optionChosen.indexOf(index) === -1 && this.mulOptionChosen.indexOf(index) === -1) {
+                  optionChosen.push(index)
+                  this.mulOptionChosen.push(index)
+                }
               }
             })
           } else {

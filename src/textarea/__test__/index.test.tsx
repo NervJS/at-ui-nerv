@@ -41,7 +41,7 @@ describe('textarea test', () => {
   })
   it('onInput should work', (done) => {
     const onInput = sinon.spy()
-    const textareaJSX = <Textarea onInput={{ onInput }} disabled />
+    const textareaJSX = <Textarea onInput={onInput} disabled />
     const component = Nerv.render(textareaJSX as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))
     dom.find('textarea').trigger('input')

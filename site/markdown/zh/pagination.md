@@ -13,7 +13,7 @@ imports:
 
 :::demo
 ```html
-<Pagination total="60" />
+<Pagination total="60" current="2" />
 ```
 :::
 

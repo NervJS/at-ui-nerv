@@ -111,9 +111,10 @@ class Textarea extends Nerv.Component<TextareaProps, any> {
   }
   inputHandler (e: any) {
     const propsHandler = this.props.onInput
-    if (propsHandler && typeof propsHandler !== 'function') { console.warn('WARNING: onInput Handler should be a function') }
-    if (propsHandler) {
+    if (propsHandler && typeof propsHandler === 'function') {
       propsHandler(e)
+    } else {
+      console.warn('WARNING: onInput Handler should be a function')
     }
     this.resizeTextarea()
     this.setState({
