@@ -12,7 +12,7 @@ imports:
 
 :::demo
 ```jsx
-<Select style="width:100px" onChange={(value, event)=>{ console.log(value)}}>
+<Select className ="testClass" style="width:100px" onChange={(value, event)=>{ console.log(value)}}>
   <Select.Option value="1">深圳</Select.Option>
   <Select.Option value="2">广州广州广州广州广州广州广州广州广州广州</Select.Option>
   <Select.Option value="3">上海</Select.Option>

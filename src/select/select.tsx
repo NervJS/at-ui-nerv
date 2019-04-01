@@ -2,6 +2,7 @@ import * as Nerv from 'nervjs'
 import SelectOption from './select-option'
 import SelectOptionGroup from './select-optiongroup'
 // import { VirtualChildren } from 'nerv-shared';
+import classnames from 'classnames'
 export interface SelectProps {
     className?: string,
     icon?: string
@@ -69,16 +70,13 @@ class Select extends Nerv.Component<any, any> {
       }
     }
     renderToggleArrowClass () {
-      let style = 'at-select '
-      if (this.props.disabled) {
-        style += ' at-select--disabled'
-      }
-      if (this.props.clearable && this.state.selected) {
-        style += ' at-select--show-clear'
-      }
-      style += this.state.isDropDown ? ' at-select--visible' : ''
-      style += ` at-select--single at-select--${this.props.size || 'normal'}`
-      return style
+      const {className, disabled, clearable, size} = this.props
+      return classnames('at-select', [
+        disabled ? 'at-select--disabled' : '',
+        clearable && this.state.selected ? 'at-select--show-clear' : '',
+        this.state.isDropDown ? 'at-select--visible' : '',
+        ` at-select--single at-select--${size || 'normal'}`
+      ], className)
     }
     renderSingleSelect () {
       const propsChildren = this.getPropsSelectOption()
@@ -152,7 +150,7 @@ class Select extends Nerv.Component<any, any> {
       // dropDownClass += ' slide-up-leave slide-up-leave-active'
 
       return (
-      <div className={this.renderToggleArrowClass()} data-v-a01f69b8='' style={style}>
+      <div className={this.renderToggleArrowClass()} style={style}>
         <div className='at-select__selection' ref={(trigger) => {this.$trigger = trigger}} onClick={this.handleClick}>
           {this.renderMultipleSelect()}
           <span className='at-select__placeholder' style={placeholderStyle}>{this.props.placeholder || '请选择'}</span>
