@@ -486,7 +486,7 @@ imports:
           <span>
             {item.name}
           </span>
-           <Button onClick={(event,index)=>{console.log('index1', index, event);alert(item.address)}}>查看地址</Button>
+           <Button onClick={(index, event)=>{console.log('item1', index, event, item);alert(item.address)}}>查看地址</Button>
         </div>)}
       },
       {
@@ -498,7 +498,7 @@ imports:
         title: '操作二',
         width:'300',
         action: 'onClick',
-        component:(item)=>{return (<Button onClick={(index,event)=>{alert(item.name)}}>查看名字</Button>)}
+        component:(item)=>{return (<Button onClick={()=>{alert(item.name)}}>查看名字</Button>)}
       }
       ]}
       />
