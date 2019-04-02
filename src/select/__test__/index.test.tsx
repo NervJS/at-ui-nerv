@@ -79,9 +79,10 @@ describe('select test', () => {
         })
       }
     }
-    const component = Nerv.render(<Test /> as VNode, scratch)
-    const dom = $(Nerv.findDOMNode(component))
+    // const component = Nerv.render(<Test /> as VNode, scratch)
+    // const dom = $(Nerv.findDOMNode(component))
     // expect(dom.find('.at-select__option').length).toBe(2)
+    Nerv.render(<Test /> as VNode, scratch)
   })
 
   it('test class', () => {
