@@ -84,8 +84,18 @@ class Select extends Nerv.Component<any, any> {
       if (this.props.multiple || this.props.filterable) {style = this.DISPLAY_NONE}
       const chosen = this.state.optionChosen[0]
       const chosenChildren = propsChildren[chosen] || {props: {label: '', children: []}}
-      const chosenSpan = chosenChildren.props.label || chosenChildren.props.children// 没有label会选择标签结构本身
+      const chosenSpan = this.cloneSelectOption(chosenChildren)
       return <span className='at-select__selected' style={style}>{chosenSpan}</span>
+    }
+    cloneSelectOption (chosenChildren) {
+      let chosenSpan
+      const label = chosenChildren.props.label
+      if (label) {
+        chosenSpan = label
+      } else {
+        chosenSpan =  Nerv.cloneElement(chosenChildren.props.children)
+      }
+      return chosenSpan
     }
     renderMultipleSelect () {
       if (!this.props.multiple) {return}
@@ -94,7 +104,7 @@ class Select extends Nerv.Component<any, any> {
       chosen.forEach((item, index) => {
         const chosenChildren = (this.getPropsSelectOption() || [])[item]
         const key = chosenChildren.props.key
-        const chosenSpan = chosenChildren.props.label || chosenChildren.props.children
+        const chosenSpan = this.cloneSelectOption(chosenChildren)
         const option = (<span className='at-tag'>
                         <span className='at-tag__text'>{chosenSpan}</span>
                         <i className='icon icon-x at-tag__close' onClick={this.removeMultipleChoice.bind(this, key)}></i>
@@ -328,6 +338,8 @@ class Select extends Nerv.Component<any, any> {
 
     preparePropsSelection (props) {
       let count = 0
+      this.propsSelectOption = []
+      this.searchOption = []
       Nerv.Children.forEach(props.children as any, (child, index) => {
         if (child.name != 'SelectOptionGroup') {
           child.props.onClick = this.handleChose
@@ -346,7 +358,6 @@ class Select extends Nerv.Component<any, any> {
           }, null)
         }
       }, null)
-
     }
 
     handleClick (event) {
@@ -413,8 +424,6 @@ class Select extends Nerv.Component<any, any> {
     }
     componentWillReceiveProps (nextProps, nextState) {
       if (nextProps.children != this.props.children) {
-        this.propsSelectOption = []
-        this.searchOption = []
         this.preparePropsSelection(nextProps)
       }
       const optionChosen = this.addressDefaultValue(nextProps)
