@@ -86,7 +86,7 @@ State > {
     this.setState({focus: false})
   }
   render () {
-    const {children, label, name, disabled, checked} = this.props
+    const {children, name, disabled, checked} = this.props
     const {focus, currentValue} = this.state
     return (
       <label
@@ -108,7 +108,7 @@ State > {
             onBlur={this.onBlurHandle}/>
         </span>
         <span className='at-checkbox__label'>
-          {label || children}
+          {children}
         </span>
       </label >
     )
