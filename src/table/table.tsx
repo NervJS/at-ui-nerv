@@ -169,7 +169,7 @@ class Table extends Nerv.Component<TableProps, any> {
       for (let index = 0; index < this.renderArr.length; index++) {
         const item = this.renderArr[index]
         const {action, render} = item
-        const element = Nerv.cloneElement(render(dataTemp))
+        const element = Nerv.cloneElement(render(dataTemp, i))
         let childrenTemp = element.props.children
         if (childrenTemp) {
           if (typeof childrenTemp === 'object' && !(childrenTemp instanceof Array)) { childrenTemp = [childrenTemp] }

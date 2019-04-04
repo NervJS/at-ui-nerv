@@ -481,12 +481,12 @@ imports:
         title: '操作一',
         width:'300',
         action: 'onClick',
-        component: (item)=>{
+        component: (item, itemIndex)=>{
           return (<div>
           <span>
             {item.name}
           </span>
-           <Button onClick={(index, event)=>{console.log('item1', index, event, item);alert(item.address)}}>查看地址</Button>
+           <Button onClick={(index, event)=>{console.log(index, event, 'itemIndex', itemIndex);alert(item.address)}}>查看地址</Button>
         </div>)}
       },
       {
@@ -498,7 +498,7 @@ imports:
         title: '操作二',
         width:'300',
         action: 'onClick',
-        component:(item)=>{return (<Button onClick={()=>{alert(item.name)}}>查看名字</Button>)}
+        component:(item, index)=>{return (<Button onClick={()=>{alert(item.name)}}>查看名字</Button>)}
       }
       ]}
       />
