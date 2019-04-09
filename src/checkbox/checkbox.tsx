@@ -21,7 +21,6 @@ class Checkbox extends Component < CheckboxProps,
 State > {
   static Group: typeof CheckboxGroup
   static defaultProps = {
-    value: false,
     checked: false,
     disabled: false
   }
@@ -30,7 +29,7 @@ State > {
   state = {
     focus: false,
     model: this.props.label,
-    currentValue: this.props.value
+    currentValue: this.props.checked
   }
   constructor (...args) {
     super(...args)
@@ -44,10 +43,7 @@ State > {
       .onFocusHandle
       .bind(this)
   }
-  updateModel () {
-    const {value} = this.props
-    this.setState({currentValue: value})
-  }
+
   componentDidMount () {
     const {checked} = this.props
     if (checked) {
@@ -86,7 +82,7 @@ State > {
     this.setState({focus: false})
   }
   render () {
-    const {children, name, disabled, checked} = this.props
+    const {children, name, disabled} = this.props
     const {focus, currentValue} = this.state
     return (
       <label
@@ -101,7 +97,7 @@ State > {
             type='checkbox'
             className='at-checkbox__original'
             name={name}
-            checked={checked}
+            checked={currentValue}
             disabled={disabled}
             onChange={this.onChangeHandle}
             onFocus={this.onFocusHandle}
