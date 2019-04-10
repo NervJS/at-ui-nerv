@@ -63,7 +63,10 @@ class Table extends Nerv.Component<TableProps, any> {
     )
   }
   componentWillMount () {
-    const { data = [], columns = [] } = this.props
+    this.initColumnAndData(this.props)
+  }
+  initColumnAndData (props) {
+    const { data = [], columns = [] } = props
     data.forEach((item, index) => {
       this.state.valueArr.push(false)
       this.state.selectAll.push(false)
@@ -163,9 +166,11 @@ class Table extends Nerv.Component<TableProps, any> {
           </th>
         )
       }
+      // 处理普通单元格
       this.keyArr.forEach((key, index) => {
         tdElement.push(<td className='at-table__cell'>{dataTemp[key]}</td>)
       })
+      // 处理自定义组件单元格
       for (let index = 0; index < this.renderArr.length; index++) {
         const item = this.renderArr[index]
         const {action, render} = item
@@ -443,6 +448,7 @@ class Table extends Nerv.Component<TableProps, any> {
     // window.removeEventListener('resize', this.handleResize)
   }
   componentWillUpdate (nextProps, nextState) {
+    this.initColumnAndData(nextProps)
     if (this.props.columns != nextProps.columns) {
       this.handleResize()
     }

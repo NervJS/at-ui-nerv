@@ -6,7 +6,7 @@ import Table from '../index'
 import sinon from 'sinon'
 
 describe('table test', () => {
-    let columns=[
+    const columns = [
         {
           title: '姓名',
           key: 'name'
@@ -20,7 +20,7 @@ describe('table test', () => {
           key: 'address'
         }
       ]
-      let data= [
+    const data = [
         {
           name: '库里',
           age: 18,
@@ -66,31 +66,55 @@ describe('table test', () => {
           age: 19,
           address: '北京市朝阳区'
         }
-      ]  
-  let scratch
-  beforeAll(() => {
+      ]
+    let scratch
+    beforeAll(() => {
     scratch = document.createElement('div')
     document.body.appendChild(scratch)
   })
 
-  beforeEach(() => {
+    beforeEach(() => {
     scratch = document.createElement('div')
     document.body.appendChild(scratch)
   })
 
-  afterEach(() => {
+    afterEach(() => {
     scratch.parentNode.removeChild(scratch)
     scratch = null
   })
 
-  it('basic render', () => {
+    it('basic render', () => {
     const select = <Table columns={columns} data={data} />
     const component = Nerv.render(select as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))
     expect(dom.find('tr').length).toBe(10)
   })
+    it('should update when props change', () => {
+    class Test extends Nerv.Component<any, any> {
+      constructor (props) {
+        super(props)
+        this.state = {
+          columns: [],
+          data: []
+        }
+      }
+      render () {
+        return <Table columns={this.state.columns} data={this.state.data} />
+      }
+      componentDidMount () {
+        this.setState({
+          columns,
+          data
+        })
+      }
+    }
+    const table = <Test/>
+    const component = Nerv.render(table as VNode, scratch)
+    const dom = $(Nerv.findDOMNode(component))
+    expect(dom.find('tr').length).toBe(1)
+  })
 
-  it('onSelectionChange', (done) => {
+    it('onSelectionChange', (done) => {
     const onChange = sinon.spy()
     const select = <Table columns={columns} onSelectionChange={onChange} data={data} optional />
     const component = Nerv.render(select as VNode, scratch)
@@ -99,7 +123,7 @@ describe('table test', () => {
     console.log(trigger)
     trigger.trigger('change')
     trigger.trigger('click')
-    trigger.trigger('check') 
+    trigger.trigger('check')
     setTimeout(() => {
         console.log(onChange.called)
         expect(onChange.called).toBeTruthy()
@@ -107,7 +131,7 @@ describe('table test', () => {
     })
   })
 
-  it('select all', (done) => {
+    it('select all', (done) => {
     const onChange = sinon.spy()
     const select = <Table columns={columns} onSelectAll={onChange} data={data} optional />
     const component = Nerv.render(select as VNode, scratch)
@@ -116,7 +140,7 @@ describe('table test', () => {
     console.log(trigger)
     trigger.trigger('change')
     trigger.trigger('click')
-    trigger.trigger('check') 
+    trigger.trigger('check')
     setTimeout(() => {
         console.log(onChange.called)
         expect(onChange.called).toBeTruthy()
