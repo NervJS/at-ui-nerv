@@ -67,9 +67,13 @@ class Table extends Nerv.Component<TableProps, any> {
   }
   initColumnAndData (props) {
     const { data = [], columns = [] } = props
+    this.renderArr = []
+    this.keyArr = []
+    const valueArr: any[] = []
+    const selectAll: any[] = []
     data.forEach((item, index) => {
-      this.state.valueArr.push(false)
-      this.state.selectAll.push(false)
+      valueArr.push(false)
+      selectAll.push(false)
     })
     columns.forEach((item, index) => {
       item._index = index

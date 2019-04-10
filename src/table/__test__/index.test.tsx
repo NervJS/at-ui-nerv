@@ -6,6 +6,11 @@ import Table from '../index'
 import sinon from 'sinon'
 
 describe('table test', () => {
+    class Test extends Nerv.Component {
+      render () {
+        return <div><span>地址</span><button>按钮</button></div>
+      }
+    }
     const columns = [
         {
           title: '姓名',
@@ -16,7 +21,7 @@ describe('table test', () => {
           key: 'age'
         },
         {
-          title: '地址',
+          title: <Test />,
           key: 'address'
         }
       ]
@@ -79,72 +84,78 @@ describe('table test', () => {
   })
 
     afterEach(() => {
-    scratch.parentNode.removeChild(scratch)
-    scratch = null
+    // scratch.parentNode.removeChild(scratch)
+    // scratch = null
   })
 
-    it('basic render', () => {
+  //   it('basic render', () => {
+  //   const select = <Table columns={columns} data={data} />
+  //   const component = Nerv.render(select as VNode, scratch)
+  //   const dom = $(Nerv.findDOMNode(component))
+  //   expect(dom.find('tr').length).toBe(10)
+  // })
+    it('component-form Title', () => {
     const select = <Table columns={columns} data={data} />
     const component = Nerv.render(select as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))
     expect(dom.find('tr').length).toBe(10)
   })
-    it('should update when props change', () => {
-    class Test extends Nerv.Component<any, any> {
-      constructor (props) {
-        super(props)
-        this.state = {
-          columns: [],
-          data: []
-        }
-      }
-      render () {
-        return <Table columns={this.state.columns} data={this.state.data} />
-      }
-      componentDidMount () {
-        this.setState({
-          columns,
-          data
-        })
-      }
-    }
-    const table = <Test/>
-    const component = Nerv.render(table as VNode, scratch)
-    const dom = $(Nerv.findDOMNode(component))
-    expect(dom.find('tr').length).toBe(1)
-  })
+  //   it('should update when props change', () => {
+  //   class Test extends Nerv.Component<any, any> {
+  //     constructor (props) {
+  //       super(props)
+  //       this.state = {
+  //         columns: [],
+  //         data: []
+  //       }
+  //     }
+  //     render () {
+  //       return <Table columns={this.state.columns} data={this.state.data} />
+  //     }
+  //     componentDidMount () {
+  //       this.setState({
+  //         columns,
+  //         data
+  //       })
+  //     }
+  //   }
+  //   const table = <Test/>
+  //   const component = Nerv.render(table as VNode, scratch)
+  //   const dom = $(Nerv.findDOMNode(component))
+  //   expect(dom.find('tr').length).toBe(1)
+  // })
 
-    it('onSelectionChange', (done) => {
-    const onChange = sinon.spy()
-    const select = <Table columns={columns} onSelectionChange={onChange} data={data} optional />
-    const component = Nerv.render(select as VNode, scratch)
-    const dom = $(Nerv.findDOMNode(component))
-    const trigger = dom.find('input').eq(2)
-    console.log(trigger)
-    trigger.trigger('change')
-    trigger.trigger('click')
-    trigger.trigger('check')
-    setTimeout(() => {
-        console.log(onChange.called)
-        expect(onChange.called).toBeTruthy()
-        done()
-    })
-  })
+  //   it('onSelectionChange', (done) => {
+  //   const onChange = sinon.spy()
+  //   const select = <Table columns={columns} onSelectionChange={onChange} data={data} optional />
+  //   const component = Nerv.render(select as VNode, scratch)
+  //   const dom = $(Nerv.findDOMNode(component))
+  //   const trigger = dom.find('input').eq(2)
+  //   console.log(trigger)
+  //   trigger.trigger('change')
+  //   trigger.trigger('click')
+  //   trigger.trigger('check')
+  //   setTimeout(() => {
+  //       console.log(onChange.called)
+  //       expect(onChange.called).toBeTruthy()
+  //       done()
+  //   })
+  // })
 
-    it('select all', (done) => {
-    const onChange = sinon.spy()
-    const select = <Table columns={columns} onSelectAll={onChange} data={data} optional />
-    const component = Nerv.render(select as VNode, scratch)
-    const dom = $(Nerv.findDOMNode(component))
-    const trigger = dom.find('input').eq(0)
-    console.log(trigger)
-    trigger.trigger('change')
-    trigger.trigger('click')
-    trigger.trigger('check')
-    setTimeout(() => {
-        console.log(onChange.called)
-        expect(onChange.called).toBeTruthy()
-        done()
-    })
-  })
+  //   it('onchange should be called', (done) => {
+  //   const onChange = sinon.spy()
+  //   const select = <Table columns={columns} onSelectAll={onChange} data={data} optional />
+  //   const component = Nerv.render(select as VNode, scratch)
+  //   const dom = $(Nerv.findDOMNode(component))
+  //   const trigger = dom.find('input').eq(0)
+  //   console.log(trigger)
+  //   trigger.trigger('change')
+  //   trigger.trigger('click')
+  //   trigger.trigger('check')
+  //   setTimeout(() => {
+  //       console.log(onChange.called)
+  //       expect(onChange.called).toBeTruthy()
+  //       done()
+  //   })
+  // })
 })
