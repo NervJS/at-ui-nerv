@@ -71,7 +71,7 @@ describe('select test', () => {
     }
     const select = <Test />
     const component = Nerv.render(select as VNode, scratch)
-    const dom = $(Nerv.findDOMNode(component))
+    // const dom = $(Nerv.findDOMNode(component))
     // expect(dom.find('.at-pagination__item').length).toBe(5)
   })
   it('more than 8 pages render', () => {
