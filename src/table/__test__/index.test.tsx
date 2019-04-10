@@ -3,7 +3,7 @@ import * as Nerv from 'nervjs'
 import * as $ from 'webpack-zepto'
 import {VNode} from 'nerv-shared'
 import Table from '../index'
-import sinon from 'sinon'
+// import sinon from 'sinon'
 
 describe('table test', () => {
     class Test extends Nerv.Component {

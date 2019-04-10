@@ -47,7 +47,33 @@ describe('select test', () => {
     const dom = $(Nerv.findDOMNode(component))
     expect(dom.find('.at-pagination__item').length).toBe(5)
   })
-
+  it('basic update', () => {
+    class Test extends Nerv.Component<any, any> {
+      constructor (props) {
+        super(props)
+        this.state = {
+          current: 2,
+          total: 0
+        }
+      }
+      render () {
+        return <Pagination total={this.state.total} current={this.state.current}/>
+      }
+      componentDidMount () {
+        window.setTimeout(() => {
+          console.log('timeout')
+          this.setState({
+            current: 3,
+            total: 100
+          })
+        }, 5000)
+      }
+    }
+    const select = <Test />
+    const component = Nerv.render(select as VNode, scratch)
+    const dom = $(Nerv.findDOMNode(component))
+    // expect(dom.find('.at-pagination__item').length).toBe(5)
+  })
   it('more than 8 pages render', () => {
     const select = <Pagination total='100' />
     const component = Nerv.render(select as VNode, scratch)

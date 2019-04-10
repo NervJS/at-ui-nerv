@@ -44,6 +44,11 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
     const {total} = props
     this.total = total || 0
   }
+  componentWillUpdate (nextProps) {
+    const props = nextProps
+    const {total} = props
+    this.total = total || 0
+  }
   totalPage () {
     const num = Math.ceil(this.total / this.state.pageSize)
     return (num === 0) ? 1 : num
