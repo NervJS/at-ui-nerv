@@ -113,7 +113,8 @@ module.exports = function (source) {
     attributes: { imports: importMap }
   } = frontMatter(source)
 
-  const imports = "import * as Nerv from 'nervjs';  import copy from 'copy-to-clipboard';" + importMap
+  // const imports = "import * as Nerv from 'nervjs';  import copy from 'copy-to-clipboard';" + importMap
+  const imports = "import copy from 'copy-to-clipboard';" + importMap
 
   let moduleJS = []
   let state = ''

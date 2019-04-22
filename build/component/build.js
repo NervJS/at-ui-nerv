@@ -4,7 +4,6 @@ const merge = require('merge')
 const baseWebpackConfig = require('../site/webpack.base.config.js')
 const path = require('path')
 const spinner = ora('building components for production')
-
 spinner.start()
 
 baseWebpackConfig.entry = {}
@@ -37,9 +36,14 @@ function getConfig (options) {
       libraryTarget: options.libraryTarget,
       path: path.resolve(__dirname, '../../', 'dist')
     },
-    externals: {
-
-    },
+    externals: [
+      function (context, request, callback) {
+        if (request.indexOf('nerv') > -1 || request.indexOf('react-transition-group') > -1 || request.indexOf('classnames') > -1) {
+          return callback(null, 'commonjs ' + request)
+        };
+        callback()
+      }
+    ],
     devtool: status === 'lan' ? 'source-map' : false,
     plugins: [
       new webpack.LoaderOptionsPlugin({
@@ -51,7 +55,6 @@ function getConfig (options) {
         banner: `/*!AT-UI-Nerv*/`,
         raw: true
       })
-
     ]
   })
   if (options.env === 'production') {
@@ -68,7 +71,9 @@ function getConfig (options) {
 }
 
 Object.keys(buildsConfig).map(conf => {
-  webpack(getConfig(buildsConfig[conf]), (err, stats) => {
+  let config = getConfig(buildsConfig[conf])
+  console.log('config', conf)
+  webpack(config, (err, stats) => {
     spinner.stop()
     if (err) {
       throw err
