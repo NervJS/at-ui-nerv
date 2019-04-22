@@ -178,7 +178,8 @@ class Table extends Nerv.Component<TableProps, any> {
       for (let index = 0; index < this.renderArr.length; index++) {
         const item = this.renderArr[index]
         const {action, render} = item
-        const element = Nerv.cloneElement(render(dataTemp, i))
+        const elementTemp = Nerv.createElement(render(dataTemp, i))
+        const element = Nerv.cloneElement(elementTemp)
         let childrenTemp = element.props.children
         if (childrenTemp) {
           if (typeof childrenTemp === 'object' && !(childrenTemp instanceof Array)) { childrenTemp = [childrenTemp] }
@@ -187,6 +188,7 @@ class Table extends Nerv.Component<TableProps, any> {
             if (itemInner.props && itemInner.props[action]) {
               const childAction = itemInner.props[action]
               if (childAction) {
+                // 绑定子元素的事件，只会处理action里面的属性
                 itemInner.props[action] = childAction.bind(element, i)
               }
             }
@@ -194,16 +196,12 @@ class Table extends Nerv.Component<TableProps, any> {
         }
         const propsAction = element.props[action] || this.noop
         element.props[action] = propsAction.bind(element, i)
-        // tdElement.push()
         tdElement.splice(item.index, 0, <td className='at-table__cell'>{element}</td>)
       }
       // })
       dataElement.push(<tr>{tdElement}</tr>)
     }
     return <tbody ref={(tablebody) => {this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
-  }
-  coplyChildren (children) {
-    Nerv.cloneElement
   }
   log (key) {
 
@@ -446,7 +444,7 @@ class Table extends Nerv.Component<TableProps, any> {
     if (this.props.height) {
       this.resizeHeightHandler()
     }
-    // window.addEventListener('resize', this.handleResize)
+    window.addEventListener('resize', this.handleResize)
   }
   componentWillUnmount () {
     // window.removeEventListener('resize', this.handleResize)

@@ -38,7 +38,7 @@ module.exports = function (config) {
       './node_modules/babel-polyfill/dist/polyfill.js',
       // 'browsers/ie8.js',
       // 'browsers/polyfill.js',
-      'src/**/__test__/**/*test.ts?(x)'
+      'src/table/__test__/**/*test.ts?(x)'
     ],
 
     specReporter: {
@@ -54,7 +54,7 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'src/**/__test__/**/*test.ts?(x)': ['webpack', 'sourcemap']
+      'src/table/__test__/**/*test.ts?(x)': ['webpack', 'sourcemap']
     },
 
     // test results reporter to use
