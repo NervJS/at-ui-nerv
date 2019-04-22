@@ -1,6 +1,5 @@
 import * as Nerv from 'nervjs'
 // import * as sinon from 'sinon'
-import * as $ from 'webpack-zepto'
 import {VNode} from 'nerv-shared'
 import Table from '../index'
 // import sinon from 'sinon'
