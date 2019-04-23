@@ -264,6 +264,7 @@ class Table extends Nerv.Component<TableProps, any> {
     })
   }
   handleResize () {
+      if (!this.$tablebody) { return }
       const columnsWidth = {}
       if ((this.props.data || []).length) {
         const $td = this.$tablebody.querySelectorAll('tr')[0].querySelectorAll('td')
@@ -431,6 +432,7 @@ class Table extends Nerv.Component<TableProps, any> {
     return dataSelected
   }
   resizeHeightHandler () {
+    if (!this.$header) { return }
     const resizeMarginTop = this.$header.offsetHeight
     const headerHeight = Number(this.props.height) - resizeMarginTop
     this.setState({
