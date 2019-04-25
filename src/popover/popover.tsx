@@ -1,5 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
+import Component from '@lib/component'
 import { calculatePosition } from '../util/util'
 
 type triggerType = 'hover' | 'focus' | 'click'
@@ -12,7 +13,7 @@ export interface PopoverProps {
   trigger?: triggerType
 }
 
-class Popover extends Nerv.Component<PopoverProps, any> {
+class Popover extends Component<PopoverProps, any> {
   private top: number
   private left: number
   private enter: boolean
@@ -204,7 +205,8 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     }
     return (
       <div
-        className={this.renderPopoverClassNames(this.props)}
+        // className={this.renderPopoverClassNames(this.props)}
+        className={this.className('at-popover')}
         ref={(wrapper) => {
           this.$wrapper = wrapper
         }}
