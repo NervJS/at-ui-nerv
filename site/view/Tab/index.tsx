@@ -274,7 +274,6 @@ class TabExample extends Nerv.Component<any, any> {
     )
   }
   tabChangeHandler (index) {
-    console.log('xxx', index)
     this.setState({
       activeIndex : index
     })
@@ -284,7 +283,6 @@ class TabExample extends Nerv.Component<any, any> {
     this.setState({
       activeIndex : 24
     }, () => {
-      console.log('xxxclick', this.state.activeIndex)
     })
   }
   handleAdd () {

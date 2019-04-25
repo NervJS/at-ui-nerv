@@ -27,7 +27,7 @@ imports:
 <Rate 
   showText="true" 
   value={this.state.value2} 
-  onChange={(n)=>{this.setState({value2:n})}}
+  onChange={(n)=>{this.setState({value2:n+1})}}
   >
   <span>{ this.state.value2 } 星</span>
 </Rate>
@@ -54,8 +54,8 @@ imports:
   <Rate
     allowHalf="true"
     showText="true"
-    value="0"
-    onChange={this.changeHandle}>
+    value={5}
+    onChange={(val)=>{console.log(val)}}>
   </Rate>
 </div>
 ```

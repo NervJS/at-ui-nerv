@@ -16,7 +16,7 @@ interface MessageState {
 class Message extends Component<MessageProps, MessageState> {
   static defaultProps = {
     message: '',
-    duration: null,
+    duration: 3000,
     type: 'info'
   }
   timer: any

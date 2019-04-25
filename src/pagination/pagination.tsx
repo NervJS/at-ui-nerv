@@ -16,7 +16,7 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
   constructor (props) {
     super(props)
     this.state = {
-      currPage: 1,
+      currPage: Number(props.current) || 1,
       pageSize: props.pageSize || 10
     }
     this.pageSizeSelectHandler = this.pageSizeSelectHandler.bind(this)
@@ -32,9 +32,22 @@ class Pagination extends Nerv.Component<PaginationProps, any> {
       props.size && props.size === 'small' ? 'at-pagination--small' : ''
     ], props.className)
   }
+  componentWillReceiveProps (nextProps, nextState) {
+    if (nextProps.current !== this.props.current) {
+      this.setState({
+        currPage: Number(nextProps.current)
+      })
+    }
+  }
   componentWillMount () {
     const props = this.props
-    this.total = props.total || 0
+    const {total} = props
+    this.total = total || 0
+  }
+  componentWillUpdate (nextProps) {
+    const props = nextProps
+    const {total} = props
+    this.total = total || 0
   }
   totalPage () {
     const num = Math.ceil(this.total / this.state.pageSize)

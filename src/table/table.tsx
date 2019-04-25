@@ -63,23 +63,31 @@ class Table extends Nerv.Component<TableProps, any> {
     )
   }
   componentWillMount () {
-    const { data = [], columns = [] } = this.props
+    this.initColumnAndData(this.props)
+  }
+  initColumnAndData (props) {
+    const { data = [], columns = [] } = props
+    this.renderArr = []
+    this.keyArr = []
+    const valueArr: any[] = []
+    const selectAll: any[] = []
     data.forEach((item, index) => {
-      this.state.valueArr.push(false)
-      this.state.selectAll.push(false)
+      valueArr.push(false)
+      selectAll.push(false)
     })
     columns.forEach((item, index) => {
       item._index = index
       if (item.sortType) {
         (this.sortType = item.sortType), (this.sortBy = item.key)
       }
-      if (item.key) {
+      if (item.key && !item.component) {
         this.keyArr.push(item.key)
       }
       if (item.component) {
         this.renderArr.push({
           render: item.component,
-          action: item.action || ''
+          action: item.action || '',
+          index
         })
       }
     })
@@ -142,14 +150,14 @@ class Table extends Nerv.Component<TableProps, any> {
 
     const dataElement: any[] = []
 
-    for(let i=0;i<data.length;i++) {
+    for (let i = 0; i < data.length; i++) {
       const tdElement: any[] = []
-      let dataTemp = data[i]
+      const dataTemp = data[i]
       // 处理多选框
       if (this.props.optional) {
         const pageSize = this.state.currPageSize
         const currPage = this.state.currPage
-        let indexTemp = (currPage - 1) * pageSize + i
+        const indexTemp = (currPage - 1) * pageSize + i
         tdElement.push(
           <th
             className='at-table__cell at-table__column-selection'
@@ -162,43 +170,39 @@ class Table extends Nerv.Component<TableProps, any> {
           </th>
         )
       }
+      // 处理普通单元格
       this.keyArr.forEach((key, index) => {
         tdElement.push(<td className='at-table__cell'>{dataTemp[key]}</td>)
       })
+      // 处理自定义组件单元格
       for (let index = 0; index < this.renderArr.length; index++) {
-        const item = this.renderArr[index];
-        const {action,render} = item;
-        const {type, props, children: myChildren} = render;
-        let element = Nerv.cloneElement(Nerv.createElement(type, props, myChildren))
-        let childrenTemp = myChildren
-        if(myChildren) {
-          if(typeof myChildren === 'object' && !(myChildren instanceof Array) ) { childrenTemp = [myChildren] }
-          for(let j = 0;j<childrenTemp.length;j++) {
-            let itemInner = childrenTemp[j]
-            let childPropsAction = itemInner.props[action] || this.noop;
-            if(!(element['children'] instanceof Array)) {
-              element['children'].props[action] = childPropsAction.bind(element, i)
-            } else {
-              element['children'][j].props[action] = childPropsAction.bind(element, i)
+        const item = this.renderArr[index]
+        const {action, render} = item
+        const element = Nerv.cloneElement(render(dataTemp, i))
+        let childrenTemp = element.props.children
+        if (childrenTemp) {
+          if (typeof childrenTemp === 'object' && !(childrenTemp instanceof Array)) { childrenTemp = [childrenTemp] }
+          for (let j = 0; j < childrenTemp.length; j++) {
+            const itemInner = childrenTemp[j]
+            if (itemInner.props && itemInner.props[action]) {
+              const childAction = itemInner.props[action]
+              if (childAction) {
+                // 绑定子元素的事件，只会处理action里面的属性
+                itemInner.props[action] = childAction.bind(element, i)
+              }
             }
-           
           }
         }
-
-        let propsAction = element.props[action] || this.noop
-        element.props[action] = propsAction.bind(element,i)
-        tdElement.push(<td className='at-table__cell'>{element}</td>)
+        const propsAction = element.props[action] || this.noop
+        element.props[action] = propsAction.bind(element, i)
+        tdElement.splice(item.index, 0, <td className='at-table__cell'>{element}</td>)
       }
-       
       // })
       dataElement.push(<tr>{tdElement}</tr>)
     }
-    return <tbody ref={(tablebody)=>{this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
+    return <tbody ref={(tablebody) => {this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
   }
-  coplyChildren(children) {
-    Nerv.cloneElement
-  }
-  log(key){
+  log (key) {
 
   }
   noop () {
@@ -260,6 +264,7 @@ class Table extends Nerv.Component<TableProps, any> {
     })
   }
   handleResize () {
+      if (!this.$tablebody) { return }
       const columnsWidth = {}
       if ((this.props.data || []).length) {
         const $td = this.$tablebody.querySelectorAll('tr')[0].querySelectorAll('td')
@@ -427,6 +432,7 @@ class Table extends Nerv.Component<TableProps, any> {
     return dataSelected
   }
   resizeHeightHandler () {
+    if (!this.$header) { return }
     const resizeMarginTop = this.$header.offsetHeight
     const headerHeight = Number(this.props.height) - resizeMarginTop
     this.setState({
@@ -439,12 +445,13 @@ class Table extends Nerv.Component<TableProps, any> {
     if (this.props.height) {
       this.resizeHeightHandler()
     }
-    // window.addEventListener('resize', this.handleResize)
+    window.addEventListener('resize', this.handleResize)
   }
   componentWillUnmount () {
     // window.removeEventListener('resize', this.handleResize)
   }
   componentWillUpdate (nextProps, nextState) {
+    this.initColumnAndData(nextProps)
     if (this.props.columns != nextProps.columns) {
       this.handleResize()
     }

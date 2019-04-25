@@ -16,12 +16,28 @@ describe('textarea test', () => {
     document.body.appendChild(scratch)
   })
 
-  afterEach(() => {
-    scratch.parentNode.removeChild(scratch)
-    scratch = null
-  })
+  // afterEach(() => {
+  //   scratch.parentNode.removeChild(scratch)
+  //   scratch = null
+  // })
   it('basic render', () => {
-    const textareaJSX = <Textarea />
+    class Test extends Nerv.Component<any, any> {
+      constructor (props) {
+        super(props)
+        this.state = {value: '1' }
+      }
+      render () {
+        return <Textarea value={this.state.value} />
+      }
+      componentDidMount () {
+        window.setTimeout(() => {
+          this.setState({
+            value: '2'
+          })
+        }, 3000)
+      }
+    }
+    const textareaJSX = <Test />
     const component = Nerv.render(textareaJSX as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))
     expect(dom.hasClass('at-textarea')).toBeTruthy()
@@ -41,7 +57,7 @@ describe('textarea test', () => {
   })
   it('onInput should work', (done) => {
     const onInput = sinon.spy()
-    const textareaJSX = <Textarea onInput={{ onInput }} disabled />
+    const textareaJSX = <Textarea onInput={onInput} disabled />
     const component = Nerv.render(textareaJSX as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))
     dom.find('textarea').trigger('input')
