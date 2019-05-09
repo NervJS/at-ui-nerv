@@ -105,14 +105,6 @@ module.exports = {
       }
     ]
   },
-  externals: {
-    'nervjs': {
-      commonjs: 'nervjs',
-      commonjs2: 'nervjs',
-      amd: 'nervjs',
-      root: 'nervjs'
-    }
-  },
   resolve: {
     extensions: ['.js', '.jsx', '.tsx', '.ts'],
     alias: {

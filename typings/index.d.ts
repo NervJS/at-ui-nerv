@@ -1,71 +1,15 @@
-declare module 'at-ui-nerv' {
-  export import Button = AtUINerv.Button
-  export import Alert = AtUINerv.Alert
-  export import Card = AtUINerv.CardL
-  export import Loadingbar = AtUINerv.Loadingbar
-  export import Message = AtUINerv.Message
-  export import Notification = AtUINerv.Notification
-  export import Badge = AtUINerv.Badge
-  export import Input = AtUINerv.Input
-  export import Icon = AtUINerv.Icon
-  export import Breadcrumb = AtUINerv.Breadcrumb
-  export import InputNumber = AtUINerv.InputNumber
-  export import Checkbox = AtUINerv.Checkbox
-  export import Tag = AtUINerv.Tag
-  export import Dropdown = AtUINerv.Dropdown
-  export import Select = AtUINerv.Select
-  export import Radio = AtUINerv.Radio
-  export import Rate = AtUINerv.Rate
-  export import Modal = AtUINerv.Modal
-  export import Collapse = AtUINerv.Collapse
-  export import Menu = AtUINerv.Menu
-  export import Switch = AtUINerv.Switch
-  export import Tooltip = AtUINerv.Tooltip
-  export import Slider = AtUINerv.Slider
-  export import Textarea = AtUINerv.Textarea
-  export import Timeline = AtUINerv.Timeline
-  export import Popover = AtUINerv.Popover
-  export import Tabs = AtUINerv.Tabs
-  export import Table = AtUINerv.Table
-  export import Steps = AtUINerv.Steps
-  export import Pagination = AtUINerv.Pagination
-  export import Progress = AtUINerv.Progress
-}
-declare module '@o2team/at-ui-nerv' {
-  export import Button = AtUINerv.Button
-  export import Alert = AtUINerv.Alert
-  export import Card = AtUINerv.CardL
-  export import Loadingbar = AtUINerv.Loadingbar
-  export import Message = AtUINerv.Message
-  export import Notification = AtUINerv.Notification
-  export import Badge = AtUINerv.Badge
-  export import Input = AtUINerv.Input
-  export import Icon = AtUINerv.Icon
-  export import Breadcrumb = AtUINerv.Breadcrumb
-  export import InputNumber = AtUINerv.InputNumber
-  export import Checkbox = AtUINerv.Checkbox
-  export import Tag = AtUINerv.Tag
-  export import Dropdown = AtUINerv.Dropdown
-  export import Select = AtUINerv.Select
-  export import Radio = AtUINerv.Radio
-  export import Rate = AtUINerv.Rate
-  export import Modal = AtUINerv.Modal
-  export import Collapse = AtUINerv.Collapse
-  export import Menu = AtUINerv.Menu
-  export import Switch = AtUINerv.Switch
-  export import Tooltip = AtUINerv.Tooltip
-  export import Slider = AtUINerv.Slider
-  export import Textarea = AtUINerv.Textarea
-  export import Timeline = AtUINerv.Timeline
-  export import Popover = AtUINerv.Popover
-  export import Tabs = AtUINerv.Tabs
-  export import Table = AtUINerv.Table
-  export import Steps = AtUINerv.Steps
-  export import Pagination = AtUINerv.Pagination
-  export import Progress = AtUINerv.Progress
-}
+import * as Nerv from 'nervjs'
+import { VNode } from 'nerv-shared'
+import SelectOption from '../src/select/select-option'
+import ButtonGroup from '../src/button/button-group'
+import { BreadcrumbProps } from '../src/breadcrumb/breadcrumb'
+import SelectOptionGroup from '../src/select/select-optiongroup'
+import { ModalFunc } from '../src/modal/modal'
+import MenuItem from '../src/menu/MenuItem'
+import MenuSub from '../src/menu/MenuSub'
+
 declare namespace AtUINerv {
-  //Button
+  // Button
   export type ButtonType =
     | 'default'
     | 'primary'
@@ -95,7 +39,7 @@ declare namespace AtUINerv {
   export class Button extends Nerv.Component<ButtonProps, any> {
     static Group: typeof ButtonGroup
   }
-  //alert
+  // alert
   interface AlertProps {
     type?: string
     message?: string
@@ -112,7 +56,7 @@ declare namespace AtUINerv {
   }
 
   export class Alert extends Nerv.Component<AlertProps, AlertState> {}
-  //card
+  // card
   interface CardProps {
     bordered?: boolean
     noHover?: boolean
@@ -120,7 +64,7 @@ declare namespace AtUINerv {
     loading?: boolean
   }
   export class CardL extends Nerv.Component<CardProps, any> {}
-  //loadingbar
+  // loadingbar
   export interface Loadingbar {
     start: () => void
     update: () => void
@@ -128,7 +72,7 @@ declare namespace AtUINerv {
     error: () => void
     config: (config: object) => void
   }
-  //Message
+  // Message
   export type MessageContent = OptionsContent | string
   export interface OptionsContent {
     type?: string
@@ -147,15 +91,7 @@ declare namespace AtUINerv {
     error?: (e: any) => void
   }
   export let Message: MessageInterface
-  //notification
-  interface OptionsContent {
-    type?: string
-    title?: string
-    message?: string
-    duration?: number
-    icon?: string
-    onClose?: () => void
-  }
+  // notification
 
   interface NotificationInterface {
     (options: OptionsContent): void
@@ -163,7 +99,7 @@ declare namespace AtUINerv {
     closeAll?: () => void
   }
   export let Notification: NotificationInterface
-  //badge
+  // badge
   interface BadgeProps {
     value?: string | number
     maxNum?: number
@@ -173,7 +109,7 @@ declare namespace AtUINerv {
   }
 
   export class Badge extends Nerv.Component<BadgeProps, {}> {}
-  //input
+  // input
   interface InputProps {
     type?: string
     value?: string | number
@@ -196,14 +132,14 @@ declare namespace AtUINerv {
   }
 
   export class Input extends Nerv.Component<InputProps, InputState> {}
-  //icon
+  // icon
   export interface IconProps {
     className?: string
     type?: string
   }
 
   export class Icon extends Nerv.Component<IconProps, any> {}
-  //breadcrumb
+  // breadcrumb
   interface BreadCrumbItemProps {
     href?: string
     to?: object | string
@@ -214,14 +150,14 @@ declare namespace AtUINerv {
     separator?: string
   }
 
-  class BreadCrumbItem extends Nerv.Component<
+  class BreadcrumbItem extends Nerv.Component<
     BreadCrumbItemProps,
     BreadCrumbItemState
   > {}
   export class Breadcrumb extends Nerv.Component<BreadcrumbProps, any> {
     static Item: typeof BreadcrumbItem
   }
-  //inputnumber
+  // inputnumber
   interface InputNumberProps {
     value?: number
     onBlur?: (a?) => {}
@@ -244,7 +180,9 @@ declare namespace AtUINerv {
     InputNumberProps,
     InputNumberState
   > {}
-  //checkbox
+  // checkbox
+
+  type labelType = string | number | boolean
   export interface CheckboxProps {
     label?: labelType
     name?: string
@@ -272,7 +210,7 @@ declare namespace AtUINerv {
   export class Checkbox extends Nerv.Component<CheckboxProps, State> {
     static Group: typeof CheckboxGroup
   }
-  //Tag
+  // Tag
   export interface TagProps {
     name?: string | number
     color?: string
@@ -283,9 +221,9 @@ declare namespace AtUINerv {
     show: boolean
   }
 
-  const colorArr = ['default', 'primary', 'success', 'error', 'warning', 'info']
+  // const colorArr = ['default', 'primary', 'success', 'error', 'warning', 'info']
   export class Tag extends Nerv.Component<TagProps, TagState> {}
-  //dropdown
+  // dropdown
   interface DropdownProps {
     trigger?: 'click' | 'hover' | 'focus'
     placement?:
@@ -309,7 +247,7 @@ declare namespace AtUINerv {
   }
 
   export class Dropdown extends Nerv.Component<DropdownProps, DropdownState> {}
-  //select
+  // select
   export interface SelectProps {
     className?: string
     icon?: string
@@ -325,7 +263,7 @@ declare namespace AtUINerv {
     static Option: typeof SelectOption
     static OptionGroup: typeof SelectOptionGroup
   }
-  //radio
+  // radio
   interface RadioProps {
     value: string | number
     name?: string
@@ -362,11 +300,11 @@ declare namespace AtUINerv {
 
   class RadioGroup extends Nerv.Component<RadioGroupProps, any> {}
   export class Radio extends Nerv.Component<RadioProps, RadioState> {
-    static elementName = 'AtRadio'
+    static elementName: 'AtRadio'
     static Button: typeof RadioButton
     static Group: typeof RadioGroup
   }
-  //rate
+  // rate
   interface RateProps {
     value?: number
     count?: number
@@ -386,7 +324,7 @@ declare namespace AtUINerv {
     isHalf: boolean
   }
   export class Rate extends Nerv.Component<RateProps, RateState> {}
-  //modal
+  // modal
   interface ModalProps {
     title?: string
     content?: string
@@ -435,7 +373,7 @@ declare namespace AtUINerv {
     static confirm: ModalFunc
     static prompt: ModalFunc
   }
-  //collapse
+  // collapse
   interface CollapseProps {
     accordion?: boolean
     value?: any[] | string | number
@@ -465,7 +403,7 @@ declare namespace AtUINerv {
   export class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
     static Item: typeof CollapseItem
   }
-  //menu
+  // menu
   interface MenuProps {
     mode?: 'inline' | 'horizontal' | 'vertical'
     theme?: string
@@ -486,7 +424,7 @@ declare namespace AtUINerv {
     static Item: typeof MenuItem
     static Sub: typeof MenuSub
   }
-  //switch
+  // switch
   interface SwitchProps {
     className?: string
     type?: string
@@ -500,7 +438,7 @@ declare namespace AtUINerv {
     private checkedText: any
     private unCheckedText: any
   }
-  //tooltip
+  // tooltip
   export interface ToolProps {
     className?: string
     type?: string
@@ -509,13 +447,13 @@ declare namespace AtUINerv {
   }
 
   export class Tooltip extends Nerv.Component<ToolProps, any> {}
-  //slider
+  // slider
   export interface SliderProps {
     className?: string
     type?: string
   }
   export class Slider extends Nerv.Component<SliderProps, any> {}
-  //textarea
+  // textarea
   export interface TextareaProps {
     className?: string
     type?: string
@@ -529,7 +467,7 @@ declare namespace AtUINerv {
   }
 
   export class Textarea extends Nerv.Component<TextareaProps, any> {}
-  //timeline
+  // timeline
   export interface TimelineProps {
     className?: string
     pending?: boolean
@@ -545,7 +483,8 @@ declare namespace AtUINerv {
   export class Timeline extends Nerv.Component<TimelineProps, any> {
     static Item: typeof TimelineItem
   }
-  //popover
+  type triggerType = 'hover' | 'focus' | 'click'
+  // popover
   export interface PopoverProps {
     className?: string
     type?: string
@@ -556,7 +495,7 @@ declare namespace AtUINerv {
   }
 
   export class Popover extends Nerv.Component<PopoverProps, any> {}
-  //tabs
+  // tabs
   export interface TabsProps {
     className?: string
     size?: string
@@ -576,7 +515,7 @@ declare namespace AtUINerv {
   export class Tabs extends Nerv.Component<TabsProps, any> {
     static Pane: typeof TabPane
   }
-  //table
+  // table
   export type SortType = 'normal' | 'desc' | 'asc'
   export interface TableProps {
     className?: string
@@ -597,7 +536,7 @@ declare namespace AtUINerv {
   }
 
   export class Table extends Nerv.Component<TableProps, any> {}
-  //steps
+  // steps
   export interface StepsProps {
     className?: string
     current?: number
@@ -605,6 +544,7 @@ declare namespace AtUINerv {
     size?: string
     direction?: string
   }
+  type StatusType = 'wait' | 'process' | 'finish' | 'error'
   export interface StepProps {
     className?: string
     type?: string
@@ -620,7 +560,7 @@ declare namespace AtUINerv {
   export class Steps extends Nerv.Component<StepsProps, any> {
     static Step: typeof Step
   }
-  //pagination
+  // pagination
   export interface PaginationProps {
     className?: string
     type?: string
@@ -628,7 +568,7 @@ declare namespace AtUINerv {
   }
 
   export class Pagination extends Nerv.Component<PaginationProps, any> {}
-  //progress
+  // progress
   export interface ProgressProps {
     className?: string
     pending?: boolean
@@ -638,3 +578,5 @@ declare namespace AtUINerv {
 
   export class Progress extends Nerv.Component<ProgressProps, any> {}
 }
+
+export = AtUINerv

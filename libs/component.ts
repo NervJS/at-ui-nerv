@@ -1,5 +1,6 @@
 // 思路参考自Element React
 import * as Nerv from 'nervjs'
+console.log('Nerv', Nerv)
 import classnames from 'classnames'
 
 export default class Component<props, state> extends Nerv.Component<props, state> {
