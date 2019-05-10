@@ -1,7 +1,6 @@
 const mdContainer = require('markdown-it-container')
 const frontMatter = require('front-matter')
 const highlight = require('highlight.js')
-
 let md = require('markdown-it')
 
 let options = {
@@ -113,8 +112,8 @@ module.exports = function (source) {
     attributes: { imports: importMap }
   } = frontMatter(source)
 
-  // const imports = "import * as Nerv from 'nervjs';  import copy from 'copy-to-clipboard';" + importMap
-  const imports = "import copy from 'copy-to-clipboard';" + importMap
+  const imports = "import * as Nerv from 'nervjs';  import copy from 'copy-to-clipboard';" + importMap
+  // const imports = "import copy from 'copy-to-clipboard';" + importMap
 
   let moduleJS = []
   let state = ''
