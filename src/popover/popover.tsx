@@ -1,5 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
+import Component from '@lib/component'
 import { calculatePosition } from '../util/util'
 
 type triggerType = 'hover' | 'focus' | 'click'
@@ -12,9 +13,11 @@ export interface PopoverProps {
   trigger?: triggerType
 }
 
-class Popover extends Nerv.Component<PopoverProps, any> {
+class Popover extends Component<PopoverProps, any> {
   private top: number
   private left: number
+  private popperWidth: number
+  private popperHeight: number
   private enter: boolean
   private $wrapper: any
   private $trigger: any
@@ -204,7 +207,8 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     }
     return (
       <div
-        className={this.renderPopoverClassNames(this.props)}
+        // className={this.renderPopoverClassNames(this.props)}
+        className={this.className('at-popover')}
         ref={(wrapper) => {
           this.$wrapper = wrapper
         }}
@@ -244,6 +248,9 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     ) || { top: 0, left: 0 }
     this.top = position.top
     this.left = position.left
+    this.popperWidth = popover.offsetWidth
+    this.popperHeight = popover.offsetHeight
+
     this.setState({
       display: 'none'
     })
@@ -269,7 +276,7 @@ class Popover extends Nerv.Component<PopoverProps, any> {
     // 增加resize监听
     window.addEventListener('resize', this.onWindowResize)
   }
-  componentWillUnMount () {
+  componentWillUnmount () {
     switch (this.props.trigger) {
       case 'hover':
         this.$wrapper.removeEventListener('mouseenter', this.onMouseEnter)

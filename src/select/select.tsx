@@ -341,7 +341,7 @@ class Select extends Nerv.Component<any, any> {
       this.propsSelectOption = []
       this.searchOption = []
       Nerv.Children.forEach(props.children as any, (child, index) => {
-        if (child.name != 'SelectOptionGroup') {
+        if (child.name !== 'SelectOptionGroup') {
           child.props.onClick = this.handleChose
           child.props.key = index
           child.key = index
@@ -383,7 +383,7 @@ class Select extends Nerv.Component<any, any> {
     }
     windowClickHideAll (event) {
       if (this.state.isDropDown) {
-        if (this.clickTarget != event.target) {
+        if (this.clickTarget !== event.target) {
           this.setState({
             isDropDown: false
           })
@@ -423,7 +423,7 @@ class Select extends Nerv.Component<any, any> {
       }, null)
     }
     componentWillReceiveProps (nextProps, nextState) {
-      if (nextProps.children != this.props.children) {
+      if (nextProps.children !== this.props.children) {
         this.preparePropsSelection(nextProps)
       }
       const optionChosen = this.addressDefaultValue(nextProps)
@@ -448,7 +448,7 @@ class Select extends Nerv.Component<any, any> {
           if ((propsvalue as any) instanceof Array) {
             if (!this.props.multiple) { console.warn('WARNING: you assign an array to the value of Select Component without using the `MULTIPLE` property ')}
             propsvalue.forEach((item: string | number) => {
-              if (item == childValue) {
+              if (item === childValue) {
                 if (optionChosen.indexOf(index) === -1 && this.mulOptionChosen.indexOf(index) === -1) {
                   optionChosen.push(index)
                   this.mulOptionChosen.push(index)
@@ -456,7 +456,7 @@ class Select extends Nerv.Component<any, any> {
               }
             })
           } else {
-            if (childValue == propsvalue) {
+            if (childValue === propsvalue) {
               optionChosen.push(index)
               if (this.props.filterable) {
                 this.setState({
