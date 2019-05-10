@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 
-interface MenuGroupProps {
+export interface MenuGroupProps {
   title?: string
   _onSelect?: (e: any) => void
 }

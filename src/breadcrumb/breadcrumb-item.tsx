@@ -1,13 +1,13 @@
 import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 
-interface BreadCrumbItemProps {
+export interface BreadCrumbItemProps {
     href?: string
     to?: object | string
     replace?: boolean
 }
 
-interface BreadCrumbItemState {
+export interface BreadCrumbItemState {
     separator?: string
 }
 

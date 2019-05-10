@@ -1,11 +1,11 @@
 import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 
-interface CheckboxGroupProps {
+export interface CheckboxGroupProps {
   onChange?: (e) => void
 }
 
-interface CheckboxGroupState {
+export interface CheckboxGroupState {
   valueList: any[]
 }
 

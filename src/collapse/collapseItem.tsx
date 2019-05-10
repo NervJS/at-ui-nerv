@@ -3,14 +3,14 @@ import Component from '@lib/component'
 import CollapseTransition from '../animations/collapse-transition.jsx'
 import '../animations/collapseanimations.scss'
 
-interface CollapseItemProps {
+export interface CollapseItemProps {
   title?: string
   panelName?: string
   disabled?: boolean
   isActive?: boolean
 }
 
-interface CollapseItemState {
+export interface CollapseItemState {
   index: number
   isActive: boolean | undefined
 }

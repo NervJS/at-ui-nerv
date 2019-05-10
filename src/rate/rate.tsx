@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 
-interface RateProps {
+export interface RateProps {
   value?: number
   count?: number
   disabled?: boolean
@@ -12,7 +12,7 @@ interface RateProps {
   allowClear?: boolean
 }
 
-interface RateState {
+export interface RateState {
   currentValue: number
   hoverIndex: number
   lastHoverIndex: number

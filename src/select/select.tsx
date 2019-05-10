@@ -12,6 +12,10 @@ export interface SelectProps {
     circle?: boolean
     disabled?: boolean
     value?: string | number
+    onChange?: (retVal: Array<{
+      value: string
+      label: string
+    }>) => void
 }
 
 class Select extends Nerv.Component<any, any> {

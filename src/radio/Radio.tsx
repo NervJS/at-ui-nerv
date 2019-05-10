@@ -4,14 +4,14 @@ import Component from '@lib/component'
 import RadioGroup from './RadioGroup'
 import RadioButton from './RadioButton'
 
-interface RadioProps {
+export interface RadioProps {
   value: string | number
   name?: string
   label: string | number
   disabled?: boolean
 }
 
-interface RadioState {
+export interface RadioState {
   focus: boolean
   checked: boolean
 }

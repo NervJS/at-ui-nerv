@@ -1,13 +1,13 @@
 import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 
-interface RadioButtonProps {
+export interface RadioButtonProps {
   label: string | number
   value?: string | number
   disabled?: boolean
 }
 
-interface RadioButtonState {
+export interface RadioButtonState {
   checked: boolean
 }
 

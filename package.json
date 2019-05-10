@@ -64,6 +64,7 @@
   },
   "homepage": "https://github.com/NervJS/at-ui-nerv#readme",
   "dependencies": {
+    "@types/dom-inputevent": "^1.0.4",
     "at-ui-style": "^1.5.0",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.8",

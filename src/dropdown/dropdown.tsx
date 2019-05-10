@@ -3,7 +3,7 @@ import Component from '@lib/component'
 import DropdownItem from './dropdownItem'
 import DropdownMenu from './dropdownMenu'
 
-interface DropdownProps {
+export interface DropdownProps {
   trigger?: 'click' | 'hover' | 'focus'
   placement?:
     | 'top'
@@ -21,7 +21,7 @@ interface DropdownProps {
   dropDownChange?: (name) => void
 }
 
-interface DropdownState {
+export interface DropdownState {
   visible: boolean
 }
 

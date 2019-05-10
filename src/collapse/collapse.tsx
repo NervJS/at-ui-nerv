@@ -2,14 +2,14 @@ import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 import CollapseItem from './collapseItem'
 
-interface CollapseProps {
+export interface CollapseProps {
   accordion?: boolean
   value?: any[] | string | number
   simple?: boolean
   onChange?: (a) => {}
 }
 
-interface CollapseState {
+export interface CollapseState {
   currentValue: any
 }
 

@@ -3,7 +3,7 @@ import Component from '@lib/component'
 
 import Button from '../button'
 
-interface ModalFooterProps {
+export interface ModalFooterProps {
   cancelText?: string
   okText?: string
   onConfirm?: Function

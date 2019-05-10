@@ -7,7 +7,7 @@ import ModalFooter from './ModalFooter'
 
 export type ModalFunc = (config) => any
 
-interface ModalProps {
+export interface ModalProps {
   title?: string
   content?: string
   value?: boolean
@@ -24,7 +24,7 @@ interface ModalProps {
   willUnmount?: () => void
 }
 
-interface ModalState {
+export interface ModalState {
   wrapShow: boolean
   showCancelButton: boolean
   showConfirmButton: boolean

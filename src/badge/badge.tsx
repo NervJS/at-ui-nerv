@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 
-interface BadgeProps {
+export interface BadgeProps {
   value?: string | number
   maxNum?: number
   dot?: boolean

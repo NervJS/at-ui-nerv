@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 
-interface RadioGroupProps {
+export interface RadioGroupProps {
   value: string | number | any[]
   size?: string
   fill?: string

@@ -2,22 +2,22 @@ import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 import CheckboxGroup from './checkbox-group'
 
-type labelType = string | number | boolean
+export type labelType = string | number | boolean
 
 export interface CheckboxProps {
   label?: labelType
   name?: string
   checked?: boolean
   disabled?: boolean
-  onChange?: (checked: boolean, label: labelType) => {}
+  onChange?: (checked: boolean, label: labelType) => void
 }
 
-interface State {
+export interface CheckboxState {
   focus: boolean
   currentValue: any
 }
 
-class Checkbox extends Component<CheckboxProps, State> {
+class Checkbox extends Component<CheckboxProps, CheckboxState> {
   static Group: typeof CheckboxGroup
   static defaultProps = {
     checked: false,

@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import Component from '@lib/component'
 
-interface CardProps {
+export interface CardProps {
   bordered?: boolean
   noHover?: boolean
   bodyStyle?: object

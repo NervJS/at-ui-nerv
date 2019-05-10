@@ -2,7 +2,7 @@ import * as Nerv from 'nervjs'
 import { CSSTransition } from 'react-transition-group'
 import Component from '@lib/component'
 
-interface AlertProps {
+export interface AlertProps {
   type?: string
   message?: string
   description?: string
@@ -12,7 +12,7 @@ interface AlertProps {
   closeText?: string
 }
 
-interface AlertState {
+export interface AlertState {
   isShow: boolean
   isExited: boolean
 }
