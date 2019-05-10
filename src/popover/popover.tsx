@@ -16,8 +16,6 @@ export interface PopoverProps {
 class Popover extends Component<PopoverProps, any> {
   private top: number
   private left: number
-  private popperWidth: number
-  private popperHeight: number
   private enter: boolean
   private $wrapper: any
   private $trigger: any
@@ -248,8 +246,6 @@ class Popover extends Component<PopoverProps, any> {
     ) || { top: 0, left: 0 }
     this.top = position.top
     this.left = position.left
-    this.popperWidth = popover.offsetWidth
-    this.popperHeight = popover.offsetHeight
 
     this.setState({
       display: 'none'
