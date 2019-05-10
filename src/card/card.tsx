@@ -8,7 +8,7 @@ export interface CardProps {
   loading?: boolean
 }
 
-class CardL extends Component<CardProps, any> {
+class Card extends Component<CardProps, any> {
   static defaultProps = {
     bordered: true,
     noHover: false,
@@ -94,4 +94,4 @@ class CardL extends Component<CardProps, any> {
   }
 }
 
-export default CardL
+export default Card

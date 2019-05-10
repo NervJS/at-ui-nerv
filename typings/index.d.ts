@@ -55,7 +55,7 @@ declare namespace AtUINerv {
   export class Alert extends Nerv.Component<AlertProps, AlertState> {}
 
   // card
-  export class CardL extends Nerv.Component<CardProps, any> {}
+  export class Card extends Nerv.Component<CardProps, any> {}
   // loadingbar
   export interface Loadingbar {
     start: () => void
