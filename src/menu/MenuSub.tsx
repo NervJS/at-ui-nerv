@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import { CSSTransition } from 'react-transition-group'
 import CollapseTransition from '../animations/collapse-transition'
 import { CSSProperties } from 'react'

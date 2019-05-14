@@ -2,11 +2,13 @@ import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 
 export interface SwitchProps {
-  className?: string,
-  type?: string,
-  value?: any,
-  size?: string,
+  className?: string
+  type?: string
+  value?: any
+  size?: string
   disabled?: any
+  onChange?: (e: MouseEvent, value: boolean) => void
+  onClick?: (e: MouseEvent, value: boolean) => void
 }
 
 class Switch extends Nerv.Component<SwitchProps, any> {

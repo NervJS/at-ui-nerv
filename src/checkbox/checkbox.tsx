@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import CheckboxGroup from './checkbox-group'
 
 export type labelType = string | number | boolean
@@ -57,7 +57,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       },
       label
     } = this.props
-    if (evt.target instanceof HTMLInputElement) {
+    if (evt.target instanceof HTMLInputElement && label) {
       const checked = evt.target.checked
 
       this.setState(

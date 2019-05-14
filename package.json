@@ -1,6 +1,6 @@
 {
   "name": "at-ui-nerv",
-  "version": "0.4.4-0",
+  "version": "0.4.36",
   "description": "AT-UI for Nerv",
   "main": "dist/at.nerv.js",
   "scripts": {
@@ -48,6 +48,7 @@
   "files": [
     "dist/*",
     "src",
+    "libs",
     "typings"
   ],
   "repository": {

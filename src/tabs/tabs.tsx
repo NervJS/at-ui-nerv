@@ -2,10 +2,22 @@ import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import TabPane from './tab-pane'
 export interface TabsProps {
-  className?: string,
-  size?: string,
+  activeIndex?: number
+  className?: string
+  size?: string
   type?: 'card' | 'line'
   closable?: boolean | string
+  animated?: boolean | string
+  onClick?: (event: MouseEvent) => void
+  onDragLeave?: (event: DragEvent) => void
+  onDragOver?: (event: DragEvent) => void
+  onDrop?: (event: DragEvent) => void
+  onMouseOver?: (event: MouseEvent) => void
+  onMouseEnter?: (event: MouseEvent) => void
+  onMouseOut?: (event: MouseEvent) => void
+  onMouseLeave?: (event: MouseEvent) => void
+  onChange?: (index: number) => void
+  onTabRemove?: (index: number, event: MouseEvent) => void
 }
 
 class Tabs extends Nerv.Component<TabsProps, any> {
@@ -49,117 +61,164 @@ class Tabs extends Nerv.Component<TabsProps, any> {
         this.nextable = false
         this.prevable = false
         if (this.state.navOffset > 0) {
-            this.navOffset = 0
-          }
+          this.navOffset = 0
+        }
       } else {
         this.prevable = currentOffset !== 0
         this.nextable = currentOffset + containerWidth < navWidth
         if (navWidth - currentOffset < containerWidth) {
-            this.navOffset = navWidth - containerWidth
+          this.navOffset = navWidth - containerWidth
         }
       }
     }
   }
   renderTabsClassNames (props: TabsProps) {
-    return classnames('at-tabs', [
-      props.size && props.size === 'small' ? 'at-tabs--small' : '',
-      props.type && props.type === 'card' ? 'at-tabs--card' : '',
-      this.state.scrollable ? 'at-tabs--scroll' : ''
-    ], props.className)
+    return classnames(
+      'at-tabs',
+      [
+        props.size && props.size === 'small' ? 'at-tabs--small' : '',
+        props.type && props.type === 'card' ? 'at-tabs--card' : '',
+        this.state.scrollable ? 'at-tabs--scroll' : ''
+      ],
+      props.className
+    )
   }
   renderIconNav (icon) {
     const classname = `icon at-tabs-nav__icon ${icon}`
-    return (<i className={classname}></i>)
+    return <i className={classname} />
   }
   renderPrevBtn () {
-    if (!this.state.scrollable) { return }
+    if (!this.state.scrollable) {
+      return
+    }
     let classname = 'at-tabs__prev'
     if (!this.state.prevable) {
       classname += ' at-tabs__prev--disabled'
     }
-    return (<span className={classname} onClick={this.handlePrev}><i className='icon icon-chevron-left'></i></span>)
+    return (
+      <span className={classname} onClick={this.handlePrev}>
+        <i className='icon icon-chevron-left' />
+      </span>
+    )
   }
   renderNextBtn () {
-    if (!this.state.scrollable) { return }
+    if (!this.state.scrollable) {
+      return
+    }
     let classname = 'at-tabs__next'
     if (!this.state.nextable) {
       classname += ' at-tabs__next--disabled'
     }
-    return (<span className={classname} onClick={this.handleNext}><i className='icon icon-chevron-right'></i></span>)
+    return (
+      <span className={classname} onClick={this.handleNext}>
+        <i className='icon icon-chevron-right' />
+      </span>
+    )
   }
   handlePrev () {
-    if (!this.prevable) { return }
+    if (!this.prevable) {
+      return
+    }
     this.launchByActive = true
     const containerWidth = this.$navScroll.offsetWidth
     const currentOffset = this.state.navOffset
 
-    if (currentOffset === 0) { return }
+    if (currentOffset === 0) {
+      return
+    }
 
-    const newOffset = currentOffset > containerWidth ? currentOffset - containerWidth : 0
+    const newOffset =
+      currentOffset > containerWidth ? currentOffset - containerWidth : 0
     this.navOffset = newOffset
     this.setState({
       navOffset: newOffset
     })
   }
   handleNext () {
-    if (!this.nextable) { return }
+    if (!this.nextable) {
+      return
+    }
     this.launchByActive = true
     const containerWidth = this.$navScroll.offsetWidth
     const currentOffset = this.state.navOffset
     const navWidth = this.$nav.offsetWidth
 
-    if (navWidth - currentOffset <= containerWidth) { return }
+    if (navWidth - currentOffset <= containerWidth) {
+      return
+    }
 
-    const newOffset = (navWidth - currentOffset > containerWidth * 2) ? currentOffset + containerWidth : navWidth - containerWidth
+    const newOffset =
+      navWidth - currentOffset > containerWidth * 2
+        ? currentOffset + containerWidth
+        : navWidth - containerWidth
     this.navOffset = newOffset
     this.setState({
       navOffset: newOffset
     })
   }
   renderTabsNav () {
-    const {children, closable= false} = this.props
-    const closableFlag =  closable || closable === 'true'
+    const { children, closable = false } = this.props
+    const closableFlag = closable || closable === 'true'
     const navArr: any[] = []
     let extra: any = []
-    Nerv.Children.forEach(children as any, (child, index) => {
-      const props = child.props
-      if (props.slot && props.slot === 'extra') {
-        // 如果是附加内容
-        extra.push(child)
-      } else {
-        const {disabled= false, label, icon} = props
-        const disabledFlag = disabled || disabled === 'true'
-        let classname = 'at-tabs-nav__item'
-        let closeBtn: any
-        let renderIcon: any
-        // let refTab: string = ''
-        if (disabledFlag) {
-          classname += ' at-tabs-nav__item--disabled'
-        } else if (this.state.activeIndex === index) {
-          classname += ' at-tabs-nav__item--active'
-          // refTab = 'activeTab'
-        }
-        if (closableFlag && !props.unclosable) {
-          classname += ' at-tabs-nav__item--closable'
-          closeBtn = <span className='at-tabs-nav__close' onClick={this.onTabRemove.bind(this, index)}><i className='icon icon-x'></i></span>
-        }
-        if (icon) {
-          renderIcon = this.renderIconNav(icon)
-        }
-        navArr.push(<div className={classname} ref={(activeTab) => {
-          if (this.state.activeIndex === index) {
-            this.$activeTab = activeTab
+    Nerv.Children.forEach(
+      children as any,
+      (child, index) => {
+        const props = child.props
+        if (props.slot && props.slot === 'extra') {
+          // 如果是附加内容
+          extra.push(child)
+        } else {
+          const { disabled = false, label, icon } = props
+          const disabledFlag = disabled || disabled === 'true'
+          let classname = 'at-tabs-nav__item'
+          let closeBtn: any
+          let renderIcon: any
+          // let refTab: string = ''
+          if (disabledFlag) {
+            classname += ' at-tabs-nav__item--disabled'
+          } else if (this.state.activeIndex === index) {
+            classname += ' at-tabs-nav__item--active'
+            // refTab = 'activeTab'
           }
-        }} onClick={this.tabChangeHandler.bind(this, index, disabledFlag)}>
-        {renderIcon}{label}{closeBtn}
-        </div>)
-      }
-    }, null)
-    extra = <div className='at-tabs__extra'>
-              <div>
-                {extra}
-              </div>
+          if (closableFlag && !props.unclosable) {
+            classname += ' at-tabs-nav__item--closable'
+            closeBtn = (
+              <span
+                className='at-tabs-nav__close'
+                onClick={this.onTabRemove.bind(this, index)}
+              >
+                <i className='icon icon-x' />
+              </span>
+            )
+          }
+          if (icon) {
+            renderIcon = this.renderIconNav(icon)
+          }
+          navArr.push(
+            <div
+              className={classname}
+              ref={(activeTab) => {
+                if (this.state.activeIndex === index) {
+                  this.$activeTab = activeTab
+                }
+              }}
+              onClick={this.tabChangeHandler.bind(this, index, disabledFlag)}
+            >
+              {renderIcon}
+              {label}
+              {closeBtn}
             </div>
+          )
+        }
+      },
+      null
+    )
+    extra = (
+      <div className='at-tabs__extra'>
+        <div>{extra}</div>
+      </div>
+    )
     this.tabLength = navArr.length
     return {
       navArr,
@@ -167,7 +226,10 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     }
   }
   onTabRemove (index, event) {
-    if (index === this.state.activeIndex && this.state.activeIndex ===  this.tabLength - 1) {
+    if (
+      index === this.state.activeIndex &&
+      this.state.activeIndex === this.tabLength - 1
+    ) {
       this.setState({
         activeIndex: this.tabLength - 2 < 0 ? 0 : this.tabLength - 2
       })
@@ -175,29 +237,38 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     this.props.onTabRemove && this.props.onTabRemove(index, event)
   }
   tabChangeHandler (index, disabledFlag, event) {
-    if (disabledFlag) {return}
+    if (disabledFlag) {
+      return
+    }
     const props = this.props
     this.setState({
       activeIndex: index
     })
-    props.onChange && props.onChange (index)
+    props.onChange && props.onChange(index)
   }
   renderTransitionStyle () {
     // 这个是tabbody的动画移动
     const animated = this.props.animated
-    let offset = - (this.state.activeIndex * 100)
+    let offset = -(this.state.activeIndex * 100)
     if (animated === false || animated === 'false') {
       offset = 0
     }
-    return {transform: `translate3d(${offset}%, 0px, 0px)`}
+    return { transform: `translate3d(${offset}%, 0px, 0px)` }
   }
   render () {
     const props = this.props
     const {
       style,
-      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseEnter,
+      onMouseOut,
+      onMouseLeave,
+      onClick,
       children
-      } = props
+    } = props
     const needProps = {
       children,
       onDragLeave,
@@ -208,10 +279,10 @@ class Tabs extends Nerv.Component<TabsProps, any> {
       onMouseEnter,
       onMouseLeave,
       onClick
-      }
+    }
     const classNames = this.renderTabsClassNames(props)
     const tabsNav = this.renderTabsNav()
-    const transitionStyle = this.renderTransitionStyle ()
+    const transitionStyle = this.renderTransitionStyle()
     let prevBtn: any
     let nextBtn: any
     prevBtn = this.renderPrevBtn()
@@ -227,8 +298,19 @@ class Tabs extends Nerv.Component<TabsProps, any> {
             {prevBtn}
             {nextBtn}
             <div className='at-tabs__nav-wrap'>
-              <div className='at-tabs__nav-scroll' ref={(navScroll) => {this.$navScroll = navScroll}}>
-                <div className='at-tabs-nav' ref={(nav) => {this.$nav = nav}} style={offsetNavStyle}>
+              <div
+                className='at-tabs__nav-scroll'
+                ref={(navScroll) => {
+                  this.$navScroll = navScroll
+                }}
+              >
+                <div
+                  className='at-tabs-nav'
+                  ref={(nav) => {
+                    this.$nav = nav
+                  }}
+                  style={offsetNavStyle}
+                >
                   {tabsNav.navArr}
                 </div>
               </div>
@@ -236,44 +318,53 @@ class Tabs extends Nerv.Component<TabsProps, any> {
           </div>
         </div>
         <div className='at-tabs__body' style={transitionStyle}>
-          {this.renderBody ()}
+          {this.renderBody()}
         </div>
       </div>
     )
   }
   renderExtra (child) {
     return (
-    <div className='at-tabs__extra'>
-      <div>{child}</div>
-    </div>)
+      <div className='at-tabs__extra'>
+        <div>{child}</div>
+      </div>
+    )
   }
   renderBody () {
-    const {children, animated= true} = this.props
+    const { children, animated = true } = this.props
     const childrenResult: any[] = []
     if (animated === false || animated === 'false') {
-      Nerv.Children.forEach(children as any, (child, index) => {
-        if (!(child.props.slot && child.props.slot === 'extra')) {
-          child.props.animated = false
-          child.props.activeIndex = this.state.activeIndex
-          child.props.index = index
-          childrenResult.push(child)
-        }
-      }, null)
+      Nerv.Children.forEach(
+        children as any,
+        (child, index) => {
+          if (!(child.props.slot && child.props.slot === 'extra')) {
+            child.props.animated = false
+            child.props.activeIndex = this.state.activeIndex
+            child.props.index = index
+            childrenResult.push(child)
+          }
+        },
+        null
+      )
       return childrenResult
     } else {
-      Nerv.Children.forEach(children as any, (child, index) => {
-        if (!(child.props.slot && child.props.slot === 'extra')) {
-          child.props.activeIndex = this.state.activeIndex
-          child.props.index = index
-          childrenResult.push(child)
-        }
-      }, null)
+      Nerv.Children.forEach(
+        children as any,
+        (child, index) => {
+          if (!(child.props.slot && child.props.slot === 'extra')) {
+            child.props.activeIndex = this.state.activeIndex
+            child.props.index = index
+            childrenResult.push(child)
+          }
+        },
+        null
+      )
       return childrenResult
     }
   }
   componentDidMount () {
     this.updateHandle() // 未setState，给scrollable赋值
-    this.scrollToActiveTab()// 未setState,给this.navOffset赋值
+    this.scrollToActiveTab() // 未setState,给this.navOffset赋值
     this.updateAfterUpdate(this.state, 'mount') // setState,更新页面，显示按钮
     window.addEventListener('resize', this.updateHandle, false)
     this.setState({
@@ -318,7 +409,12 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     }
   }
   scrollToActiveTab () {
-    if (!this.state.scrollable && !(this.prevable || this.nextable) || this.launchByActive) { return }
+    if (
+      (!this.state.scrollable && !(this.prevable || this.nextable)) ||
+      this.launchByActive
+    ) {
+      return
+    }
     const activeTab = this.$activeTab
     const navScroll = this.$navScroll
     const activeTabBounds = activeTab.getBoundingClientRect()
@@ -327,21 +423,24 @@ class Tabs extends Nerv.Component<TabsProps, any> {
     let newOffset = currentOffset
     if (activeTabBounds.left < navScrollBounds.left) {
       if (activeTabBounds.left !== this.lastActiveLeft) {
-        newOffset = currentOffset - (navScrollBounds.left - activeTabBounds.left) - activeTabBounds.width
+        newOffset =
+          currentOffset -
+          (navScrollBounds.left - activeTabBounds.left) -
+          activeTabBounds.width
         this.lastActiveLeft = activeTabBounds.left
       }
     }
     if (activeTabBounds.right > navScrollBounds.right) {
       if (activeTabBounds.right !== this.lastActiveRight) {
-        newOffset = currentOffset + (activeTabBounds.right - navScrollBounds.right) + activeTabBounds.width
+        newOffset =
+          currentOffset +
+          (activeTabBounds.right - navScrollBounds.right) +
+          activeTabBounds.width
         this.lastActiveRight = activeTabBounds.right
       }
     }
     this.navOffset = newOffset
   }
-  componentWillReceiveProps (nextProps) {
-  }
-
 }
 
 export default Tabs

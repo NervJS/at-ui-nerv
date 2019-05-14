@@ -2,7 +2,13 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 
-export default class Component<props, state> extends Nerv.Component<props, state> {
+export default class Component<P, S> extends Nerv.Component<P & {
+  className?: string
+  style?: {
+    [key: string]: string | number
+  } | string
+}, S> {
+  state: S
   classnames (...args): string {
     return classnames(...args)
   }

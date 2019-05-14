@@ -15,7 +15,7 @@ export interface SelectProps {
     onChange?: (retVal: Array<{
       value: string
       label: string
-    }>) => void
+    } | string>) => void
 }
 
 class Select extends Nerv.Component<any, any> {

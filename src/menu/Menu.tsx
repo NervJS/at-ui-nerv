@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import { CSSProperties } from 'react'
 import MenuGroup from './MenuGroup'
 import MenuItem from './MenuItem'

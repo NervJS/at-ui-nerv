@@ -11,7 +11,6 @@ import { CardProps } from '../src/card/card'
 import { CheckboxProps, CheckboxState } from '../src/checkbox/checkbox'
 import { CheckboxGroupProps, CheckboxGroupState } from '../src/checkbox/checkbox-group'
 import { CollapseProps, CollapseState } from '../src/collapse/collapse'
-import { CollapseItemProps, CollapseItemState } from '../src/collapse/collapseItem'
 import { DropdownProps, DropdownState } from '../src/dropdown/dropdown'
 import { IconProps } from '../src/icon/icon'
 import { InputNumberProps, InputNumberState } from '../src/input-number/InputNumber'
@@ -45,17 +44,29 @@ import { TextareaProps } from '../src/textarea/textarea'
 import { TimelineProps } from '../src/timeline/timeline'
 import { TimelineItemProps } from '../src/timeline/timeline-item'
 import { ToolProps } from '../src/tooltip/tooltip'
+import CollapseItem from '../src/collapse/collapseItem'
 
 declare namespace AtUINerv {
+
+  interface Style {
+    [key: string]: string
+  }
+  type ClassName = string
+
+  interface BaseProps {
+    style?: Style
+    className?: ClassName
+  }
+
   // Button
-  export class Button extends Nerv.Component<ButtonProps, any> {
+  export class Button extends Nerv.Component<BaseProps & ButtonProps, any> {
     static Group: typeof ButtonGroup
   }
 
-  export class Alert extends Nerv.Component<AlertProps, AlertState> {}
+  export class Alert extends Nerv.Component<BaseProps & AlertProps, AlertState> {}
 
   // card
-  export class Card extends Nerv.Component<CardProps, any> {}
+  export class Card extends Nerv.Component<BaseProps & CardProps, any> {}
   // loadingbar
   export interface Loadingbar {
     start: () => void
@@ -85,70 +96,70 @@ declare namespace AtUINerv {
   export let Notification: NotificationInterface
 
   // badge
-  export class Badge extends Nerv.Component<BadgeProps, {}> {}
+  export class Badge extends Nerv.Component<BaseProps & BadgeProps, {}> {}
 
   // input
-  export class Input extends Nerv.Component<InputProps, InputState> {}
+  export class Input extends Nerv.Component<BaseProps & InputProps, InputState> {}
 
   // icon
-  export class Icon extends Nerv.Component<IconProps, any> {}
+  export class Icon extends Nerv.Component<BaseProps & IconProps, any> {}
 
   // breadcrumb
   class BreadcrumbItem extends Nerv.Component<
-    BreadCrumbItemProps,
+    BaseProps & BreadCrumbItemProps,
     BreadCrumbItemState
   > {}
-  export class Breadcrumb extends Nerv.Component<BreadcrumbProps, any> {
+  export class Breadcrumb extends Nerv.Component<BaseProps & BreadcrumbProps, any> {
     static Item: typeof BreadcrumbItem
   }
 
   // inputnumber
   export class InputNumber extends Nerv.Component<
-    InputNumberProps,
+    BaseProps & InputNumberProps,
     InputNumberState
   > {}
 
   // checkbox
   class CheckboxGroup extends Nerv.Component<
-    CheckboxGroupProps,
+    BaseProps & CheckboxGroupProps,
     CheckboxGroupState
   > {}
-  export class Checkbox extends Nerv.Component<CheckboxProps, CheckboxState> {
+  export class Checkbox extends Nerv.Component<BaseProps & CheckboxProps, CheckboxState> {
     static Group: typeof CheckboxGroup
   }
 
   // Tag
 
   // const colorArr = ['default', 'primary', 'success', 'error', 'warning', 'info']
-  export class Tag extends Nerv.Component<TagProps, TagState> {}
+  export class Tag extends Nerv.Component<BaseProps & TagProps, TagState> {}
 
   // dropdown
-  export class Dropdown extends Nerv.Component<DropdownProps, DropdownState> {}
+  export class Dropdown extends Nerv.Component<BaseProps & DropdownProps, DropdownState> {}
 
-  export class Select extends Nerv.Component<SelectProps, any> {
+  export class Select extends Nerv.Component<BaseProps & SelectProps, any> {
     static Option: typeof SelectOption
     static OptionGroup: typeof SelectOptionGroup
   }
 
   class RadioButton extends Nerv.Component<
-    RadioButtonProps,
+    BaseProps & RadioButtonProps,
     RadioButtonState
   > {}
 
-  class RadioGroup extends Nerv.Component<RadioGroupProps, any> {}
-  export class Radio extends Nerv.Component<RadioProps, RadioState> {
+  class RadioGroup extends Nerv.Component<BaseProps & RadioGroupProps, any> {}
+  export class Radio extends Nerv.Component<BaseProps & RadioProps, RadioState> {
     static elementName: 'AtRadio'
     static Button: typeof RadioButton
     static Group: typeof RadioGroup
   }
 
   // rate
-  export class Rate extends Nerv.Component<RateProps, RateState> {}
+  export class Rate extends Nerv.Component<BaseProps & RateProps, RateState> {}
 
   // modal
-  class ModalFooter extends Nerv.Component<ModalFooterProps, any> {}
+  class ModalFooter extends Nerv.Component<BaseProps & ModalFooterProps, any> {}
   class ModalBody {}
-  export class Modal extends Nerv.Component<ModalProps, ModalState> {
+  export class Modal extends Nerv.Component<BaseProps & ModalProps, ModalState> {
     static body: typeof ModalBody
     static footer: typeof ModalFooter
     static alert: ModalFunc
@@ -161,67 +172,63 @@ declare namespace AtUINerv {
   }
 
   // collapse
-  class CollapseItem extends Nerv.Component<
-    CollapseItemProps,
-    CollapseItemState
-  > {}
-  export class Collapse extends Nerv.Component<CollapseProps, CollapseState> {
+  export class Collapse extends Nerv.Component<BaseProps & CollapseProps, CollapseState> {
     static Item: typeof CollapseItem
   }
 
   // menu
-  class MenuGroup extends Nerv.Component<MenuGroupProps, any> {}
-  export class Menu extends Nerv.Component<MenuProps, any> {
+  class MenuGroup extends Nerv.Component<BaseProps & MenuGroupProps, any> {}
+  export class Menu extends Nerv.Component<BaseProps & MenuProps, any> {
     static Group: typeof MenuGroup
     static Item: typeof MenuItem
     static Sub: typeof MenuSub
   }
 
   // switch
-  export class Switch extends Nerv.Component<SwitchProps, any> {
+  export class Switch extends Nerv.Component<BaseProps & SwitchProps, any> {
     private value: boolean
     private checkedText: any
     private unCheckedText: any
   }
 
   // tooltip
-  export class Tooltip extends Nerv.Component<ToolProps, any> {}
+  export class Tooltip extends Nerv.Component<BaseProps & ToolProps, any> {}
 
   // slider
-  export class Slider extends Nerv.Component<SliderProps, any> {}
+  export class Slider extends Nerv.Component<BaseProps & SliderProps, any> {}
 
   // textarea
-  export class Textarea extends Nerv.Component<TextareaProps, any> {}
+  export class Textarea extends Nerv.Component<BaseProps & TextareaProps, any> {}
 
   // timeline
-  class TimelineItem extends Nerv.Component<TimelineItemProps, any> {}
-  export class Timeline extends Nerv.Component<TimelineProps, any> {
+  class TimelineItem extends Nerv.Component<BaseProps & TimelineItemProps, any> {}
+  export class Timeline extends Nerv.Component<BaseProps & TimelineProps, any> {
     static Item: typeof TimelineItem
   }
 
   // popover
-  export class Popover extends Nerv.Component<PopoverProps, any> {}
+  export class Popover extends Nerv.Component<BaseProps & PopoverProps, any> {}
 
   // tabs
-  class TabPane extends Nerv.Component<TabPaneProps, any> {}
-  export class Tabs extends Nerv.Component<TabsProps, any> {
+  class TabPane extends Nerv.Component<BaseProps & TabPaneProps, any> {}
+  export class Tabs extends Nerv.Component<BaseProps & TabsProps, any> {
     static Pane: typeof TabPane
   }
 
   // table
-  export class Table extends Nerv.Component<TableProps, any> {}
+  export class Table extends Nerv.Component<BaseProps & TableProps, any> {}
 
   // steps
-  class Step extends Nerv.Component<StepProps, any> {}
-  export class Steps extends Nerv.Component<StepsProps, any> {
+  class Step extends Nerv.Component<BaseProps & StepProps, any> {}
+  export class Steps extends Nerv.Component<BaseProps & StepsProps, any> {
     static Step: typeof Step
   }
 
   // pagination
-  export class Pagination extends Nerv.Component<PaginationProps, any> {}
+  export class Pagination extends Nerv.Component<BaseProps & PaginationProps, any> {}
 
   // progress
-  export class Progress extends Nerv.Component<ProgressProps, any> {}
+  export class Progress extends Nerv.Component<BaseProps & ProgressProps, any> {}
 }
 
 export = AtUINerv

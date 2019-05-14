@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import { calculatePosition } from '../util/util'
 
 type triggerType = 'hover' | 'focus' | 'click'

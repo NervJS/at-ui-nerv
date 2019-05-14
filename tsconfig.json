@@ -37,8 +37,7 @@
     "siteoutput",
     "tests",
     "jest",
-    "__tests__",
-    "**/*.test.ts"
+    "**/*.test.tsx"
   ],
   "compileOnSave": false
 }

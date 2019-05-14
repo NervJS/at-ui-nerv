@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
 export interface InputProps {
   type?: string
@@ -9,6 +9,8 @@ export interface InputProps {
   icon?: string
   prependButton?: boolean
   appendButton?: boolean
+  append?: any
+  prepend?: any
   readonly?: boolean
   disabled?: boolean
   autofocus?: boolean
@@ -16,9 +18,10 @@ export interface InputProps {
   minlength?: number
   max?: number
   min?: number
+  status?: string
   onFocus?: (evt: FocusEvent) => void
   onBlur?: (evt: FocusEvent) => void
-  onInput?: (evt: InputEvent) => void
+  onInput?: (val: string, evt: InputEvent) => void
 }
 
 export interface InputState {

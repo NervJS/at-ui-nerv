@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import { CSSTransition } from 'react-transition-group'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
 export interface AlertProps {
   type?: string

@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import CollapseTransition from '../animations/collapse-transition.jsx'
 import '../animations/collapseanimations.scss'
 
