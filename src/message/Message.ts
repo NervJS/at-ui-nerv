@@ -7,14 +7,15 @@ const defaultType = 'info'
 const instances: VNode[] = []
 let seed = 1
 let zindexSeed = 1010
-export type MessageContent = OptionsContent | string
-export interface OptionsContent {
+
+interface OptionsContent {
   type?: string
   message?: string
   duration: number
   icon?: string
   onClose?: () => void
 }
+export type MessageContent = OptionsContent | string
 interface MessageInterface {
   (options?: OptionsContent | string): void
   close?: (id: string, customCloseFunc: (a: VNode) => void) => void
@@ -43,8 +44,8 @@ const Message: MessageInterface = (
 
   options.onClose = () => {
     (Message as any).close(id, customCloseFunc)
-    Nerv.unmountComponentAtNode(container)
-    document.body.removeChild(container)
+     Nerv.unmountComponentAtNode(container)
+     document.body.removeChild(container)
   }
   const instance = Nerv.createElement(MessageElem, {
     ...options

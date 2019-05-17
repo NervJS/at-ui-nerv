@@ -11,6 +11,7 @@ import { CardProps } from '../src/card/card'
 import { CheckboxProps, CheckboxState } from '../src/checkbox/checkbox'
 import { CheckboxGroupProps, CheckboxGroupState } from '../src/checkbox/checkbox-group'
 import { CollapseProps, CollapseState } from '../src/collapse/collapse'
+import CollapseItem from '../src/collapse/collapseItem'
 import { DropdownProps, DropdownState } from '../src/dropdown/dropdown'
 import { IconProps } from '../src/icon/icon'
 import { InputNumberProps, InputNumberState } from '../src/input-number/InputNumber'
@@ -22,6 +23,7 @@ import MenuSub from '../src/menu/MenuSub'
 import { MessageContent } from '../src/message/Message'
 import { ModalFunc, ModalProps, ModalState } from '../src/modal/modal'
 import { ModalFooterProps } from '../src/modal/ModalFooter'
+import { NotificationContent } from '../src/notification/notification'
 import { PaginationProps } from '../src/pagination/pagination'
 import { PopoverProps } from '../src/popover/popover'
 import { ProgressProps } from '../src/progress/progress'
@@ -44,7 +46,6 @@ import { TextareaProps } from '../src/textarea/textarea'
 import { TimelineProps } from '../src/timeline/timeline'
 import { TimelineItemProps } from '../src/timeline/timeline-item'
 import { ToolProps } from '../src/tooltip/tooltip'
-import CollapseItem from '../src/collapse/collapseItem'
 
 declare namespace AtUINerv {
 
@@ -89,7 +90,7 @@ declare namespace AtUINerv {
   // notification
 
   interface NotificationInterface {
-    (options: MessageContent): void
+    (options: NotificationContent): void
     close?: (id: string, customCloseFunc: (a: VNode) => void) => void
     closeAll?: () => void
   }

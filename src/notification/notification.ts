@@ -2,7 +2,7 @@ import * as Nerv from 'nervjs'
 import NotificationElem from './notificationElem'
 import { VNode } from 'nerv-shared'
 
-interface OptionsContent {
+export interface NotificationContent {
   type?: string
   title?: string
   message?: string
@@ -12,7 +12,7 @@ interface OptionsContent {
 }
 
 interface NotificationInterface {
-  (options: OptionsContent): void
+  (options: NotificationContent): void
   close?: (id: string, customCloseFunc: (a: VNode) => void) => void
   closeAll?: () => void
 }
