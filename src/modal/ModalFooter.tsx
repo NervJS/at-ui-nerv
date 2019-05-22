@@ -25,7 +25,6 @@ class ModalFooter extends Component<ModalFooterProps, any> {
       <div className={this.classnames('at-modal__footer', className as any)} style={style}>
         {showCancel ? <Button onClick={onCancel}>{}{localeCancelText}</Button> : null}
         <Button type='primary' onClick={onConfirm}>
-          {}
           {localeOKText}
         </Button>
       </div>

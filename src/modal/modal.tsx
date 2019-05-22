@@ -5,7 +5,23 @@ import { CSSTransition } from 'react-transition-group'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 
-export type ModalFunc = (config) => any
+export type ModalFunc<T> = (config: T) => Promise<any>
+
+type ModalAlertConfig = Pick<ModalProps, 'title' | 'content' | 'callback'>
+type ModalConfirmConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalPromptConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalInfoConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalSuccessConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalWarningConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalErrorConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+
+export type ModalAlert = ModalFunc<ModalAlertConfig>
+export type ModalInfo = ModalFunc<ModalInfoConfig>
+export type ModalSuccess = ModalFunc<ModalSuccessConfig>
+export type ModalError = ModalFunc<ModalErrorConfig>
+export type ModalWarning = ModalFunc<ModalWarningConfig>
+export type ModalConfirm = ModalFunc<ModalConfirmConfig>
+export type ModalPrompt = ModalFunc<ModalPromptConfig>
 
 export interface ModalProps {
   title?: string
@@ -22,6 +38,9 @@ export interface ModalProps {
   closeOnPressEsc?: boolean
   type?: string
   willUnmount?: () => void
+  onConfirm?: () => void
+  callback?: () => void
+  onCancel?: () => void
 }
 
 export interface ModalState {
@@ -38,13 +57,13 @@ export interface ModalState {
 class Modal extends Component<ModalProps, ModalState> {
   static body: typeof ModalBody
   static footer: typeof ModalFooter
-  static alert: ModalFunc
-  static info: ModalFunc
-  static success: ModalFunc
-  static error: ModalFunc
-  static warning: ModalFunc
-  static confirm: ModalFunc
-  static prompt: ModalFunc
+  static alert: ModalAlert
+  static info: ModalInfo
+  static success: ModalSuccess
+  static error: ModalError
+  static warning: ModalWarning
+  static confirm: ModalConfirm
+  static prompt: ModalPrompt
 
   static defaultProps = {
     value: false,

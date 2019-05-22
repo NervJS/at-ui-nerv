@@ -23,7 +23,6 @@ Modal.alert = (config) => {
           }
         }}
       >
-        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
@@ -52,7 +51,6 @@ Modal.confirm = (config) => {
           }
         }}
       >
-        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={true} />
       </Modal>
@@ -81,7 +79,6 @@ Modal.prompt = (config) => {
           }
         }}
       >
-        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={true} />
       </Modal>
@@ -118,7 +115,6 @@ Object.keys(modes).forEach((mode) => {
             }
           }}
         >
-          {}
           <ModalBody>{content}</ModalBody>
           <ModalFooter showCancel={false} />
         </Modal>

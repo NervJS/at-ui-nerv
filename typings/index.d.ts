@@ -21,7 +21,17 @@ import { MenuGroupProps } from '../src/menu/MenuGroup'
 import MenuItem from '../src/menu/MenuItem'
 import MenuSub from '../src/menu/MenuSub'
 import { MessageContent } from '../src/message/Message'
-import { ModalFunc, ModalProps, ModalState } from '../src/modal/modal'
+import {
+  ModalAlert,
+  ModalConfirm,
+  ModalError,
+  ModalInfo,
+  ModalPrompt,
+  ModalProps,
+  ModalState,
+  ModalSuccess,
+  ModalWarning
+} from '../src/modal/modal'
 import { ModalFooterProps } from '../src/modal/ModalFooter'
 import { NotificationContent } from '../src/notification/notification'
 import { PaginationProps } from '../src/pagination/pagination'
@@ -163,13 +173,13 @@ declare namespace AtUINerv {
   export class Modal extends Nerv.Component<BaseProps & ModalProps, ModalState> {
     static body: typeof ModalBody
     static footer: typeof ModalFooter
-    static alert: ModalFunc
-    static info: ModalFunc
-    static success: ModalFunc
-    static error: ModalFunc
-    static warning: ModalFunc
-    static confirm: ModalFunc
-    static prompt: ModalFunc
+    static alert: ModalAlert
+    static info: ModalInfo
+    static success: ModalSuccess
+    static error: ModalError
+    static warning: ModalWarning
+    static confirm: ModalConfirm
+    static prompt: ModalPrompt
   }
 
   // collapse
