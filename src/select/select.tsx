@@ -12,6 +12,7 @@ export interface SelectProps {
     circle?: boolean
     disabled?: boolean
     value?: string | number
+    onClick?: (event: MouseEvent) => void
     onChange?: (retVal: Array<{
       value: string
       label: string
@@ -368,6 +369,9 @@ class Select extends Nerv.Component<any, any> {
       if (this.props.disabled) { return }
       // event.stopPropagation()
       this.clickTarget = event.target
+      if (this.props.onClick) {
+        this.props.onClick(event)
+      }
       this.toggleDropDown()
       if (this.props.filterable) {
         const optionShow: any[] = []
