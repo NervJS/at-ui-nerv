@@ -1,6 +1,8 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import TabPane from './tab-pane'
+import Component from '../../libs/component'
+
 export interface TabsProps {
   activeIndex?: number
   className?: string
@@ -8,19 +10,20 @@ export interface TabsProps {
   type?: 'card' | 'line'
   closable?: boolean | string
   animated?: boolean | string
-  onClick?: (event: MouseEvent) => void
-  onDragLeave?: (event: DragEvent) => void
-  onDragOver?: (event: DragEvent) => void
-  onDrop?: (event: DragEvent) => void
-  onMouseOver?: (event: MouseEvent) => void
-  onMouseEnter?: (event: MouseEvent) => void
-  onMouseOut?: (event: MouseEvent) => void
-  onMouseLeave?: (event: MouseEvent) => void
+  value?: string
+  onClick?
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
   onChange?: (index: number) => void
   onTabRemove?: (index: number, event: MouseEvent) => void
 }
 
-class Tabs extends Nerv.Component<TabsProps, any> {
+class Tabs extends Component<TabsProps, any> {
   static Pane: typeof TabPane
   private prevable: boolean
   private nextable: boolean
@@ -211,8 +214,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
             </div>
           )
         }
-      },
-      null
+      }
     )
     extra = (
       <div className='at-tabs__extra'>
@@ -343,8 +345,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
             child.props.index = index
             childrenResult.push(child)
           }
-        },
-        null
+        }
       )
       return childrenResult
     } else {
@@ -356,8 +357,7 @@ class Tabs extends Nerv.Component<TabsProps, any> {
             child.props.index = index
             childrenResult.push(child)
           }
-        },
-        null
+        }
       )
       return childrenResult
     }

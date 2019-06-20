@@ -2,6 +2,7 @@ import * as Nerv from 'nervjs'
 import Component from '../../libs/component'
 
 export interface CheckboxGroupProps {
+  value?
   onChange?: (e) => void
 }
 
@@ -22,17 +23,19 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
     this.vList = this.props.value
     if (this.props.children) {
       Nerv.Children.map(
-        this.props.children as object[],
+        this.props.children,
         (child, index) => {
-          const { props } = child
-          if (props.checked) {
-            const idx = this.state.valueList.indexOf(props.label || props.children)
-            if (idx === -1) {
-              this.state.valueList.push(props.label)
+          if (!child) { return }
+          if (typeof child === 'object' && 'props' in child) {
+            const { props } = child
+            if (props.checked) {
+              const idx = this.state.valueList.indexOf(props.label || props.children)
+              if (idx === -1) {
+                this.state.valueList.push(props.label)
+              }
             }
           }
-        },
-        this
+        }
       )
     }
   }
@@ -75,27 +78,26 @@ class CheckboxGroup extends Component<CheckboxGroupProps, CheckboxGroupState> {
   render () {
     const children = this.props.children
       ? Nerv.Children.map(
-          this.props.children as object[],
-          (child, idx, arr) => {
-            if (!child) {
-              return null
-            }
-            const { elementName } = child.type
-            if (elementName !== 'AtCheckbox') {
-              return null
-            }
+          this.props.children,
+          (child, idx) => {
+            if (!child) { return }
+            if (typeof child === 'object' && 'props' in child) {
+              const elementName = child.type['elementName']
+              if (elementName !== 'AtCheckbox') {
+                return null
+              }
 
-            return Nerv.cloneElement(child, {
-              ...child.props,
-              key: idx,
-              checked:
-                child.props.checked ||
-                this.state.valueList.indexOf(child.props.value as never) >= 0 ||
-                this.state.valueList.indexOf(child.props.label as never) >= 0,
-              onChange: this.onChangeHandle.bind(this, child.props.value || child.props.label)
-            })
-          },
-          this
+              return Nerv.cloneElement(child, {
+                ...child.props,
+                key: idx,
+                checked:
+                  child.props.checked ||
+                  this.state.valueList.indexOf(child.props.value as never) >= 0 ||
+                  this.state.valueList.indexOf(child.props.label as never) >= 0,
+                onChange: this.onChangeHandle.bind(this, child.props.value || child.props.label)
+              })
+            }
+          }
         )
       : []
     return <div className={'at-checkbox-group'}>{children}</div>

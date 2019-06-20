@@ -24,15 +24,13 @@ describe('dropdown test', () => {
     const onChange = sinon.spy()
     const DropdownElem = (
       <Dropdown dropdownChange={onChange} trigger='click'>
-        {}
         <a href='#'>Hover</a>
         <Dropdown.Menu>
-          {}
-          <Dropdown.Item>{}黄金糕</Dropdown.Item>
-          <Dropdown.Item>{}狮子头</Dropdown.Item>
-          <Dropdown.Item>{}螺蛳粉</Dropdown.Item>
-          <Dropdown.Item disabled>{}双皮奶</Dropdown.Item>
-          <Dropdown.Item divided>{}蚵仔煎</Dropdown.Item>
+          <Dropdown.Item>黄金糕</Dropdown.Item>
+          <Dropdown.Item>狮子头</Dropdown.Item>
+          <Dropdown.Item>螺蛳粉</Dropdown.Item>
+          <Dropdown.Item disabled>双皮奶</Dropdown.Item>
+          <Dropdown.Item divided>蚵仔煎</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     )
@@ -52,22 +50,23 @@ describe('dropdown test', () => {
     const onChange = sinon.spy()
     const DropdownElem = (
       <Dropdown dropdownChange={onChange} trigger='click'>
-        {}
         <a href='#'>Hover</a>
         <Dropdown.Menu>
-          {}
-          <Dropdown.Item>{}黄金糕</Dropdown.Item>
-          <Dropdown.Item>{}狮子头</Dropdown.Item>
-          <Dropdown.Item>{}螺蛳粉</Dropdown.Item>
-          <Dropdown.Item disabled>{}双皮奶</Dropdown.Item>
-          <Dropdown.Item divided>{}蚵仔煎</Dropdown.Item>
+          <Dropdown.Item>黄金糕</Dropdown.Item>
+          <Dropdown.Item>狮子头</Dropdown.Item>
+          <Dropdown.Item>螺蛳粉</Dropdown.Item>
+          <Dropdown.Item disabled>双皮奶</Dropdown.Item>
+          <Dropdown.Item divided>蚵仔煎</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     )
     const component = Nerv.render(DropdownElem as VNode, scratch)
     const trigger = $(component.vnode.dom).find('.at-dropdown__trigger')
     trigger.trigger('click')
-    $(Nerv.findDOMNode(component)).find('.at-dropdown-menu__item').eq(0).trigger('click')
+    $(Nerv.findDOMNode(component))
+      .find('.at-dropdown-menu__item')
+      .eq(0)
+      .trigger('click')
     setTimeout(() => {
       expect(onChange.called).toBeTruthy()
       done()

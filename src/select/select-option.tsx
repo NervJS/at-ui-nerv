@@ -1,4 +1,5 @@
 import * as Nerv from 'nervjs'
+import Component from '../../libs/component'
 
 export interface SelectOptionProps {
   className?: string
@@ -8,16 +9,18 @@ export interface SelectOptionProps {
   loading?: boolean
   circle?: boolean
   disabled?: boolean
+  key?
   value?: string | number
+  chosenIndex?
+  onPageSizeChange?
+  onClick?
 }
 
-class SelectOption extends Nerv.Component<SelectOptionProps, any> {
+class SelectOption extends Component<SelectOptionProps, any> {
   private $li: any
   constructor (props: SelectOptionProps) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
-    this.state = {
-    }
+    this.state = {}
     this.$li = null
   }
   componentWillReceiveProps (nextProps) {
@@ -25,14 +28,18 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
   }
 
   handleClick = (e: React.MouseEvent<HTMLLIElement>) => {
-
     const onClick = this.props.onClick
     const index = this.props.key
     const onPageSizeChange = this.props.onPageSizeChange
-    if(onPageSizeChange) {onPageSizeChange(e)}
+    if (onPageSizeChange) {
+      onPageSizeChange(e)
+    }
 
     if (onClick) {
-      if (this.props.disabled) {onClick(e, index, true); return}
+      if (this.props.disabled) {
+        onClick(e, index, true)
+        return
+      }
       onClick(e, index)
     }
   }
@@ -42,19 +49,30 @@ class SelectOption extends Nerv.Component<SelectOptionProps, any> {
     let classname = 'at-select__option'
 
     // classname += (!!~this.props.chosenIndex) && this.props.chosenIndex == this.props.key ? ' at-select__option--selected': ''
-    classname += this.props.chosenIndex && !!~this.props.chosenIndex.indexOf(this.props.key) ? ' at-select__option--selected' : ''
+    classname +=
+      this.props.chosenIndex &&
+      !!~this.props.chosenIndex.indexOf(this.props.key)
+        ? ' at-select__option--selected'
+        : ''
     if (props.disabled) {
       classname += ' at-select__option--disabled'
     }
-      // <SelectOption>{i}  xxx</SelectOption>  最好放进一个变量中，否则children会分成2个数组 {i} 和xxx
+    // <SelectOption>{i}  xxx</SelectOption>  最好放进一个变量中，否则children会分成2个数组 {i} 和xxx
     return (
-        <li ref={(li)=>{this.$li = li}} className={classname} onClick={this.handleClick as any}>{children}</li>
+      <li
+        ref={(li) => {
+          this.$li = li
+        }}
+        className={classname}
+        onClick={this.handleClick as any}
+      >
+        {children}
+      </li>
     )
   }
-  componentDidMount () {
 
-  }
   componentDidUpdate () {
+    if (!this.props.style) { return }
     for (const item in this.props.style) {
       this.$li.style[item] = this.props.style[item]
     }

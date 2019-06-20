@@ -33,10 +33,9 @@ describe('modal test', () => {
   })
   it('use Modal as component ', (done) => {
     const modalJSX = (
-      <Modal value={true} title={'这是标题1'}>
-        {}
+      <Modal value title={'这是标题1'}>
         <Modal.body style='text-align:center;'>
-          {} <p>能看到这里的内容吗？</p>
+          <p>能看到这里的内容吗？</p>
         </Modal.body>
         <Modal.footer />
       </Modal>
@@ -121,10 +120,9 @@ describe('modal test', () => {
   it('确认 btn should trigger onConfirm', (done) => {
     const onConfirm = sinon.spy()
     const modalJSX = (
-      <Modal value={true} title={'这是标题3'} onConfirm={onConfirm}>
-        {}
+      <Modal value title={'这是标题3'} onConfirm={onConfirm}>
         <Modal.body style='text-align:center;'>
-          {} <p>能看到这里的内容吗？</p>
+          <p>能看到这里的内容吗？</p>
         </Modal.body>
         <Modal.footer />
       </Modal>
@@ -148,14 +146,13 @@ describe('modal test', () => {
     const onCancel = sinon.spy()
     const modalJSX = (
       <Modal
-        value={true}
+        value
         title={'这是标题4'}
         type={'success'}
         onCancel={onCancel}
       >
-        {}
         <Modal.body style={{ textAlign: 'center' }}>
-          {} <p>能看到这里的内容吗？</p>
+          <p>能看到这里的内容吗？</p>
         </Modal.body>
         <Modal.footer showCancel />
       </Modal>
@@ -184,10 +181,9 @@ describe('modal test', () => {
     }
     for (const mode in modes) {
       const modalJSX = (
-        <Modal value={true} type={mode}>
-          {}
+        <Modal value type={mode}>
           <Modal.body style={{ textAlign: 'center' }}>
-            {} <p>能看到这里的内容吗？</p>
+            <p>能看到这里的内容吗？</p>
           </Modal.body>
           <Modal.footer showCancel />
         </Modal>

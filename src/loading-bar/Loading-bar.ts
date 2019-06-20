@@ -1,9 +1,12 @@
 import * as Nerv from 'nervjs'
 
 import LoadingbarElem from './LoadingbarElem'
+
 let instance
 
 class LoadingBar {
+  container = document.createElement('div')
+
   constructor (options) {
     options = options || {}
 
@@ -14,7 +17,6 @@ class LoadingBar {
     Nerv.render(instance, this.container)
     // document.body.appendChild(instance.dom)
   }
-  container = document.createElement('div')
 
   update (newOptions) {
     if (newOptions.percent) {

@@ -22,21 +22,21 @@ describe('timeline test', () => {
   it('basic render', () => {
     const timelineJSX = (
       <Timeline>
-        {}
+
         <Timeline.Item>
-          {}
+
           <p>刷牙洗脸</p>
         </Timeline.Item>
         <Timeline.Item>
-          {}
+
           <p>吃早餐</p>
         </Timeline.Item>
         <Timeline.Item>
-          {}
+
           <p>上班</p>
         </Timeline.Item>
         <Timeline.Item>
-          {}
+
           <p>睡觉</p>
         </Timeline.Item>
       </Timeline>
@@ -56,9 +56,9 @@ describe('timeline test', () => {
     Object.keys(colors).forEach((color) => {
       const timelineJSX = (
         <Timeline>
-          {}
+
           <Timeline.Item color={color}>
-            {}
+
             <p>刷牙洗脸</p>
           </Timeline.Item>
         </Timeline>
@@ -71,21 +71,21 @@ describe('timeline test', () => {
   it('pending property should render ghost point', () => {
     const timelineJSX = (
       <Timeline pending>
-        {}
+
         <Timeline.Item>
-          {}
+
           <p>刷牙洗脸</p>
         </Timeline.Item>
         <Timeline.Item>
-          {}
+
           <p>吃早餐</p>
         </Timeline.Item>
         <Timeline.Item>
-          {}
+
           <p>上班</p>
         </Timeline.Item>
         <Timeline.Item>
-          {}
+
           <p>睡觉</p>
         </Timeline.Item>
       </Timeline>
@@ -102,9 +102,9 @@ describe('timeline test', () => {
   it('custom slot', () => {
     const timelineJSX = (
       <Timeline>
-        {}
+
         <Timeline.Item color='blue'>
-          {}
+
           <i slot='dot' className='icon icon-github' />
           <p>刷牙洗脸</p>
         </Timeline.Item>

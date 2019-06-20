@@ -1,6 +1,5 @@
 import * as Nerv from 'nervjs'
 import NotificationElem from './notificationElem'
-import { VNode } from 'nerv-shared'
 
 export interface NotificationContent {
   type?: string
@@ -13,12 +12,13 @@ export interface NotificationContent {
 
 interface NotificationInterface {
   (options: NotificationContent): void
-  close?: (id: string, customCloseFunc: (a: VNode) => void) => void
+  close?: (id: string, customCloseFunc: (a: Instance) => void) => void
   closeAll?: () => void
 }
 
 const noticeType = ['success', 'error', 'warning', 'info']
-const instances: VNode[] = []
+type Instance = React.ComponentElement<any, NotificationElem>
+const instances: Instance[] = []
 let seed = 1
 let zindexSeed = 1010
 
@@ -27,7 +27,7 @@ const Notification: NotificationInterface = (options) => {
   const id = `notification_${seed++}`
   const container = document.createElement('div')
   document.body.appendChild(container)
-  options.onClose = function () {
+  options.onClose = () => {
     (Notification as any).close(id, onClose)
     Nerv.unmountComponentAtNode(container)
     document.body.removeChild(container)
@@ -39,8 +39,8 @@ const Notification: NotificationInterface = (options) => {
 
   instance['id'] = id
 
-  Nerv.render(instance as any, container)
-  instance.dom.style.zIndex = zindexSeed++
+  Nerv.render(instance as any, container);
+  (instance as any).dom.style.zIndex = zindexSeed++
 
   const offset = 0
   let topDist = offset
@@ -49,14 +49,14 @@ const Notification: NotificationInterface = (options) => {
     topDist += (instances[i] as any).dom.offsetHeight + 8
   }
 
-  topDist += 16
-  instance.dom.style.top = `${topDist}px`
-  instances.push(instance as VNode)
+  topDist += 16;
+  (instance as any).dom.style.top = `${topDist}px`
+  instances.push(instance)
 
   return instance
 }
 
-Notification.close = function (id, onClose) {
+Notification.close = (id, onClose) => {
   const len = instances.length
   let index
   let removedHeight
@@ -75,7 +75,7 @@ Notification.close = function (id, onClose) {
   }
   if (len > 1) {
     for (i = index; i < len - 1; i++) {
-      (instances[i].dom as HTMLElement).style.top = `${parseInt((instances[i].dom as HTMLElement).style.top as never) -
+      (instances[i] as any).dom.style.top = `${parseInt((instances[i] as any).dom.style.top as never, 10) -
         removedHeight -
         16}px`
     }

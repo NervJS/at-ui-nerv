@@ -24,9 +24,7 @@ describe('Collapse', () => {
     const onChange = sinon.spy()
     const collapseJSX = (
       <Collapse onChange={onChange}>
-        {}
         <Collapse.Item key={'test'}>
-          {}
           <div>test</div>
         </Collapse.Item>
       </Collapse>
@@ -45,13 +43,10 @@ describe('Collapse', () => {
     const onChange = sinon.spy()
     const accordionJSX = (
       <Collapse accordion onChange={onChange}>
-        {}
         <Collapse.Item title='title'>
-          {}
           <div>test</div>
         </Collapse.Item>
         <Collapse.Item>
-          {}
           <div>test</div>
         </Collapse.Item>
       </Collapse>
@@ -91,13 +86,9 @@ describe('Collapse', () => {
     const onChange = sinon.spy()
     const nestJSX = (
       <Collapse onChange={onChange}>
-        {}
         <Collapse.Item>
-          {}
           <Collapse accordion>
-            {}
             <Collapse.Item title='嵌套面板'>
-              {}
               <div>嵌套面板的内容</div>
             </Collapse.Item>
           </Collapse>

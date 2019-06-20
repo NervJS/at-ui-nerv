@@ -1,12 +1,15 @@
-import * as Nerv from 'nervjs'
-import Component from '../../libs/component'
-import { CSSTransition } from 'react-transition-group'
 import { VNode } from 'nerv-shared'
+import * as Nerv from 'nervjs'
+import { CSSTransition } from 'react-transition-group'
+
+import Component from '../../libs/component'
 
 interface MessageProps {
   message: string | VNode
   duration: number
   type: string
+  onClose: (...args: any[]) => any
+  icon
 }
 
 interface MessageState {
@@ -20,8 +23,8 @@ class Message extends Component<MessageProps, MessageState> {
     type: 'info'
   }
   timer: any
-  constructor (...args) {
-    super(...args)
+  constructor (props, ctx) {
+    super(props, ctx)
     this.state = {
       visible: false
     }
@@ -56,9 +59,7 @@ class Message extends Component<MessageProps, MessageState> {
       onClose()
     }
   }
-  destroy () {
-
-  }
+  destroy () {/* TODO  */}
   render () {
     const { message, type, icon } = this.props
     const { visible } = this.state

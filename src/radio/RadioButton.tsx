@@ -5,6 +5,9 @@ export interface RadioButtonProps {
   label: string | number
   value?: string | number
   disabled?: boolean
+  onChange?
+  name?
+  size?
 }
 
 export interface RadioButtonState {

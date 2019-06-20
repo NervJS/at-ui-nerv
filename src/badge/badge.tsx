@@ -9,8 +9,6 @@ export interface BadgeProps {
   status?: string
 }
 
-// interface BadgeState {}
-
 class Badge extends Component<BadgeProps, {}> {
   static defaultProps = {
     value: '',
@@ -18,9 +16,6 @@ class Badge extends Component<BadgeProps, {}> {
     dot: false,
     show: true,
     status: 'error'
-  }
-  constructor (...args) {
-    super(...args)
   }
 
   render () {

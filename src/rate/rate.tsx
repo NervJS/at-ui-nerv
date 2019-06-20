@@ -10,6 +10,7 @@ export interface RateProps {
   icon?: string
   onChange?: (a) => void
   allowClear?: boolean
+  onHoverChange?
 }
 
 export interface RateState {
@@ -167,8 +168,8 @@ class Rate extends Component<RateProps, RateState> {
   render () {
     const { disabled, icon, count, showText, children } = this.props
     const { currentValue } = this.state
-    const buildItem = (c: number): Nerv.Component[] => {
-      const result: Nerv.Component[] = []
+    const buildItem = (c: number) => {
+      const result: JSX.Element[] = []
       for (let i = 1; i <= c; i++) {
         result.push((
           <li className={this.classnames('at-rate__item', this.clacClass(i))}>
@@ -183,7 +184,7 @@ class Rate extends Component<RateProps, RateState> {
               />
             </i>
           </li>
-        ) as never)
+        ))
       }
       return result
     }

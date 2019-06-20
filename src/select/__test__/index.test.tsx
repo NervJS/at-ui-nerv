@@ -50,10 +50,10 @@ describe('select test', () => {
         return  <Modal value={true}
                   title={'xxxx'}
                   width={1000}>
-          {}      <Modal.body>
-            {}
+                 <Modal.body>
+
                   <Select onChange={this.handleOnChange} value={this.state.value}>
-                      {}
+
                       {select}
                   </Select>
                   </Modal.body>
@@ -61,7 +61,7 @@ describe('select test', () => {
       }
       renderSelectItem () {
         return this.state.list.map((item) => (
-              <Select.Option value={item.id}>{}{item.name}</Select.Option>
+              <Select.Option value={item.id}> {item.name}</Select.Option>
           ))
       }
       componentDidMount () {
@@ -87,9 +87,9 @@ describe('select test', () => {
 
   it('test class', () => {
     const select = <Select style='width:100px;' size='large'>
-                      {}
-                      <Select.Option>{}'深圳'</Select.Option>
-                      <Select.Option>{}'广州'</Select.Option>
+
+                      <Select.Option> '深圳'</Select.Option>
+                      <Select.Option> '广州'</Select.Option>
                   </Select>
     const component = Nerv.render(select as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))
@@ -98,9 +98,9 @@ describe('select test', () => {
 
   it('test disabled class', () => {
     const select = <Select style='width:100px;' disabled>
-                      {}
-                      <Select.Option>{}'深圳'</Select.Option>
-                      <Select.Option>{}'广州'</Select.Option>
+
+                      <Select.Option> '深圳'</Select.Option>
+                      <Select.Option> '广州'</Select.Option>
                   </Select>
     const component = Nerv.render(select as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))
@@ -110,9 +110,9 @@ describe('select test', () => {
   it('test onChange', (done) => {
     const onChange = sinon.spy()
     const select = <Select style='width:100px;' onChange={onChange}>
-                      {}
-                      <Select.Option>{}'深圳'</Select.Option>
-                      <Select.Option>{}'广州'</Select.Option>
+
+                      <Select.Option> '深圳'</Select.Option>
+                      <Select.Option> '广州'</Select.Option>
                   </Select>
     const component = Nerv.render(select as VNode, scratch)
     const dom = $(Nerv.findDOMNode(component))

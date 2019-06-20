@@ -16,30 +16,32 @@ class Card extends Component<CardProps, any> {
   }
   render () {
     const { bordered, noHover, bodyStyle, loading, children, style } = this.props
-    let titleSlot = null
-    let extraSlot = null
-    let loadingSlot = null
+    let titleSlot
+    let extraSlot
+    let loadingSlot
     const contentSlot = []
     Nerv.Children.forEach(
-      children as object[],
+      children,
       (child, index) => {
-        const { slot } = child.props
-        delete child.props.slot
-        switch (slot) {
-          case 'title':
-            titleSlot = child
-            break
-          case 'extra':
-            extraSlot = child
-            break
-          case 'loading':
-            loadingSlot = child
-            break
-          default:
-            contentSlot.push(child as never)
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          const { slot } = child.props
+          delete child.props.slot
+          switch (slot) {
+            case 'title':
+              titleSlot = child
+              break
+            case 'extra':
+              extraSlot = child
+              break
+            case 'loading':
+              loadingSlot = child
+              break
+            default:
+              contentSlot.push(child as never)
+          }
         }
-      },
-      this
+      }
     )
     return (
       <div

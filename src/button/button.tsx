@@ -18,7 +18,6 @@ export interface ButtonProps {
   disabled?: boolean
   onClick?: (evt: MouseEvent) => void
 }
-
 class Button extends Component<ButtonProps, any> {
   static Group: typeof ButtonGroup
 

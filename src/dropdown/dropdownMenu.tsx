@@ -3,6 +3,8 @@ import Component from '../../libs/component'
 import { CSSTransition } from 'react-transition-group'
 
 interface DropdownMenuProps {
+  show?
+  rootElem
   placement?:
     | 'top'
     | 'top-left'
@@ -36,14 +38,16 @@ class DropdownMenu extends Component<DropdownMenuProps, any> {
           }}
         >
           {Nerv.Children.map(
-            children as any,
+            children,
             (child, idx) => {
-              return Nerv.cloneElement(child, {
-                ...child.props,
-                rootElem: this.props.rootElem
-              })
-            },
-            this
+              if (!child) { return }
+              if (typeof child === 'object' && 'props' in child) {
+                return Nerv.cloneElement(child, {
+                  ...child.props,
+                  rootElem: this.props.rootElem
+                })
+              }
+            }
           )}
           {/* {children} */}
         </ul>

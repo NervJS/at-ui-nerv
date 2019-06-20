@@ -6,6 +6,7 @@ export interface TagProps {
   name?: string | number
   color?: string
   closable?: boolean
+  onClose?
 }
 
 export interface TagState {

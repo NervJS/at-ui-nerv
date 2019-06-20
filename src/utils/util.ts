@@ -25,7 +25,7 @@ export function camelCase (name) {
 }
 
 export function getStyle (element, styleName) {
-  if (!element || !styleName) return null
+  if (!element || !styleName) { return null }
 
   styleName = camelCase(styleName)
   if (styleName === 'float') {
@@ -33,7 +33,7 @@ export function getStyle (element, styleName) {
   }
 
   try {
-    const computed = document.defaultView.getComputedStyle(element, '')
+    const computed = document.defaultView!.getComputedStyle(element, '')
     return element.style[styleName] || computed ? computed[styleName] : null
   } catch (e) {
     return element.style[styleName]
@@ -82,8 +82,8 @@ export function deepCopy (data) {
 }
 
 export function hasClass (el, cls) {
-  if (!el || !cls) return false
-  if (cls.indexOf(' ') !== -1) throw new Error('className should not contain space.')
+  if (!el || !cls) { return false }
+  if (cls.indexOf(' ') !== -1) { throw new Error('className should not contain space.') }
   if (el.classList) {
     return el.classList.contains(cls)
   }
@@ -91,14 +91,14 @@ export function hasClass (el, cls) {
 }
 
 export function addClass (el, cls) {
-  if (!el) return
+  if (!el) { return }
 
   const classes = (cls || '').split(' ')
   let curClass = el.className
 
   for (let i = 0, j = classes.length; i < j; i++) {
     const clsName = classes[i]
-    if (!clsName) continue
+    if (!clsName) { continue }
 
     if (el.classList) {
       el.classList.add(clsName)
@@ -112,13 +112,13 @@ export function addClass (el, cls) {
 }
 
 export function removeClass (el, cls) {
-  if (!el || !cls) return
+  if (!el || !cls) { return }
   const classes = cls.split(' ')
   let curClass = ` ${el.className} `
 
   for (let i = 0, j = classes.length; i < j; i++) {
     const clsName = classes[i]
-    if (!clsName) continue
+    if (!clsName) { continue }
 
     if (el.classList) {
       el.classList.remove(clsName)
@@ -142,13 +142,13 @@ export function findComponentUpward (context, componentName, componentNames) {
   let name = parent.$options.name
   while (parent && (!name || componentNames.indexOf(name) < 0)) {
     parent = parent.$parent
-    if (parent) name = parent.$options.name
+    if (parent) { name = parent.$options.name }
   }
 
   return parent
 }
 
-export function findComponentsUpward (context, componentName, components = []) {
+export function findComponentsUpward (context, componentName, components: any[] = []) {
   let parent = context.$parent
   let name = parent.$options.name
 
@@ -171,7 +171,7 @@ export function findComponentDownward (context, componentName) {
   let children
 
   if (childrens.length) {
-    childrens.forEach(child => {
+    childrens.forEach((child) => {
       if (child.$options.name === componentName) {
         children = child
       }
@@ -186,7 +186,7 @@ export function findComponentDownward (context, componentName) {
         break
       } else {
         children = findComponentDownward(child, componentName)
-        if (children) break
+        if (children) { break }
       }
     }
   }
@@ -194,11 +194,11 @@ export function findComponentDownward (context, componentName) {
   return children
 }
 
-export function findComponentsDownward (context, componentName, components = []) {
+export function findComponentsDownward (context, componentName, components: any[] = []) {
   const childrens = context.$children
 
   if (childrens.length) {
-    childrens.forEach(child => {
+    childrens.forEach((child) => {
       const subChildren = child.$children
       const name = child.$options.name
 
@@ -217,7 +217,7 @@ export function findComponentsDownward (context, componentName, components = [])
   return components
 }
 
-export function debounce (func, wait, immediate) {
+export function debounce (func, wait, immediate?) {
   let timeout
   let args
   let context
@@ -258,14 +258,14 @@ export function debounce (func, wait, immediate) {
   }
 }
 
-export function throttle (fn, threshhold, scope) {
+export function throttle (fn, threshhold, scope?) {
   threshhold || (threshhold = 250)
   let last = +new Date()
   let deferTimer
   return function () {
-    let context = scope || this
-    let now = +new Date()
-    let args = arguments
+    const context = scope || this
+    const now = +new Date()
+    const args = arguments
     if (last && now < last + threshhold) {
       clearTimeout(deferTimer)
       deferTimer = setTimeout(() => {
@@ -280,14 +280,14 @@ export function throttle (fn, threshhold, scope) {
 }
 
 export function styleStr2Obj (str) {
-  let obj = {}
+  const obj = {}
   if (typeof str === 'string') {
-    let arr = str.split(';')
+    const arr = str.split(';')
     arr.forEach((item) => {
       if (item.length > 0) {
-        let arrTemp = item.split(':')
-        let key = arrTemp[0]
-        let value = arrTemp[1]
+        const arrTemp = item.split(':')
+        const key = arrTemp[0]
+        const value = arrTemp[1]
         obj[key] = value
       }
     })
@@ -295,7 +295,7 @@ export function styleStr2Obj (str) {
   return obj
 }
 export function calculatePosition (placement, trigger, popover) {
-  let position = {
+  const position = {
     left: 0,
     top: 0
   }

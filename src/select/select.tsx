@@ -345,7 +345,7 @@ class Select extends Nerv.Component<any, any> {
       let count = 0
       this.propsSelectOption = []
       this.searchOption = []
-      Nerv.Children.forEach(props.children as any, (child, index) => {
+      Nerv.Children.forEach(props.children, (child, index) => {
         if (child.name !== 'SelectOptionGroup') {
           child.props.onClick = this.handleChose
           child.props.key = index
@@ -360,9 +360,9 @@ class Select extends Nerv.Component<any, any> {
             this.propsSelectOption.push(child)
             this.searchOption.push(child.label || child.props.children)
             count ++
-          }, null)
+          })
         }
-      }, null)
+      })
     }
 
     handleClick (event) {
@@ -410,9 +410,9 @@ class Select extends Nerv.Component<any, any> {
             // 单选选择，通知每个选项，是否要变黑加粗
             child.props.chosenIndex = optionChosen
 
-          }, null)
+          })
         }
-      }, null)
+      })
     }
     componentWillMount () {
       this.preparePropsSelection(this.props)
@@ -426,9 +426,9 @@ class Select extends Nerv.Component<any, any> {
             // 单选选择，通知每个选项，是否要变黑加粗
             child.props.chosenIndex = optionChosen
 
-          }, null)
+          })
         }
-      }, null)
+      })
     }
     componentWillReceiveProps (nextProps, nextState) {
       if (nextProps.children !== this.props.children) {
@@ -443,9 +443,9 @@ class Select extends Nerv.Component<any, any> {
           Nerv.Children.forEach(child.props.children as any, (child) => {
             // 单选选择，通知每个选项，是否要变黑加粗
             child.props.chosenIndex = optionChosen
-          }, null)
+          })
         }
-      }, null)
+      })
     }
     addressDefaultValue (props) {
       const propsvalue: any = props.value
@@ -473,7 +473,7 @@ class Select extends Nerv.Component<any, any> {
               }
             }
           }
-        }, null)
+        })
       }
       if (optionChosen.length > 0) {
         this.setState({

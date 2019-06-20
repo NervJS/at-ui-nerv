@@ -9,6 +9,7 @@ export interface SelectOptionGroupProps {
   circle?: boolean
   disabled?: boolean
   value?: any
+  label?
 }
 
 class SelectOptionGroup extends Nerv.Component<SelectOptionGroupProps, any> {
@@ -29,9 +30,6 @@ class SelectOptionGroup extends Nerv.Component<SelectOptionGroupProps, any> {
         </ul>
       </ul>
     )
-  }
-  componentDidMount () {
-
   }
 }
 

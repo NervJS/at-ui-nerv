@@ -37,6 +37,8 @@ export interface ModalProps {
   width?: number | string
   closeOnPressEsc?: boolean
   type?: string
+  modalClass?
+  modalStyle?
   willUnmount?: () => void
   onConfirm?: () => void
   callback?: () => void
@@ -135,61 +137,63 @@ class Modal extends Component<ModalProps, ModalState> {
   //   Nerv.unmountComponentAtNode(document.body)
   // }
   componentWillUnmount () {
-    const { willUmount } = this.props
-    if (willUmount instanceof Function) {
-      willUmount()
+    const { willUnmount } = this.props
+    if (willUnmount instanceof Function) {
+      willUnmount()
     }
   }
 
   enhanceChildren = () => {
     const { children, onConfirm, onCancel, cancelText, okText } = this.props
     return Nerv.Children.map(
-      children as never,
+      children,
       (child, index) => {
-        const { props: oProps = {} } = child
-        const {
-          onCancel: oonCancel = () => {},
-          onConfirm: oonConfirm = () => {}
-        } = oProps
-        const { name } = child
-        const newProps = {}
-        switch (name) {
-          case 'ModalBody':
-            Object.assign(newProps)
-            break
-          case 'ModalFooter':
-            Object.assign(newProps, {
-              cancelText,
-              okText
-            })
-            break
-          default:
-            return child
-        }
-        return Nerv.cloneElement(child, {
-          ...oProps,
-          ...newProps,
-          onCancel: () => {
-            this.close()
-            if (onCancel instanceof Function) {
-              onCancel()
-            }
-            if (oonCancel instanceof Function) {
-              oonCancel()
-            }
-          },
-          onConfirm: () => {
-            this.close()
-            if (onConfirm instanceof Function) {
-              onConfirm()
-            }
-            if (oonConfirm instanceof Function) {
-              oonConfirm()
-            }
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          const { props: oProps = {} } = child
+          const {
+            onCancel: oonCancel = () => {},
+            onConfirm: oonConfirm = () => {}
+          } = oProps
+          const name = child['name']
+          const newProps = {}
+          switch (name) {
+            case 'ModalBody':
+              Object.assign(newProps)
+              break
+            case 'ModalFooter':
+              Object.assign(newProps, {
+                cancelText,
+                okText
+              })
+              break
+            default:
+              return child
           }
-        })
-      },
-      this
+          return Nerv.cloneElement(child, {
+            ...oProps,
+            ...newProps,
+            onCancel: () => {
+              this.close()
+              if (onCancel instanceof Function) {
+                onCancel()
+              }
+              if (oonCancel instanceof Function) {
+                oonCancel()
+              }
+            },
+            onConfirm: () => {
+              this.close()
+              if (onConfirm instanceof Function) {
+                onConfirm()
+              }
+              if (oonConfirm instanceof Function) {
+                oonConfirm()
+              }
+            }
+          })
+        }
+      }
     )
   }
 

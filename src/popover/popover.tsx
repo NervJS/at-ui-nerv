@@ -11,6 +11,14 @@ export interface PopoverProps {
   placement?: string
   title?: string
   trigger?: triggerType
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
 }
 
 class Popover extends Component<PopoverProps, any> {
@@ -170,18 +178,20 @@ class Popover extends Component<PopoverProps, any> {
     let title: any = null
     let content: any = null
     Nerv.Children.map(
-      props.children as any,
+      props.children,
       (child) => {
-        if (child.props && child.props.slot) {
-          if (child.props.slot === 'content') {
-            content = Nerv.cloneElement(child.children)
-          }
-          if (child.props.slot === 'title') {
-            title = Nerv.cloneElement(child.children)
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          if (child.props.slot) {
+            if (child.props.slot === 'content') {
+              content = Nerv.cloneElement(child['children'])
+            }
+            if (child.props.slot === 'title') {
+              title = Nerv.cloneElement(child['children'])
+            }
           }
         }
-      },
-      null
+      }
     )
     if (!content && props.content) {
       content = props.content

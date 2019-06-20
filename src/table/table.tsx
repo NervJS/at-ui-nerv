@@ -2,7 +2,8 @@ import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import Checkbox from '../checkbox'
 import Pagination from '../pagination'
-import {getStyle} from '../utils/util'
+import { getStyle } from '../utils/util'
+import Component from '../../libs/component'
 export type SortType = 'normal' | 'desc' | 'asc'
 export interface TableProps {
   className?: string
@@ -20,9 +21,19 @@ export interface TableProps {
   showPagequickjump?: boolean
   height?: string | number
   sortType?: SortType
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
+  onSelectionChange?
+  onSelectAll?
 }
 
-class Table extends Nerv.Component<TableProps, any> {
+class Table extends Component<TableProps, any> {
   private keyArr: any[] = []
   private sortBy: string
   private sortType: string
@@ -177,12 +188,17 @@ class Table extends Nerv.Component<TableProps, any> {
       // 处理自定义组件单元格
       for (let index = 0; index < this.renderArr.length; index++) {
         const item = this.renderArr[index]
-        const {action, render} = item
+        const { action, render } = item
         const element = Nerv.cloneElement(render(dataTemp, i))
-        let childrenTemp = element.props.children
+        let childrenTemp = element.props['children']
         if (childrenTemp) {
-          if (typeof childrenTemp === 'object' && !(childrenTemp instanceof Array)) { childrenTemp = [childrenTemp] }
-          for (let j = 0; j < childrenTemp.length; j++) {
+          if (
+            typeof childrenTemp === 'object' &&
+            !(childrenTemp instanceof Array)
+          ) {
+            childrenTemp = [childrenTemp]
+          }
+          for (let j = 0; j < childrenTemp['length']; j++) {
             const itemInner = childrenTemp[j]
             if (itemInner.props && itemInner.props[action]) {
               const childAction = itemInner.props[action]
@@ -195,19 +211,28 @@ class Table extends Nerv.Component<TableProps, any> {
         }
         const propsAction = element.props[action] || this.noop
         element.props[action] = propsAction.bind(element, i)
-        tdElement.splice(item.index, 0, <td className='at-table__cell'>{element}</td>)
+        tdElement.splice(
+          item.index,
+          0,
+          <td className='at-table__cell'>{element}</td>
+        )
       }
       // })
       dataElement.push(<tr>{tdElement}</tr>)
     }
-    return <tbody ref={(tablebody) => {this.$tablebody = tablebody}} className='at-table__tbody'>{dataElement}</tbody>
+    return (
+      <tbody
+        ref={(tablebody) => {
+          this.$tablebody = tablebody
+        }}
+        className='at-table__tbody'
+      >
+        {dataElement}
+      </tbody>
+    )
   }
-  log (key) {
-
-  }
-  noop () {
-
-  }
+  log (key) {}
+  noop () {}
   renderColumns () {
     const columns = this.props.columns || []
     const columnsElement: any[] = []
@@ -222,7 +247,7 @@ class Table extends Nerv.Component<TableProps, any> {
       )
     }
     columns.forEach((item) => {
-      if (!item.checkbox == true) {
+      if (!item.checkbox === true) {
         let sortBtn
         if (item.sortType) {
           sortBtn = this.renderSortBtn()
@@ -234,21 +259,31 @@ class Table extends Nerv.Component<TableProps, any> {
           >
             {item.title}
             {sortBtn}
-        </th>)
+          </th>
+        )
       }
     })
-    return (<thead className='at-table__thead'>
-              <tr>
-                {columnsElement}
-              </tr>
-            </thead>)
+    return (
+      <thead className='at-table__thead'>
+        <tr>{columnsElement}</tr>
+      </thead>
+    )
   }
   _renderPagination () {
     const props = this.props
     const dataSize = props.data && props.data.length
     let renderPagination: any = null
     if (props.pagination) {
-      renderPagination = (<Pagination total={dataSize} showTotal showSizer showQuickJump onPageChange={this.pageChangeHandler} onPageSizeChange={this.pageSizeChangeHandler} />)
+      renderPagination = (
+        <Pagination
+          total={dataSize}
+          showTotal
+          showSizer
+          showQuickJump
+          onPageChange={this.pageChangeHandler}
+          onPageSizeChange={this.pageSizeChangeHandler}
+        />
+      )
     }
     return renderPagination
   }
@@ -264,25 +299,29 @@ class Table extends Nerv.Component<TableProps, any> {
     })
   }
   handleResize () {
-      if (!this.$tablebody) { return }
-      const columnsWidth = {}
-      if ((this.props.data || []).length) {
-        const $td = this.$tablebody.querySelectorAll('tr')[0].querySelectorAll('td')
-        for (let i = 0; i < $td.length; i++) {
-          const column = (this.props.columns || [])[i]
-          let width = parseInt(getStyle($td[i], 'width'))
-          if (column) {
-            if (column.width) {
-              width = column.width
-            }
-            columnsWidth[column._index] = { width }
+    if (!this.$tablebody) {
+      return
+    }
+    const columnsWidth = {}
+    if ((this.props.data || []).length) {
+      const $td = this.$tablebody
+        .querySelectorAll('tr')[0]
+        .querySelectorAll('td')
+      for (let i = 0; i < $td.length; i++) {
+        const column = (this.props.columns || [])[i]
+        let width = parseInt(getStyle($td[i], 'width'))
+        if (column) {
+          if (column.width) {
+            width = column.width
           }
+          columnsWidth[column._index] = { width }
         }
       }
-      this.columnsWidth = columnsWidth
-      this.setState({
-        columnsWidth: this.columnsWidth
-      })
+    }
+    this.columnsWidth = columnsWidth
+    this.setState({
+      columnsWidth: this.columnsWidth
+    })
   }
   setCellWidth (column) {
     let width = ''
@@ -299,10 +338,17 @@ class Table extends Nerv.Component<TableProps, any> {
     const props = this.props
     let {
       style,
-      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseEnter,
+      onMouseOut,
+      onMouseLeave,
+      onClick,
       children,
       optional
-      } = props
+    } = props
     const needProps = {
       children,
       onDragLeave,
@@ -313,9 +359,9 @@ class Table extends Nerv.Component<TableProps, any> {
       onMouseEnter,
       onMouseLeave,
       onClick
-      }
+    }
     const classNames = this.renderTableClassNames(props)
-    style = {...style, height: this.props.height + 'px'}
+    style = { ...style, height: this.props.height + 'px' }
     let body
     const resizeStyle = {
       height: this.state.resizeHeight + 'px',
@@ -325,45 +371,44 @@ class Table extends Nerv.Component<TableProps, any> {
     const columns = this.props.columns || []
     let hasCheckBox = false
     columns.forEach((column, index) => {
-        if (column.checkbox) { hasCheckBox = true } // 用户使用optional,且自己定义了column
-        col.push(<col width={this.setCellWidth(column)}/>)
+      if (column.checkbox) {
+        hasCheckBox = true
+      } // 用户使用optional,且自己定义了column
+      col.push(<col width={this.setCellWidth(column)} />)
     })
     if (optional && !hasCheckBox) {
       // 用户使用optional,但是自己木有定义column
-      col.splice(0, 0, <col width='100'/>)
+      col.splice(0, 0, <col width='100' />)
     }
     if (!props.height) {
       body = (
         <div className='at-table__content'>
           <div className='at-table__body'>
             <table>
-              <colgroup>
-                {}
-                {col}
-              </colgroup>
+              <colgroup>{col}</colgroup>
               {this.renderColumns()}
               {this.renderData()}
             </table>
           </div>
         </div>
-      )} else {
-        body = (
-        <div className='at-table__content' >
-          <div className='at-table__header' ref={(header) => {this.$header = header}}>
+      )
+    } else {
+      body = (
+        <div className='at-table__content'>
+          <div
+            className='at-table__header'
+            ref={(header) => {
+              this.$header = header
+            }}
+          >
             <table>
-              <colgroup>
-                {}
-                {col}
-              </colgroup>
+              <colgroup>{col}</colgroup>
               {this.renderColumns()}
             </table>
           </div>
           <div className='at-table__body' style={resizeStyle}>
             <table>
-              <colgroup>
-                {}
-                {col}
-              </colgroup>
+              <colgroup>{col}</colgroup>
               {this.renderData()}
             </table>
           </div>
@@ -372,14 +417,14 @@ class Table extends Nerv.Component<TableProps, any> {
     }
     let footer: any = null
     if (props.pagination) {
-      footer = (<div className='at-table__footer'>
-                  {this._renderPagination()}
-                </div>)
+      footer = (
+        <div className='at-table__footer'>{this._renderPagination()}</div>
+      )
     }
     return (
       <div className={classNames} {...needProps} style={style}>
-       {body}
-       {footer}
+        {body}
+        {footer}
       </div>
     )
   }
@@ -432,7 +477,9 @@ class Table extends Nerv.Component<TableProps, any> {
     return dataSelected
   }
   resizeHeightHandler () {
-    if (!this.$header) { return }
+    if (!this.$header) {
+      return
+    }
     const resizeMarginTop = this.$header.offsetHeight
     const headerHeight = Number(this.props.height) - resizeMarginTop
     this.setState({
@@ -452,10 +499,10 @@ class Table extends Nerv.Component<TableProps, any> {
   }
   componentWillUpdate (nextProps, nextState) {
     this.initColumnAndData(nextProps)
-    if (this.props.columns != nextProps.columns) {
+    if (this.props.columns !== nextProps.columns) {
       this.handleResize()
     }
   }
- }
+}
 
 export default Table

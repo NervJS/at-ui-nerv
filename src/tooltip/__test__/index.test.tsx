@@ -23,8 +23,8 @@ describe('toolTip test', () => {
   it('basic render', (done) => {
     const toolTipJSX = (
       <Tooltip placement='top' content='提示信息'>
-        {}
-        <Button>{}按钮</Button>
+
+        <Button> 按钮</Button>
       </Tooltip>
     )
     const component = Nerv.render(toolTipJSX as VNode, scratch)
@@ -56,7 +56,7 @@ describe('toolTip test', () => {
           content='Top Right 提示文字'
           placement={placement}
         >
-          {}
+
           <div slot='content'>
             <p>文字1</p>
             <p>文字2</p>

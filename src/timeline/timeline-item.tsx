@@ -5,7 +5,8 @@ export interface TimelineItemProps {
   className?: string,
   pending?: boolean,
   classFromParent?: string,
-  color?: string
+  color?: string,
+  value?
 }
 
 class TimelineItem extends Nerv.Component<TimelineItemProps, any> {
@@ -43,7 +44,7 @@ class TimelineItem extends Nerv.Component<TimelineItemProps, any> {
       } else {
         content = child
       }
-    }, null)
+    })
     return {
       slot,
       content
@@ -55,17 +56,13 @@ class TimelineItem extends Nerv.Component<TimelineItemProps, any> {
     const classname = this.renderTimelineItemClassNames(props, slot)
     return (
       <div className={classname}>
-        <div className='at-timeline__tail'></div>
+        <div className='at-timeline__tail' />
         <div className='at-timeline__dot'>
           {slot}
         </div>
         <div className='at-timeline__content'>{content}</div>
       </div>
     )
-  }
-  componentDidMount () {
-  }
-  componentWillReceiveProps (nextProps) {
   }
 }
 

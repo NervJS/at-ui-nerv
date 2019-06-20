@@ -1,34 +1,52 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
+import Component from '../../libs/component'
 
 export interface TabPaneProps {
-  className?: string,
-  type?: string,
-  name?: string | number,
-  label?: string,
-  icon?: string,
-  disabled?: boolean | string,
+  activeIndex?: number
+  className?: string
+  type?: string
+  name?: string | number
+  label?: string
+  icon?: string
+  animated?: boolean
+  disabled?: boolean | string
   closable?: boolean | string
+  unclosable?: boolean
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
 }
 
-class TabPane extends Nerv.Component<TabPaneProps, any> {
+class TabPane extends Component<TabPaneProps, any> {
   private index: number
   constructor (props) {
     super(props)
     this.index = props.index
   }
   renderTabPaneClassNames (props: TabPaneProps) {
-    return classnames('at-tabs__pane', [
-    ], props.className)
+    return classnames('at-tabs__pane', [], props.className)
   }
 
   render () {
     const props = this.props
-    let {
+    const {
       style,
-      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseEnter,
+      onMouseOut,
+      onMouseLeave,
+      onClick,
       children
-      } = props
+    } = props
     const needProps = {
       children,
       onDragLeave,
@@ -39,27 +57,28 @@ class TabPane extends Nerv.Component<TabPaneProps, any> {
       onMouseEnter,
       onMouseLeave,
       onClick
-      }
+    }
     const classNames = this.renderTabPaneClassNames(props)
-    if (props.animated == false) {
-      let display
-      if (this.props.activeIndex == this.index) {
-        display = 'block'
-      } else {
-        display = 'none'
+    let displayValue = 'none'
+    if (props.animated === false) {
+      if (this.props.activeIndex === this.index) {
+        displayValue = 'block'
       }
-      style = {...style,
-               display}
     }
     return (
-      <div className={classNames} {...needProps} style={style} >
+      <div
+        className={classNames}
+        {...{
+          ...needProps,
+          style: {
+            ...style,
+            display: displayValue
+          }
+        }}
+      >
         {children}
       </div>
     )
-  }
-  componentDidMount () {
-  }
-  componentWillReceiveProps (nextProps) {
   }
 }
 

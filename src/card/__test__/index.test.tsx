@@ -23,7 +23,6 @@ describe('card', () => {
   it('basic render', () => {
     const card = (
       <Card>
-        {}
         <div slot='title'>title</div>
         <div slot='extra'>
           <a>extra</a>

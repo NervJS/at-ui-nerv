@@ -4,7 +4,7 @@ import Icon from '../'
 
 describe('Icon', () => {
   it('render Icon', () => {
-    const icon = <Icon type='icon-cloud'>{}Icon</Icon>
+    const icon = <Icon type='icon-cloud'>Icon</Icon>
     const component = renderIntoDocument(icon)
     const dom = Nerv.findDOMNode(component)
     // expect(component.props).toHaveProperty('type', 'icon-cloud')

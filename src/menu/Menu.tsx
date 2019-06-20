@@ -40,44 +40,48 @@ class Menu extends Component<MenuProps, any> {
     const { currentActiveChildName, currentOpenedChildName } = this.state
     if (inlineCollapsed) {
       return Nerv.Children.map(
-        children as never,
+        children,
         (child, idx) => {
-          return (
-            child &&
-            Nerv.cloneElement(child, {
-              ...child.props,
-              mode: inlineCollapsed ? 'inlineCollapsed' : mode,
-              name: child.props.name ? child.props.name : idx,
-              active: Object.is(child.props.name, currentActiveChildName),
-              isOpen: Object.is(child.props.name, currentOpenedChildName),
-              _onSelect: this.onChildSelect,
-              _onOpened: this.onChildOpened,
-              parentElem: this,
-              rootElem: this
-            })
-          )
-        },
-        this
+          if (!child) { return }
+          if (typeof child === 'object' && 'props' in child) {
+            return (
+              child &&
+              Nerv.cloneElement(child, {
+                ...child.props,
+                mode: inlineCollapsed ? 'inlineCollapsed' : mode,
+                name: child.props.name ? child.props.name : idx,
+                active: Object.is(child.props.name, currentActiveChildName),
+                isOpen: Object.is(child.props.name, currentOpenedChildName),
+                _onSelect: this.onChildSelect,
+                _onOpened: this.onChildOpened,
+                parentElem: this,
+                rootElem: this
+              })
+            )
+          }
+        }
       )
     } else {
       return Nerv.Children.map(
-        children as never,
+        children,
         (child, idx) => {
-          return (
-            child &&
-            Nerv.cloneElement(child, {
-              ...child.props,
-              mode: inlineCollapsed ? 'inlineCollapsed' : mode,
-              name: child.props.name ? child.props.name : idx,
-              active: child.props.name === currentActiveChildName,
-              _onSelect: this.onChildSelect,
-              _onOpened: this.onChildOpened,
-              parentElem: this,
-              rootElem: this
-            })
-          )
-        },
-        this
+          if (!child) { return }
+          if (typeof child === 'object' && 'props' in child) {
+            return (
+              child &&
+              Nerv.cloneElement(child, {
+                ...child.props,
+                mode: inlineCollapsed ? 'inlineCollapsed' : mode,
+                name: child.props.name ? child.props.name : idx,
+                active: child.props.name === currentActiveChildName,
+                _onSelect: this.onChildSelect,
+                _onOpened: this.onChildOpened,
+                parentElem: this,
+                rootElem: this
+              })
+            )
+          }
+        }
       )
     }
   }

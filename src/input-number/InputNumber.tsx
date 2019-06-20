@@ -9,6 +9,7 @@ export interface InputNumberProps {
   step?: number | string
   min?: number
   max?: number
+  name?: string
   disabled?: boolean
   readonly?: boolean
   autofocus?: boolean

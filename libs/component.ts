@@ -1,14 +1,15 @@
 // 思路参考自Element React
-import * as Nerv from 'nervjs'
 import classnames from 'classnames'
+import * as Nerv from 'nervjs'
+import { CSSProperties } from 'react'
 
 export default class Component<P, S> extends Nerv.Component<P & {
   className?: string
-  style?: {
-    [key: string]: string | number
-  } | string
+  style?: CSSProperties
 }, S> {
-  state: S
+  constructor (...args) {
+    super(args[0], args[1])
+  }
   classnames (...args): string {
     return classnames(...args)
   }
@@ -16,8 +17,8 @@ export default class Component<P, S> extends Nerv.Component<P & {
     const { className } = this.props
     return this.classnames.apply(this, args.concat(className))
   }
-  style (args): object {
+  style (args: object) {
     const { style } = this.props
-    return {...args, ...style}
+    return {...args, ...(style as object)}
   }
 }

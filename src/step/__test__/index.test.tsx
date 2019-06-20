@@ -22,7 +22,7 @@ describe('step test', () => {
   it('basic render', () => {
     const stepJSX = (
       <Steps current={0}>
-        {}
+
         <Steps.Step title='Step1' description='This is a description.' />
         <Steps.Step title='Step2' description='This is a description.' />
         <Steps.Step title='Step3' />
@@ -37,7 +37,7 @@ describe('step test', () => {
   it('small size mode', () => {
     const stepJSX = (
       <Steps size='small' current={0}>
-        {}
+
         <Steps.Step title='Step1' description='This is a description.' />
         <Steps.Step title='Step2' description='This is a description.' />
         <Steps.Step title='Step3' />
@@ -50,7 +50,7 @@ describe('step test', () => {
   it('with icon', () => {
     const stepJSX = (
       <Steps size='small' current={0}>
-        {}
+
         <Steps.Step title='Step1' description='This is a description.' />
         <Steps.Step title='Step2' description='This is a description.' />
         <Steps.Step title='Step3' icon='icon-pocket' />
@@ -68,7 +68,7 @@ describe('step test', () => {
   it('vertical mode', () => {
     const stepJSX = (
       <Steps size='small' direction='vertical'>
-        {}
+
         <Steps.Step title='Step1' description='This is a description.' />
         <Steps.Step title='Step2' description='This is a description.' />
         <Steps.Step title='Step3' icon='icon-pocket' />
@@ -81,7 +81,7 @@ describe('step test', () => {
   it('error mode', () => {
     const stepJSX = (
         <Steps size='small' direction='vertical' status='error' current={1}>
-        {}
+
         <Steps.Step title='Step1' description='This is a description.' />
         <Steps.Step title='Step2' description='This is a description.' />
         <Steps.Step title='Step3' icon='icon-pocket' />

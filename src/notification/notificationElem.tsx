@@ -12,6 +12,7 @@ interface NotificationElemProps {
   duration: number
   showClose: boolean
   icon?: string
+  top?
   onClose: () => void
 }
 

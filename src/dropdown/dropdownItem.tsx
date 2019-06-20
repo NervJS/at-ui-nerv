@@ -5,6 +5,7 @@ interface DropdownItemProps {
   name?: string
   disabled?: boolean
   divided?: boolean
+  rootElem
 }
 
 class DropdownItem extends Component<DropdownItemProps, any> {
@@ -19,9 +20,6 @@ class DropdownItem extends Component<DropdownItemProps, any> {
   onClickHandle = () => {
     const { name, disabled, children, rootElem } = this.props
     if (!disabled) {
-      // this
-      //     .context
-      //     .component
       rootElem.onMenuItemClickHandle(name || children, this)
     }
   }

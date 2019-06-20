@@ -19,6 +19,7 @@ export interface InputProps {
   max?: number
   min?: number
   status?: string
+  size?
   onFocus?: (evt: FocusEvent) => void
   onBlur?: (evt: FocusEvent) => void
   onInput?: (val: string, evt: InputEvent) => void

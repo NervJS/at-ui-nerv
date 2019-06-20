@@ -8,7 +8,7 @@ interface LoadingbarElemProps {
   show?: boolean
 }
 
-class LoadingbarElem extends Component<LoadingbarElemProps, null> {
+class LoadingbarElem extends Component<LoadingbarElemProps, {}> {
   static defaultProps = {
     show: false,
     status: 'success',

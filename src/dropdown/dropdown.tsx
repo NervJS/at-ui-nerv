@@ -17,8 +17,8 @@ export interface DropdownProps {
     | 'right-bottom'
     | 'bottom'
     | 'bottom-left'
-    | 'bottom-right'
-  dropDownChange?: (name) => void
+    | 'bottom-right',
+  dropdownChange?: (name, ctx: any) => void
 }
 
 export interface DropdownState {
@@ -137,7 +137,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
     const menu = []
     const trigger = []
     Nerv.Children.forEach(
-      children as any,
+      children,
       (
         child: {
           type
@@ -149,8 +149,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
           return
         }
         trigger.push(child as never)
-      },
-      this
+      }
     )
     return { menu, trigger }
   }

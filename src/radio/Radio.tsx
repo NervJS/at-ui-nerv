@@ -9,6 +9,7 @@ export interface RadioProps {
   name?: string
   label: string | number
   disabled?: boolean
+  onChange?
 }
 
 export interface RadioState {
@@ -51,10 +52,10 @@ class Radio extends Component<RadioProps, RadioState> {
     })
   }
   onChangeHandle = (evt) => {
-    const { onChange = () => {} } = this.props
+    const { onChange } = this.props
     if (evt.target instanceof HTMLInputElement) {
       const val = evt.target.value
-      onChange(val)
+      onChange && onChange(val)
     }
   }
   render () {

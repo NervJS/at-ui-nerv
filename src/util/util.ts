@@ -1,12 +1,12 @@
 export function styleStr2Obj (str) {
-  let obj = {}
+  const obj = {}
   if (typeof str === 'string') {
-    let arr = str.split(';')
+    const arr = str.split(';')
     arr.forEach((item) => {
       if (item.length > 0) {
-        let arrTemp = item.split(':')
-        let key = arrTemp[0]
-        let value = arrTemp[1]
+        const arrTemp = item.split(':')
+        const key = arrTemp[0]
+        const value = arrTemp[1]
         obj[key] = value
       }
     })
@@ -17,7 +17,7 @@ export function calculatePosition (placement = 'top', trigger, popover) {
   if (!(trigger && popover)) {
     return
   }
-  let position = {
+  const position = {
     left: 0,
     top: 0
   }
