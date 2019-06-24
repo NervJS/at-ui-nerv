@@ -4,7 +4,7 @@ import * as Nerv from 'nervjs'
 import { AlertProps, AlertState } from '../src/alert/alert'
 import { BadgeProps } from '../src/badge/badge'
 import { BreadcrumbProps } from '../src/breadcrumb/breadcrumb'
-import { BreadCrumbItemProps, BreadCrumbItemState } from '../src/breadcrumb/breadcrumb-item'
+import { BreadCrumbItemProps } from '../src/breadcrumb/breadcrumb-item'
 import { CardProps } from '../src/card/card'
 import { CheckboxProps, CheckboxState } from '../src/checkbox/checkbox'
 import { CheckboxGroupProps, CheckboxGroupState } from '../src/checkbox/checkbox-group'
@@ -18,7 +18,7 @@ import { MenuProps } from '../src/menu/Menu'
 import { MenuGroupProps } from '../src/menu/MenuGroup'
 import MenuItem from '../src/menu/MenuItem'
 import MenuSub from '../src/menu/MenuSub'
-import { MessageContent } from '../src/message/Message'
+import Message from '../src/message/Message'
 import {
   ModalAlert,
   ModalConfirm,
@@ -78,17 +78,9 @@ export interface Loadingbar {
   error: () => void
   config: (config: object) => void
 }
+
 // Message
-interface MessageInterface {
-  (options?: MessageContent): void
-  close?: (id: string, customCloseFunc: (a: VNode) => void) => void
-  closeAll?: () => void
-  info?: (e: any) => void
-  success?: (e: any) => void
-  warning?: (e: any) => void
-  error?: (e: any) => void
-}
-export let Message: MessageInterface
+export { Message }
 // notification
 
 interface NotificationInterface {
@@ -108,9 +100,9 @@ export class Input extends Nerv.Component<BaseProps & InputProps, InputState> {}
 export class Icon extends Nerv.Component<BaseProps & IconProps, any> {}
 
 // breadcrumb
-class BreadcrumbItem extends Nerv.Component<
+declare class BreadcrumbItem extends Nerv.Component<
   BaseProps & BreadCrumbItemProps,
-  BreadCrumbItemState
+  {}
 > {}
 export class Breadcrumb extends Nerv.Component<BaseProps & BreadcrumbProps, any> {
   static Item: typeof BreadcrumbItem
@@ -123,7 +115,7 @@ export class InputNumber extends Nerv.Component<
 > {}
 
 // checkbox
-class CheckboxGroup extends Nerv.Component<
+declare class CheckboxGroup extends Nerv.Component<
   BaseProps & CheckboxGroupProps,
   CheckboxGroupState
 > {}
@@ -144,12 +136,12 @@ export class Select extends Nerv.Component<BaseProps & SelectProps, any> {
   static OptionGroup: typeof SelectOptionGroup
 }
 
-class RadioButton extends Nerv.Component<
+declare class RadioButton extends Nerv.Component<
   BaseProps & RadioButtonProps,
   RadioButtonState
 > {}
 
-class RadioGroup extends Nerv.Component<BaseProps & RadioGroupProps, any> {}
+declare class RadioGroup extends Nerv.Component<BaseProps & RadioGroupProps, any> {}
 export class Radio extends Nerv.Component<BaseProps & RadioProps, RadioState> {
   static elementName: 'AtRadio'
   static Button: typeof RadioButton
@@ -160,8 +152,8 @@ export class Radio extends Nerv.Component<BaseProps & RadioProps, RadioState> {
 export class Rate extends Nerv.Component<BaseProps & RateProps, RateState> {}
 
 // modal
-class ModalFooter extends Nerv.Component<BaseProps & ModalFooterProps, any> {}
-class ModalBody {}
+declare class ModalFooter extends Nerv.Component<BaseProps & ModalFooterProps, any> {}
+declare class ModalBody {}
 export class Modal extends Nerv.Component<BaseProps & ModalProps, ModalState> {
   static body: typeof ModalBody
   static footer: typeof ModalFooter
@@ -180,7 +172,7 @@ export class Collapse extends Nerv.Component<BaseProps & CollapseProps, Collapse
 }
 
 // menu
-class MenuGroup extends Nerv.Component<BaseProps & MenuGroupProps, any> {}
+declare class MenuGroup extends Nerv.Component<BaseProps & MenuGroupProps, any> {}
 export class Menu extends Nerv.Component<BaseProps & MenuProps, any> {
   static Group: typeof MenuGroup
   static Item: typeof MenuItem
@@ -204,7 +196,7 @@ export class Slider extends Nerv.Component<BaseProps & SliderProps, any> {}
 export class Textarea extends Nerv.Component<BaseProps & TextareaProps, any> {}
 
 // timeline
-class TimelineItem extends Nerv.Component<BaseProps & TimelineItemProps, any> {}
+declare class TimelineItem extends Nerv.Component<BaseProps & TimelineItemProps, any> {}
 export class Timeline extends Nerv.Component<BaseProps & TimelineProps, any> {
   static Item: typeof TimelineItem
 }
@@ -213,7 +205,7 @@ export class Timeline extends Nerv.Component<BaseProps & TimelineProps, any> {
 export class Popover extends Nerv.Component<BaseProps & PopoverProps, any> {}
 
 // tabs
-class TabPane extends Nerv.Component<BaseProps & TabPaneProps, any> {}
+declare class TabPane extends Nerv.Component<BaseProps & TabPaneProps, any> {}
 export class Tabs extends Nerv.Component<BaseProps & TabsProps, any> {
   static Pane: typeof TabPane
 }
@@ -222,7 +214,7 @@ export class Tabs extends Nerv.Component<BaseProps & TabsProps, any> {
 export class Table extends Nerv.Component<BaseProps & TableProps, any> {}
 
 // steps
-class Step extends Nerv.Component<BaseProps & StepProps, any> {}
+declare class Step extends Nerv.Component<BaseProps & StepProps, any> {}
 export class Steps extends Nerv.Component<BaseProps & StepsProps, any> {
   static Step: typeof Step
 }

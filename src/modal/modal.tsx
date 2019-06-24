@@ -25,7 +25,7 @@ export type ModalPrompt = ModalFunc<ModalPromptConfig>
 
 export interface ModalProps {
   title?: string
-  content?: string
+  content?: string | JSX.Element
   value?: boolean
   cancelText?: string
   okText?: string
