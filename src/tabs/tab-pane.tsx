@@ -59,10 +59,10 @@ class TabPane extends Component<TabPaneProps, any> {
       onClick
     }
     const classNames = this.renderTabPaneClassNames(props)
-    let displayValue = 'none'
+    let displayValue = 'block'
     if (props.animated === false) {
-      if (this.props.activeIndex === this.index) {
-        displayValue = 'block'
+      if (this.props.activeIndex !== this.index) {
+        displayValue = 'none'
       }
     }
     return (
