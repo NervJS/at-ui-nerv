@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import Component from '../../libs/component'
-import { calculatePosition } from '../util/util'
+import { calculatePosition } from '../utils/util'
 
 type triggerType = 'hover' | 'focus' | 'click'
 export interface PopoverProps {

@@ -1,6 +1,6 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-import { styleStr2Obj } from '../util/util'
+import { styleStr2Obj } from '../utils/util'
 import Component from '../../libs/component'
 type StatusType = 'wait' | 'process' | 'finish' | 'error'
 export interface StepProps {

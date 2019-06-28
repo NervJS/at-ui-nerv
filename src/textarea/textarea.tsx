@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import { calcTextareaHeight } from './utils'
-import { styleStr2Obj } from '../util/util'
+import { styleStr2Obj } from '../utils/util'
 import Component from '../../libs/component'
 export interface TextareaProps {
   className?: string

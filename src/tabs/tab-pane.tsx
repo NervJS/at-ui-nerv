@@ -1,5 +1,7 @@
-import * as Nerv from 'nervjs'
 import classnames from 'classnames'
+import * as Nerv from 'nervjs'
+import { CSSProperties } from 'react'
+
 import Component from '../../libs/component'
 
 export interface TabPaneProps {
@@ -58,22 +60,19 @@ class TabPane extends Component<TabPaneProps, any> {
       onMouseLeave,
       onClick
     }
+    const copyStyle: CSSProperties = {...style}
     const classNames = this.renderTabPaneClassNames(props)
-    let displayValue = 'block'
     if (props.animated === false) {
-      if (this.props.activeIndex !== this.index) {
-        displayValue = 'none'
-      }
+      copyStyle.display = this.props.activeIndex !== this.index
+        ? 'none'
+        : 'block'
     }
     return (
       <div
         className={classNames}
         {...{
           ...needProps,
-          style: {
-            ...style,
-            display: displayValue
-          }
+          style: copyStyle
         }}
       >
         {children}

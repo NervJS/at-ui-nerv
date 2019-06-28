@@ -294,6 +294,7 @@ export function styleStr2Obj (str) {
   }
   return obj
 }
+
 export function calculatePosition (placement, trigger, popover) {
   const position = {
     left: 0,
@@ -356,3 +357,5 @@ export function calculatePosition (placement, trigger, popover) {
   }
   return position
 }
+
+export type Size = 'large' | 'normal' | 'small' | 'smaller'
