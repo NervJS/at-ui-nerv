@@ -31,8 +31,8 @@ interface MessageInterface {
   closeAll: () => void
 }
 
-const Message: MessageInterface = (
-  options = { type: 'info', duration: 3000, icon: 'info' }
+const Message = (
+  options: OptionsContent | string = { type: 'info', duration: 3000, icon: 'info' }
 ) => {
   const container = document.createElement('div')
   document.body.appendChild(container)
@@ -49,24 +49,24 @@ const Message: MessageInterface = (
 
   options.onClose = () => {
     (Message as any).close(id, customCloseFunc)
-     Nerv.unmountComponentAtNode(container)
-     document.body.removeChild(container)
+    Nerv.unmountComponentAtNode(container)
+    document.body.removeChild(container)
   }
   const instance = Nerv.createElement(MessageElem, {
     ...options
   })
   instance['id'] = id
 
-  Nerv.render(instance as any, container)
-  ; (instance as any).dom.style.zIndex = zindexSeed++
+  Nerv.render(instance as any, container);
+  (instance as any).dom.style.zIndex = zindexSeed++
   const offset = 0
   const len = instances.length
   let topDist = offset
   for (let i = 0; i < len; i++) {
     topDist += (instances[i] as any).dom.offsetHeight + 8
   }
-  topDist += 8
-  ; (instance as any).dom.style.top = `${topDist}px`
+  topDist += 8;
+  (instance as any).dom.style.top = `${topDist}px`
   instances.push(instance)
   return {
     close: () => {
@@ -126,4 +126,4 @@ type MessageStaticFuncs = Record<
   (options: Pick<OptionsContent, Exclude<keyof OptionsContent, 'type'>> | string) => ReturnType<Message>
 >
 
-export default Message as MessageInterface & MessageStaticFuncs
+export default Message as any as MessageInterface & MessageStaticFuncs

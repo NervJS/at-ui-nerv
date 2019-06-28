@@ -858,7 +858,7 @@
   resolved "http://registry.m.jd.com/@types/classnames/download/@types/classnames-2.2.7.tgz#fb68cc9be8487e6ea5b13700e759bfbab7e0fefd"
   integrity sha1-+2jMm+hIfm6lsTcA51m/urfg/v0=
 
-"@types/dom-inputevent@^1.0.4":
+"@types/dom-inputevent@1.0.4":
   version "1.0.4"
   resolved "http://registry.m.jd.com/@types/dom-inputevent/download/@types/dom-inputevent-1.0.4.tgz#05bc0bbaed7006f74af6afa9fc897f402783ab42"
   integrity sha1-BbwLuu1wBvdK9q+p/Il/QCeDq0I=
@@ -1436,10 +1436,10 @@ asynckit@^0.4.0:
   resolved "http://registry.m.jd.com/asynckit/download/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-at-ui-style@^1.5.0:
-  version "1.5.1"
-  resolved "http://registry.m.jd.com/at-ui-style/download/at-ui-style-1.5.1.tgz#db2057afb3aeb5961d33753cd4ff8bff82e913a0"
-  integrity sha1-2yBXr7OutZYdM3U81P+L/4LpE6A=
+at-ui-style@1.5.0:
+  version "1.5.0"
+  resolved "http://registry.m.jd.com/at-ui-style/download/at-ui-style-1.5.0.tgz#7897048e721654fc331eea9c4604d0617ce642de"
+  integrity sha1-eJcEjnIWVPwzHuqcRgTQYXzmQt4=
 
 atob@^2.1.1:
   version "2.1.2"
@@ -3057,10 +3057,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
-  version "2.2.6"
-  resolved "http://registry.m.jd.com/classnames/download/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
-  integrity sha1-Q5Nb/90pHzJtrQogUwmzjQD2UM4=
+classnames@2.2.5:
+  version "2.2.5"
+  resolved "http://registry.m.jd.com/classnames/download/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+  integrity sha1-+zgB1FNGdknvNgPH1hoCvRKb3m0=
 
 clean-css@4.2.x:
   version "4.2.1"
@@ -3687,12 +3687,12 @@ copy-descriptor@^0.1.0:
   resolved "http://registry.m.jd.com/copy-descriptor/download/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
-copy-to-clipboard@^3.0.8:
-  version "3.2.0"
-  resolved "http://registry.m.jd.com/copy-to-clipboard/download/copy-to-clipboard-3.2.0.tgz#d2724a3ccbfed89706fac8a894872c979ac74467"
-  integrity sha1-0nJKPMv+2JcG+siolIcsl5rHRGc=
+copy-to-clipboard@3.0.8:
+  version "3.0.8"
+  resolved "http://registry.m.jd.com/copy-to-clipboard/download/copy-to-clipboard-3.0.8.tgz#f4e82f4a8830dce4666b7eb8ded0c9bcc313aba9"
+  integrity sha1-9OgvSogw3ORma3643tDJvMMTq6k=
   dependencies:
-    toggle-selection "^1.0.6"
+    toggle-selection "^1.0.3"
 
 core-js-compat@^3.0.0:
   version "3.0.1"
@@ -10193,10 +10193,10 @@ pn@^1.1.0:
   resolved "http://registry.m.jd.com/pn/download/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
   integrity sha1-4vTO8OIZ9GPBeas3Rj5OHs3Muvs=
 
-popper.js@^1.14.3:
-  version "1.15.0"
-  resolved "http://registry.m.jd.com/popper.js/download/popper.js-1.15.0.tgz#5560b99bbad7647e9faa475c6b8056621f5a4ff2"
-  integrity sha1-VWC5m7rXZH6fqkdca4BWYh9aT/I=
+popper.js@1.14.3:
+  version "1.14.3"
+  resolved "http://registry.m.jd.com/popper.js/download/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
+  integrity sha1-FDj5jQRqz3tNeM1QK/QYrGTU8JU=
 
 portfinder@^1.0.9:
   version "1.0.20"
@@ -10857,7 +10857,7 @@ react-router@^4.2.0, react-router@^4.3.1:
     prop-types "^15.6.1"
     warning "^4.0.1"
 
-react-transition-group@~2.3.1:
+react-transition-group@2.3.1:
   version "2.3.1"
   resolved "http://registry.m.jd.com/react-transition-group/download/react-transition-group-2.3.1.tgz#31d611b33e143a5e0f2d94c348e026a0f3b474b6"
   integrity sha1-MdYRsz4UOl4PLZTDSOAmoPO0dLY=
@@ -12784,7 +12784,7 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
-toggle-selection@^1.0.6:
+toggle-selection@^1.0.3:
   version "1.0.6"
   resolved "http://registry.m.jd.com/toggle-selection/download/toggle-selection-1.0.6.tgz#6e45b1263f2017fa0acc7d89d78b15b8bf77da32"
   integrity sha1-bkWxJj8gF/oKzH2J14sVuL932jI=
@@ -12984,10 +12984,10 @@ typedarray@^0.0.6:
   resolved "http://registry.m.jd.com/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^2.6.2:
-  version "2.9.2"
-  resolved "http://registry.m.jd.com/typescript/download/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
-  integrity sha1-HL9h0F1rliaSROtqO85L2RTg8Aw=
+typescript@3.5.2:
+  version "3.5.2"
+  resolved "http://registry.m.jd.com/typescript/download/typescript-3.5.2.tgz#a09e1dc69bc9551cadf17dba10ee42cf55e5d56c"
+  integrity sha1-oJ4dxpvJVRyt8X26EO5Cz1Xl1Ww=
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"
