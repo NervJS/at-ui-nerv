@@ -9,7 +9,7 @@ export interface CheckboxProps {
   name?: string
   checked?: boolean
   disabled?: boolean
-  onChange?: (checked: boolean, label: labelType) => void
+  onChange?: (checked: boolean, label?: labelType) => void
 }
 
 export interface CheckboxState {
@@ -57,7 +57,7 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
       },
       label
     } = this.props
-    if (evt.target instanceof HTMLInputElement && label) {
+    if (evt.target instanceof HTMLInputElement) {
       const checked = evt.target.checked
 
       this.setState(
@@ -65,7 +65,11 @@ class Checkbox extends Component<CheckboxProps, CheckboxState> {
           currentValue: checked
         },
         () => {
-          onChange(checked, label)
+          if (label) {
+            onChange(checked, label)
+          } else {
+            onChange(checked)
+          }
         }
       )
     }

@@ -70,6 +70,7 @@
       true,
       "allow-leading-underscore",
       "ban-keywords"
-    ]
+    ],
+    "max-classes-per-file": false
   }
 }

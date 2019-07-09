@@ -31,7 +31,7 @@ describe('Tag', () => {
     return {evt, name}
   }
   it('render tag', () => {
-    const tag = <Tag closable onClose={handleClose}> Tag</Tag>
+    const tag = <Tag closable onClose={handleClose}>Tag</Tag>
     const component = renderIntoDocument(tag)
     const dom = Nerv.findDOMNode(component)
     expect(component.props.closable).toBeTruthy()
@@ -39,14 +39,14 @@ describe('Tag', () => {
     expect(dom.textContent).toBe('Tag')
   })
   it('closable', () => {
-    const tag = <Tag closable={true}> TEST</Tag>
+    const tag = <Tag closable={true}>TEST</Tag>
     const component = renderIntoDocument(tag)
     const dom = Nerv.findDOMNode(component)
     expect($(dom).find('.at-tag__close').get(0)).toBeDefined()
   })
   it('onClose', (done) => {
     const onClose = sinon.spy()
-    const tag = <Tag closable={true} onClose={onClose}> TEST</Tag>
+    const tag = <Tag closable={true} onClose={onClose}>TEST</Tag>
     const component = Nerv.render(tag as VNode, scratch)
     fireEvent(component.vnode.dom.querySelector('i'), 'click')
     Nerv.nextTick(() => {
