@@ -18,9 +18,7 @@ Modal.alert = (config) => {
         type={'alert'}
         onConfirm={() => {
           resolve()
-          if (callback instanceof Function) {
-            callback()
-          }
+          callback && callback()
         }}
       >
         <ModalBody>{content}</ModalBody>
@@ -40,15 +38,11 @@ Modal.confirm = (config) => {
         type={'confirm'}
         onConfirm={() => {
           resolve()
-          if (onConfirm instanceof Function) {
-            onConfirm()
-          }
+          onConfirm && onConfirm()
         }}
         onCancel={() => {
           // reject()
-          if (onCancel instanceof Function) {
-            onCancel()
-          }
+          onCancel && onCancel()
         }}
       >
         <ModalBody>{content}</ModalBody>
@@ -68,15 +62,13 @@ Modal.prompt = (config) => {
         type={'info'}
         onConfirm={() => {
           resolve()
-          if (onConfirm instanceof Function) {
-            onConfirm()
+          if (onConfirm) {
+            onConfirm && onConfirm()
           }
         }}
         onCancel={() => {
           reject()
-          if (onCancel instanceof Function) {
-            onCancel()
-          }
+          onCancel && onCancel()
         }}
       >
         <ModalBody>{content}</ModalBody>
@@ -104,15 +96,11 @@ Object.keys(modes).forEach((mode) => {
           type={mode}
           onConfirm={() => {
             resolve()
-            if (onConfirm instanceof Function) {
-              onConfirm()
-            }
+            onConfirm && onConfirm()
           }}
           onCancel={() => {
             // reject()
-            if (onCancel instanceof Function) {
-              onCancel()
-            }
+            onCancel && onCancel()
           }}
         >
           <ModalBody>{content}</ModalBody>

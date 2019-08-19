@@ -19,7 +19,7 @@ class Switch extends Component<SwitchProps, any> {
   private unCheckedText: any
   constructor (props) {
     super(props)
-    this.value = props.value === 'true' ? true : false
+    this.value = Boolean(props.value)
     this.state = {
       switchClass: this.value ? 'at-switch--checked' : ''
     }
