@@ -117,6 +117,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      favicon: path.resolve(siteRoot, './favicon.ico'),
       template: `${siteRoot}/index.html`
     })
   ]
