@@ -4,8 +4,8 @@ import Button from '../../../src/button'
 import Steps from '../../../src/step'
 const Step = Steps.Step
 class StepExample extends Nerv.Component<any, any> {
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       current: 0
     }

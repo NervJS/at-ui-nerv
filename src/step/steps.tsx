@@ -20,8 +20,8 @@ export interface StepsProps {
 
 class Steps extends Component<StepsProps, any> {
   static Step: typeof Step
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
   }
   renderIconClassNames (props: StepsProps) {
     return classnames('at-steps', [

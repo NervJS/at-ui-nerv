@@ -28,8 +28,8 @@ class Slider extends Component<SliderProps, any> {
   private min: number
   private step: number
   private $bar: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     let { max = 100, min = 0, value = 0, step = 1 } = props
     if (max > 100 || min < 0 || min > max) {
       max = 100

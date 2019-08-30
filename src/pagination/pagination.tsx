@@ -32,8 +32,8 @@ class Pagination extends Component<PaginationProps, any> {
   private total: number
   private $pageInput: any
   private $pageInputSimple: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       currPage: Number(props.current) || 1,
       pageSize: props.pageSize || 10

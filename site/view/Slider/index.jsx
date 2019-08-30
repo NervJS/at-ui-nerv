@@ -3,8 +3,8 @@ import * as Nerv from 'nervjs'
 import Slider from '@md/slider.md'
 
 class SliderExample extends Nerv.Component {
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       percent: 0
     }

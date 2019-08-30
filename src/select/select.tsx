@@ -47,8 +47,8 @@ class Select extends Component<SelectProps, any> {
   private searchOption: any[]
   private clickTarget: any
   private $trigger: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     let optionChosen: any = []
     if ('optionChosen' in this.props) {
       optionChosen = typeof this.props.optionChosen === 'number'

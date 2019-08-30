@@ -3,8 +3,8 @@ import * as Nerv from 'nervjs'
 import Timeline from '../../../src/timeline'
 const TimelineItem = Timeline.Item
 class SelectExample extends Nerv.Component<any, any> {
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       data: []
     }

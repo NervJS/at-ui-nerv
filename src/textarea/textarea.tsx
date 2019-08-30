@@ -31,8 +31,8 @@ export interface TextareaProps {
 
 class Textarea extends Component<TextareaProps, any> {
   private $textarea: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.inputHandler = this.inputHandler.bind(this)
     this.state = {
       height: '',

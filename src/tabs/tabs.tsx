@@ -37,8 +37,8 @@ class Tabs extends Component<TabsProps, any> {
   private $activeTab: any
   // private activeRight:number
   // private scrollRight:number
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.prevable = false
     this.nextable = false
     this.launchByActive = false

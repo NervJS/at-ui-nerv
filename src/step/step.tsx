@@ -25,8 +25,8 @@ export interface StepProps {
 }
 
 class Step extends Component<StepProps, any> {
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
   }
   renderStepClassNames (props: StepProps) {
     let statusClass: string = ''

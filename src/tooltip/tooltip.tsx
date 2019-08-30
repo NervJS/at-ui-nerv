@@ -25,8 +25,8 @@ class Tooltip extends Component<ToolProps, any> {
   private left: number
   private $trigger: any
   private $tip: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       top: 0,
       left: 0,

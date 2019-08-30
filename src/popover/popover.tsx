@@ -28,8 +28,8 @@ class Popover extends Component<PopoverProps, any> {
   private $wrapper: any
   private $trigger: any
   private $popper: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       top: 0,
       left: 0,

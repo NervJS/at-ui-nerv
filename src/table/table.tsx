@@ -41,8 +41,8 @@ class Table extends Component<TableProps, any> {
   private $tablebody: any
   private columnsWidth = {}
   private $header: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       resizeHeight: 0,
       resizeMarginTop: 0,

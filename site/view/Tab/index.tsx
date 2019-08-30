@@ -3,8 +3,8 @@ import * as Nerv from 'nervjs'
 import Tabs from '../../../src/tabs'
 const Tabpane = Tabs.Pane
 class TabExample extends Nerv.Component<any, any> {
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.onTabRemoveHanlder = this.onTabRemoveHanlder.bind(this)
     this.handleAdd = this.handleAdd.bind(this)
     this.tabChangeHandler = this.tabChangeHandler.bind(this)

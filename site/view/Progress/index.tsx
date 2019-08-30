@@ -4,8 +4,8 @@
 // import Button from '../../../src/button'
 // const ButtonGroup = Button.Group
 // class ProgressExample extends Nerv.Component {
-//   constructor (props) {
-//     super(props)
+//   constructor (props, context) {
+//     super(props, context)
 //     this.state = {
 //       percent: 0
 //     }

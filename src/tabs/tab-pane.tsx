@@ -27,8 +27,8 @@ export interface TabPaneProps {
 
 class TabPane extends Component<TabPaneProps, any> {
   private index: number
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.index = props.index
   }
   renderTabPaneClassNames (props: TabPaneProps) {
