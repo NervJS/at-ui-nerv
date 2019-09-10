@@ -11,10 +11,10 @@ interface MenuSubProps {
   active?: boolean
   disabled?: boolean
   opened?: boolean
-  mode
-  name
-  rootElem
-  parentElem
+  mode?
+  name?
+  rootElem?
+  parentElem?
   _onSelect?: (e: any) => void
   _onOpened?: (e: any) => void
 }

@@ -4,8 +4,8 @@ import Modal from './modal'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 
-Modal.body = ModalBody
-Modal.footer = ModalFooter
+Modal.Body = ModalBody
+Modal.Footer = ModalFooter
 
 // preset
 Modal.alert = (config) => {

@@ -31,6 +31,7 @@ import {
   ModalWarning
 } from '../src/modal/modal'
 import { ModalFooterProps } from '../src/modal/ModalFooter'
+import { ModalBodyProps } from '../src/modal/ModalBody'
 import { NotificationContent } from '../src/notification/notification'
 import { PaginationProps } from '../src/pagination/pagination'
 import { PopoverProps } from '../src/popover/popover'
@@ -152,19 +153,7 @@ export class Radio extends Nerv.Component<BaseProps & RadioProps, RadioState> {
 export class Rate extends Nerv.Component<BaseProps & RateProps, RateState> {}
 
 // modal
-declare class ModalFooter extends Nerv.Component<BaseProps & ModalFooterProps, any> {}
-declare class ModalBody {}
-export class Modal extends Nerv.Component<BaseProps & ModalProps, ModalState> {
-  static body: typeof ModalBody
-  static footer: typeof ModalFooter
-  static alert: ModalAlert
-  static info: ModalInfo
-  static success: ModalSuccess
-  static error: ModalError
-  static warning: ModalWarning
-  static confirm: ModalConfirm
-  static prompt: ModalPrompt
-}
+export { default as Modal } from '../src/modal/modal'
 
 // collapse
 export class Collapse extends Nerv.Component<BaseProps & CollapseProps, CollapseState> {
@@ -172,12 +161,7 @@ export class Collapse extends Nerv.Component<BaseProps & CollapseProps, Collapse
 }
 
 // menu
-declare class MenuGroup extends Nerv.Component<BaseProps & MenuGroupProps, any> {}
-export class Menu extends Nerv.Component<BaseProps & MenuProps, any> {
-  static Group: typeof MenuGroup
-  static Item: typeof MenuItem
-  static Sub: typeof MenuSub
-}
+export { default as Menu } from '../src/menu/Menu'
 
 // switch
 export class Switch extends Nerv.Component<BaseProps & SwitchProps, any> {

@@ -18,7 +18,7 @@ export interface SelectOptionProps {
 
 class SelectOption extends Component<SelectOptionProps, any> {
   private $li: any
-  constructor (props: SelectOptionProps) {
+  constructor (props: SelectOptionProps, context) {
     super(props, context)
     this.state = {}
     this.$li = null

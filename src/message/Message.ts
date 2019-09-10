@@ -1,7 +1,16 @@
 import * as Nerv from 'nervjs'
+
 import MessageElem from './MessageElem'
 
 type MessageTypes = 'info' | 'success' | 'warning' | 'error' | 'loading'
+type Instance = React.ComponentElement<any, MessageElem>
+interface OptionsContent {
+  type?: string
+  message?: string
+  duration?: number
+  icon?: string
+  onClose?: () => void
+}
 
 const messageType: MessageTypes[] = [
   'info',
@@ -11,25 +20,11 @@ const messageType: MessageTypes[] = [
   'loading'
 ]
 const defaultType = 'info'
-type Instance = React.ComponentElement<any, MessageElem>
 const instances: Instance[] = []
 let seed = 1
 let zindexSeed = 1010
 
-interface OptionsContent {
-  type?: string
-  message?: string
-  duration: number
-  icon?: string
-  onClose?: () => void
-}
 export type MessageContent = OptionsContent | string
-
-interface MessageInterface {
-  (options?: OptionsContent | string): void
-  close: (id: string, customCloseFunc: (a: Instance) => void) => void
-  closeAll: () => void
-}
 
 const Message = (
   options: OptionsContent | string = { type: 'info', duration: 3000, icon: 'info' }
@@ -121,9 +116,14 @@ messageType.forEach((type) => {
   }
 })
 
+interface MessageInterface {
+  (options?: OptionsContent | string): void
+  close: (id: string, customCloseFunc: (a: Instance) => void) => void
+  closeAll: () => void
+}
 type MessageStaticFuncs = Record<
   MessageTypes,
-  (options: Pick<OptionsContent, Exclude<keyof OptionsContent, 'type'>> | string) => ReturnType<Message>
+  (options: Pick<OptionsContent, Exclude<keyof OptionsContent, 'type'>> | string) => ReturnType<typeof Message>
 >
 
 export default Message as any as MessageInterface & MessageStaticFuncs

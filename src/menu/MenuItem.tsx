@@ -6,7 +6,7 @@ interface MenuItemProps {
   to?: object | string
   replace?: boolean
   disabled?: boolean
-  rootElem
+  rootElem?
   _onSelect?: (e: any) => void
 }
 

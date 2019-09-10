@@ -29,7 +29,7 @@ export interface ModalProps {
   value?: boolean
   cancelText?: string
   okText?: string
-  maskClosable?: string
+  maskClosable?: boolean
   showHead?: boolean
   showClose?: boolean
   showFooter?: boolean
@@ -57,8 +57,8 @@ export interface ModalState {
 }
 
 class Modal extends Component<ModalProps, ModalState> {
-  static body: typeof ModalBody
-  static footer: typeof ModalFooter
+  static Body: typeof ModalBody
+  static Footer: typeof ModalFooter
   static alert: ModalAlert
   static info: ModalInfo
   static success: ModalSuccess

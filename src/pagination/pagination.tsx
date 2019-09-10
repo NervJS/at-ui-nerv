@@ -11,6 +11,7 @@ export interface PaginationProps {
   size?: string
   total?
   current?
+  pageSize?: number
   showQuickJump?
   showSizer?
   showTotal?

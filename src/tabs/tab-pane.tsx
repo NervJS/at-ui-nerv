@@ -9,7 +9,7 @@ export interface TabPaneProps {
   className?: string
   type?: string
   name?: string | number
-  label?: string
+  label?: React.ReactNode
   icon?: string
   animated?: boolean
   disabled?: boolean | string

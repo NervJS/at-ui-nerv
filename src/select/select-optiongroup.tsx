@@ -14,7 +14,7 @@ export interface SelectOptionGroupProps {
 
 class SelectOptionGroup extends Nerv.Component<SelectOptionGroupProps, any> {
 
-  constructor (props: SelectOptionGroupProps) {
+  constructor (props: SelectOptionGroupProps, context) {
     super(props, context)
     this.state = {
 
