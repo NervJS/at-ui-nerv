@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
-interface RadioGroupProps {
+export interface RadioGroupProps {
   value: string | number | any[]
   size?: string
   fill?: string
@@ -25,23 +25,22 @@ class RadioGroup extends Component<RadioGroupProps, any> {
     const { style } = this.props
     const children = this.props.children
       ? Nerv.Children.map(
-          this.props.children as object[],
-          (child, index, arr) => {
-            if (!child) {
-              return null
+          this.props.children,
+          (child, index) => {
+            if (!child) { return }
+            if (typeof child === 'object' && 'props' in child) {
+              const elementName = child.type['elementName']
+              if (elementName !== 'AtRadioButton' && elementName !== 'AtRadio') {
+                return null
+              }
+              return Nerv.cloneElement(child, {
+                ...child.props,
+                onChange: this.onChange.bind(this),
+                value: this.props.value,
+                size: this.props.size
+              })
             }
-            const { elementName } = child.type
-            if (elementName !== 'AtRadioButton' && elementName !== 'AtRadio') {
-              return null
-            }
-            return Nerv.cloneElement(child, {
-              ...child.props,
-              onChange: this.onChange.bind(this),
-              value: this.props.value,
-              size: this.props.size
-            })
-          },
-          this
+          }
         )
       : ''
     return (

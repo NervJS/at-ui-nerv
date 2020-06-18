@@ -1,34 +1,54 @@
-import * as Nerv from 'nervjs'
 import classnames from 'classnames'
+import * as Nerv from 'nervjs'
+import { CSSProperties } from 'react'
+
+import Component from '../../libs/component'
 
 export interface TabPaneProps {
-  className?: string,
-  type?: string,
-  name?: string | number,
-  label?: string,
-  icon?: string,
-  disabled?: boolean | string,
+  activeIndex?: number
+  className?: string
+  type?: string
+  name?: string | number
+  label?: React.ReactNode
+  icon?: string
+  animated?: boolean
+  disabled?: boolean | string
   closable?: boolean | string
+  unclosable?: boolean
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
 }
 
-class TabPane extends Nerv.Component<TabPaneProps, any> {
+class TabPane extends Component<TabPaneProps, any> {
   private index: number
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.index = props.index
   }
   renderTabPaneClassNames (props: TabPaneProps) {
-    return classnames('at-tabs__pane', [
-    ], props.className)
+    return classnames('at-tabs__pane', [], props.className)
   }
 
   render () {
     const props = this.props
-    let {
+    const {
       style,
-      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseEnter,
+      onMouseOut,
+      onMouseLeave,
+      onClick,
       children
-      } = props
+    } = props
     const needProps = {
       children,
       onDragLeave,
@@ -39,27 +59,25 @@ class TabPane extends Nerv.Component<TabPaneProps, any> {
       onMouseEnter,
       onMouseLeave,
       onClick
-      }
+    }
+    const copyStyle: CSSProperties = {...style}
     const classNames = this.renderTabPaneClassNames(props)
-    if (props.animated == false) {
-      let display
-      if (this.props.activeIndex == this.index) {
-        display = 'block'
-      } else {
-        display = 'none'
-      }
-      style = {...style,
-               display}
+    if (props.animated === false) {
+      copyStyle.display = this.props.activeIndex !== this.index
+        ? 'none'
+        : 'block'
     }
     return (
-      <div className={classNames} {...needProps} style={style} >
+      <div
+        className={classNames}
+        {...{
+          ...needProps,
+          style: copyStyle
+        }}
+      >
         {children}
       </div>
     )
-  }
-  componentDidMount () {
-  }
-  componentWillReceiveProps (nextProps) {
   }
 }
 

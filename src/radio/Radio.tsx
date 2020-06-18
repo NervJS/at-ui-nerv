@@ -1,17 +1,18 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
 import RadioGroup from './RadioGroup'
 import RadioButton from './RadioButton'
 
-interface RadioProps {
+export interface RadioProps {
   value: string | number
   name?: string
   label: string | number
   disabled?: boolean
+  onChange?
 }
 
-interface RadioState {
+export interface RadioState {
   focus: boolean
   checked: boolean
 }
@@ -51,10 +52,10 @@ class Radio extends Component<RadioProps, RadioState> {
     })
   }
   onChangeHandle = (evt) => {
-    const { onChange = () => {} } = this.props
+    const { onChange } = this.props
     if (evt.target instanceof HTMLInputElement) {
       const val = evt.target.value
-      onChange(val)
+      onChange && onChange(val)
     }
   }
   render () {

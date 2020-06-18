@@ -1,12 +1,23 @@
-import * as Nerv from 'nervjs'
 import classnames from 'classnames'
+import * as Nerv from 'nervjs'
+
+import Component from '../../libs/component'
 import TimelineItem from './timeline-item'
+
 export interface TimelineProps {
   className?: string,
   pending?: boolean,
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
 }
 
-class Timeline extends Nerv.Component<TimelineProps, any> {
+class Timeline extends Component<TimelineProps, any> {
   static Item: typeof TimelineItem
   renderTimelineClassNames (props: TimelineProps) {
     return classnames('at-timeline', [
@@ -33,27 +44,23 @@ class Timeline extends Nerv.Component<TimelineProps, any> {
     const count = Nerv.Children.count(children as any)
     Nerv.Children.forEach(children as any, (child, index) => {
       if (this.props.pending) {
-        if (count - 2 == index) {
+        if (count - 2 === index) {
           child.props.classFromParent = ' at-timeline__item--last '
         }
-        if (count - 1 == index) {
+        if (count - 1 === index) {
           child.props.classFromParent = ' at-timeline__item--pending '
         }
       } else {
-        if (count - 1 == index) {
+        if (count - 1 === index) {
           child.props.classFromParent = ' at-timeline__item--last '
         }
       }
-    }, null)
+    })
     return (
       <div className={classNames} style={style} {...needProps}>
         {this.props.children}
       </div>
     )
-  }
-  componentDidMount () {
-  }
-  componentWillReceiveProps (nextProps) {
   }
 }
 

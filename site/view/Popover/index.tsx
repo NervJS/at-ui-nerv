@@ -7,15 +7,13 @@
 //   render() {
 //     return (
 //       <div style={{ margin: '160px' }}>
-//         {}
 //         <Popover
 //           style={{ marginLeft: '200px', color: 'red' }}
 //           placement="top"
 //           title="Title"
 //           content="Top Placement"
 //         >
-//           {}
-//           <Button size="small">{}点击</Button>
+//           <Button size="small">点击</Button>
 //         </Popover>
 //         <Popover
 //           content="Top Placement"
@@ -23,15 +21,12 @@
 //           title="Title"
 //           trigger="click"
 //         >
-//           {}
 //           一段文字
 //         </Popover>
 //         <Popover content="Top Placement" title="Title" trigger="hover">
-//           {}
 //           一段文字
 //         </Popover>
 //         <Popover content="Top Placement" title="Title" trigger="focus">
-//           {}
 //           一段文字
 //         </Popover>
 //         <Popover trigger="hover" content="Top Placement">

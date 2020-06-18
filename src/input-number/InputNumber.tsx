@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
-interface InputNumberProps {
+export interface InputNumberProps {
   value?: number
   onBlur?: (a?) => {}
   onFocus?: (a) => {}
@@ -9,13 +9,14 @@ interface InputNumberProps {
   step?: number | string
   min?: number
   max?: number
+  name?: string
   disabled?: boolean
   readonly?: boolean
   autofocus?: boolean
   onChange?: (val: number) => void
 }
 
-interface InputNumberState {
+export interface InputNumberState {
   currentValue: number
 }
 

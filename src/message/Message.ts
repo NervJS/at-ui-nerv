@@ -1,32 +1,33 @@
 import * as Nerv from 'nervjs'
-import MessageElem from './MessageElem'
-import { VNode } from 'nerv-shared'
 
-const messageType = ['info', 'success', 'warning', 'error', 'loading']
-const defaultType = 'info'
-const instances: VNode[] = []
-let seed = 1
-let zindexSeed = 1010
-export type MessageContent = OptionsContent | string
-export interface OptionsContent {
+import MessageElem from './MessageElem'
+
+type MessageTypes = 'info' | 'success' | 'warning' | 'error' | 'loading'
+type Instance = React.ComponentElement<any, MessageElem>
+interface OptionsContent {
   type?: string
   message?: string
-  duration: number
+  duration?: number
   icon?: string
   onClose?: () => void
 }
-interface MessageInterface {
-  (options?: OptionsContent | string): void
-  close?: (id: string, customCloseFunc: (a: VNode) => void) => void
-  closeAll?: () => void
-  info?: (e: any) => void
-  success?: (e: any) => void
-  warning?: (e: any) => void
-  error?: (e: any) => void
-}
 
-const Message: MessageInterface = (
-  options = { type: 'info', duration: 3000, icon: 'info' }
+const messageType: MessageTypes[] = [
+  'info',
+  'success',
+  'warning',
+  'error',
+  'loading'
+]
+const defaultType = 'info'
+const instances: Instance[] = []
+let seed = 1
+let zindexSeed = 1010
+
+export type MessageContent = OptionsContent | string
+
+const Message = (
+  options: OptionsContent | string = { type: 'info', duration: 3000, icon: 'info' }
 ) => {
   const container = document.createElement('div')
   document.body.appendChild(container)
@@ -51,17 +52,17 @@ const Message: MessageInterface = (
   })
   instance['id'] = id
 
-  Nerv.render(instance as any, container)
-  instance.dom.style.zIndex = zindexSeed++
+  Nerv.render(instance as any, container);
+  (instance as any).dom.style.zIndex = zindexSeed++
   const offset = 0
   const len = instances.length
   let topDist = offset
   for (let i = 0; i < len; i++) {
     topDist += (instances[i] as any).dom.offsetHeight + 8
   }
-  topDist += 8
-  instance.dom.style.top = `${topDist}px`
-  instances.push(instance as VNode)
+  topDist += 8;
+  (instance as any).dom.style.top = `${topDist}px`
+  instances.push(instance)
   return {
     close: () => {
       instance['component'].close()
@@ -78,7 +79,7 @@ Message.close = (id, customCloseFunc) => {
         customCloseFunc(instances[i])
       }
       index = i
-      removedHeight = (instances[i].dom as any).offsetHeight
+      removedHeight = ((instances[i] as any).dom as any).offsetHeight
       instances.splice(i, 1)
       break
     }
@@ -86,8 +87,9 @@ Message.close = (id, customCloseFunc) => {
 
   if (len > 1) {
     for (let i = index; i < len - 1; i++) {
-      (instances[i].dom as HTMLElement).style.top = `${parseInt(
-        (instances[i].dom as any).style.top
+      (instances[i] as any).dom.style.top = `${parseInt(
+        ((instances[i] as any).dom as any).style.top,
+        10
       ) -
         removedHeight -
         8}px`
@@ -114,4 +116,14 @@ messageType.forEach((type) => {
   }
 })
 
-export default Message
+interface MessageInterface {
+  (options?: OptionsContent | string): void
+  close: (id: string, customCloseFunc: (a: Instance) => void) => void
+  closeAll: () => void
+}
+type MessageStaticFuncs = Record<
+  MessageTypes,
+  (options: Pick<OptionsContent, Exclude<keyof OptionsContent, 'type'>> | string) => ReturnType<typeof Message>
+>
+
+export default Message as any as MessageInterface & MessageStaticFuncs

@@ -1,7 +1,7 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
-import Component from '@lib/component'
-import { calculatePosition } from '../util/util'
+import Component from '../../libs/component'
+import { calculatePosition } from '../utils/util'
 
 type triggerType = 'hover' | 'focus' | 'click'
 export interface PopoverProps {
@@ -11,6 +11,14 @@ export interface PopoverProps {
   placement?: string
   title?: string
   trigger?: triggerType
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
 }
 
 class Popover extends Component<PopoverProps, any> {
@@ -20,8 +28,8 @@ class Popover extends Component<PopoverProps, any> {
   private $wrapper: any
   private $trigger: any
   private $popper: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       top: 0,
       left: 0,
@@ -170,18 +178,20 @@ class Popover extends Component<PopoverProps, any> {
     let title: any = null
     let content: any = null
     Nerv.Children.map(
-      props.children as any,
+      props.children,
       (child) => {
-        if (child.props && child.props.slot) {
-          if (child.props.slot === 'content') {
-            content = Nerv.cloneElement(child.children)
-          }
-          if (child.props.slot === 'title') {
-            title = Nerv.cloneElement(child.children)
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          if (child.props.slot) {
+            if (child.props.slot === 'content') {
+              content = Nerv.cloneElement(child['children'])
+            }
+            if (child.props.slot === 'title') {
+              title = Nerv.cloneElement(child['children'])
+            }
           }
         }
-      },
-      null
+      }
     )
     if (!content && props.content) {
       content = props.content

@@ -22,9 +22,8 @@ describe('Breadcrumb test', () => {
   it('basic test', () => {
     const breadcrumb = (
       <Breadcrumb>
-        {}
-        <Breadcrumb.Item>{}首页</Breadcrumb.Item>
-        <Breadcrumb.Item>{}活动管理</Breadcrumb.Item>
+        <Breadcrumb.Item>首页</Breadcrumb.Item>
+        <Breadcrumb.Item>活动管理</Breadcrumb.Item>
       </Breadcrumb>
     )
     const component = Nerv.render(breadcrumb as VNode, scratch)
@@ -34,9 +33,8 @@ describe('Breadcrumb test', () => {
   it('test separator', () => {
     const breadcrumb = (
       <Breadcrumb separator={`\\`}>
-        {}
-        <Breadcrumb.Item>{}首页</Breadcrumb.Item>
-        <Breadcrumb.Item>{}活动管理</Breadcrumb.Item>
+        <Breadcrumb.Item>首页</Breadcrumb.Item>
+        <Breadcrumb.Item>活动管理</Breadcrumb.Item>
       </Breadcrumb>
     )
     const component = Nerv.render(breadcrumb as VNode, scratch)

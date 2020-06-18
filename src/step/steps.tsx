@@ -1,18 +1,27 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import Step from './step'
+import Component from '../../libs/component'
 export interface StepsProps {
   className?: string,
   current?: number,
   status?: string,
   size?: string,
   direction?: string
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
 }
 
-class Steps extends Nerv.Component<StepsProps, any> {
+class Steps extends Component<StepsProps, any> {
   static Step: typeof Step
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
   }
   renderIconClassNames (props: StepsProps) {
     return classnames('at-steps', [
@@ -40,24 +49,23 @@ class Steps extends Nerv.Component<StepsProps, any> {
       }
     const classNames = this.renderIconClassNames(props)
     const length = Nerv.Children.count(children as any)
-    Nerv.Children.map(children as any, (child, index) => {
-      child.props.current = this.props.current
-      child.props.index = index
-      child.props.status = status
-      child.props.length = length
-      if ((length - 1) === child.props.index) {
-        child.props.last = true
+    Nerv.Children.map(children, (child, index) => {
+      if (!child) { return }
+      if (typeof child === 'object' && 'props' in child) {
+        child.props.current = this.props.current
+        child.props.index = index
+        child.props.status = status
+        child.props.length = length
+        if ((length - 1) === child.props.index) {
+          child.props.last = true
+        }
       }
-    }, null)
+    })
     return (
       <div className={classNames} {...needProps} style={style}>
         {props.children}
       </div>
     )
-  }
-  componentDidMount () {
-  }
-  componentWillReceiveProps (nextProps) {
   }
 }
 

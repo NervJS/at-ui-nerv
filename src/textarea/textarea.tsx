@@ -1,7 +1,8 @@
 import * as Nerv from 'nervjs'
 import classnames from 'classnames'
 import { calcTextareaHeight } from './utils'
-import { styleStr2Obj } from '../util/util'
+import { styleStr2Obj } from '../utils/util'
+import Component from '../../libs/component'
 export interface TextareaProps {
   className?: string
   type?: string
@@ -12,12 +13,26 @@ export interface TextareaProps {
   resize?: string
   name?: string
   value?: any
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onKeyDown?
+  onKeyUp?
+  onKeyPress?
+  onClick?
+  minRows?
+  onInput?
+  maxRows?
 }
 
-class Textarea extends Nerv.Component<TextareaProps, any> {
+class Textarea extends Component<TextareaProps, any> {
   private $textarea: any
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
     this.inputHandler = this.inputHandler.bind(this)
     this.state = {
       height: '',

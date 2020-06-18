@@ -1,24 +1,41 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
 export interface IconProps {
-  className?: string,
-  type?: string,
+  className?: string
+  type?: string
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
 }
 
 class Icon extends Component<IconProps, any> {
   renderIconClassNames (props: IconProps) {
-    return this.classnames('icon', [
-      props.type ? `${props.type}` : ''
-    ], props.className)
+    return this.classnames(
+      'icon',
+      [props.type ? `${props.type}` : ''],
+      props.className
+    )
   }
   render () {
     const props = this.props
     const {
       style,
-      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseEnter,
+      onMouseOut,
+      onMouseLeave,
+      onClick,
       children
-      } = props
+    } = props
     const needProps = {
       children,
       onDragLeave,
@@ -29,16 +46,9 @@ class Icon extends Component<IconProps, any> {
       onMouseEnter,
       onMouseLeave,
       onClick
-      }
+    }
     const classNames = this.renderIconClassNames(props)
-    return (
-      <i className={classNames} {...needProps} style={style} >
-      </i>
-    )
-  }
-  componentDidMount () {
-  }
-  componentWillReceiveProps (nextProps) {
+    return <i className={classNames} {...needProps} style={style} />
   }
 }
 

@@ -1,5 +1,7 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
+
+export interface ModalBodyProps {}
 
 class ModalBody extends Component<any, any> {
   render () {

@@ -18,10 +18,16 @@
     "jsx": "react",
     "jsxFactory": "Nerv.createElement",
     "paths": {
-        "@md/*": ["site/markdown/*"],
-        "@lib/*":["libs/*"],
-        "@src/*":["src/*"]
-    }
+      "@md/*": ["site/markdown/*"],
+      "@lib/*":["libs/*"],
+      "@src/*":["src/*"],
+      "nervjs": [
+        "typings/nerv.d.ts"
+      ]
+    },
+    "types": [
+      "dom-inputevent"
+    ]
   },
   "include": [
     "src",
@@ -33,8 +39,7 @@
     "siteoutput",
     "tests",
     "jest",
-    "__tests__",
-    "**/*.test.ts"
+    "**/*.test.tsx"
   ],
   "compileOnSave": false
 }

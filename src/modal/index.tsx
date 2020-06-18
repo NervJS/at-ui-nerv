@@ -1,11 +1,11 @@
+import Nerv from 'nervjs'
+
 import Modal from './modal'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
-import * as Nerv from 'nervjs'
-import { VNode } from 'nerv-shared'
-//
-Modal.body = ModalBody
-Modal.footer = ModalFooter
+
+Modal.Body = ModalBody
+Modal.Footer = ModalFooter
 
 // preset
 Modal.alert = (config) => {
@@ -13,22 +13,19 @@ Modal.alert = (config) => {
     const { title, content, callback } = config
     const modal = (
       <Modal
-        value={true}
+        value
         title={title}
         type={'alert'}
         onConfirm={() => {
           resolve()
-          if (callback instanceof Function) {
-            callback()
-          }
+          callback && callback()
         }}
       >
-        {}
         <ModalBody>{content}</ModalBody>
         <ModalFooter showCancel={false} />
       </Modal>
     )
-    Nerv.render(modal as VNode, document.body)
+    Nerv.render(modal, document.body)
   })
 }
 Modal.confirm = (config) => {
@@ -36,28 +33,23 @@ Modal.confirm = (config) => {
     const { title, content, onConfirm, onCancel } = config
     const modal = (
       <Modal
-        value={true}
+        value
         title={title}
         type={'confirm'}
         onConfirm={() => {
           resolve()
-          if (onConfirm instanceof Function) {
-            onConfirm()
-          }
+          onConfirm && onConfirm()
         }}
         onCancel={() => {
           // reject()
-          if (onCancel instanceof Function) {
-            onCancel()
-          }
+          onCancel && onCancel()
         }}
       >
-        {}
         <ModalBody>{content}</ModalBody>
-        <ModalFooter showCancel={true} />
+        <ModalFooter showCancel />
       </Modal>
     )
-    Nerv.render(modal as VNode, document.body)
+    Nerv.render(modal, document.body)
   })
 }
 Modal.prompt = (config) => {
@@ -65,28 +57,25 @@ Modal.prompt = (config) => {
     const { title = '提示', content, onConfirm, onCancel } = config
     const modal = (
       <Modal
-        value={true}
+        value
         title={title}
         type={'info'}
         onConfirm={() => {
           resolve()
-          if (onConfirm instanceof Function) {
-            onConfirm()
+          if (onConfirm) {
+            onConfirm && onConfirm()
           }
         }}
         onCancel={() => {
           reject()
-          if (onCancel instanceof Function) {
-            onCancel()
-          }
+          onCancel && onCancel()
         }}
       >
-        {}
         <ModalBody>{content}</ModalBody>
-        <ModalFooter showCancel={true} />
+        <ModalFooter showCancel />
       </Modal>
     )
-    Nerv.render(modal as VNode, document.body)
+    Nerv.render(modal, document.body)
   })
 }
 const modes = {
@@ -102,28 +91,23 @@ Object.keys(modes).forEach((mode) => {
       const { title = presetTitle, content, onConfirm, onCancel } = config
       const modal = (
         <Modal
-          value={true}
+          value
           title={title}
           type={mode}
           onConfirm={() => {
             resolve()
-            if (onConfirm instanceof Function) {
-              onConfirm()
-            }
+            onConfirm && onConfirm()
           }}
           onCancel={() => {
             // reject()
-            if (onCancel instanceof Function) {
-              onCancel()
-            }
+            onCancel && onCancel()
           }}
         >
-          {}
           <ModalBody>{content}</ModalBody>
           <ModalFooter showCancel={false} />
         </Modal>
       )
-      Nerv.render(modal as VNode, document.body)
+      Nerv.render(modal, document.body)
     })
   }
 })

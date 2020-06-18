@@ -23,17 +23,17 @@ describe('Tab test', () => {
   it('basic render', () => {
     const tabJSX = (
       <Tabs>
-        {}
+
         <Tabs.Pane label='Tab1' name='name1'>
-          {}
+
           <p>Content of Tab Pane 1</p>
         </Tabs.Pane>
         <Tabs.Pane label='Tab2' name='name2'>
-          {}
+
           <p>Content of Tab Pane 2</p>
         </Tabs.Pane>
         <Tabs.Pane label='Tab3' name='name3'>
-          {}
+
           <p>Content of Tab Pane 3</p>
         </Tabs.Pane>
       </Tabs>
@@ -46,17 +46,17 @@ describe('Tab test', () => {
     const onChange = sinon.spy()
     const tabsJSX = (
       <Tabs onChange={onChange}>
-        {}
+
         <Tabs.Pane label='Tab1' name='name1'>
-          {}
+
           <p>Content of Tab Pane 1</p>
         </Tabs.Pane>
         <Tabs.Pane label='Tab2' name='name2'>
-          {}
+
           <p>Content of Tab Pane 2</p>
         </Tabs.Pane>
         <Tabs.Pane label='Tab3' name='name3' disabled='true'>
-          {}
+
           <p>Content of Tab Pane 3</p>
         </Tabs.Pane>
       </Tabs>
@@ -72,17 +72,17 @@ describe('Tab test', () => {
   it('icon property', () => {
     const tabsJSX = (
       <Tabs>
-        {}
+
         <Tabs.Pane label='Tab1' name='name1' icon='icon-github'>
-          {}
+
           <p>Content of Tab Pane 1</p>
         </Tabs.Pane>
         <Tabs.Pane label='Tab2' name='name2' icon='icon-twitter'>
-          {}
+
           <p>Content of Tab Pane 2</p>
         </Tabs.Pane>
         <Tabs.Pane label='Tab3' name='name3' icon='icon-pocket'>
-          {}
+
           <p>Content of Tab Pane 3</p>
         </Tabs.Pane>
       </Tabs>
@@ -95,17 +95,17 @@ describe('Tab test', () => {
     const extraContent = '额外内容'
     const tabsJSX = (
       <Tabs>
-        {}
+
         <Tabs.Pane label='Tab1' name='name1'>
-          {}
+
           <p>Content of Tab Pane 1</p>
         </Tabs.Pane>
         <Tabs.Pane label='Tab2' name='name2'>
-          {}
+
           <p>Content of Tab Pane 2</p>
         </Tabs.Pane>
         <Tabs.Pane label='Tab3' name='name3'>
-          {}
+
           <p>Content of Tab Pane 3</p>
         </Tabs.Pane>
         <div slot='extra'>{extraContent}</div>
@@ -150,7 +150,7 @@ describe('Tab test', () => {
   //   ]
   //   const tabsJSX = (
   //     <Tabs closable>
-  //       {}
+  //
   //       {tabsList.map((tab, idx) => {
   //         return (
   //           <Tabs.Pane
@@ -159,7 +159,7 @@ describe('Tab test', () => {
   //             name={tab.name}
   //             icon="icon-github"
   //           >
-  //             {}
+  //
   //             <p>{tab.content}</p>
   //           </Tabs.Pane>
   //         )

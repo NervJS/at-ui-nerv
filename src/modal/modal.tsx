@@ -1,19 +1,35 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import { CSSTransition } from 'react-transition-group'
 
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 
-export type ModalFunc = (config) => any
+export type ModalFunc<T> = (config: T) => Promise<any>
 
-interface ModalProps {
+type ModalAlertConfig = Pick<ModalProps, 'title' | 'content' | 'callback'>
+type ModalConfirmConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalPromptConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalInfoConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalSuccessConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalWarningConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+type ModalErrorConfig = Pick<ModalProps, 'title' | 'content' | 'onConfirm' | 'onCancel'>
+
+export type ModalAlert = ModalFunc<ModalAlertConfig>
+export type ModalInfo = ModalFunc<ModalInfoConfig>
+export type ModalSuccess = ModalFunc<ModalSuccessConfig>
+export type ModalError = ModalFunc<ModalErrorConfig>
+export type ModalWarning = ModalFunc<ModalWarningConfig>
+export type ModalConfirm = ModalFunc<ModalConfirmConfig>
+export type ModalPrompt = ModalFunc<ModalPromptConfig>
+
+export interface ModalProps {
   title?: string
-  content?: string
+  content?: string | JSX.Element
   value?: boolean
   cancelText?: string
   okText?: string
-  maskClosable?: string
+  maskClosable?: boolean
   showHead?: boolean
   showClose?: boolean
   showFooter?: boolean
@@ -21,10 +37,15 @@ interface ModalProps {
   width?: number | string
   closeOnPressEsc?: boolean
   type?: string
+  modalClass?
+  modalStyle?
   willUnmount?: () => void
+  onConfirm?: () => void
+  callback?: () => void
+  onCancel?: () => void
 }
 
-interface ModalState {
+export interface ModalState {
   wrapShow: boolean
   showCancelButton: boolean
   showConfirmButton: boolean
@@ -36,15 +57,15 @@ interface ModalState {
 }
 
 class Modal extends Component<ModalProps, ModalState> {
-  static body: typeof ModalBody
-  static footer: typeof ModalFooter
-  static alert: ModalFunc
-  static info: ModalFunc
-  static success: ModalFunc
-  static error: ModalFunc
-  static warning: ModalFunc
-  static confirm: ModalFunc
-  static prompt: ModalFunc
+  static Body: typeof ModalBody
+  static Footer: typeof ModalFooter
+  static alert: ModalAlert
+  static info: ModalInfo
+  static success: ModalSuccess
+  static error: ModalError
+  static warning: ModalWarning
+  static confirm: ModalConfirm
+  static prompt: ModalPrompt
 
   static defaultProps = {
     value: false,
@@ -116,61 +137,63 @@ class Modal extends Component<ModalProps, ModalState> {
   //   Nerv.unmountComponentAtNode(document.body)
   // }
   componentWillUnmount () {
-    const { willUmount } = this.props
-    if (willUmount instanceof Function) {
-      willUmount()
+    const { willUnmount } = this.props
+    if (willUnmount instanceof Function) {
+      willUnmount()
     }
   }
 
   enhanceChildren = () => {
     const { children, onConfirm, onCancel, cancelText, okText } = this.props
     return Nerv.Children.map(
-      children as never,
+      children,
       (child, index) => {
-        const { props: oProps = {} } = child
-        const {
-          onCancel: oonCancel = () => {},
-          onConfirm: oonConfirm = () => {}
-        } = oProps
-        const { name } = child
-        const newProps = {}
-        switch (name) {
-          case 'ModalBody':
-            Object.assign(newProps)
-            break
-          case 'ModalFooter':
-            Object.assign(newProps, {
-              cancelText,
-              okText
-            })
-            break
-          default:
-            return child
-        }
-        return Nerv.cloneElement(child, {
-          ...oProps,
-          ...newProps,
-          onCancel: () => {
-            this.close()
-            if (onCancel instanceof Function) {
-              onCancel()
-            }
-            if (oonCancel instanceof Function) {
-              oonCancel()
-            }
-          },
-          onConfirm: () => {
-            this.close()
-            if (onConfirm instanceof Function) {
-              onConfirm()
-            }
-            if (oonConfirm instanceof Function) {
-              oonConfirm()
-            }
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          const { props: oProps = {} } = child
+          const {
+            onCancel: oonCancel = () => {},
+            onConfirm: oonConfirm = () => {}
+          } = oProps
+          const name = child['name']
+          const newProps = {}
+          switch (name) {
+            case 'ModalBody':
+              Object.assign(newProps)
+              break
+            case 'ModalFooter':
+              Object.assign(newProps, {
+                cancelText,
+                okText
+              })
+              break
+            default:
+              return child
           }
-        })
-      },
-      this
+          return Nerv.cloneElement(child, {
+            ...oProps,
+            ...newProps,
+            onCancel: () => {
+              this.close()
+              if (onCancel instanceof Function) {
+                onCancel()
+              }
+              if (oonCancel instanceof Function) {
+                oonCancel()
+              }
+            },
+            onConfirm: () => {
+              this.close()
+              if (onConfirm instanceof Function) {
+                onConfirm()
+              }
+              if (oonConfirm instanceof Function) {
+                oonConfirm()
+              }
+            }
+          })
+        }
+      }
     )
   }
 

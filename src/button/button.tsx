@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
 import ButtonGroup from './button-group'
 
@@ -12,12 +12,12 @@ export interface ButtonProps {
   icon?: string
   size?: ButtonSize
   hollow?: boolean
-  nativeType?: string
+  nativeType?: 'button' | 'submit' | 'reset'
   loading?: boolean
   circle?: boolean
   disabled?: boolean
+  onClick?: (evt: MouseEvent) => void
 }
-
 class Button extends Component<ButtonProps, any> {
   static Group: typeof ButtonGroup
 
@@ -58,7 +58,8 @@ class Button extends Component<ButtonProps, any> {
         style={style}
         disabled={disabled}
         type={nativeType || 'button'}
-        onClick={this.handleClick}>
+        onClick={this.handleClick}
+      >
         {loading && <i className='at-btn__loading icon icon-loader' />}
         {icon && <i className={this.classnames('at-btn__icon icon', icon)} />}
         {children && <span className='at-btn__text'>{children}</span>}

@@ -1,16 +1,18 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import CollapseTransition from '../animations/collapse-transition.jsx'
 import '../animations/collapseanimations.scss'
 
-interface CollapseItemProps {
+export interface CollapseItemProps {
   title?: string
   panelName?: string
   disabled?: boolean
   isActive?: boolean
+  _toggle
+  key
 }
 
-interface CollapseItemState {
+export interface CollapseItemState {
   index: number
   isActive: boolean | undefined
 }
@@ -24,8 +26,8 @@ class CollapseItem extends Component<
     disabled: false
   }
   static elementName = 'AtCollapseItem'
-  constructor (...args) {
-    super(...args)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       index: 0,
       isActive: !!this.props.isActive
@@ -53,24 +55,26 @@ class CollapseItem extends Component<
   render () {
     const { title, disabled, children } = this.props
     const { isActive } = this.props
-    let titleSlot = null
+    let titleSlot
     const contentSlot = []
     Nerv.Children.forEach(
-      children as never,
+      children,
       (child, index) => {
-        const { props } = child
-        if (props) {
-          switch (props.slot) {
-            case 'title':
-              titleSlot = child
-              break
-            default:
-              contentSlot.push(child as never)
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          const { props } = child
+          if (props) {
+            switch (props.slot) {
+              case 'title':
+                titleSlot = child
+                break
+              default:
+                contentSlot.push(child as never)
+            }
+            delete child.props.slot
           }
-          delete child.props.slot
         }
-      },
-      this
+      }
     )
     return (
       <div
@@ -84,7 +88,6 @@ class CollapseItem extends Component<
           {titleSlot || <div>{title}</div>}
         </div>
         <CollapseTransition isShow={isActive}>
-          {}
           <div className='at-collapse__body'>
             <div className='at-collapse__content'>{contentSlot}</div>
           </div>

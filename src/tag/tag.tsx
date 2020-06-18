@@ -1,11 +1,12 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import { CSSTransition } from 'react-transition-group'
 
 export interface TagProps {
   name?: string | number
   color?: string
   closable?: boolean
+  onClose?
 }
 
 export interface TagState {

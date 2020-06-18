@@ -1,8 +1,8 @@
 import * as Nerv from 'nervjs'
 import { CSSTransition } from 'react-transition-group'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
-interface AlertProps {
+export interface AlertProps {
   type?: string
   message?: string
   description?: string
@@ -10,9 +10,10 @@ interface AlertProps {
   showIcon?: boolean
   icon?: string
   closeText?: string
+  onClose?: Function
 }
 
-interface AlertState {
+export interface AlertState {
   isShow: boolean
   isExited: boolean
 }
@@ -42,7 +43,15 @@ class Alert extends Component<AlertProps, AlertState> {
     }
   }
   render () {
-    const { closable, icon, type, description, showIcon, message, closeText } = this.props
+    const {
+      closable,
+      icon,
+      type,
+      description,
+      showIcon,
+      message,
+      closeText
+    } = this.props
     const { isShow, isExited } = this.state
     const classArr = {
       success: 'icon-check-circle',
@@ -65,18 +74,28 @@ class Alert extends Component<AlertProps, AlertState> {
           this.setState({
             isExited: true
           })
-        }}>
+        }}
+      >
         <div
           className={this.className('at-alert', {
-            [`at-alert--${type}`]: !!type  as any,
+            [`at-alert--${type}`]: !!type as any,
             'at-alert--with-description': description
           })}
-          style={this.style({ display: isExited ? 'none' : '' })}>
-          {showIcon ? <i className={this.classnames('icon at-alert__icon', iconClass)} /> : ''}
+          style={this.style({ display: isExited ? 'none' : '' })}
+        >
+          {showIcon ? (
+            <i className={this.classnames('icon at-alert__icon', iconClass)} />
+          ) : (
+            ''
+          )}
 
           <div className='at-alert__content'>
             {message ? <p className='at-alert__message'>{message}</p> : ''}
-            {description ? <p className='at-alert__description'>{description}</p> : ''}
+            {description ? (
+              <p className='at-alert__description'>{description}</p>
+            ) : (
+              ''
+            )}
           </div>
           <i
             className={this.classnames('icon at-alert__close', {
@@ -84,7 +103,8 @@ class Alert extends Component<AlertProps, AlertState> {
               'icon-x': !closeText
             })}
             style={{ display: closable || closeText ? '' : 'none' }}
-            onClick={this.onCloseHandle}>
+            onClick={this.onCloseHandle}
+          >
             {closeText}
           </i>
         </div>

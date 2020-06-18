@@ -9,8 +9,8 @@ interface HeaderProps {
 }
 
 class HeaderS extends Nerv.Component<HeaderProps, any> {
-  constructor (...args) {
-    super(...args)
+  constructor (props, context) {
+    super(props, context)
     this.state = {
       toggle: true
     }

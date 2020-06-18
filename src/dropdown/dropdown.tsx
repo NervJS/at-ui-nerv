@@ -1,9 +1,9 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import DropdownItem from './dropdownItem'
 import DropdownMenu from './dropdownMenu'
 
-interface DropdownProps {
+export interface DropdownProps {
   trigger?: 'click' | 'hover' | 'focus'
   placement?:
     | 'top'
@@ -17,11 +17,11 @@ interface DropdownProps {
     | 'right-bottom'
     | 'bottom'
     | 'bottom-left'
-    | 'bottom-right'
-  dropDownChange?: (name) => void
+    | 'bottom-right',
+  dropdownChange?: (name, ctx: any) => void
 }
 
-interface DropdownState {
+export interface DropdownState {
   visible: boolean
 }
 
@@ -137,7 +137,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
     const menu = []
     const trigger = []
     Nerv.Children.forEach(
-      children as any,
+      children,
       (
         child: {
           type
@@ -149,8 +149,7 @@ class Dropdown extends Component<DropdownProps, DropdownState> {
           return
         }
         trigger.push(child as never)
-      },
-      this
+      }
     )
     return { menu, trigger }
   }

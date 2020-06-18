@@ -1,15 +1,13 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
-interface BadgeProps {
+export interface BadgeProps {
   value?: string | number
   maxNum?: number
   dot?: boolean
   show?: boolean
   status?: string
 }
-
-// interface BadgeState {}
 
 class Badge extends Component<BadgeProps, {}> {
   static defaultProps = {
@@ -18,9 +16,6 @@ class Badge extends Component<BadgeProps, {}> {
     dot: false,
     show: true,
     status: 'error'
-  }
-  constructor (...args) {
-    super(...args)
   }
 
   render () {

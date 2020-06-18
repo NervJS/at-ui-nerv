@@ -1,13 +1,13 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
 import Button from '../button'
 
-interface ModalFooterProps {
+export interface ModalFooterProps {
   cancelText?: string
   okText?: string
-  onConfirm?: Function
-  onCancel?: Function
+  onConfirm?: (event: MouseEvent) => void
+  onCancel?: (event: MouseEvent) => void
   showCancel?: boolean
 }
 
@@ -23,9 +23,8 @@ class ModalFooter extends Component<ModalFooterProps, any> {
     const localeOKText = okText
     const defaultFooter = (
       <div className={this.classnames('at-modal__footer', className as any)} style={style}>
-        {showCancel ? <Button  onClick={onCancel}>{}{localeCancelText}</Button> : null}
+        {showCancel ? <Button onClick={onCancel}>{localeCancelText}</Button> : null}
         <Button type='primary' onClick={onConfirm}>
-          {}
           {localeOKText}
         </Button>
       </div>

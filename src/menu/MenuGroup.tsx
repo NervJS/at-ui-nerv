@@ -1,24 +1,28 @@
 import * as Nerv from 'nervjs'
 
-interface MenuGroupProps {
+export interface MenuGroupProps {
   title?: string
+  rootElem?
+  name: string
   _onSelect?: (e: any) => void
 }
 
 class MenuGroup extends Nerv.Component<MenuGroupProps, any> {
   enhanceChildren = () => {
-    const { children = [], rootElem } = this.props
+    const { children, rootElem } = this.props
     return Nerv.Children.map(
-      children as never,
+      children,
       (child, idx) => {
-        return Nerv.cloneElement(child, {
-          ...child.props,
-          _onSelect: this.onSelect,
-          parentElem: this,
-          rootElem
-        })
-      },
-      this
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          return Nerv.cloneElement(child, {
+            ...child.props,
+            _onSelect: this.onSelect,
+            parentElem: this,
+            rootElem
+          })
+        }
+      }
     )
   }
   onSelect = (e) => {

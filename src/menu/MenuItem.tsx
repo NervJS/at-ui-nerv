@@ -1,11 +1,12 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
 interface MenuItemProps {
   name?: string | number
   to?: object | string
   replace?: boolean
   disabled?: boolean
+  rootElem?
   _onSelect?: (e: any) => void
 }
 

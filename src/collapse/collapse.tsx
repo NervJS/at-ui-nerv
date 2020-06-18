@@ -1,15 +1,15 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import CollapseItem from './collapseItem'
 
-interface CollapseProps {
+export interface CollapseProps {
   accordion?: boolean
   value?: any[] | string | number
   simple?: boolean
   onChange?: (a) => {}
 }
 
-interface CollapseState {
+export interface CollapseState {
   currentValue: any
 }
 
@@ -32,19 +32,21 @@ class Collapse extends Component<CollapseProps, CollapseState> {
     const activeKey = this.getActiveKey()
     const { accordion, children } = this.props
     return Nerv.Children.map(
-      children as never,
+      children,
       (child, index) => {
-        const name = child.props.panelName || index.toString()
-        return Nerv.cloneElement(child, {
-          ...child,
-          isActive: accordion
-            ? activeKey[0] === name
-            : (child.isActive = activeKey.indexOf(name) >= 0),
-          key: index,
-          _toggle: this.toggle
-        })
-      },
-      this
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          const name = child.props.panelName || index.toString()
+          return Nerv.cloneElement(child, {
+            ...child,
+            isActive: accordion
+              ? activeKey[0] === name
+              : (child['isActive'] = activeKey.indexOf(name) >= 0),
+            key: index,
+            _toggle: this.toggle
+          })
+        }
+      }
     )
   }
   getActiveKey = () => {

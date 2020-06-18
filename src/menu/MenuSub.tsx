@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 import { CSSTransition } from 'react-transition-group'
 import CollapseTransition from '../animations/collapse-transition'
 import { CSSProperties } from 'react'
@@ -11,6 +11,10 @@ interface MenuSubProps {
   active?: boolean
   disabled?: boolean
   opened?: boolean
+  mode?
+  name?
+  rootElem?
+  parentElem?
   _onSelect?: (e: any) => void
   _onOpened?: (e: any) => void
 }
@@ -86,24 +90,26 @@ class MenuSub extends Component<MenuSubProps, any> {
     })
   }
   enhanceChildren = () => {
-    const { children = [], rootElem, mode: parentMode } = this.props
+    const { children, rootElem, mode: parentMode } = this.props
     const { currentOpenedChildName, currentActiveChildName } = this.state
     return Nerv.Children.map(
-      children as never,
+      children,
       (child, idx) => {
-        const { name, mode } = child.props
-        return Nerv.cloneElement(child, {
-          ...child.props,
-          isOpen: name === currentOpenedChildName,
-          active: name === currentActiveChildName,
-          _onSelect: this.onSelect,
-          _onOpened: this.onOpened,
-          parentElem: this,
-          rootElem,
-          mode: mode ? mode : parentMode
-        })
-      },
-      this
+        if (!child) { return }
+        if (typeof child === 'object' && 'props' in child) {
+          const { name, mode } = child.props
+          return Nerv.cloneElement(child, {
+            ...child.props,
+            isOpen: name === currentOpenedChildName,
+            active: name === currentActiveChildName,
+            _onSelect: this.onSelect,
+            _onOpened: this.onOpened,
+            parentElem: this,
+            rootElem,
+            mode: mode ? mode : parentMode
+          })
+        }
+      }
     )
   }
 
@@ -173,7 +179,6 @@ class MenuSub extends Component<MenuSubProps, any> {
 
         {mode === 'inline' || mode === 'inlineCollapsed' ? (
           <CollapseTransition isShow={isOpen} timeout={300}>
-            {}
             <ul className='at-menu'>{this.enhanceChildren()}</ul>
           </CollapseTransition>
         ) : (

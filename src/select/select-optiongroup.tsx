@@ -9,12 +9,13 @@ export interface SelectOptionGroupProps {
   circle?: boolean
   disabled?: boolean
   value?: any
+  label?
 }
 
 class SelectOptionGroup extends Nerv.Component<SelectOptionGroupProps, any> {
 
-  constructor (props: SelectOptionGroupProps) {
-    super(props)
+  constructor (props: SelectOptionGroupProps, context) {
+    super(props, context)
     this.state = {
 
     }
@@ -29,9 +30,6 @@ class SelectOptionGroup extends Nerv.Component<SelectOptionGroupProps, any> {
         </ul>
       </ul>
     )
-  }
-  componentDidMount () {
-
   }
 }
 

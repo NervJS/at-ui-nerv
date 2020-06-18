@@ -24,7 +24,7 @@ describe('Switch test', () => {
     const onChange = sinon.spy()
     const switchJSX = (
       <Switch onChange={onChange}>
-        {}
+
         <span slot='checkedText'>
           <i className='icon icon-left-arrow' />
         </span>
@@ -78,7 +78,7 @@ describe('Switch test', () => {
     const defaultVal = false
     const switchJSX = (
       <Switch value={defaultVal}>
-        {}
+
         <span slot='checkedText'>
           <i className='icon icon-left-arrow' />
         </span>

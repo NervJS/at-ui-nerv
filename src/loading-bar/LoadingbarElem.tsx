@@ -1,5 +1,5 @@
 import * as Nerv from 'nervjs'
-import Component from '@lib/component'
+import Component from '../../libs/component'
 
 interface LoadingbarElemProps {
   status?: string
@@ -8,7 +8,7 @@ interface LoadingbarElemProps {
   show?: boolean
 }
 
-class LoadingbarElem extends Component<LoadingbarElemProps, null> {
+class LoadingbarElem extends Component<LoadingbarElemProps, {}> {
   static defaultProps = {
     show: false,
     status: 'success',

@@ -1,24 +1,36 @@
-import * as Nerv from 'nervjs'
+import { calculatePosition } from '../utils/util'
 import classnames from 'classnames'
+import * as Nerv from 'nervjs'
+
+import Component from '../../libs/component'
 
 export interface ToolProps {
-  className?: string,
-  type?: string,
-  content?: string,
+  className?: string
+  type?: string
+  content?: string
   placement?: string
+  tipstyle?
+  onDragLeave?
+  onDragOver?
+  onDrop?
+  onMouseOver?
+  onMouseEnter?
+  onMouseOut?
+  onMouseLeave?
+  onClick?
 }
 
-class Tooltip extends Nerv.Component<ToolProps, any> {
+class Tooltip extends Component<ToolProps, any> {
   private top: number
   private left: number
   private $trigger: any
-  private $tip:any
-  constructor (props) {
-    super(props)
+  private $tip: any
+  constructor (props, context) {
+    super(props, context)
     this.state = {
-        top: 0,
-        left: 0,
-        display: 'block'
+      top: 0,
+      left: 0,
+      display: 'block'
     }
     this.onMouseEnter = this.onMouseEnter.bind(this)
     this.onMouseLeave = this.onMouseLeave.bind(this)
@@ -28,8 +40,7 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
     this.$tip = null
   }
   renderTooltipClassNames (props: ToolProps) {
-    return classnames('at-tooltip', [
-    ], props.className)
+    return classnames('at-tooltip', [], props.className)
   }
   onMouseEnter (e: React.MouseEvent<HTMLDivElement>) {
     this.setState({
@@ -50,7 +61,7 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
       if (child.props.slot) {
         contentSlot = child.children
       }
-    }, null)
+    })
     if (!contentSlot) {
       contentSlot = props.content
     }
@@ -60,9 +71,16 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
       display: this.state.display
     }
     const {
-      onDragLeave, onDragOver, onDrop, onMouseOver, onMouseEnter, onMouseOut, onMouseLeave, onClick,
+      onDragLeave,
+      onDragOver,
+      onDrop,
+      onMouseOver,
+      onMouseEnter,
+      onMouseOut,
+      onMouseLeave,
+      onClick,
       children
-      } = props
+    } = props
     const needProps = {
       children,
       onDragLeave,
@@ -73,22 +91,45 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
       onMouseEnter,
       onMouseLeave,
       onClick
-      }
-    const classname = classnames('at-tooltip__popper',
-                                [props.placement ? `at-tooltip--${this.props.placement}` : 'at-tooltip--top'],
-                                'fade-enter-active fade-enter-to',
-                                this.props.className)
+    }
+    const classname = classnames(
+      'at-tooltip__popper',
+      [
+        props.placement
+          ? `at-tooltip--${this.props.placement}`
+          : 'at-tooltip--top'
+      ],
+      'fade-enter-active fade-enter-to',
+      this.props.className
+    )
 
     if (props.tipstyle) {
-      tipstyle = {...tipstyle, ...props.tipstyle}
+      tipstyle = { ...tipstyle, ...props.tipstyle }
     }
     return (
-    <div className={this.renderTooltipClassNames(props)} {...needProps} style={props.style} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-        <span className='at-tooltip__trigger' ref={(trigger)=>{this.$trigger = trigger}}>
+      <div
+        className={this.renderTooltipClassNames(props)}
+        {...needProps}
+        style={props.style}
+        onMouseEnter={this.onMouseEnter}
+        onMouseLeave={this.onMouseLeave}
+      >
+        <span
+          className='at-tooltip__trigger'
+          ref={(trigger) => {
+            this.$trigger = trigger
+          }}
+        >
           {this.props.children}
         </span>
-        <div className={classname} ref={(tip)=> {this.$tip = tip}} style={tipstyle}>
-          <div className='at-tooltip__arrow'></div>
+        <div
+          className={classname}
+          ref={(tip) => {
+            this.$tip = tip
+          }}
+          style={tipstyle}
+        >
+          <div className='at-tooltip__arrow' />
           <div className='at-tooltip__content'>
             <div>{contentSlot}</div>
           </div>
@@ -99,76 +140,17 @@ class Tooltip extends Nerv.Component<ToolProps, any> {
   componentDidMount () {
     const trigger = this.$trigger
     const popover = this.$tip
-    const position = this.calculatePosition(this.props.placement, trigger, popover)
+    const position = calculatePosition(
+      this.props.placement,
+      trigger,
+      popover
+    )
     this.top = position.top
     this.left = position.left
     this.setState({
       display: 'none'
     })
   }
-  calculatePosition (placement, trigger, popover) {
-    const position = {
-      left: 0,
-      top: 0
-    }
-    switch (placement) {
-      case 'top' :
-        position.left = trigger.offsetLeft - (popover.offsetWidth / 2) + (trigger.offsetWidth / 2)
-        position.top = trigger.offsetTop - popover.offsetHeight
-        break
-      case 'top-left':
-        position.left = trigger.offsetLeft
-        position.top = trigger.offsetTop - popover.offsetHeight
-        break
-      case 'top-right':
-        position.left = trigger.offsetLeft + trigger.offsetWidth - popover.offsetWidth
-        position.top = trigger.offsetTop - popover.offsetHeight
-        break
-      case 'left':
-        position.left = trigger.offsetLeft - popover.offsetWidth
-        position.top = trigger.offsetTop + (trigger.offsetHeight / 2) - (popover.offsetHeight / 2)
-        break
-      case 'left-top':
-        position.left = trigger.offsetLeft - popover.offsetWidth
-        position.top = trigger.offsetTop
-        break
-      case 'left-bottom':
-        position.left = trigger.offsetLeft - popover.offsetWidth
-        position.top = trigger.offsetTop + trigger.offsetHeight - popover.offsetHeight
-        break
-      case 'right':
-        position.left = trigger.offsetLeft + trigger.offsetWidth
-        position.top = trigger.offsetTop + (trigger.offsetHeight / 2) - (popover.offsetHeight / 2)
-        break
-      case 'right-top':
-        position.left = trigger.offsetLeft + trigger.offsetWidth
-        position.top = trigger.offsetTop
-        break
-      case 'right-bottom':
-        position.left = trigger.offsetLeft + trigger.offsetWidth
-        position.top = trigger.offsetTop + trigger.offsetHeight - popover.offsetHeight
-        break
-      case 'bottom':
-        position.left = trigger.offsetLeft - (popover.offsetWidth / 2) + (trigger.offsetWidth / 2)
-        position.top = trigger.offsetTop + trigger.offsetHeight
-        break
-      case 'bottom-left':
-        position.left = trigger.offsetLeft
-        position.top = trigger.offsetTop + trigger.offsetHeight
-        break
-      case 'bottom-right':
-        position.left = trigger.offsetLeft + trigger.offsetWidth - popover.offsetWidth
-        position.top = trigger.offsetTop + trigger.offsetHeight
-        break
-      default:
-        // if user set wrong placement, then use default 'top'
-        position.left = trigger.offsetLeft - (popover.offsetWidth / 2) + (trigger.offsetWidth / 2)
-        position.top = trigger.offsetTop - popover.offsetHeight
-        break
-    }
-    return position
-  }
-
 }
 
 export default Tooltip
